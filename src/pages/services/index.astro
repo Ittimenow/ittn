@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const all = await getCollection('services');
+const grouped: Record<string, typeof all> = {};
+for (const s of all.sort((a, b) => a.data.order - b.data.order)) {
+	(grouped[s.data.group] ??= []).push(s);
+}
+const order = ['Разработка', 'Автоматизация', 'Дополнительно'] as const;
+---
+
+<Layout title="Услуги — ittimenow" description="Разработка, автоматизация и ИИ-сервисы для бизнеса.">
+	<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+		<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Что делаем</p>
+		<h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Услуги</h1>
+		<p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
+			От прототипа до промышленного внедрения. Подбираем стек под задачу, а не задачу под стек.
+		</p>
+
+		<div class="mt-12 space-y-12">
+			{order.map((g) => grouped[g] && (
+				<div>
+					<h2 class="mb-4 text-xs font-semibold uppercase tracking-wider text-neutral-500">{g}</h2>
+					<div class="grid gap-4 md:grid-cols-2">
+						{grouped[g].map((s) => (
+							<a
+								href={`/services/${s.id}/`}
+								class="group rounded-2xl border border-neutral-200 bg-white p-6 transition hover:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-900/40 dark:hover:border-neutral-600"
+								transition:name={`service-${s.id}`}
+							>
+								<h3 class="text-xl font-semibold">{s.data.title}</h3>
+								<p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{s.data.summary}</p>
+								<span class="mt-4 inline-flex text-sm font-medium text-indigo-600 dark:text-indigo-400">
+									Подробнее →
+								</span>
+							</a>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+</Layout>

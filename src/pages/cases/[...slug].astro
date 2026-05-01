@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const cases = await getCollection('cases');
+	return cases.map((c) => ({ params: { slug: c.id }, props: { c } }));
+}
+
+const { c } = Astro.props;
+const { Content } = await render(c);
+---
+
+<Layout title={`${c.data.title} — ittimenow`} description={c.data.summary}>
+	<article class="mx-auto max-w-3xl px-6 py-16">
+		<a href="/cases" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
+			← все кейсы
+		</a>
+
+		<header class="mt-6 border-b border-neutral-200 pb-8 dark:border-neutral-800">
+			<div class="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+				<span class="font-medium text-neutral-700 dark:text-neutral-300">{c.data.client}</span>
+				{c.data.industry && <><span>·</span><span>{c.data.industry}</span></>}
+				{c.data.year && <><span>·</span><span>{c.data.year}</span></>}
+			</div>
+			<h1
+				class="mt-3 text-4xl font-bold tracking-tight"
+				transition:name={`case-${c.id}`}
+			>
+				{c.data.title}
+			</h1>
+			<p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{c.data.summary}</p>
+
+			{c.data.stack.length > 0 && (
+				<div class="mt-5 flex flex-wrap gap-1.5">
+					{c.data.stack.map((s) => (
+						<span class="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
+							{s}
+						</span>
+					))}
+				</div>
+			)}
+		</header>
+
+		<div class="prose-content mt-8">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.prose-content :global(h2) { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600; }
+	.prose-content :global(p) { margin: 0.75rem 0; line-height: 1.75; color: var(--prose-text); }
+	.prose-content :global(ul) { margin: 0.75rem 0; padding-left: 1.5rem; list-style: disc; color: var(--prose-text); }
+	.prose-content :global(li + li) { margin-top: 0.25rem; }
+	.prose-content { --prose-text: oklch(0.371 0 0); }
+	:global(.dark) .prose-content { --prose-text: oklch(0.872 0 0); }
+</style>

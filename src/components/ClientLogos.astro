@@ -1,0 +1,20 @@
+---
+const clients = [
+	'Альфа-Страхование', 'Донстрой', 'Россельхозбанк', 'РТ-Капитал',
+	'ВкусВилл', 'Северсталь', 'Газпром нефть', 'МТС',
+];
+---
+
+<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+	<div class="mb-8">
+		<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Клиенты</p>
+		<h2 class="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Нам доверяют</h2>
+	</div>
+	<div class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 sm:grid-cols-4 dark:border-neutral-800 dark:bg-neutral-800">
+		{clients.map((c) => (
+			<div class="flex h-24 items-center justify-center bg-white px-4 text-center text-sm font-medium text-neutral-600 dark:bg-neutral-950 dark:text-neutral-400">
+				{c}
+			</div>
+		))}
+	</div>
+</section>

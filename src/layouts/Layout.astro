@@ -1,23 +1,72 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	bare?: boolean;
+}
+
+const {
+	title = 'ittimenow',
+	description = 'ittimenow — сайт на Astro и Tailwind.',
+	image = '/og.png',
+	bare = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const ogImage = new URL(image, Astro.site ?? Astro.url);
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="ru" class="h-full">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
+		<link rel="canonical" href={canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<ClientRouter />
+
+		<script is:inline>
+			(() => {
+				const stored = localStorage.getItem('theme');
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				if (stored === 'dark' || (!stored && prefersDark)) {
+					document.documentElement.classList.add('dark');
+				}
+			})();
+		</script>
 	</head>
-	<body>
-		<slot />
+	<body
+		class="min-h-full bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100"
+	>
+		{bare ? <slot /> : (
+			<>
+				<Header transition:persist />
+				<main><slot /></main>
+				<Footer transition:persist />
+			</>
+		)}
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

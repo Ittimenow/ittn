@@ -1,0 +1,82 @@
+---
+const year = new Date().getFullYear();
+
+const sections = [
+	{
+		title: 'Разработка',
+		links: [
+			{ title: 'Сайты и сервисы', href: '/services/web' },
+			{ title: 'Искусственный интеллект', href: '/services/ai' },
+		],
+	},
+	{
+		title: 'Автоматизация',
+		links: [
+			{ title: 'Битрикс24', href: '/services/bitrix24' },
+			{ title: 'РосБизнесСофт', href: '/services/rbs' },
+			{ title: 'ЭЛМА', href: '/services/elma' },
+		],
+	},
+	{
+		title: 'Компания',
+		links: [
+			{ title: 'Кейсы', href: '/cases' },
+			{ title: 'Блог', href: '/posts' },
+			{ title: 'О нас', href: '/about' },
+		],
+	},
+];
+---
+
+<footer class="mt-32 border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+	<div class="mx-auto max-w-6xl px-6 py-16">
+		<div class="grid gap-10 md:grid-cols-4">
+			<div>
+				<a href="/" class="flex items-center gap-2 text-lg font-semibold">
+					<span
+						class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-sm font-black text-white"
+					>IT</span>
+					ittimenow
+				</a>
+				<p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+					Цифровые системы эффективного бизнеса. С 2013 года.
+				</p>
+			</div>
+
+			{sections.map((s) => (
+				<div>
+					<p class="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+						{s.title}
+					</p>
+					<ul class="space-y-2 text-sm">
+						{s.links.map((l) => (
+							<li>
+								<a
+									href={l.href}
+									class="text-neutral-700 transition hover:text-indigo-600 dark:text-neutral-300 dark:hover:text-indigo-400"
+								>
+									{l.title}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+
+		<div
+			class="mt-12 flex flex-col gap-4 border-t border-neutral-200 pt-6 text-sm text-neutral-600 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800 dark:text-neutral-400"
+		>
+			<p>© 2013–{year} ittimenow.com</p>
+			<div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+				<a href="tel:+74951335888" class="hover:text-neutral-900 dark:hover:text-neutral-100">
+					+7 (495) 133-58-88
+				</a>
+				<a href="mailto:hello@ittimenow.com" class="hover:text-neutral-900 dark:hover:text-neutral-100">
+					hello@ittimenow.com
+				</a>
+				<span>Москва, Варшавское шоссе, 28А</span>
+			</div>
+		</div>
+	</div>
+</footer>

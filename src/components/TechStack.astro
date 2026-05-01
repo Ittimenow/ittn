@@ -1,0 +1,21 @@
+---
+const stack = [
+	'NestJS', 'React', 'Next.js', 'Astro', 'PostgreSQL', 'MongoDB',
+	'Redis', 'Docker', 'Kubernetes', 'Python', 'FastAPI', 'TypeScript',
+	'Битрикс24', 'РосБизнесСофт', 'ЭЛМА', 'OpenAI', 'YandexGPT',
+];
+---
+
+<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+	<div class="mb-8">
+		<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Технологии</p>
+		<h2 class="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">С чем работаем</h2>
+	</div>
+	<div class="flex flex-wrap gap-2">
+		{stack.map((t) => (
+			<span class="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-300">
+				{t}
+			</span>
+		))}
+	</div>
+</section>

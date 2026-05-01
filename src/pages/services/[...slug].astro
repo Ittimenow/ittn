@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const services = await getCollection('services');
+	return services.map((service) => ({
+		params: { slug: service.id },
+		props: { service },
+	}));
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+---
+
+<Layout title={`${service.data.title} — ittimenow`} description={service.data.summary}>
+	<article class="mx-auto max-w-3xl px-6 py-16">
+		<a href="/services" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
+			← все услуги
+		</a>
+
+		<header class="mt-6 border-b border-neutral-200 pb-8 dark:border-neutral-800">
+			<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{service.data.group}</p>
+			<h1
+				class="mt-2 text-4xl font-bold tracking-tight"
+				transition:name={`service-${service.id}`}
+			>
+				{service.data.title}
+			</h1>
+			<p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{service.data.summary}</p>
+		</header>
+
+		<div class="prose-content mt-8">
+			<Content />
+		</div>
+
+		<div class="mt-12 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40">
+			<p class="text-sm text-neutral-700 dark:text-neutral-300">
+				Расскажите о задаче — обсудим, как лучше подойти.
+			</p>
+			<a
+				href="/#consultation"
+				class="mt-3 inline-block rounded-md bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white dark:bg-white dark:text-neutral-900"
+			>
+				Получить консультацию
+			</a>
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.prose-content :global(h2) { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600; }
+	.prose-content :global(p) { margin: 0.75rem 0; line-height: 1.75; color: var(--prose-text); }
+	.prose-content :global(ul) { margin: 0.75rem 0; padding-left: 1.5rem; list-style: disc; color: var(--prose-text); }
+	.prose-content :global(li + li) { margin-top: 0.25rem; }
+	.prose-content { --prose-text: oklch(0.371 0 0); }
+	:global(.dark) .prose-content { --prose-text: oklch(0.872 0 0); }
+</style>

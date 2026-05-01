@@ -1,0 +1,98 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('posts', ({ data }) => !data.draft);
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title} description={post.data.description} image={post.data.cover}>
+	<article class="mx-auto max-w-3xl px-6 py-16">
+		<a href="/posts" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
+			← к списку постов
+		</a>
+
+		<header class="mt-6 mb-10 border-b border-neutral-200 pb-6 dark:border-neutral-800">
+			<h1
+				class="text-4xl font-bold tracking-tight"
+				transition:name={`post-${post.id}`}
+			>
+				{post.data.title}
+			</h1>
+			<p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{post.data.description}</p>
+			<time
+				datetime={post.data.pubDate.toISOString()}
+				class="mt-3 block text-sm text-neutral-500"
+			>
+				{post.data.pubDate.toLocaleDateString('ru-RU', {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+				})}
+			</time>
+		</header>
+
+		<div class="prose-content">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.prose-content :global(h2) {
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+	.prose-content :global(p) {
+		margin: 1rem 0;
+		line-height: 1.75;
+		color: var(--prose-text);
+	}
+	.prose-content :global(ul) {
+		margin: 1rem 0;
+		padding-left: 1.5rem;
+		list-style: disc;
+		color: var(--prose-text);
+	}
+	.prose-content :global(li + li) {
+		margin-top: 0.25rem;
+	}
+	.prose-content :global(code) {
+		border-radius: 0.25rem;
+		background: var(--prose-code-bg);
+		padding: 0.125rem 0.375rem;
+		font-size: 0.875rem;
+	}
+	.prose-content :global(pre) {
+		margin: 1.5rem 0;
+		overflow-x: auto;
+		border-radius: 0.5rem;
+		background: var(--prose-pre-bg);
+		padding: 1rem;
+		font-size: 0.875rem;
+	}
+	.prose-content :global(pre code) {
+		background: transparent;
+		padding: 0;
+	}
+	.prose-content {
+		--prose-text: oklch(0.371 0 0);
+		--prose-code-bg: oklch(0.967 0 0);
+		--prose-pre-bg: oklch(0.967 0 0);
+	}
+	:global(.dark) .prose-content {
+		--prose-text: oklch(0.872 0 0);
+		--prose-code-bg: oklch(0.269 0 0);
+		--prose-pre-bg: oklch(0.205 0 0);
+	}
+</style>
