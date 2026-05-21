@@ -1,0 +1,465 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="ittimenow — shader flight game"
+	description="Тестовая игровая страница с управляемым WebGL-фоном."
+	bare
+>
+	<main class="shader-page" aria-label="Animated shader background">
+		<canvas id="shader-background" class="shader-canvas" aria-hidden="true"></canvas>
+
+		<section class="shader-content">
+			<img
+				class="shader-logo"
+				src="https://ittimenow.com/wp-content/uploads/2022/03/%D0%A0%D0%B5%D1%81%D1%83%D1%80%D1%81-1-1.webp"
+				alt=""
+				loading="eager"
+				decoding="async"
+			/>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	:global(html),
+	:global(body) {
+		overflow: hidden;
+		background: #020100;
+	}
+
+	.shader-page {
+		position: fixed;
+		inset: 0;
+		isolation: isolate;
+		min-height: 100svh;
+		overflow: hidden;
+		background: #020100;
+		color: #ffffff;
+	}
+
+	.shader-canvas {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		touch-action: none;
+		background: #020100;
+	}
+
+	.shader-content {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		width: min(1120px, calc(100% - 40px));
+		min-height: 100svh;
+		margin: 0 auto;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+	}
+
+	.shader-logo {
+		display: block;
+		filter: brightness(0) invert(1);
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.shader-logo {
+		position: fixed;
+		top: 10vh;
+		left: 50%;
+		width: 10vw;
+		height: auto;
+		transform: translateX(-50%);
+	}
+
+	@media (max-width: 640px) {
+		.shader-content {
+			width: min(100% - 28px, 1120px);
+		}
+	}
+</style>
+
+<script>
+	const canvas = document.getElementById('shader-background');
+
+	if (!(canvas instanceof HTMLCanvasElement)) {
+		throw new Error('Shader canvas was not found.');
+	}
+
+	const fragmentSource = `#version 300 es
+precision highp float;
+out vec4 O;
+uniform vec2 resolution;
+uniform vec2 ship;
+uniform float time;
+#define FC gl_FragCoord.xy
+#define T time
+#define R resolution
+#define MN min(R.x,R.y)
+
+float rnd(vec2 p) {
+	p=fract(p*vec2(12.9898,78.233));
+	p+=dot(p,p+34.56);
+	return fract(p.x*p.y);
+}
+
+float noise(in vec2 p) {
+	vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
+	float
+	a=rnd(i),
+	b=rnd(i+vec2(1,0)),
+	c=rnd(i+vec2(0,1)),
+	d=rnd(i+1.);
+	return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+}
+
+float fbm(vec2 p) {
+	float t=.0, a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
+	for (int i=0; i<5; i++) {
+		t+=a*noise(p);
+		p*=2.*m;
+		a*=.5;
+	}
+	return t;
+}
+
+float clouds(vec2 p) {
+	float d=1., t=.0;
+	for (float i=.0; i<3.; i++) {
+		float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
+		t=mix(t,d,a);
+		d=a;
+		p*=2./(i+1.);
+	}
+	return t;
+}
+
+void main(void) {
+	vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
+	vec3 col=vec3(0);
+	float cloudSpeed=.055;
+	vec2 star=vec2(
+		.035*sin(T*.09)+.018*sin(T*.031+1.7),
+		ship.y
+	);
+	vec2 dir=normalize(vec2(-1., .035*sin(T*.05)));
+	vec2 cloudUv=vec2(st.x+T*cloudSpeed,-st.y);
+	cloudUv+=.018*vec2(
+		noise(st*1.7+vec2(T*.035,1.4))-0.5,
+		noise(st*1.9+vec2(2.1,-T*.028))-0.5
+	);
+	vec2 shipDelta=uv-star;
+	float shipAlong=dot(shipDelta,dir);
+	float shipAcross=length(shipDelta-dir*shipAlong);
+	float bowPush=exp(-dot(shipDelta*vec2(12.,16.),shipDelta*vec2(12.,16.)));
+	float wakePush=smoothstep(.34,.0,shipAlong)*smoothstep(.07,.0,shipAcross)*smoothstep(-.025,.04,shipAlong);
+	vec2 sideDir=normalize(shipDelta+vec2(.0001));
+	vec2 tangent=vec2(-dir.y,dir.x);
+	float wakeNoise=noise(vec2(shipAlong*24.-T*.32,shipAcross*58.+T*.16))-.5;
+	cloudUv+=sideDir*bowPush*.026;
+	cloudUv+=dir*wakePush*.018+tangent*wakePush*wakeNoise*.026;
+	for (int i=0; i<4; i++) {
+		float id=float(i);
+		float cycle=T*.105+id*.27;
+		float slot=floor(cycle);
+		float progress=fract(cycle);
+		float seed=slot*8.37+id*31.91;
+		float startY=mix(-.42,.48,rnd(vec2(seed,1.73)));
+		float angle=mix(-.1745,.1745,rnd(vec2(seed,4.29)));
+		vec2 asteroidDir=normalize(vec2(-1.,tan(angle)));
+		vec2 asteroidTrailDir=-asteroidDir;
+		vec2 asteroidStart=vec2(1.05+.24*rnd(vec2(seed,7.11)),startY);
+		vec2 asteroid=asteroidStart+asteroidDir*progress*2.05;
+		vec2 impactDelta=uv-asteroid;
+		float trailAlong=dot(impactDelta,asteroidTrailDir);
+		vec2 trailSide=impactDelta-asteroidTrailDir*trailAlong;
+		float trailOffset=(noise(vec2(trailAlong*5.4+seed,T*.18))-0.5)*.07;
+		vec2 warpedTrailSide=trailSide+vec2(-asteroidTrailDir.y,asteroidTrailDir.x)*trailOffset;
+		float trailAcross=length(warpedTrailSide);
+		vec2 trailTangent=vec2(-asteroidTrailDir.y,asteroidTrailDir.x);
+		float trailWidth=.13+.05*noise(vec2(trailAlong*7.5-seed,T*.21));
+		float trailMask=smoothstep(.68,.0,trailAlong)*smoothstep(trailWidth,.0,trailAcross)*smoothstep(-.03,.07,trailAlong);
+		float trailTexture=.68+.32*noise(vec2(trailAlong*14.-T*.9+seed,trailAcross*42.+T*.21));
+		float swirl=noise(vec2(trailAlong*11.+seed,trailAcross*35.-T*.27))-0.5;
+		float trailLife=smoothstep(.04,.16,progress)*(1.-smoothstep(.62,.99,progress));
+		float frontAlong=dot(impactDelta,asteroidDir);
+		vec2 frontSide=impactDelta-asteroidDir*frontAlong;
+		float frontAcross=length(frontSide);
+		float frontPush=smoothstep(.2,.0,frontAlong)*smoothstep(.11,.0,frontAcross)*smoothstep(-.025,.055,frontAlong);
+		cloudUv+=warpedTrailSide*trailMask*trailTexture*.42*trailLife;
+		cloudUv+=trailTangent*trailMask*swirl*.036*trailLife;
+		cloudUv+=asteroidTrailDir*trailMask*(.012+.014*swirl)*trailLife;
+		cloudUv+=asteroidDir*frontPush*.045*trailLife;
+		float impactPulse=smoothstep(.48,.54,progress)*(1.-smoothstep(.62,.76,progress));
+		float impactCore=exp(-dot(impactDelta*vec2(34.,34.),impactDelta*vec2(34.,34.)));
+		float impactRing=exp(-dot(impactDelta*vec2(18.,18.),impactDelta*vec2(18.,18.)));
+		vec2 impactPush=normalize(impactDelta+vec2(.0001))*(impactCore*.014+impactRing*.006)*impactPulse;
+		cloudUv+=impactPush;
+	}
+	float bg=clouds(cloudUv);
+	vec3 cloudTone=vec3(.196,.231,1.);
+	col=cloudTone*(bg*.18+bg*bg*.22);
+	float asteroidTrackDarken=.0;
+	for (int i=0; i<4; i++) {
+		float id=float(i);
+		float cycle=T*.105+id*.27;
+		float slot=floor(cycle);
+		float progress=fract(cycle);
+		float seed=slot*8.37+id*31.91;
+		float startY=mix(-.42,.48,rnd(vec2(seed,1.73)));
+		float angle=mix(-.1745,.1745,rnd(vec2(seed,4.29)));
+		vec2 asteroidDir=normalize(vec2(-1.,tan(angle)));
+		vec2 asteroidTrailDir=-asteroidDir;
+		vec2 asteroidStart=vec2(1.05+.24*rnd(vec2(seed,7.11)),startY);
+		vec2 asteroid=asteroidStart+asteroidDir*progress*2.05;
+		vec2 trackDelta=uv-asteroid;
+		float trackAlong=dot(trackDelta,asteroidTrailDir);
+		vec2 trackSide=trackDelta-asteroidTrailDir*trackAlong;
+		float trackOffset=(noise(vec2(trackAlong*5.4+seed,T*.18))-0.5)*.07;
+		float trackAcross=length(trackSide+vec2(-asteroidTrailDir.y,asteroidTrailDir.x)*trackOffset);
+		float trackLife=smoothstep(.04,.16,progress)*(1.-smoothstep(.72,.9,progress));
+		float preImpactFade=1.-smoothstep(.46,.56,progress);
+		float softWakeWidth=.16+.04*noise(vec2(trackAlong*8.2-seed,T*.16));
+		float softWake=1.-smoothstep(.0,softWakeWidth,trackAcross);
+		float wakeNoise=.65+.35*noise(vec2(trackAlong*18.+seed,trackAcross*28.-T*.2));
+		float trackMask=smoothstep(.64,.0,trackAlong)*smoothstep(-.03,.06,trackAlong)*softWake*wakeNoise*trackLife*preImpactFade;
+		asteroidTrackDarken=max(asteroidTrackDarken,trackMask);
+	}
+	col*=1.-asteroidTrackDarken*.28;
+
+	float strikeTick=floor(T*.32);
+	float strikePhase=fract(T*.32);
+	float strikeChance=step(.62,rnd(vec2(strikeTick,7.31)));
+	float pulseA=smoothstep(.025,.04,strikePhase)*(1.-smoothstep(.055,.1,strikePhase));
+	float pulseB=smoothstep(.14,.155,strikePhase)*(1.-smoothstep(.175,.22,strikePhase));
+	float pulseC=smoothstep(.255,.27,strikePhase)*(1.-smoothstep(.292,.34,strikePhase));
+	float pulseD=smoothstep(.39,.405,strikePhase)*(1.-smoothstep(.425,.47,strikePhase));
+	float flicker=step(.24,rnd(vec2(strikeTick,floor(strikePhase*72.))));
+	float flash=strikeChance*(pulseA+pulseB*.9+pulseC*.72+pulseD*.52)*flicker;
+	vec2 strikeCenter=vec2(
+		mix(-.72,.72,rnd(vec2(strikeTick,2.17))),
+		mix(-.34,.34,rnd(vec2(strikeTick,5.83)))
+	);
+	strikeCenter.x-=strikePhase/.32*cloudSpeed*.5;
+	vec2 flashUv=uv-strikeCenter;
+	float brokenCloud=.45+.55*noise(flashUv*20.+strikeTick*2.9);
+	brokenCloud*=.6+.4*noise(flashUv*44.-strikeTick);
+	float core=exp(-dot(flashUv*vec2(18.,24.),flashUv*vec2(18.,24.)));
+	float halo=exp(-dot(flashUv*vec2(9.2,12.4),flashUv*vec2(9.2,12.4)));
+	float spill=exp(-dot(flashUv*vec2(4.8,6.2),flashUv*vec2(4.8,6.2)));
+	float glow=(core*.72+halo*.62+spill*.28)*brokenCloud;
+	float cloudBody=smoothstep(.08,.28,bg);
+	float lightSuppress=1.-smoothstep(.66,.95,bg);
+	float darkGrooves=smoothstep(.08,.42,1.-bg);
+	float cloudRelief=cloudBody*(.24+lightSuppress*darkGrooves*.9);
+	float embeddedGlow=glow*cloudRelief;
+	col+=vec3(.74,.88,1.)*embeddedGlow*flash*1.85;
+
+	for (int i=0; i<4; i++) {
+		float id=float(i);
+		float cycle=T*.105+id*.27;
+		float slot=floor(cycle);
+		float progress=fract(cycle);
+		float seed=slot*8.37+id*31.91;
+		float startY=mix(-.42,.48,rnd(vec2(seed,1.73)));
+		float angle=mix(-.1745,.1745,rnd(vec2(seed,4.29)));
+		vec2 asteroidDir=normalize(vec2(-1.,tan(angle)));
+		vec2 asteroidTrailDir=-asteroidDir;
+		vec2 asteroidStart=vec2(1.05+.24*rnd(vec2(seed,7.11)),startY);
+		vec2 asteroid=asteroidStart+asteroidDir*progress*2.05;
+		vec2 ap=uv-asteroid;
+		float asteroidAlong=dot(ap,asteroidTrailDir);
+		float asteroidAcross=length(ap-asteroidTrailDir*asteroidAlong);
+		float asteroidWakeStart=smoothstep(-.014,.05,asteroidAlong);
+		float asteroidFlow=noise(vec2(asteroidAlong*18.-T*1.7+seed,asteroidAcross*78.+T*.45));
+		float asteroidFine=noise(vec2(asteroidAlong*46.-T*3.7-seed,asteroidAcross*150.-T*.92));
+		float asteroidFlicker=.78+.22*smoothstep(.22,1.,rnd(vec2(floor(T*35.)+id,seed)));
+		asteroidFlicker+=.08*sin(T*88.+seed);
+		float asteroidHead=(.0048/max(length(ap),.012))*asteroidFlicker;
+		float asteroidCenter=exp(-dot(ap*vec2(34.,34.),ap*vec2(34.,34.)))*asteroidFlicker;
+		float asteroidOuter=exp(-dot(ap*vec2(12.,12.),ap*vec2(12.,12.)));
+		float asteroidTailTexture=.62+.25*asteroidFlow+.13*asteroidFine;
+		float asteroidTailWave=.84+.16*sin(asteroidAlong*38.-T*3.4+asteroidFlow);
+		float asteroidTailWidth=.005*(.76+.34*noise(vec2(asteroidAlong*10.-T,seed)));
+		float asteroidGlowWidth=.03*(.84+.2*asteroidFlow);
+		float asteroidTail=smoothstep(.3,.0,asteroidAlong)*smoothstep(asteroidTailWidth,.0,asteroidAcross)*asteroidWakeStart*asteroidTailTexture*asteroidTailWave;
+		float asteroidTailGlow=smoothstep(.52,.0,asteroidAlong)*smoothstep(asteroidGlowWidth,.0,asteroidAcross)*asteroidWakeStart*(.72+.28*asteroidTailTexture);
+		float entry=smoothstep(.02,.12,progress);
+		float sink=smoothstep(.46,.82,progress);
+		float cloudDepth=smoothstep(.22,.92,bg);
+		float cloudHide=1.-smoothstep(.18,.86,cloudDepth*sink+bg*.16);
+		float pathFade=1.-smoothstep(.68,.9,progress);
+		float asteroidVisibility=entry*pathFade*cloudHide;
+		float impactPulse=smoothstep(.48,.54,progress)*(1.-smoothstep(.62,.76,progress));
+		float impactNoise=.7+.3*noise(ap*32.+seed);
+		float impactCore=exp(-dot(ap*vec2(42.,42.),ap*vec2(42.,42.)));
+		float impactHalo=exp(-dot(ap*vec2(24.,24.),ap*vec2(24.,24.)));
+		float impactSpill=exp(-dot(ap*vec2(15.,15.),ap*vec2(15.,15.)));
+		float impactFlash=(impactCore*.65+impactHalo*.32+impactSpill*.12)*impactPulse*impactNoise;
+		vec3 asteroidColor=vec3(1.,.06,.015);
+		col+=vec3(1.,.82,.64)*impactFlash*.72;
+		col+=vec3(1.,.08,.02)*impactFlash*.45;
+		col+=asteroidColor*asteroidHead*asteroidVisibility;
+		col+=vec3(1.,.12,.02)*asteroidCenter*.35*asteroidVisibility;
+		col+=vec3(1.,.03,.01)*asteroidOuter*.12*asteroidVisibility;
+		col+=vec3(1.,.04,.01)*asteroidTail*.92*asteroidVisibility;
+		col+=vec3(.9,.015,.005)*asteroidTailGlow*.3*asteroidVisibility;
+	}
+
+	vec2 p=uv-star;
+	float along=dot(p,dir);
+	float across=length(p-dir*along);
+	float fastFlicker=.82+.18*smoothstep(.28,1.,rnd(vec2(floor(T*42.),11.7)));
+	fastFlicker+=.07*sin(T*96.)+.04*sin(T*173.);
+	float softOcclusionNoise=noise(st*3.5+vec2(T*.025,-T*.018))*.035;
+	float highCloud=smoothstep(.94,.995,bg+softOcclusionNoise);
+	float objectVisibility=1.-smoothstep(.945,.995,bg+softOcclusionNoise);
+	objectVisibility=mix(objectVisibility,1.-highCloud*.82,.35);
+	objectVisibility*=.72+.28*(1.-highCloud);
+	float head=(.0058/max(length(p),.014))*fastFlicker;
+	float centerGlow=exp(-dot(p*vec2(30.,30.),p*vec2(30.,30.)))*fastFlicker;
+	float outerGlow=exp(-dot(p*vec2(13.,13.),p*vec2(13.,13.)))*(.72+.28*fastFlicker);
+	float cloudContact=highCloud*outerGlow*(.65+.35*fastFlicker);
+	col+=vec3(.72,.86,1.)*cloudContact*.18;
+	float tailStart=smoothstep(-.018,.055,along);
+	float tailFlow=noise(vec2(along*16.-T*1.4,across*70.+T*.36));
+	float tailFine=noise(vec2(along*42.-T*3.2,across*135.-T*.8));
+	float tailTexture=.68+.22*tailFlow+.1*tailFine;
+	float tailWave=.86+.14*sin(along*34.-T*3.1+.8*tailFlow);
+	float tailWidth=.0055*(.78+.28*noise(vec2(along*9.-T*.9,T*.17)));
+	float glowWidth=.034*(.86+.18*tailFlow);
+	float tail=smoothstep(.36,.0,along)*smoothstep(tailWidth,.0,across)*tailStart*tailTexture*tailWave;
+	float tailGlow=smoothstep(.62,.0,along)*smoothstep(glowWidth,.0,across)*tailStart*(.76+.24*tailTexture);
+	vec3 starColor=vec3(1.,.78,.36);
+	col+=starColor*head*objectVisibility;
+	col+=vec3(1.,.68,.22)*centerGlow*.22*objectVisibility;
+	col+=vec3(1.,.42,.08)*outerGlow*.07*objectVisibility;
+	col+=vec3(1.,.48,.12)*tail*.85*objectVisibility;
+	col+=vec3(.9,.28,.06)*tailGlow*.22*objectVisibility;
+	O=vec4(col,1);
+}`;
+
+	const vertexSource = `#version 300 es
+precision highp float;
+in vec2 position;
+void main() {
+	gl_Position = vec4(position, 0.0, 1.0);
+}`;
+
+	const gl = canvas.getContext('webgl2', {
+		antialias: false,
+		alpha: false,
+		powerPreference: 'high-performance',
+	});
+
+	if (!gl) {
+		canvas.insertAdjacentHTML(
+			'afterend',
+			'<p class="shader-webgl-error">WebGL2 недоступен в этом браузере.</p>',
+		);
+		throw new Error('WebGL2 is not available.');
+	}
+
+	const compileShader = (type, source) => {
+		const shader = gl.createShader(type);
+		if (!shader) {
+			throw new Error('Unable to create shader.');
+		}
+		gl.shaderSource(shader, source);
+		gl.compileShader(shader);
+		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+			const message = gl.getShaderInfoLog(shader) ?? 'Unknown shader compile error.';
+			gl.deleteShader(shader);
+			throw new Error(message);
+		}
+		return shader;
+	};
+
+	const vertexShader = compileShader(gl.VERTEX_SHADER, vertexSource);
+	const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentSource);
+	const program = gl.createProgram();
+
+	if (!program) {
+		throw new Error('Unable to create shader program.');
+	}
+
+	gl.attachShader(program, vertexShader);
+	gl.attachShader(program, fragmentShader);
+	gl.linkProgram(program);
+
+	if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+		throw new Error(gl.getProgramInfoLog(program) ?? 'Unable to link shader program.');
+	}
+
+	const vertices = new Float32Array([-1, 1, -1, -1, 1, 1, 1, -1]);
+	const buffer = gl.createBuffer();
+	const position = gl.getAttribLocation(program, 'position');
+	const resolution = gl.getUniformLocation(program, 'resolution');
+	const shipUniform = gl.getUniformLocation(program, 'ship');
+	const time = gl.getUniformLocation(program, 'time');
+	let targetY = 0;
+	const ship = { x: 0, y: 0 };
+	let previousTime = 0;
+	let frame = 0;
+
+	gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+	gl.enableVertexAttribArray(position);
+	gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+	const resize = () => {
+		const scale = Math.max(1, Math.min(window.devicePixelRatio * 0.5, 1.5));
+		const width = Math.floor(window.innerWidth * scale);
+		const height = Math.floor(window.innerHeight * scale);
+		if (canvas.width !== width || canvas.height !== height) {
+			canvas.width = width;
+			canvas.height = height;
+		}
+		gl.viewport(0, 0, width, height);
+	};
+
+	const setTargetFromPointer = (event) => {
+		const size = Math.min(window.innerWidth, window.innerHeight);
+		targetY = (window.innerHeight * 0.5 - event.clientY) / size;
+	};
+
+	const updateShip = (now) => {
+		const seconds = now * 0.001;
+		const dt = previousTime === 0 ? 0 : Math.min(seconds - previousTime, 0.05);
+		previousTime = seconds;
+
+		const follow = 1 - Math.exp(-dt * 0.24);
+		ship.y += (targetY - ship.y) * follow;
+	};
+
+	const render = (now) => {
+		resize();
+		updateShip(now);
+		gl.useProgram(program);
+		gl.uniform2f(resolution, canvas.width, canvas.height);
+		gl.uniform2f(shipUniform, ship.x, ship.y);
+		gl.uniform1f(time, now * 0.001);
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+		frame = requestAnimationFrame(render);
+	};
+
+	window.addEventListener('resize', resize, { passive: true });
+	window.addEventListener('pointermove', setTargetFromPointer, { passive: true });
+	document.addEventListener('astro:before-swap', () => {
+		window.removeEventListener('resize', resize);
+		window.removeEventListener('pointermove', setTargetFromPointer);
+		cancelAnimationFrame(frame);
+		gl.deleteProgram(program);
+		gl.deleteShader(vertexShader);
+		gl.deleteShader(fragmentShader);
+		gl.deleteBuffer(buffer);
+	}, { once: true });
+
+	resize();
+	frame = requestAnimationFrame(render);
+</script>

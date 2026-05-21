@@ -1,0 +1,255 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const offerItems = [
+	'Аудит текущих процессов',
+	'Настройка CRM и карточек',
+	'Воронки, стадии, роли, права',
+	'Импорт и очистка клиентской базы',
+	'Интеграции: 1С, телефония, сайт, почта',
+	'Автоматизация: роботы, БП, смарт-процессы',
+];
+
+const problems = [
+	'Все заявки из сайта, почты и мессенджеров в одном месте',
+	'Ни один лид не теряется и не забывается',
+	'Единый сценарий работы менеджеров вместо хаоса',
+	'Прозрачная воронка и загрузка команды для руководителя',
+	'Автоматические счета, КП, акты, напоминания',
+	'Согласования уходят из чатов и таблиц в процессы',
+];
+
+const benefits = [
+	'Меньше потерь лидов и просроченных задач',
+	'Выше скорость обработки заявок',
+	'Меньше ручной работы у менеджеров',
+	'Прозрачная отчетность для руководителя',
+	'Единая история коммуникаций по клиенту',
+	'Масштабирование продаж без хаоса',
+];
+
+const packages = [
+	{
+		name: 'Аудит и дорожная карта',
+		price: 'от 19 000 ₽',
+		fit: 'Если нужно понять архитектуру внедрения и бюджет.',
+		items: ['Интервью и разбор процессов', 'Рекомендации по облаку/коробке', 'Карта автоматизации', 'Предварительная смета'],
+	},
+	{
+		name: 'Быстрый старт CRM',
+		price: 'от 39 000 ₽',
+		fit: 'Для малого бизнеса и первого запуска Bitrix24.',
+		items: ['Портал, роли, права', 'Базовая CRM и 1-2 воронки', 'Карточки лидов/сделок', 'Подключение почты или формы'],
+	},
+	{
+		name: 'Отдел продаж под ключ',
+		price: 'от 89 000 ₽',
+		fit: 'Когда нужен управляемый отдел продаж.',
+		items: ['Воронки и автоматизация', 'Телефония/почта/формы', 'Шаблоны документов', 'Отчеты и обучение команды'],
+	},
+	{
+		name: 'Комплексное внедрение',
+		price: 'от 149 000 ₽',
+		fit: 'Для продаж, процессов, интеграций и аналитики.',
+		items: ['Бизнес-анализ и CRM', 'Смарт-процессы', 'Интеграции с 1С и сервисами', 'Миграция и сопровождение'],
+	},
+	{
+		name: 'Коробка и сложные интеграции',
+		price: 'от 249 000 ₽',
+		fit: 'Для требований безопасности и кастомизации.',
+		items: ['Архитектура и инфраструктура', 'API-интеграции', 'Кастомные модули', 'Оптимизация портала'],
+	},
+];
+
+const steps = [
+	['Аудит', 'Фиксируем цели, процессы, роли и точки потерь.'],
+	['Проектирование', 'Описываем воронки, карточки, интеграции и этапы запуска.'],
+	['Настройка', 'Конфигурируем CRM, права, роботов, формы и каналы связи.'],
+	['Запуск', 'Переносим данные, тестируем сценарии и обучаем сотрудников.'],
+	['Сопровождение', 'Донастраиваем процессы и развиваем систему по KPI.'],
+];
+
+const faqs = [
+	[
+		'Сколько стоит внедрение Bitrix24?',
+		'Стоимость зависит от числа пользователей, логики процессов, интеграций и объема миграции данных. Базовый запуск начинается от 39 000 ₽.',
+	],
+	[
+		'Сколько времени занимает внедрение?',
+		'Быстрый запуск обычно занимает от нескольких дней до нескольких недель. Сложные проекты с интеграциями идут этапами до нескольких месяцев.',
+	],
+	[
+		'Что выбрать: облако или коробку?',
+		'Облако подходит для быстрого старта и типовых задач. Коробка нужна для глубокой кастомизации, контроля инфраструктуры и требований к безопасности.',
+	],
+	[
+		'Можно ли интегрировать с 1С, телефонией и сайтом?',
+		'Да. Это один из самых частых сценариев: связываем Bitrix24 с 1С, телефонией, формами, почтой, сайтом и внешними сервисами.',
+	],
+];
+---
+
+<Layout
+	title="Внедрение и настройка Bitrix24 под ключ — цена от 39 000 ₽ | IT Time Now"
+	description="Внедрение и настройка Bitrix24 для бизнеса: CRM, воронки, роботы, телефония, 1С, интеграции, обучение и сопровождение. Запуск от 39 000 ₽."
+	headerVariant="glass"
+>
+	<div class="bg-white text-black dark:bg-neutral-950 dark:text-white">
+		<section class="border-b border-[#E5E7EB] bg-[#F1F1F1] dark:border-neutral-800 dark:bg-neutral-900/40">
+			<div class="mx-auto grid max-w-[1400px] gap-10 px-6 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+				<div>
+					<p class="text-sm font-semibold uppercase text-[#232BFF]">Внедрение CRM Bitrix24</p>
+					<h1 class="mt-4 max-w-4xl text-[42px] font-bold leading-none sm:text-[54px]">
+						Внедрение и настройка Bitrix24 под ваши процессы
+					</h1>
+					<p class="mt-6 max-w-3xl text-lg leading-[30.6px] text-neutral-700 dark:text-neutral-300">
+						Запустим Bitrix24 под ваш бизнес от 39 000 ₽: CRM, воронки продаж, роли, карточки,
+						автоматизацию, телефонию, почту, формы и интеграции. Поможем выбрать облако или коробку,
+						перенесем данные и обучим команду.
+					</p>
+					<p class="mt-4 max-w-2xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+						Для малого бизнеса, отделов продаж и компаний со сложными процессами. Первый созвон - с
+						разбором задачи и предварительной сметой.
+					</p>
+					<div class="mt-8 flex flex-wrap gap-3">
+						<a href="#lead-form" class="inline-flex min-h-11 items-center bg-[#006AFF] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#232BFF]">
+							Получить расчет
+						</a>
+						<a href="#lead-form" class="inline-flex min-h-11 items-center border border-[#232BFF] px-5 py-3 text-sm font-bold text-[#232BFF] transition hover:bg-[#232BFF] hover:text-white">
+							Обсудить проект
+						</a>
+					</div>
+				</div>
+				<div class="bg-white p-7 shadow-[rgba(61,61,61,0.09)_0px_2px_18px_0px] dark:bg-neutral-900">
+					<p class="text-sm font-semibold uppercase text-[#232BFF]">Что входит в услугу</p>
+					<ul class="mt-5 space-y-3">
+						{offerItems.map((item) => (
+							<li class="flex gap-3 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
+								<span class="mt-[9px] h-1.5 w-1.5 shrink-0 bg-[#232BFF]"></span>
+								<span>{item}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto max-w-[1400px] px-6 py-14 lg:px-8">
+			<div class="grid gap-8 lg:grid-cols-2">
+				<div>
+					<p class="text-sm font-semibold uppercase text-[#232BFF]">Какие задачи решаем</p>
+					<h2 class="mt-3 text-[30px] leading-[30px]">Убираем потери лидов, ручную работу и беспорядок</h2>
+				</div>
+				<div class="grid gap-4 sm:grid-cols-2">
+					{problems.map((item) => (
+						<div class="border-l-4 border-[#232BFF] bg-white p-5 shadow-[rgba(61,61,61,0.09)_0px_2px_18px_0px] dark:bg-neutral-900">
+							<p class="text-sm leading-6 text-neutral-700 dark:text-neutral-300">{item}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="bg-[#F1F1F1] dark:bg-neutral-900/40">
+			<div class="mx-auto max-w-[1400px] px-6 py-14 lg:px-8">
+				<p class="text-sm font-semibold uppercase text-[#232BFF]">Ваша выгода</p>
+				<h2 class="mt-3 max-w-4xl text-[30px] leading-[30px]">После внедрения вы получаете управляемый и масштабируемый процесс продаж</h2>
+				<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+					{benefits.map((item) => (
+						<div class="bg-white p-5 shadow-[rgba(61,61,61,0.09)_0px_2px_18px_0px] dark:bg-neutral-900">
+							<p class="text-sm leading-6 text-neutral-700 dark:text-neutral-300">{item}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto max-w-[1400px] px-6 py-14 lg:px-8">
+			<div class="flex flex-wrap items-end justify-between gap-6">
+				<div>
+					<p class="text-sm font-semibold uppercase text-[#232BFF]">Стоимость и пакеты</p>
+					<h2 class="mt-3 text-[30px] leading-[30px]">Готовые решения под ваш этап роста</h2>
+				</div>
+				<p class="max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+					Лицензия Bitrix24 оплачивается отдельно. Стоимость работ зависит от сложности логики,
+					интеграций и объема данных для переноса.
+				</p>
+			</div>
+			<div class="mt-8 grid gap-4 lg:grid-cols-5">
+				{packages.map((pack) => (
+					<article class="bg-white p-5 shadow-[rgba(61,61,61,0.09)_0px_2px_18px_0px] dark:bg-neutral-900">
+						<h3 class="text-lg leading-[21.6px]">{pack.name}</h3>
+						<p class="mt-3 text-2xl font-bold text-[#232BFF]">{pack.price}</p>
+						<p class="mt-3 text-sm leading-6 text-neutral-700 dark:text-neutral-300">{pack.fit}</p>
+						<ul class="mt-4 space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
+							{pack.items.map((item) => (
+								<li class="flex gap-2">
+									<span class="text-[#232BFF]">•</span>
+									<span>{item}</span>
+								</li>
+							))}
+						</ul>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="bg-[#F1F1F1] dark:bg-neutral-900/40">
+			<div class="mx-auto max-w-[1400px] px-6 py-14 lg:px-8">
+				<p class="text-sm font-semibold uppercase text-[#232BFF]">Как проходит внедрение</p>
+				<h2 class="mt-3 text-[30px] leading-[30px]">5 шагов: аудит -> проектирование -> настройка -> запуск -> сопровождение</h2>
+				<div class="mt-8 grid gap-4 md:grid-cols-5">
+					{steps.map(([title, text], index) => (
+						<div class="bg-white p-5 shadow-[rgba(61,61,61,0.09)_0px_2px_18px_0px] dark:bg-neutral-900">
+							<p class="text-sm font-bold text-[#232BFF]">{String(index + 1).padStart(2, '0')}</p>
+							<h3 class="mt-3 text-lg leading-[21.6px]">{title}</h3>
+							<p class="mt-3 text-sm leading-6 text-neutral-700 dark:text-neutral-300">{text}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto max-w-[1400px] px-6 py-14 lg:px-8">
+			<div class="grid gap-8 lg:grid-cols-2">
+				<div>
+					<p class="text-sm font-semibold uppercase text-[#232BFF]">FAQ</p>
+					<h2 class="mt-3 text-[30px] leading-[30px]">Частые вопросы по внедрению Bitrix24</h2>
+				</div>
+				<div class="grid gap-4">
+					{faqs.map(([q, a]) => (
+						<details class="bg-white p-5 shadow-[rgba(61,61,61,0.09)_0px_2px_18px_0px] dark:bg-neutral-900">
+							<summary class="cursor-pointer text-lg leading-[21.6px]">{q}</summary>
+							<p class="mt-3 text-sm leading-6 text-neutral-700 dark:text-neutral-300">{a}</p>
+						</details>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section id="lead-form" class="mx-auto max-w-[1400px] px-6 pb-20 lg:px-8">
+			<div class="grid gap-8 bg-[#232BFF] p-8 text-white shadow-[rgba(0,0,0,0.1)_0px_2px_5px_0px] lg:grid-cols-2">
+				<div>
+					<p class="text-sm font-semibold uppercase">Форма заявки</p>
+					<h2 class="mt-3 text-[30px] leading-[30px]">Получите план внедрения и предварительную смету</h2>
+					<p class="mt-5 text-sm leading-6 text-white/90">
+						Расскажите, что хотите автоматизировать: продажи, заявки с сайта, документооборот,
+						согласования, задачи, производство, сервис или интеграции с 1С.
+					</p>
+				</div>
+				<form class="grid gap-3 bg-white p-5 text-black" method="post" action="#">
+					<input required type="text" name="name" placeholder="Имя" class="h-[51px] border border-[#424956] bg-white px-4 text-sm outline-none focus:border-2 focus:border-[#232BFF]" />
+					<input required type="text" name="contact" placeholder="Телефон / WhatsApp / Telegram" class="h-[51px] border border-[#424956] bg-white px-4 text-sm outline-none focus:border-2 focus:border-[#232BFF]" />
+					<textarea name="task" rows="4" placeholder="Что хотите настроить" class="border border-[#424956] bg-white px-4 py-3 text-sm outline-none focus:border-2 focus:border-[#232BFF]"></textarea>
+					<button type="submit" class="h-[51px] bg-[#006AFF] px-5 text-sm font-bold text-white transition hover:bg-[#232BFF]">
+						Получить план внедрения
+					</button>
+					<p class="text-xs leading-5 text-neutral-600">
+						После заявки уточним задачу и подготовим предварительный сценарий внедрения без лишних
+						созвонов.
+					</p>
+				</form>
+			</div>
+		</section>
+	</div>
+</Layout>

@@ -16,21 +16,13 @@ const { Content } = await render(post);
 
 <Layout title={post.data.title} description={post.data.description} image={post.data.cover}>
 	<article class="mx-auto max-w-3xl px-6 py-16">
-		<a href="/posts" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
-			← к списку постов
-		</a>
-
-		<header class="mt-6 mb-10 border-b border-neutral-200 pb-6 dark:border-neutral-800">
-			<h1
-				class="text-4xl font-bold tracking-tight"
-				transition:name={`post-${post.id}`}
-			>
-				{post.data.title}
-			</h1>
-			<p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{post.data.description}</p>
+		<div class="flex items-center justify-between gap-4 text-sm text-neutral-500">
+			<a href="/posts" class="transition hover:text-[#323bff] dark:hover:text-[#323bff]">
+				← к списку постов
+			</a>
 			<time
 				datetime={post.data.pubDate.toISOString()}
-				class="mt-3 block text-sm text-neutral-500"
+				class="shrink-0"
 			>
 				{post.data.pubDate.toLocaleDateString('ru-RU', {
 					year: 'numeric',
@@ -38,6 +30,24 @@ const { Content } = await render(post);
 					day: 'numeric',
 				})}
 			</time>
+		</div>
+
+		<header class="mt-6 mb-10 pb-6">
+			<h1
+				class="text-4xl font-bold tracking-tight"
+				transition:name={`post-${post.id}`}
+			>
+				{post.data.title}
+			</h1>
+			<p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{post.data.description}</p>
+			{post.data.cover && (
+				<img
+					src={post.data.cover}
+					alt=""
+					class="relative left-1/2 mt-8 aspect-video w-screen max-w-4xl -translate-x-1/2 rounded-xl object-cover"
+					loading="eager"
+				/>
+			)}
 		</header>
 
 		<div class="prose-content">
@@ -53,6 +63,18 @@ const { Content } = await render(post);
 		font-size: 1.5rem;
 		font-weight: 600;
 	}
+	.prose-content :global(h3) {
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+	.prose-content :global(h4) {
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+		font-size: 1.0625rem;
+		font-weight: 600;
+	}
 	.prose-content :global(p) {
 		margin: 1rem 0;
 		line-height: 1.75;
@@ -64,8 +86,28 @@ const { Content } = await render(post);
 		list-style: disc;
 		color: var(--prose-text);
 	}
+	.prose-content :global(ol) {
+		margin: 1rem 0;
+		padding-left: 1.5rem;
+		list-style: decimal;
+		color: var(--prose-text);
+	}
 	.prose-content :global(li + li) {
 		margin-top: 0.25rem;
+	}
+	.prose-content :global(a) {
+		color: oklch(0.518 0.253 323.949);
+		text-decoration: underline;
+		text-underline-offset: 0.1875rem;
+	}
+	.prose-content :global(strong) {
+		font-weight: 700;
+		color: var(--prose-strong);
+	}
+	.prose-content :global(img) {
+		margin: 2rem 0;
+		width: 100%;
+		border-radius: 0.75rem;
 	}
 	.prose-content :global(code) {
 		border-radius: 0.25rem;
@@ -87,11 +129,13 @@ const { Content } = await render(post);
 	}
 	.prose-content {
 		--prose-text: oklch(0.371 0 0);
+		--prose-strong: oklch(0.205 0 0);
 		--prose-code-bg: oklch(0.967 0 0);
 		--prose-pre-bg: oklch(0.967 0 0);
 	}
 	:global(.dark) .prose-content {
 		--prose-text: oklch(0.872 0 0);
+		--prose-strong: oklch(0.985 0 0);
 		--prose-code-bg: oklch(0.269 0 0);
 		--prose-pre-bg: oklch(0.205 0 0);
 	}

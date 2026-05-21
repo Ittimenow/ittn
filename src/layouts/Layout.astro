@@ -9,6 +9,7 @@ interface Props {
 	description?: string;
 	image?: string;
 	bare?: boolean;
+	headerVariant?: 'default' | 'glass';
 }
 
 const {
@@ -16,6 +17,7 @@ const {
 	description = 'ittimenow — сайт на Astro и Tailwind.',
 	image = '/og.png',
 	bare = false,
+	headerVariant = 'glass',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
@@ -63,7 +65,7 @@ const ogImage = new URL(image, Astro.site ?? Astro.url);
 	>
 		{bare ? <slot /> : (
 			<>
-				<Header transition:persist />
+				<Header variant={headerVariant} transition:persist />
 				<main><slot /></main>
 				<Footer transition:persist />
 			</>
