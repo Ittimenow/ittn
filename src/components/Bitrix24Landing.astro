@@ -188,7 +188,7 @@ const checklist = [
 					<UiIcon name="chevron" class="h-3.5 w-3.5" />
 					<span>Внедрение CRM Bitrix24</span>
 				</nav>
-				<h1>
+				<h1 transition:name="service-bitrix24">
 					Внедрение и настройка Bitrix24 под ваши процессы
 				</h1>
 				<p class="bitrix-lead">
@@ -227,7 +227,7 @@ const checklist = [
 
 			<picture class="bitrix-hero-media">
 				<img
-					src="/main-b24.png"
+					src="/main-b24-v2.png"
 					alt="Интерфейс Bitrix24 с CRM, задачами и аналитикой"
 					width="1086"
 					height="1448"
@@ -801,7 +801,7 @@ const checklist = [
 		display: inline-flex;
 		align-items: center;
 		min-height: 28px;
-		border-radius: 9999px;
+		border-radius: 24px;
 		background: rgba(35, 43, 255, 0.09);
 		padding: 4px 12px;
 		color: var(--ds2-primary);
@@ -951,11 +951,10 @@ const checklist = [
 		cursor: pointer;
 		isolation: isolate;
 		transition:
-			border-color 600ms cubic-bezier(0.23, 1, 0.32, 1),
-			border-radius 600ms cubic-bezier(0.23, 1, 0.32, 1),
-			background 600ms cubic-bezier(0.23, 1, 0.32, 1),
-			color 600ms cubic-bezier(0.23, 1, 0.32, 1),
-			transform 600ms cubic-bezier(0.23, 1, 0.32, 1);
+			border-color 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			background 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			color 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
 
 	.ds2-btn::before {
@@ -1011,7 +1010,6 @@ const checklist = [
 
 	.ds2-btn:hover {
 		border-color: var(--ds2-btn-hover-border);
-		border-radius: 12px;
 		color: var(--ds2-btn-hover-color);
 	}
 
@@ -1600,7 +1598,7 @@ const checklist = [
 		}
 
 		.bitrix-hero-benefit {
-			width: calc(100% + 220px);
+			width: calc(100% + 110px);
 			max-width: none;
 			transform: translateX(36px);
 		}
@@ -2238,6 +2236,52 @@ const checklist = [
 		.bitrix-problem-card,
 		.bitrix-services .ds2-service-card {
 			min-height: 320px;
+		}
+
+		.bitrix-problems .bitrix-problem-card {
+			border-color: rgba(35, 43, 255, 0.24);
+			background: linear-gradient(180deg, rgba(35, 43, 255, 0.08), var(--ds2-card-strong));
+			box-shadow: var(--ds2-shadow), var(--ds2-glow);
+		}
+
+		.bitrix-problems {
+			padding-top: 30px;
+			padding-bottom: 72px;
+			margin-top: 22px;
+			margin-bottom: -60px;
+		}
+
+		:global(.dark) .bitrix-problems .bitrix-problem-card {
+			border-color: rgba(95, 102, 255, 0.34);
+			background: linear-gradient(180deg, rgba(95, 102, 255, 0.16), var(--ds2-card-strong));
+		}
+
+		.bitrix-services {
+			padding-top: 30px;
+			padding-bottom: 72px;
+			margin-top: 22px;
+			margin-bottom: -60px;
+		}
+
+		.bitrix-services .ds2-service-card {
+			border-color: rgba(35, 43, 255, 0.24);
+			box-shadow: var(--ds2-shadow), var(--ds2-glow);
+		}
+
+		.bitrix-services .ds2-service-card:not(.is-accent) {
+			background: linear-gradient(180deg, rgba(35, 43, 255, 0.08), var(--ds2-card-strong));
+		}
+
+		.bitrix-services .is-accent {
+			border-color: rgba(95, 102, 255, 0.42);
+		}
+
+		:global(.dark) .bitrix-services .ds2-service-card {
+			border-color: rgba(95, 102, 255, 0.34);
+		}
+
+		:global(.dark) .bitrix-services .ds2-service-card:not(.is-accent) {
+			background: linear-gradient(180deg, rgba(95, 102, 255, 0.16), var(--ds2-card-strong));
 		}
 
 		.bitrix-table-wrap .ds2-table {

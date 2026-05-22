@@ -60,9 +60,7 @@ const ogImage = new URL(image, Astro.site ?? Astro.url);
 			})();
 		</script>
 	</head>
-	<body
-		class="min-h-full bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100"
-	>
+	<body class="min-h-full antialiased">
 		{bare ? <slot /> : (
 			<>
 				<Header variant={headerVariant} transition:persist />

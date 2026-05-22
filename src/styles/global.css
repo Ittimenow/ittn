@@ -19,9 +19,117 @@
 }
 
 @theme {
-	--font-sans: "TT Runs", Arial, sans-serif;
+	--font-sans: var(--ds2-font-system);
+	--color-indigo-400: #5f66ff;
+	--color-indigo-500: #3e45ff;
+	--color-indigo-600: #232bff;
+	--color-indigo-700: #1d24d9;
+	--color-fuchsia-400: #8b5cff;
+	--color-fuchsia-500: #8b5cff;
+	--color-fuchsia-600: #7648e8;
+	--color-neutral-50: #f6f7fb;
+	--color-neutral-100: #f4f4f5;
+	--color-neutral-200: #e4e4e7;
+	--color-neutral-300: #d4d4d8;
+	--color-neutral-400: #a1a1aa;
+	--color-neutral-500: #71717a;
+	--color-neutral-600: #52525b;
+	--color-neutral-700: #3f3f46;
+	--color-neutral-800: #27272a;
+	--color-neutral-900: #18181b;
+	--color-neutral-950: #09090b;
+	--radius-2xl: 1.5rem;
+	--radius-3xl: 2.5rem;
+}
+
+:root {
+	--ds2-primary: #232bff;
+	--ds2-secondary: #5f66ff;
+	--ds2-tertiary: #8b5cff;
+	--ds2-bg: #ffffff;
+	--ds2-soft: #f6f7fb;
+	--ds2-card: rgba(255, 255, 255, 0.74);
+	--ds2-card-strong: #ffffff;
+	--ds2-ink: #18181b;
+	--ds2-muted: #71717a;
+	--ds2-border: #e4e4e7;
+	--ds2-success: #0f9f6e;
+	--ds2-warning: #d97706;
+	--ds2-danger: #e11d48;
+	--ds2-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
+	--ds2-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
+	--ds2-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--ds2-display-size: 72px;
+	--ds2-display-line: 72px;
+	--ds2-display-weight: 500;
+	--ds2-body-size: 16px;
+	--ds2-body-line: 26px;
+	--ds2-body-weight: 400;
+	--ds2-label-size: 14px;
+	--ds2-label-line: 20px;
+	--ds2-label-weight: 500;
+	color-scheme: light;
+}
+
+.dark {
+	--ds2-bg: #09090b;
+	--ds2-soft: #111116;
+	--ds2-card: rgba(24, 24, 27, 0.74);
+	--ds2-card-strong: #18181b;
+	--ds2-ink: #ffffff;
+	--ds2-muted: #a1a1aa;
+	--ds2-border: #27272a;
+	--ds2-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
+	color-scheme: dark;
+}
+
+html {
+	background: var(--ds2-bg);
+	scroll-behavior: smooth;
 }
 
 body {
-	font-family: var(--font-sans);
+	background: var(--ds2-bg);
+	color: var(--ds2-ink);
+	font-family: var(--ds2-font-system);
+	font-size: var(--ds2-body-size);
+	font-weight: var(--ds2-body-weight);
+	line-height: var(--ds2-body-line);
+	letter-spacing: 0;
+	overflow-x: clip;
+	text-rendering: optimizeLegibility;
+}
+
+::selection {
+	background: rgba(35, 43, 255, 0.18);
+	color: var(--ds2-ink);
+}
+
+body :where(h1, h2, h3, h4, blockquote) {
+	font-family: var(--ds2-font-system);
+	font-weight: var(--ds2-display-weight);
+	letter-spacing: 0;
+}
+
+body :where(p, li, td, th, input, textarea, select, button) {
+	font-family: var(--ds2-font-system);
+	letter-spacing: 0;
+}
+
+body :where(a) {
+	text-underline-offset: 4px;
+	text-decoration-thickness: 1px;
+}
+
+body :where(a, button, input, textarea, select, summary):focus-visible {
+	outline: 3px solid rgba(35, 43, 255, 0.28);
+	outline-offset: 3px;
+}
+
+body :where(input, textarea, select) {
+	caret-color: var(--ds2-primary);
+}
+
+body :where(hr) {
+	border-color: var(--ds2-border);
 }
