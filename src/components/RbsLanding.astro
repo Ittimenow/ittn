@@ -1,0 +1,1937 @@
+---
+import UiIcon from './UiIcon.astro';
+
+const heroBenefits = [
+	'единая база клиентов и сделок',
+	'продажи связаны со складом',
+	'меньше ручного контроля',
+	'документы по шаблонам',
+	'интеграции с 1С и сайтом',
+	'понятные KPI и отчеты',
+] as const;
+
+const fitItems = [
+	'B2B-продажи с долгим циклом сделки',
+	'оптовая или дистрибьюторская компания',
+	'производство с заказами, материалами и отгрузками',
+	'складской учет, закупки и остатки',
+	'сервисный центр или выездные инженеры',
+	'строительная, проектная или монтажная компания',
+	'несколько отделов с потерями задач и документов',
+	'1С, сайт, телефония и почта, которые нужно связать',
+] as const;
+
+const tasks = [
+	{
+		icon: 'briefcase',
+		title: 'Наводим порядок в продажах',
+		text: 'Настраиваем клиентскую базу, сделки, воронки, задачи, напоминания, контроль звонков и писем.',
+	},
+	{
+		icon: 'workflow',
+		title: 'Связываем CRM и ERP-логику',
+		text: 'Соединяем заказы клиентов, номенклатуру, остатки, закупки, производство, отгрузки и документы.',
+	},
+	{
+		icon: 'layers',
+		title: 'Настраиваем интеграции',
+		text: 'Подключаем сайт, формы, почту, телефонию, мессенджеры, 1С, API и внешние сервисы.',
+	},
+	{
+		icon: 'database',
+		title: 'Переносим данные',
+		text: 'Мигрируем клиентов, компании, контакты, товары, сделки, историю и остатки из Excel, 1С или старой CRM.',
+	},
+	{
+		icon: 'file',
+		title: 'Автоматизируем документы',
+		text: 'Создаем шаблоны КП, договоров, счетов, актов, УПД и писем, чтобы сотрудники не копировали данные вручную.',
+	},
+	{
+		icon: 'users',
+		title: 'Внедряем в ежедневную работу',
+		text: 'Обучаем команду, готовим инструкции, регламенты, KPI и правила контроля качества заполнения CRM.',
+	},
+] as const;
+
+const benefits = [
+	['Единая система', 'Клиенты, сделки, задачи, документы, склад, производство и сервис работают в одном пространстве.'],
+	['Меньше ручной работы', 'Заявки попадают в CRM, письма и звонки привязываются к клиенту, документы формируются по шаблонам.'],
+	['Контроль продаж', 'Руководитель видит воронки, этапы сделок, просрочки, активность менеджеров и прогноз продаж.'],
+	['Быстрее обработка заказов', 'Менеджеры, склад и производство работают по единому процессу, без передачи данных в чатах и Excel.'],
+	['Меньше ошибок', 'Регламенты, поля, роли и автоматизация снижают риск забытых задач и неверных данных в заказах.'],
+	['Рост вместе с бизнесом', 'РосБизнесСофт можно дорабатывать под отрасль, подразделения, роли, отчеты и нестандартные процессы.'],
+] as const;
+
+const packages = [
+	{
+		name: 'Предпроектное обследование',
+		price: 'от 50 000 ₽',
+		icon: 'filter',
+		tag: 'План',
+		text: 'Когда нужно описать процессы, выбрать модули и получить понятную дорожную карту внедрения.',
+		items: ['интервью с руководителями', 'карта процессов и проблем', 'состав модулей и интеграций', 'план работ и смета'],
+	},
+	{
+		name: 'Первичное внедрение',
+		price: '80 000 ₽',
+		icon: 'rocket',
+		tag: 'Старт',
+		text: 'Быстрый запуск CRM с базовой настройкой для продаж, пользователей, прав и рабочего сценария.',
+		items: ['структура компании', 'пользователи, роли и права', 'карточки и воронки', 'базовое обучение'],
+	},
+	{
+		name: 'Проектное внедрение',
+		price: 'от 300 000 ₽',
+		icon: 'workflow',
+		tag: 'Комплексно',
+		featured: true,
+		text: 'Настройка под процессы компании: CRM, ERP-модули, интеграции, перенос данных, обучение и адаптация.',
+		items: ['аудит и ТЗ', 'CRM и ERP-модули', '1С, сайт, телефония и API', 'миграция, запуск и сопровождение'],
+	},
+] as const;
+
+const extraPrices = [
+	['Настройка CRM', 'Поля, карточки, воронки, пользователи, права, рабочий стол', 'от 25 000 ₽'],
+	['Интеграция с 1С', 'Аудит 1С, правила обмена, синхронизация документов и данных', 'от 30 000 ₽'],
+	['Интеграция сайта с CRM', 'Передача заявок с сайта в РосБизнесСофт', 'от 5 000 ₽'],
+	['Телефония', 'Подключение АТС и правил обработки звонков', 'от 5 000 ₽'],
+	['Email', 'Подключение почты сотрудников к CRM', '500 ₽ / сотрудник'],
+	['Шаблоны документов', 'КП, договор, счет, письмо, акт, УПД', 'от 1 000 ₽ / документ'],
+	['Обучение сотрудников', 'Работа с CRM, складом, сделками и клиентской базой', 'от 10 000 ₽'],
+	['Регламент работы в CRM', 'Правила обработки заявок, сделок, клиентов и задач', 'от 10 000 ₽'],
+] as const;
+
+const services = [
+	{
+		title: 'Предпроектное обследование',
+		icon: 'filter',
+		items: ['интервью с руководителями и ключевыми сотрудниками', 'описание текущих процессов', 'карта внедрения и список настроек'],
+	},
+	{
+		title: 'Настройка CRM и ERP-модулей',
+		icon: 'settings',
+		items: ['карточки клиентов, сделок, заказов и товаров', 'склады, документы, проекты и сервисные обращения', 'производственные процессы'],
+	},
+	{
+		title: 'Интеграция с 1С',
+		icon: 'database',
+		items: ['контрагенты, товары и счета', 'заказы, оплаты и остатки', 'правила обмена под вашу конфигурацию'],
+	},
+	{
+		title: 'Интеграции с каналами',
+		icon: 'phone',
+		items: ['заявки с сайта и лендингов', 'телефония, почта и мессенджеры', 'API и внешние сервисы'],
+	},
+	{
+		title: 'Миграция данных',
+		icon: 'layers',
+		items: ['клиенты, контакты и компании', 'сделки, товары и остатки', 'документы и история взаимодействий'],
+	},
+	{
+		title: 'Отчеты, обучение и поддержка',
+		icon: 'bar-chart',
+		items: ['отчеты по продажам, складу, сервису и KPI', 'инструкции и обучение пользователей', 'помощь после запуска'],
+	},
+] as const;
+
+const steps = [
+	['filter', 'Аудит', 'Фиксируем цели, процессы, роли, данные и точки потерь.'],
+	['file', 'Техническое задание', 'Описываем модули, карточки, поля, документы, интеграции и критерии готовности.'],
+	['settings', 'Настройка', 'Конфигурируем CRM/ERP, права, воронки, рабочие столы, документы и отчеты.'],
+	['layers', 'Интеграции', 'Связываем РосБизнесСофт с 1С, сайтом, телефонией, почтой, API и внешними сервисами.'],
+	['database', 'Перенос данных', 'Импортируем и проверяем клиентов, товары, сделки, остатки, документы и историю.'],
+	['users', 'Обучение', 'Показываем сотрудникам рабочие сценарии и закрепляем регламенты.'],
+	['rocket', 'Запуск и развитие', 'Запускаем систему, контролируем первые результаты и донастраиваем процессы.'],
+] as const;
+
+const clients = [
+	{ name: 'Perola Sky', src: '/clients/client-perola.png' },
+	{ name: 'William Grant & Sons Ltd.', src: '/clients/client-wgs.png' },
+	{ name: 'Альфа-страхование', src: '/clients/client-alfa.png' },
+	{ name: 'Донстрой', src: '/clients/client-donstroy.png' },
+] as const;
+
+const trustItems = [
+	'работаем с CRM/ERP, автоматизацией и интеграциями',
+	'настраиваем систему под реальные процессы, а не только по инструкции',
+	'подключаем 1С, сайт, телефонию, почту и внешние сервисы',
+	'готовим регламенты и обучающие материалы для сотрудников',
+	'работаем по договору, с этапами, сметой и понятным результатом',
+] as const;
+
+const outcomes = [
+	['Стало понятно, где сделки', 'После настройки воронок, задач и отчетов руководитель видит загрузку, просрочки и прогноз продаж.'],
+	['Документы готовятся быстрее', 'Шаблоны счетов, договоров и КП уменьшают ручной ввод и количество ошибок.'],
+	['Заявки не теряются', 'Формы сайта, почта и телефония связаны с CRM, поэтому каждое обращение попадает в работу.'],
+] as const;
+
+const faqs = [
+	['Сколько стоит внедрение РосБизнесСофт?', 'Быстрое внедрение в IT TIME NOW стоит от 80 000 ₽. Проектное внедрение - от 300 000 ₽. Итог зависит от количества пользователей, модулей, интеграций, объема данных и сложности процессов.'],
+	['Чем РосБизнесСофт отличается от обычной CRM?', 'Обычная CRM чаще закрывает продажи, задачи и клиентскую базу. РосБизнесСофт может работать как CRM/ERP-система: продажи, склад, закупки, производство, сервис, документы, отчеты и интеграции.'],
+	['Можно ли интегрировать РосБизнесСофт с 1С?', 'Да. Настраиваем обмен по клиентам, товарам, счетам, заказам, оплатам, остаткам и другим данным. Состав обмена зависит от конфигурации 1С и ваших процессов.'],
+	['Можно ли перенести данные из Excel или старой CRM?', 'Да. Переносим клиентов, компании, контакты, сделки, товары, остатки и другую информацию из Excel, 1С, старой CRM или внешних систем.'],
+	['Сколько времени занимает внедрение?', 'Быстрый запуск выполняется в рамках первичного внедрения. Проектное внедрение обычно идет этапами: обследование, ТЗ, настройка, интеграции, перенос данных, обучение и запуск.'],
+	['Подходит ли РосБизнесСофт для производства?', 'Да. Система подходит компаниям, которым нужно связать продажи, производство, склад, закупки, документы и отгрузки.'],
+	['Подходит ли РосБизнесСофт для сервисного центра?', 'Да. Можно настроить обращения, тикеты, сервисные заявки, оборудование клиентов, задачи инженеров и отчеты.'],
+	['Можно ли подключить сайт к РосБизнесСофт?', 'Да. Заявки с сайта можно передавать в CRM, создавать лиды, сделки, задачи и уведомления для менеджеров.'],
+	['Что входит в первичное внедрение?', 'Базовая настройка CRM, структура компании, пользователи, роли, поля, воронка, шаблоны документов, почта, телефония, доступные интеграции и обучение по базовому сценарию.'],
+	['Что лучше: РосБизнесСофт или Битрикс24?', 'Если нужна простая CRM для продаж, задач и коммуникаций, часто рассматривают Bitrix24. Если важны склад, производство, сервис, закупки, документы и глубокая ERP-логика, стоит рассмотреть РосБизнесСофт.'],
+] as const;
+
+const schema = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Service',
+		name: 'Внедрение CRM / ERP системы РосБизнесСофт',
+		provider: {
+			'@type': 'Organization',
+			name: 'IT TIME NOW',
+		},
+		areaServed: 'RU',
+		serviceType: 'CRM/ERP implementation',
+		description:
+			'Внедрение и настройка CRM/ERP системы РосБизнесСофт для продаж, склада, производства, сервиса и B2B.',
+		offers: {
+			'@type': 'AggregateOffer',
+			priceCurrency: 'RUB',
+			lowPrice: '80000',
+		},
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faqs.map(([question, answer]) => ({
+			'@type': 'Question',
+			name: question,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: answer,
+			},
+		})),
+	},
+];
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="ds2 rbs-ds2">
+	<section class="ds2-hero rbs-hero">
+		<div class="ds2-container rbs-hero-grid">
+			<div>
+				<nav class="rbs-breadcrumbs" aria-label="Хлебные крошки">
+					<a href="/services">Все услуги</a>
+					<UiIcon name="chevron" class="h-3.5 w-3.5" />
+					<span>РосБизнесСофт CRM / ERP</span>
+				</nav>
+				<h1 transition:name="service-rbs">Внедрение CRM / ERP системы РосБизнесСофт</h1>
+				<p class="rbs-lead">
+					Внедрим РосБизнесСофт под ваши продажи, склад, производство и сервис. Поможем перейти
+					от Excel, разрозненных таблиц и ручного контроля к единой CRM/ERP системе, где виден
+					весь путь клиента: от первого обращения и сделки до счета, отгрузки, сервиса и
+					повторной продажи.
+				</p>
+				<div class="rbs-actions">
+					<a class="ds2-btn ds2-btn-primary" href="#rbs-request">
+						<span>Получить консультацию</span>
+						<UiIcon name="arrow" class="h-4 w-4" />
+					</a>
+					<a class="ds2-btn ds2-btn-secondary" href="#rbs-prices">
+						<span>Рассчитать внедрение</span>
+						<UiIcon name="file" class="h-4 w-4" />
+					</a>
+				</div>
+				<div class="ds2-testimonial rbs-hero-benefit">
+					<div class="rbs-hero-benefit-head">
+						<UiIcon name="thumbs-up" class="rbs-hero-benefit-icon h-[52px] w-[52px] shrink-0 text-white/90" />
+						<p class="ds2-kicker">Ваша выгода</p>
+					</div>
+					<blockquote>
+						После внедрения РосБизнесСофт компания получает единую систему для продаж,
+						операций и управленческого контроля.
+					</blockquote>
+					<ul>
+						{heroBenefits.map((item) => (
+							<li>
+								<UiIcon name="check" class="h-4 w-4" />
+								<span>{item}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+
+			<picture class="rbs-hero-media">
+				<img
+					src="/main-rbs.png"
+					alt="Интерфейс РосБизнесСофт с CRM, ERP-модулями и операционными данными"
+					width="1086"
+					height="1448"
+					loading="eager"
+					decoding="async"
+				/>
+			</picture>
+		</div>
+	</section>
+
+	<section class="ds2-section">
+		<div class="ds2-container">
+			<div class="ds2-section-head rbs-wide-head">
+				<div>
+					<p class="ds2-kicker">Кому подойдет</p>
+					<h2>Когда простой CRM уже недостаточно</h2>
+				</div>
+				<p>
+					РосБизнесСофт / RBS360 подходит компаниям, где CRM должна быть связана с реальными
+					операциями: продажами, складом, производством, сервисом, закупками и документами.
+				</p>
+			</div>
+			<div class="rbs-fit-grid">
+				{fitItems.map((item) => (
+					<article class="ds2-service-card rbs-fit-card">
+						<UiIcon name="check" class="h-5 w-5" />
+						<p>{item}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ds2-section ds2-section-soft">
+		<div class="ds2-container">
+			<div class="ds2-section-head">
+				<div>
+					<p class="ds2-kicker">Задачи внедрения</p>
+					<h2>Настраиваем систему под работу отделов, а не отдельную CRM-карточку</h2>
+				</div>
+				<p>
+					IT TIME NOW внедряет РосБизнесСофт под реальные бизнес-процессы: структуру компании,
+					права доступа, карточки, воронки, документы, интеграции, отчеты и регламенты.
+				</p>
+			</div>
+			<div class="rbs-task-grid">
+				{tasks.map(({ icon, title, text }) => (
+					<article class="ds2-service-card rbs-task-card">
+						<div class="ds2-service-icon">
+							<UiIcon name={icon} class="h-5 w-5" />
+						</div>
+						<h3>{title}</h3>
+						<p>{text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ds2-section">
+		<div class="ds2-container rbs-benefit-layout">
+			<div>
+				<p class="ds2-kicker">Ваша выгода</p>
+				<h2>Единый процесс от заявки до повторной продажи</h2>
+				<p>
+					Мы не просто включаем CRM. Цель внедрения - сделать так, чтобы менеджеры, склад,
+					производство, сервис и руководство работали в одной системе.
+				</p>
+			</div>
+			<div class="rbs-benefits">
+				{benefits.map(([title, text]) => (
+					<article class="ds2-card rbs-benefit-card">
+						<UiIcon name="check" class="h-5 w-5" />
+						<h3>{title}</h3>
+						<p>{text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="rbs-prices" class="ds2-section ds2-section-soft">
+		<div class="ds2-container">
+			<div class="ds2-section-head">
+				<div>
+					<p class="ds2-kicker">Стоимость внедрения</p>
+					<h2>Пакеты IT TIME NOW для РосБизнесСофт</h2>
+				</div>
+				<p>
+					Итоговая стоимость зависит от количества пользователей, модулей, интеграций, объема
+					данных для переноса и сложности бизнес-процессов.
+				</p>
+			</div>
+			<div class="rbs-prices">
+				{packages.map((pack) => (
+					<article class:list={['ds2-price-card', pack.featured && 'is-featured']}>
+						<div class="rbs-card-top">
+							<div class="ds2-service-icon">
+								<UiIcon name={pack.icon} class="h-5 w-5" />
+							</div>
+							<span class="ds2-chip">{pack.tag}</span>
+						</div>
+						<h3>{pack.name}</h3>
+						<p class="rbs-price">{pack.price}</p>
+						<p class="rbs-card-text">{pack.text}</p>
+						<ul>
+							{pack.items.map((item) => (
+								<li>
+									<UiIcon name="check" class="h-4 w-4" />
+									<span>{item}</span>
+								</li>
+							))}
+						</ul>
+						<a class="ds2-btn ds2-btn-secondary" href="#rbs-request">
+							<span>Обсудить состав</span>
+						</a>
+					</article>
+				))}
+			</div>
+			<section class="ds2-card rbs-price-table-card" aria-label="Отдельные работы по внедрению РосБизнесСофт">
+				<div class="rbs-table-head">
+					<div>
+						<p class="ds2-kicker">Отдельные работы</p>
+						<h3>Можно собрать внедрение по модулям</h3>
+					</div>
+					<p>После короткого интервью подготовим план работ и понятную смету.</p>
+				</div>
+				<div class="rbs-table-wrap">
+					<table class="ds2-table">
+						<thead>
+							<tr>
+								<th>Работа</th>
+								<th>Что входит</th>
+								<th>Стоимость</th>
+							</tr>
+						</thead>
+						<tbody>
+							{extraPrices.map(([name, description, price]) => (
+								<tr>
+									<td>{name}</td>
+									<td>{description}</td>
+									<td>{price}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</section>
+
+	<section class="ds2-section">
+		<div class="ds2-container">
+			<div class="ds2-section-head">
+				<div>
+					<p class="ds2-kicker">Состав проекта</p>
+					<h2>Услуги по внедрению РосБизнесСофт</h2>
+				</div>
+				<p>
+					Проект можно запустить поэтапно: сначала обследование и быстрый контур продаж, затем
+					ERP-модули, интеграции, миграция данных, отчеты и сопровождение.
+				</p>
+			</div>
+			<div class="rbs-services">
+				{services.map((group) => (
+					<article class="ds2-service-card">
+						<div class="ds2-service-icon">
+							<UiIcon name={group.icon} class="h-5 w-5" />
+						</div>
+						<h3>{group.title}</h3>
+						<ul>
+							{group.items.map((item) => (
+								<li>
+									<UiIcon name="chevron" class="h-4 w-4" />
+									<span>{item}</span>
+								</li>
+							))}
+						</ul>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ds2-section ds2-section-soft">
+		<div class="ds2-container rbs-process-grid">
+			<div>
+				<p class="ds2-kicker">Как проходит внедрение</p>
+				<h2>Семь этапов с понятным результатом</h2>
+				<p>
+					Фиксируем границы каждого этапа: что настраиваем, какие данные переносим, кто проверяет
+					результат и как команда начинает работать в системе.
+				</p>
+				<a class="ds2-btn ds2-btn-dark" href="#rbs-request">
+					<span>Собрать план внедрения</span>
+					<UiIcon name="arrow" class="h-4 w-4" />
+				</a>
+			</div>
+			<ol class="rbs-timeline" aria-label="Этапы внедрения РосБизнесСофт">
+				{steps.map(([icon, title, text], index) => (
+					<li class="rbs-timeline-item">
+						<div class="rbs-timeline-date">
+							<span>Этап</span>
+							<time>{String(index + 1).padStart(2, '0')}</time>
+						</div>
+						<div class="rbs-timeline-track" aria-hidden="true">
+							<div class="rbs-timeline-line"></div>
+							<div class="rbs-timeline-dot">
+								<UiIcon name={icon} class="h-4 w-4" />
+							</div>
+						</div>
+						<div class="rbs-timeline-content">
+							<h3>{title}</h3>
+							<p>{text}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<section class="ds2-section">
+		<div class="ds2-container">
+			<div class="ds2-section-head rbs-wide-head">
+				<div>
+					<p class="ds2-kicker">Доверие</p>
+					<h2>Работаем с компаниями, где CRM связана с реальными операциями</h2>
+				</div>
+				<p>
+					Помогаем производственным компаниям, оптовым поставщикам, сервисным центрам, B2B-отделам
+					продаж и бизнесу, который вырос из Excel и простой CRM.
+				</p>
+			</div>
+			<div class="rbs-logo-marquee" aria-label="Логотипы клиентов">
+				<div class="rbs-logo-track">
+					{[0, 1, 2].map((group) => (
+						<div class="rbs-logo-group" aria-hidden={group === 0 ? 'false' : 'true'}>
+							{clients.map((client) => (
+								<figure class="rbs-logo-card">
+									<img src={client.src} alt={client.name} loading="lazy" decoding="async" />
+								</figure>
+							))}
+						</div>
+					))}
+				</div>
+			</div>
+			<section class="ds2-testimonial rbs-trust-card">
+				<div>
+					<p class="ds2-kicker">Почему IT TIME NOW</p>
+					<blockquote>Говорим на языке бизнеса и доводим CRM/ERP до использования сотрудниками.</blockquote>
+				</div>
+				<div class="rbs-trust-list">
+					{trustItems.map((item) => (
+						<span><UiIcon name="check" class="h-4 w-4" />{item}</span>
+					))}
+				</div>
+			</section>
+		</div>
+	</section>
+
+	<section class="ds2-section ds2-section-soft">
+		<div class="ds2-container">
+			<div class="ds2-section-head">
+				<div>
+					<p class="ds2-kicker">После запуска</p>
+					<h2>Какие изменения должна дать система</h2>
+				</div>
+				<p>
+					На старте фиксируем не только список настроек, но и ожидаемые изменения в работе:
+					прозрачность сделок, скорость документов, контроль заявок и снижение ручных ошибок.
+				</p>
+			</div>
+			<div class="rbs-outcomes">
+				{outcomes.map(([title, text]) => (
+					<article class="ds2-card">
+						<UiIcon name="thumbs-up" class="h-6 w-6" />
+						<h3>{title}</h3>
+						<p>{text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ds2-section">
+		<div class="ds2-container rbs-faq-grid">
+			<div>
+				<p class="ds2-kicker">FAQ</p>
+				<h2>Частые вопросы о внедрении РосБизнесСофт</h2>
+				<p>
+					Ответы закрывают ключевые вопросы перед заявкой: цена, сроки, 1С, перенос данных,
+					производство, сервис и выбор между РосБизнесСофт и Bitrix24.
+				</p>
+			</div>
+			<div class="rbs-faq-list">
+				{faqs.map(([question, answer]) => (
+					<details class="ds2-faq">
+						<summary>
+							<span>{question}</span>
+							<UiIcon name="chevron" class="h-4 w-4" />
+						</summary>
+						<div class="ds2-faq-content">
+							<p>{answer}</p>
+						</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="rbs-request" class="ds2-section rbs-request-section">
+		<div class="ds2-container">
+			<div class="ds2-final-cta rbs-request">
+				<div>
+					<p class="ds2-kicker">Рассчитать внедрение</p>
+					<h2>Узнайте, какой вариант РосБизнесСофт подойдет вашей компании</h2>
+					<p>
+						Ответим, с чего начать внедрение, какие модули нужны и сколько будет стоить запуск
+						РосБизнесСофт под ваши процессы.
+					</p>
+					<div class="rbs-dark-pills">
+						{[
+							['users', 'количество сотрудников'],
+							['database', 'есть ли 1С'],
+							['phone', 'сайт и телефония'],
+							['workflow', 'продажи, склад, производство'],
+						].map(([icon, text]) => (
+							<div class="ds2-dark-pill">
+								<UiIcon name={icon} class="h-4 w-4" />
+								{text}
+							</div>
+						))}
+					</div>
+				</div>
+				<form class="ds2-form" method="post" action="#">
+					<div class="rbs-form-grid">
+						<label>
+							<span>Имя</span>
+							<input class="ds2-input" required type="text" name="name" placeholder="Анна" />
+						</label>
+						<label>
+							<span>Телефон</span>
+							<input class="ds2-input" required type="tel" name="phone" placeholder="+7 000 000-00-00" />
+						</label>
+					</div>
+					<div class="rbs-form-grid">
+						<label>
+							<span>Email</span>
+							<input class="ds2-input" type="email" name="email" placeholder="mail@company.ru" />
+						</label>
+						<label>
+							<span>Компания</span>
+							<input class="ds2-input" type="text" name="company" placeholder="Название компании" />
+						</label>
+					</div>
+					<label>
+						<span>Что нужно автоматизировать</span>
+						<textarea class="ds2-input" name="task" rows="4" placeholder="Продажи, склад, производство, сервис, 1С, сайт"></textarea>
+					</label>
+					<div class="rbs-form-checks">
+						<label class="ds2-check"><input type="checkbox" name="needs" value="sales" /> Продажи</label>
+						<label class="ds2-check"><input type="checkbox" name="needs" value="warehouse" /> Склад</label>
+						<label class="ds2-check"><input type="checkbox" name="needs" value="production" /> Производство</label>
+						<label class="ds2-check"><input type="checkbox" name="needs" value="service" /> Сервис</label>
+						<label class="ds2-check"><input type="checkbox" name="needs" value="1c" /> 1С</label>
+						<label class="ds2-check"><input type="checkbox" name="needs" value="site" /> Сайт</label>
+					</div>
+					<button class="ds2-btn ds2-btn-primary" type="submit">
+						<span>Получить план внедрения</span>
+						<UiIcon name="arrow" class="h-4 w-4" />
+					</button>
+					<p>После заявки свяжемся с вами, зададим уточняющие вопросы и подскажем, с каких настроек лучше начать.</p>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<div class="rbs-mobile-cta">
+		<a class="ds2-btn ds2-btn-primary" href="#rbs-request">
+			<span>Расчет</span>
+			<UiIcon name="file" class="h-4 w-4" />
+		</a>
+		<a class="ds2-btn ds2-btn-secondary" href="tel:+74951335888">
+			<span>Позвонить</span>
+			<UiIcon name="phone" class="h-4 w-4" />
+		</a>
+	</div>
+</div>
+
+<script>
+	function bindRbsFaq() {
+		document.querySelectorAll<HTMLDetailsElement>('.rbs-ds2 .ds2-faq').forEach((details) => {
+			if (details.dataset.faqBound) return;
+			details.dataset.faqBound = '1';
+
+			const summary = details.querySelector('summary');
+			const content = details.querySelector<HTMLElement>('.ds2-faq-content');
+			if (!summary || !content) return;
+
+			summary.addEventListener('click', (event) => {
+				event.preventDefault();
+				if (details.dataset.animating === '1') return;
+				details.dataset.animating = '1';
+
+				const duration = 220;
+				const easing = 'ease-out';
+
+				if (details.open) {
+					const startHeight = `${content.offsetHeight}px`;
+					details.classList.add('is-closing');
+					content.style.height = startHeight;
+					content.style.overflow = 'hidden';
+
+					const animation = content.animate(
+						[
+							{ height: startHeight, opacity: 1, transform: 'translateY(0)' },
+							{ height: '0px', opacity: 0, transform: 'translateY(-4px)' },
+						],
+						{ duration, easing: 'ease-in' },
+					);
+
+					animation.onfinish = () => {
+						details.open = false;
+						details.classList.remove('is-closing');
+						content.style.height = '';
+						content.style.overflow = '';
+						delete details.dataset.animating;
+					};
+					animation.oncancel = () => {
+						details.classList.remove('is-closing');
+						content.style.height = '';
+						content.style.overflow = '';
+						delete details.dataset.animating;
+					};
+					return;
+				}
+
+				details.open = true;
+				const endHeight = `${content.offsetHeight}px`;
+				content.style.height = '0px';
+				content.style.overflow = 'hidden';
+
+				const animation = content.animate(
+					[
+						{ height: '0px', opacity: 0, transform: 'translateY(-4px)' },
+						{ height: endHeight, opacity: 1, transform: 'translateY(0)' },
+					],
+					{ duration, easing },
+				);
+
+				animation.onfinish = () => {
+					content.style.height = '';
+					content.style.overflow = '';
+					delete details.dataset.animating;
+				};
+				animation.oncancel = () => {
+					content.style.height = '';
+					content.style.overflow = '';
+					delete details.dataset.animating;
+				};
+			});
+		});
+	}
+
+	bindRbsFaq();
+	document.addEventListener('astro:page-load', bindRbsFaq);
+</script>
+
+<style>
+	.ds2 {
+		--ds2-primary: #232bff;
+		--ds2-secondary: #5f66ff;
+		--ds2-tertiary: #8b5cff;
+		--ds2-bg: #ffffff;
+		--ds2-soft: #f6f7fb;
+		--ds2-card: rgba(255, 255, 255, 0.74);
+		--ds2-card-strong: #ffffff;
+		--ds2-ink: #18181b;
+		--ds2-muted: #71717a;
+		--ds2-border: #e4e4e7;
+		--ds2-success: #0f9f6e;
+		--ds2-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
+		--ds2-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
+		--ds2-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		--ds2-display-size: 72px;
+		--ds2-display-line: 72px;
+		--ds2-display-weight: 500;
+		--ds2-body-size: 16px;
+		--ds2-body-line: 26px;
+		--ds2-body-weight: 400;
+		--ds2-label-size: 14px;
+		--ds2-label-line: 20px;
+		--ds2-label-weight: 500;
+		background: var(--ds2-bg);
+		color: var(--ds2-ink);
+		font-family: var(--ds2-font-system);
+		font-size: var(--ds2-body-size);
+		font-weight: var(--ds2-body-weight);
+		line-height: var(--ds2-body-line);
+		letter-spacing: 0;
+		overflow-x: clip;
+	}
+
+	:global(.dark) .ds2 {
+		--ds2-bg: #09090b;
+		--ds2-soft: #111116;
+		--ds2-card: rgba(24, 24, 27, 0.74);
+		--ds2-card-strong: #18181b;
+		--ds2-ink: #ffffff;
+		--ds2-muted: #a1a1aa;
+		--ds2-border: #27272a;
+		--ds2-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
+	}
+
+	.ds2 :where(p, li, td, th, input, textarea, select) {
+		font-family: var(--ds2-font-system);
+		font-size: var(--ds2-body-size);
+		font-weight: var(--ds2-body-weight);
+		line-height: var(--ds2-body-line);
+		letter-spacing: 0;
+	}
+
+	.ds2 :where(h1, h2, h3, h4, blockquote) {
+		font-family: var(--ds2-font-system);
+		font-weight: var(--ds2-display-weight);
+		letter-spacing: 0;
+	}
+
+	.ds2-container {
+		width: min(100%, 1400px);
+		margin: 0 auto;
+		padding-inline: 24px;
+	}
+
+	.ds2-hero {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(246, 247, 251, 0.92));
+	}
+
+	:global(.dark) .ds2-hero {
+		background: linear-gradient(180deg, rgba(9, 9, 11, 0.72), rgba(17, 17, 22, 0.92));
+	}
+
+	.ds2-section {
+		padding-block: 80px;
+	}
+
+	.ds2-section-soft {
+		background: rgba(246, 247, 251, 0.78);
+	}
+
+	:global(.dark) .ds2-section-soft {
+		background: rgba(17, 17, 22, 0.78);
+	}
+
+	.ds2-section-head {
+		display: grid;
+		gap: 24px;
+		align-items: end;
+	}
+
+	.rbs-wide-head {
+		align-items: start;
+	}
+
+	.ds2-section-head h2,
+	.ds2-final-cta h2,
+	.rbs-benefit-layout h2,
+	.rbs-process-grid h2,
+	.rbs-faq-grid h2 {
+		font-size: var(--ds2-display-size);
+		font-weight: var(--ds2-display-weight);
+		line-height: var(--ds2-display-line);
+	}
+
+	.ds2-section-head > p,
+	.rbs-benefit-layout > div > p:not(.ds2-kicker),
+	.rbs-process-grid > div > p:not(.ds2-kicker),
+	.rbs-faq-grid > div > p:not(.ds2-kicker) {
+		color: var(--ds2-muted);
+	}
+
+	.ds2-kicker {
+		display: inline-flex;
+		align-items: center;
+		min-height: 28px;
+		border-radius: 24px;
+		background: rgba(35, 43, 255, 0.09);
+		padding: 4px 12px;
+		color: var(--ds2-primary);
+		font-size: 13px;
+		font-weight: 700;
+	}
+
+	.ds2-card,
+	.ds2-dashboard,
+	.ds2-price-card,
+	.ds2-testimonial {
+		min-width: 0;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 24px;
+		background: var(--ds2-card);
+		padding: 24px;
+		box-shadow: var(--ds2-shadow);
+		backdrop-filter: blur(40px);
+	}
+
+	:global(.dark) .ds2-card,
+	:global(.dark) .ds2-dashboard,
+	:global(.dark) .ds2-price-card,
+	:global(.dark) .ds2-testimonial {
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.ds2-dashboard {
+		border-radius: 40px;
+		box-shadow: var(--ds2-shadow), var(--ds2-glow);
+	}
+
+	.ds2-metric {
+		border: 1px solid var(--ds2-border);
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.58);
+		padding: 16px;
+	}
+
+	:global(.dark) .ds2-metric {
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	.ds2-metric p {
+		font-size: 28px;
+		line-height: 1;
+		font-weight: 700;
+		color: var(--ds2-ink);
+	}
+
+	.ds2-metric span {
+		margin-top: 8px;
+		display: block;
+		color: var(--ds2-muted);
+		font-size: 13px;
+		line-height: 1.45;
+	}
+
+	.ds2-progress {
+		height: 8px;
+		overflow: hidden;
+		border-radius: 9999px;
+		background: rgba(113, 113, 122, 0.16);
+	}
+
+	.ds2-progress span {
+		display: block;
+		height: 100%;
+		border-radius: inherit;
+		background: linear-gradient(90deg, var(--ds2-primary), var(--ds2-secondary));
+	}
+
+	.ds2-chip {
+		display: inline-flex;
+		min-height: 34px;
+		align-items: center;
+		justify-content: center;
+		white-space: nowrap;
+		border-radius: 9999px;
+		border: 1px solid var(--ds2-border);
+		background: rgba(255, 255, 255, 0.7);
+		padding: 6px 14px;
+		color: var(--ds2-muted);
+		font-size: 13px;
+		font-weight: 700;
+	}
+
+	:global(.dark) .ds2-chip {
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	.ds2-btn {
+		--ds2-btn-fill: var(--ds2-primary);
+		--ds2-btn-hover-color: #ffffff;
+		--ds2-btn-hover-border: transparent;
+		display: inline-flex;
+		min-height: 44px;
+		position: relative;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		overflow: hidden;
+		border-radius: 9999px;
+		padding: 0 30px;
+		border: 1.5px solid transparent;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1;
+		cursor: pointer;
+		isolation: isolate;
+		transition:
+			border-color 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			background 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			color 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
+	}
+
+	.ds2-btn::before {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 0;
+		width: 16px;
+		height: 16px;
+		border-radius: 9999px;
+		background: var(--ds2-btn-fill);
+		opacity: 0;
+		content: "";
+		transform: translate(-50%, -50%);
+		transition:
+			width 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			height 800ms cubic-bezier(0.19, 1, 0.22, 1),
+			opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
+	}
+
+	.ds2-btn::after {
+		position: absolute;
+		top: 50%;
+		left: -28px;
+		z-index: 2;
+		color: currentColor;
+		content: "→";
+		font-size: 18px;
+		line-height: 1;
+		transform: translateY(-50%);
+		transition:
+			left 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
+			color 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.ds2-btn > span,
+	.ds2-btn :global(svg) {
+		position: relative;
+		z-index: 1;
+	}
+
+	.ds2-btn > span {
+		transform: translateX(-4px);
+		transition: transform 800ms ease;
+	}
+
+	.ds2-btn :global(svg) {
+		flex: 0 0 auto;
+		transition:
+			opacity 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
+			transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.ds2-btn:hover {
+		border-color: var(--ds2-btn-hover-border);
+		color: var(--ds2-btn-hover-color);
+	}
+
+	.ds2-btn:hover::before {
+		width: 340px;
+		height: 340px;
+		opacity: 1;
+	}
+
+	.ds2-btn:hover::after {
+		left: 16px;
+		color: var(--ds2-btn-hover-color);
+	}
+
+	.ds2-btn:hover > span {
+		transform: translateX(10px);
+	}
+
+	.ds2-btn:hover :global(svg:last-child) {
+		opacity: 0;
+		transform: translateX(64px);
+	}
+
+	.ds2-btn:active {
+		transform: scale(0.96);
+	}
+
+	.ds2-btn-primary {
+		--ds2-btn-fill: var(--ds2-card-strong);
+		--ds2-btn-hover-color: var(--ds2-primary);
+		--ds2-btn-hover-border: var(--ds2-border);
+		background: var(--ds2-primary);
+		color: #ffffff;
+		box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.75);
+	}
+
+	.ds2-btn-primary:hover {
+		background: var(--ds2-card-strong);
+		box-shadow: none;
+	}
+
+	.ds2-btn-secondary {
+		--ds2-btn-fill: var(--ds2-primary);
+		--ds2-btn-hover-color: #ffffff;
+		border-color: var(--ds2-border);
+		background: rgba(255, 255, 255, 0.76);
+		color: var(--ds2-primary);
+	}
+
+	:global(.dark) .ds2-btn-secondary {
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	.ds2-btn-secondary:hover,
+	.ds2-btn-dark:hover {
+		background: var(--ds2-primary);
+	}
+
+	.ds2-btn-dark {
+		--ds2-btn-fill: var(--ds2-primary);
+		--ds2-btn-hover-color: #ffffff;
+		background: var(--ds2-ink);
+		color: var(--ds2-bg);
+	}
+
+	.ds2-service-card,
+	.ds2-faq {
+		border: 1px solid var(--ds2-border);
+		background: var(--ds2-card-strong);
+	}
+
+	.ds2-service-card {
+		min-width: 0;
+		border-radius: 24px;
+		padding: 28px;
+		transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+	}
+
+	.ds2-service-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--ds2-glow);
+	}
+
+	.ds2-service-icon {
+		display: grid;
+		width: 48px;
+		height: 48px;
+		place-items: center;
+		color: var(--ds2-primary);
+	}
+
+	.ds2-service-icon :global(svg) {
+		width: 48px;
+		height: 48px;
+	}
+
+	.ds2-price-card {
+		display: flex;
+		min-height: 430px;
+		flex-direction: column;
+	}
+
+	.ds2-price-card.is-featured {
+		border-color: transparent;
+		background: linear-gradient(180deg, rgba(35, 43, 255, 0.1), var(--ds2-card));
+		box-shadow: var(--ds2-shadow), var(--ds2-glow);
+	}
+
+	.ds2-price-card ul {
+		display: grid;
+		gap: 12px;
+		margin: 24px 0 28px;
+	}
+
+	.ds2-price-card li,
+	.rbs-services li {
+		display: flex;
+		gap: 10px;
+		color: var(--ds2-muted);
+		font-size: 14px;
+		line-height: 1.55;
+	}
+
+	.ds2-price-card li :global(svg),
+	.rbs-services li :global(svg),
+	.rbs-trust-list :global(svg) {
+		flex: 0 0 auto;
+		color: var(--ds2-success);
+	}
+
+	.ds2-price-card .ds2-btn {
+		margin-top: auto;
+	}
+
+	.ds2-table {
+		width: 100%;
+		min-width: 720px;
+		border-collapse: collapse;
+		font-size: 14px;
+	}
+
+	.ds2-table th,
+	.ds2-table td {
+		border-bottom: 1px solid var(--ds2-border);
+		padding: 14px;
+		text-align: left;
+		vertical-align: top;
+	}
+
+	.ds2-table th {
+		color: var(--ds2-primary);
+		font-weight: 700;
+	}
+
+	.ds2-testimonial {
+		background: #18181b;
+		color: #ffffff;
+	}
+
+	.ds2-testimonial blockquote {
+		margin-top: 18px;
+		font-size: 28px;
+		line-height: 1.22;
+	}
+
+	.ds2-testimonial .ds2-kicker,
+	.ds2-final-cta .ds2-kicker {
+		background: rgba(255, 255, 255, 0.12);
+		color: #ffffff;
+	}
+
+	.ds2-faq {
+		overflow: hidden;
+		border-radius: 20px;
+		padding: 20px;
+		transition: background 200ms ease, box-shadow 200ms ease;
+	}
+
+	.ds2-faq summary {
+		display: flex;
+		cursor: pointer;
+		list-style: none;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		font-weight: 700;
+		transition: color 200ms ease;
+	}
+
+	.ds2-faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.ds2-faq summary :global(svg) {
+		flex: 0 0 auto;
+		opacity: 0.6;
+		transition: transform 200ms ease, opacity 200ms ease;
+	}
+
+	.ds2-faq:hover {
+		box-shadow: 0 18px 44px -28px rgba(24, 24, 27, 0.28);
+	}
+
+	.ds2-faq[open] {
+		background: var(--ds2-card);
+	}
+
+	.ds2-faq[open] summary :global(svg) {
+		opacity: 1;
+		transform: rotate(180deg);
+	}
+
+	.ds2-faq-content {
+		display: grid;
+		grid-template-rows: 0fr;
+		opacity: 0;
+		transition:
+			grid-template-rows 220ms ease,
+			opacity 200ms ease;
+	}
+
+	.ds2-faq[open] .ds2-faq-content {
+		grid-template-rows: 1fr;
+		opacity: 1;
+		animation: ds2-accordion-down 220ms ease-out;
+	}
+
+	.ds2-faq.is-closing .ds2-faq-content {
+		animation: ds2-accordion-up 220ms ease-in;
+	}
+
+	.ds2-faq-content p {
+		min-height: 0;
+		overflow: hidden;
+		margin-top: 12px;
+		color: var(--ds2-muted);
+		font-size: 14px;
+		line-height: 1.7;
+	}
+
+	@keyframes ds2-accordion-down {
+		from {
+			opacity: 0;
+			transform: translateY(-4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes ds2-accordion-up {
+		from {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		to {
+			opacity: 0;
+			transform: translateY(-4px);
+		}
+	}
+
+	.ds2-final-cta {
+		display: grid;
+		gap: 32px;
+		align-items: center;
+		border-radius: 40px;
+		background: linear-gradient(135deg, #18181b, #232bff);
+		padding: 32px;
+		color: #ffffff;
+		box-shadow: var(--ds2-glow);
+	}
+
+	.ds2-final-cta p {
+		margin-top: 18px;
+		max-width: 720px;
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	.ds2-form {
+		display: grid;
+		gap: 16px;
+		border-radius: 24px;
+		background: #ffffff;
+		padding: 24px;
+		color: #18181b;
+		box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
+	}
+
+	.ds2-form label:not(.ds2-check) > span {
+		margin-bottom: 8px;
+		display: block;
+		font-size: var(--ds2-label-size);
+		font-weight: var(--ds2-label-weight);
+		line-height: var(--ds2-label-line);
+		color: #3f3f46;
+	}
+
+	.ds2-input {
+		width: 100%;
+		min-height: 48px;
+		border-radius: 16px;
+		border: 1px solid #e4e4e7;
+		background: #ffffff;
+		padding: 12px 14px;
+		color: #18181b;
+		font-size: 14px;
+		outline: none;
+		transition: border-color 150ms ease, box-shadow 150ms ease;
+	}
+
+	.ds2-input:focus {
+		border-color: var(--ds2-primary);
+		box-shadow: 0 0 0 4px rgba(35, 43, 255, 0.14);
+	}
+
+	.ds2-check,
+	.ds2-dark-pill {
+		display: flex;
+		min-height: 48px;
+		align-items: center;
+		gap: 10px;
+		border-radius: 16px;
+	}
+
+	.ds2-check {
+		border: 1px solid #e4e4e7;
+		padding: 0 14px;
+		color: #3f3f46;
+		font-size: 14px;
+	}
+
+	.ds2-check input {
+		width: 16px;
+		height: 16px;
+		accent-color: var(--ds2-primary);
+	}
+
+	.ds2-dark-pill {
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background: rgba(255, 255, 255, 0.06);
+		padding: 0 14px;
+		color: rgba(255, 255, 255, 0.82);
+		font-size: 14px;
+	}
+
+	.rbs-hero-grid {
+		display: grid;
+		gap: 48px;
+		align-items: start;
+		padding-top: 36px;
+		padding-bottom: 72px;
+	}
+
+	.rbs-breadcrumbs {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--ds2-muted);
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 20px;
+	}
+
+	.rbs-breadcrumbs a {
+		color: var(--ds2-muted);
+		transition: color 150ms ease;
+	}
+
+	.rbs-breadcrumbs a:hover {
+		color: var(--ds2-primary);
+	}
+
+	.rbs-breadcrumbs span {
+		color: var(--ds2-ink);
+	}
+
+	.rbs-hero h1 {
+		margin-top: 20px;
+		max-width: 980px;
+		font-size: var(--ds2-display-size);
+		font-weight: var(--ds2-display-weight);
+		line-height: var(--ds2-display-line);
+	}
+
+	.rbs-lead {
+		margin-top: 24px;
+		max-width: 820px;
+		color: var(--ds2-muted);
+		font-size: 18px;
+		line-height: 1.75;
+	}
+
+	.rbs-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 32px;
+	}
+
+	.rbs-hero-benefit {
+		position: relative;
+		z-index: 2;
+		overflow: hidden;
+		margin-top: 28px;
+		max-width: 760px;
+	}
+
+	.rbs-hero-benefit .ds2-kicker {
+		background: rgba(255, 255, 255, 0.12);
+		color: #ffffff;
+	}
+
+	.rbs-hero-benefit-head {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+	}
+
+	:global(.rbs-hero-benefit-icon) {
+		width: 52px;
+		height: 52px;
+		flex: 0 0 auto;
+		color: rgba(255, 255, 255, 0.92);
+	}
+
+	.rbs-hero-benefit blockquote {
+		max-width: 640px;
+		font-size: 24px;
+		line-height: 1.24;
+	}
+
+	.rbs-hero-benefit ul {
+		display: grid;
+		gap: 10px;
+		margin-top: 20px;
+	}
+
+	.rbs-hero-benefit li {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		color: rgba(255, 255, 255, 0.72);
+		font-size: 14px;
+		line-height: 20px;
+	}
+
+	.rbs-hero-benefit li :global(svg) {
+		flex: 0 0 auto;
+		color: var(--ds2-success);
+	}
+
+	.rbs-hero-media {
+		display: block;
+		width: min(100%, 560px);
+		align-self: start;
+		justify-self: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.rbs-hero-media img {
+		display: block;
+		width: 100%;
+		height: auto;
+		max-height: 760px;
+		border-radius: 32px;
+		object-fit: contain;
+	}
+
+	.rbs-fit-grid,
+	.rbs-task-grid,
+	.rbs-benefits,
+	.rbs-prices,
+	.rbs-services,
+	.rbs-outcomes {
+		display: grid;
+		gap: 20px;
+	}
+
+	.rbs-card-top {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+	}
+
+	.rbs-fit-grid,
+	.rbs-task-grid,
+	.rbs-prices,
+	.rbs-services,
+	.rbs-outcomes {
+		margin-top: 44px;
+	}
+
+	.rbs-fit-card {
+		display: flex;
+		min-height: 116px;
+		align-items: flex-start;
+		gap: 14px;
+	}
+
+	.rbs-fit-card :global(svg) {
+		flex: 0 0 auto;
+		color: var(--ds2-success);
+	}
+
+	.rbs-fit-card p {
+		font-weight: 700;
+	}
+
+	.rbs-task-card {
+		min-height: 310px;
+	}
+
+	.rbs-task-card h3,
+	.rbs-services h3,
+	.rbs-outcomes h3 {
+		margin-top: 20px;
+		font-size: 24px;
+		line-height: 1.16;
+	}
+
+	.rbs-task-card p,
+	.rbs-benefit-card p,
+	.rbs-card-text,
+	.rbs-outcomes p {
+		margin-top: 12px;
+		color: var(--ds2-muted);
+		font-size: 14px;
+		line-height: 1.7;
+	}
+
+	.rbs-benefit-layout,
+	.rbs-process-grid,
+	.rbs-faq-grid {
+		display: grid;
+		gap: 44px;
+		align-items: start;
+	}
+
+	.rbs-benefit-card :global(svg),
+	.rbs-outcomes :global(svg) {
+		color: var(--ds2-success);
+	}
+
+	.rbs-benefit-card h3 {
+		margin-top: 18px;
+		font-size: 22px;
+		line-height: 1.18;
+	}
+
+	.rbs-price {
+		margin-top: 18px;
+		color: var(--ds2-primary);
+		font-size: 34px;
+		line-height: 1;
+		font-weight: 700;
+	}
+
+	.rbs-price-table-card {
+		margin-top: 20px;
+	}
+
+	.rbs-table-head {
+		display: grid;
+		gap: 18px;
+		align-items: end;
+	}
+
+	.rbs-table-head h3 {
+		margin-top: 12px;
+		font-size: 32px;
+		line-height: 1.08;
+	}
+
+	.rbs-table-head > p {
+		color: var(--ds2-muted);
+	}
+
+	.rbs-table-wrap {
+		margin-top: 24px;
+		overflow-x: auto;
+	}
+
+	.rbs-services ul {
+		display: grid;
+		gap: 12px;
+		margin-top: 22px;
+	}
+
+	.rbs-timeline {
+		display: grid;
+		gap: 0;
+	}
+
+	.rbs-timeline-item {
+		display: grid;
+		grid-template-columns: 68px 36px 1fr;
+		gap: 16px;
+		min-height: 108px;
+	}
+
+	.rbs-timeline-date span {
+		display: block;
+		color: var(--ds2-muted);
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	.rbs-timeline-date time {
+		display: block;
+		margin-top: 4px;
+		color: var(--ds2-primary);
+		font-size: 28px;
+		line-height: 1;
+		font-weight: 700;
+	}
+
+	.rbs-timeline-track {
+		display: grid;
+		grid-template-rows: 28px 1fr;
+		justify-items: center;
+	}
+
+	.rbs-timeline-dot {
+		display: grid;
+		width: 36px;
+		height: 36px;
+		place-items: center;
+		border-radius: 9999px;
+		background: var(--ds2-primary);
+		color: #ffffff;
+		box-shadow: var(--ds2-glow);
+	}
+
+	.rbs-timeline-line {
+		width: 2px;
+		height: 100%;
+		background: var(--ds2-border);
+		grid-row: 2;
+	}
+
+	.rbs-timeline-content {
+		border-bottom: 1px solid var(--ds2-border);
+		padding-bottom: 24px;
+	}
+
+	.rbs-timeline-content h3 {
+		font-size: 22px;
+		line-height: 1.18;
+	}
+
+	.rbs-timeline-content p {
+		margin-top: 8px;
+		color: var(--ds2-muted);
+		font-size: 14px;
+		line-height: 1.7;
+	}
+
+	.rbs-logo-marquee {
+		overflow: hidden;
+		margin-top: 44px;
+		border-block: 1px solid var(--ds2-border);
+		padding-block: 20px;
+	}
+
+	.rbs-logo-track {
+		display: flex;
+		width: max-content;
+		animation: rbs-logo-scroll 34s linear infinite;
+	}
+
+	.rbs-logo-group {
+		display: flex;
+		gap: 16px;
+		padding-right: 16px;
+	}
+
+	.rbs-logo-card {
+		display: grid;
+		width: 220px;
+		height: 86px;
+		place-items: center;
+		border-radius: 20px;
+		border: 1px solid var(--ds2-border);
+		background: var(--ds2-card-strong);
+		padding: 18px;
+	}
+
+	.rbs-logo-card img {
+		display: block;
+		max-width: 100%;
+		max-height: 42px;
+		object-fit: contain;
+	}
+
+	.rbs-trust-card {
+		display: grid;
+		gap: 28px;
+		margin-top: 44px;
+	}
+
+	.rbs-trust-list,
+	.rbs-dark-pills,
+	.rbs-form-checks {
+		display: grid;
+		gap: 12px;
+	}
+
+	.rbs-trust-list span {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		border-radius: 16px;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background: rgba(255, 255, 255, 0.06);
+		padding: 10px 12px;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 14px;
+	}
+
+	.rbs-request-section {
+		padding-bottom: 104px;
+	}
+
+	.rbs-form-grid {
+		display: grid;
+		gap: 16px;
+	}
+
+	.ds2-form > p {
+		margin-top: 0;
+		color: #71717a;
+		font-size: 12px;
+		line-height: 1.6;
+	}
+
+	.rbs-mobile-cta {
+		position: fixed;
+		right: 16px;
+		bottom: 16px;
+		left: 16px;
+		z-index: 30;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
+		border: 1px solid var(--ds2-border);
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.86);
+		padding: 10px;
+		box-shadow: var(--ds2-shadow);
+		backdrop-filter: blur(24px);
+	}
+
+	:global(.dark) .rbs-mobile-cta {
+		background: rgba(9, 9, 11, 0.86);
+	}
+
+	@keyframes rbs-logo-scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-33.333%);
+		}
+	}
+
+	@media (min-width: 640px) {
+		.rbs-form-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.rbs-hero-benefit ul {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.rbs-form-checks {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 768px) {
+		.ds2-card,
+		.ds2-dashboard,
+		.ds2-price-card,
+		.ds2-testimonial {
+			padding: 32px;
+		}
+
+		.rbs-fit-grid,
+		.rbs-task-grid,
+		.rbs-services,
+		.rbs-benefits,
+		.rbs-outcomes {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 900px) {
+		.ds2-section-head {
+			grid-template-columns: 1fr minmax(320px, 520px);
+		}
+
+		.rbs-wide-head {
+			grid-template-columns: 1fr;
+		}
+
+		.rbs-table-head,
+		.rbs-trust-card,
+		.ds2-final-cta {
+			grid-template-columns: 1fr minmax(360px, 480px);
+		}
+
+		.ds2-final-cta {
+			padding: 48px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.ds2-container {
+			padding-inline: 32px;
+		}
+
+		.rbs-hero-grid {
+			grid-template-columns: 1fr 0.86fr;
+			padding-top: 48px;
+			padding-bottom: 96px;
+		}
+
+		.rbs-hero-grid > div:first-child {
+			position: relative;
+			z-index: 2;
+		}
+
+		.rbs-hero-benefit {
+			width: calc(100% + 110px);
+			max-width: none;
+			transform: translateX(36px);
+		}
+
+		.rbs-hero-benefit ul {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.rbs-hero-media {
+			justify-self: end;
+		}
+
+		.rbs-benefit-layout,
+		.rbs-process-grid,
+		.rbs-faq-grid {
+			grid-template-columns: 0.54fr 1fr;
+		}
+
+		.rbs-prices {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.rbs-fit-grid,
+		.rbs-task-grid,
+		.rbs-services {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.rbs-mobile-cta {
+			display: none;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.rbs-benefits {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 767px) {
+		.ds2 {
+			--ds2-display-size: 42px;
+			--ds2-display-line: 46px;
+		}
+
+		.ds2-section {
+			padding-block: 56px;
+		}
+
+		.rbs-hero-grid {
+			padding-top: 28px;
+			padding-bottom: 56px;
+		}
+
+		.rbs-lead {
+			font-size: 16px;
+			line-height: 1.65;
+		}
+
+		.rbs-actions .ds2-btn {
+			width: 100%;
+		}
+
+		.rbs-timeline-item {
+			grid-template-columns: 52px 28px 1fr;
+			gap: 12px;
+		}
+
+		.rbs-timeline-dot {
+			width: 28px;
+			height: 28px;
+		}
+
+		.rbs-logo-card {
+			width: 176px;
+		}
+	}
+</style>
