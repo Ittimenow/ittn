@@ -9,7 +9,7 @@ const { variant = 'glass' } = Astro.props;
 const isGlass = variant === 'glass';
 
 const services = {
-	'Разработка': [{ title: 'Сайты и сервисы', href: '/services/web' }],
+	'Разработка': [{ title: 'Сайты и\u00A0сервисы', href: '/services/web' }],
 	'Автоматизация': [
 		{ title: 'Битрикс24', href: '/services/bitrix24' },
 		{ title: 'РосБизнесСофт', href: '/services/rbs' },
@@ -113,7 +113,7 @@ const services = {
 				Блог
 			</a>
 			<a href="/about" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
-				О нас
+				О&nbsp;нас
 			</a>
 		</nav>
 
@@ -122,7 +122,7 @@ const services = {
 				href="tel:+74951335888"
 				class="hidden text-sm font-medium text-neutral-700 transition hover:text-neutral-900 lg:inline dark:text-neutral-300 dark:hover:text-neutral-100"
 			>
-				+7 (495) 133-58-88
+				+7&nbsp;(495)&nbsp;133-58-88
 			</a>
 			<ThemeToggle />
 			<button
@@ -166,7 +166,7 @@ const services = {
 			))}
 			<a href="/cases">Кейсы</a>
 			<a href="/posts">Блог</a>
-			<a href="/about">О нас</a>
+			<a href="/about">О&nbsp;нас</a>
 		</nav>
 	</div>
 </header>

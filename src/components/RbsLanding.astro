@@ -2,196 +2,177 @@
 import UiIcon from './UiIcon.astro';
 
 const heroBenefits = [
-	'единая база клиентов и сделок',
-	'продажи связаны со складом',
+	'единая база клиентов и\u00A0сделок',
+	'продажи связаны со\u00A0складом',
 	'меньше ручного контроля',
-	'документы по шаблонам',
-	'интеграции с 1С и сайтом',
-	'понятные KPI и отчеты',
+	'документы по\u00A0шаблонам',
+	'интеграции с\u00A01С\u00A0и\u00A0сайтом',
+	'понятные KPI\u00A0и\u00A0отчеты',
 ] as const;
 
 const fitItems = [
-	'B2B-продажи с долгим циклом сделки',
-	'оптовая или дистрибьюторская компания',
-	'производство с заказами, материалами и отгрузками',
-	'складской учет, закупки и остатки',
-	'сервисный центр или выездные инженеры',
-	'строительная, проектная или монтажная компания',
-	'несколько отделов с потерями задач и документов',
-	'1С, сайт, телефония и почта, которые нужно связать',
+	'B2B-продажи с\u00A0долгим циклом сделки',
+	'оптовая или\u00A0дистрибьюторская компания',
+	'производство с\u00A0заказами, материалами и\u00A0отгрузками',
+	'складской учет, закупки и\u00A0остатки',
+	'сервисный центр или\u00A0выездные инженеры',
+	'строительная, проектная или\u00A0монтажная компания',
+	'несколько отделов с\u00A0потерями задач и\u00A0документов',
+	'1С, сайт, телефония и\u00A0почта, которые нужно связать',
 ] as const;
 
 const tasks = [
 	{
 		icon: 'briefcase',
-		title: 'Наводим порядок в продажах',
-		text: 'Настраиваем клиентскую базу, сделки, воронки, задачи, напоминания, контроль звонков и писем.',
+		title: 'Наводим порядок в\u00A0продажах',
+		text: 'Настраиваем клиентскую базу, сделки, воронки, задачи, напоминания, контроль звонков и\u00A0писем.',
 	},
 	{
 		icon: 'workflow',
-		title: 'Связываем CRM и ERP-логику',
-		text: 'Соединяем заказы клиентов, номенклатуру, остатки, закупки, производство, отгрузки и документы.',
+		title: 'Связываем CRM\u00A0и\u00A0ERP-логику',
+		text: 'Соединяем заказы клиентов, номенклатуру, остатки, закупки, производство, отгрузки и\u00A0документы.',
 	},
 	{
 		icon: 'layers',
 		title: 'Настраиваем интеграции',
-		text: 'Подключаем сайт, формы, почту, телефонию, мессенджеры, 1С, API и внешние сервисы.',
+		text: 'Подключаем сайт, формы, почту, телефонию, мессенджеры, 1С, API\u00A0и\u00A0внешние сервисы.',
 	},
 	{
 		icon: 'database',
 		title: 'Переносим данные',
-		text: 'Мигрируем клиентов, компании, контакты, товары, сделки, историю и остатки из Excel, 1С или старой CRM.',
+		text: 'Мигрируем клиентов, компании, контакты, товары, сделки, историю и\u00A0остатки из\u00A0Excel, 1С\u00A0или\u00A0старой CRM.',
 	},
 	{
 		icon: 'file',
 		title: 'Автоматизируем документы',
-		text: 'Создаем шаблоны КП, договоров, счетов, актов, УПД и писем, чтобы сотрудники не копировали данные вручную.',
+		text: 'Создаем шаблоны КП, договоров, счетов, актов, УПД\u00A0и\u00A0писем, чтобы сотрудники не\u00A0копировали данные вручную.',
 	},
 	{
 		icon: 'users',
-		title: 'Внедряем в ежедневную работу',
-		text: 'Обучаем команду, готовим инструкции, регламенты, KPI и правила контроля качества заполнения CRM.',
+		title: 'Внедряем в\u00A0ежедневную работу',
+		text: 'Обучаем команду, готовим инструкции, регламенты, KPI\u00A0и\u00A0правила контроля качества заполнения CRM.',
 	},
 ] as const;
 
 const benefits = [
-	['Единая система', 'Клиенты, сделки, задачи, документы, склад, производство и сервис работают в одном пространстве.'],
-	['Меньше ручной работы', 'Заявки попадают в CRM, письма и звонки привязываются к клиенту, документы формируются по шаблонам.'],
-	['Контроль продаж', 'Руководитель видит воронки, этапы сделок, просрочки, активность менеджеров и прогноз продаж.'],
-	['Быстрее обработка заказов', 'Менеджеры, склад и производство работают по единому процессу, без передачи данных в чатах и Excel.'],
-	['Меньше ошибок', 'Регламенты, поля, роли и автоматизация снижают риск забытых задач и неверных данных в заказах.'],
-	['Рост вместе с бизнесом', 'РосБизнесСофт можно дорабатывать под отрасль, подразделения, роли, отчеты и нестандартные процессы.'],
+	['Единая система', 'Клиенты, сделки, задачи, документы, склад, производство и\u00A0сервис работают в\u00A0одном пространстве.'],
+	['Меньше ручной работы', 'Заявки попадают в\u00A0CRM, письма и\u00A0звонки привязываются к\u00A0клиенту, документы формируются по\u00A0шаблонам.'],
+	['Контроль продаж', 'Руководитель видит воронки, этапы сделок, просрочки, активность менеджеров и\u00A0прогноз продаж.'],
+	['Быстрее обработка заказов', 'Менеджеры, склад и\u00A0производство работают по\u00A0единому процессу, без\u00A0передачи данных в\u00A0чатах и\u00A0Excel.'],
+	['Меньше ошибок', 'Регламенты, поля, роли и\u00A0автоматизация снижают риск забытых задач и\u00A0неверных данных в\u00A0заказах.'],
+	['Рост вместе с\u00A0бизнесом', 'РосБизнесСофт можно дорабатывать под\u00A0отрасль, подразделения, роли, отчеты и\u00A0нестандартные процессы.'],
 ] as const;
 
 const packages = [
 	{
 		name: 'Предпроектное обследование',
-		price: 'от 50 000 ₽',
+		price: 'от\u00A050\u00A0000\u00A0₽',
 		icon: 'filter',
 		tag: 'План',
-		text: 'Когда нужно описать процессы, выбрать модули и получить понятную дорожную карту внедрения.',
-		items: ['интервью с руководителями', 'карта процессов и проблем', 'состав модулей и интеграций', 'план работ и смета'],
+		text: 'Когда нужно описать процессы, выбрать модули и\u00A0получить понятную дорожную карту внедрения.',
+		items: ['интервью с\u00A0руководителями', 'карта процессов и\u00A0проблем', 'состав модулей и\u00A0интеграций', 'план работ и\u00A0смета'],
 	},
 	{
 		name: 'Первичное внедрение',
-		price: '80 000 ₽',
+		price: '80\u00A0000\u00A0₽',
 		icon: 'rocket',
 		tag: 'Старт',
-		text: 'Быстрый запуск CRM с базовой настройкой для продаж, пользователей, прав и рабочего сценария.',
-		items: ['структура компании', 'пользователи, роли и права', 'карточки и воронки', 'базовое обучение'],
+		text: 'Быстрый запуск CRM\u00A0с\u00A0базовой настройкой для\u00A0продаж, пользователей, прав и\u00A0рабочего сценария.',
+		items: ['структура компании', 'пользователи, роли и\u00A0права', 'карточки и\u00A0воронки', 'базовое обучение'],
 	},
 	{
 		name: 'Проектное внедрение',
-		price: 'от 300 000 ₽',
+		price: 'от\u00A0300\u00A0000\u00A0₽',
 		icon: 'workflow',
 		tag: 'Комплексно',
 		featured: true,
-		text: 'Настройка под процессы компании: CRM, ERP-модули, интеграции, перенос данных, обучение и адаптация.',
-		items: ['аудит и ТЗ', 'CRM и ERP-модули', '1С, сайт, телефония и API', 'миграция, запуск и сопровождение'],
+		text: 'Настройка под\u00A0процессы компании: CRM, ERP-модули, интеграции, перенос данных, обучение и\u00A0адаптация.',
+		items: ['аудит и\u00A0ТЗ', 'CRM\u00A0и\u00A0ERP-модули', '1С, сайт, телефония и\u00A0API', 'миграция, запуск и\u00A0сопровождение'],
 	},
-] as const;
-
-const extraPrices = [
-	['Настройка CRM', 'Поля, карточки, воронки, пользователи, права, рабочий стол', 'от 25 000 ₽'],
-	['Интеграция с 1С', 'Аудит 1С, правила обмена, синхронизация документов и данных', 'от 30 000 ₽'],
-	['Интеграция сайта с CRM', 'Передача заявок с сайта в РосБизнесСофт', 'от 5 000 ₽'],
-	['Телефония', 'Подключение АТС и правил обработки звонков', 'от 5 000 ₽'],
-	['Email', 'Подключение почты сотрудников к CRM', '500 ₽ / сотрудник'],
-	['Шаблоны документов', 'КП, договор, счет, письмо, акт, УПД', 'от 1 000 ₽ / документ'],
-	['Обучение сотрудников', 'Работа с CRM, складом, сделками и клиентской базой', 'от 10 000 ₽'],
-	['Регламент работы в CRM', 'Правила обработки заявок, сделок, клиентов и задач', 'от 10 000 ₽'],
 ] as const;
 
 const services = [
 	{
 		title: 'Предпроектное обследование',
 		icon: 'filter',
-		items: ['интервью с руководителями и ключевыми сотрудниками', 'описание текущих процессов', 'карта внедрения и список настроек'],
+		items: ['интервью с\u00A0руководителями и\u00A0ключевыми сотрудниками', 'описание текущих процессов', 'карта внедрения и\u00A0список настроек'],
 	},
 	{
-		title: 'Настройка CRM и ERP-модулей',
+		title: 'Настройка CRM\u00A0и\u00A0ERP-модулей',
 		icon: 'settings',
-		items: ['карточки клиентов, сделок, заказов и товаров', 'склады, документы, проекты и сервисные обращения', 'производственные процессы'],
+		items: ['карточки клиентов, сделок, заказов и\u00A0товаров', 'склады, документы, проекты и\u00A0сервисные обращения', 'производственные процессы'],
 	},
 	{
-		title: 'Интеграция с 1С',
+		title: 'Интеграция с\u00A01С',
 		icon: 'database',
-		items: ['контрагенты, товары и счета', 'заказы, оплаты и остатки', 'правила обмена под вашу конфигурацию'],
+		items: ['контрагенты, товары и\u00A0счета', 'заказы, оплаты и\u00A0остатки', 'правила обмена под\u00A0вашу конфигурацию'],
 	},
 	{
-		title: 'Интеграции с каналами',
+		title: 'Интеграции с\u00A0каналами',
 		icon: 'phone',
-		items: ['заявки с сайта и лендингов', 'телефония, почта и мессенджеры', 'API и внешние сервисы'],
+		items: ['заявки с\u00A0сайта и\u00A0лендингов', 'телефония, почта и\u00A0мессенджеры', 'API\u00A0и\u00A0внешние сервисы'],
 	},
 	{
 		title: 'Миграция данных',
 		icon: 'layers',
-		items: ['клиенты, контакты и компании', 'сделки, товары и остатки', 'документы и история взаимодействий'],
+		items: ['клиенты, контакты и\u00A0компании', 'сделки, товары и\u00A0остатки', 'документы и\u00A0история взаимодействий'],
 	},
 	{
-		title: 'Отчеты, обучение и поддержка',
+		title: 'Отчеты, обучение и\u00A0поддержка',
 		icon: 'bar-chart',
-		items: ['отчеты по продажам, складу, сервису и KPI', 'инструкции и обучение пользователей', 'помощь после запуска'],
+		items: ['отчеты по\u00A0продажам, складу, сервису и\u00A0KPI', 'инструкции и\u00A0обучение пользователей', 'помощь после запуска'],
 	},
 ] as const;
 
 const steps = [
-	['filter', 'Аудит', 'Фиксируем цели, процессы, роли, данные и точки потерь.'],
-	['file', 'Техническое задание', 'Описываем модули, карточки, поля, документы, интеграции и критерии готовности.'],
-	['settings', 'Настройка', 'Конфигурируем CRM/ERP, права, воронки, рабочие столы, документы и отчеты.'],
-	['layers', 'Интеграции', 'Связываем РосБизнесСофт с 1С, сайтом, телефонией, почтой, API и внешними сервисами.'],
-	['database', 'Перенос данных', 'Импортируем и проверяем клиентов, товары, сделки, остатки, документы и историю.'],
-	['users', 'Обучение', 'Показываем сотрудникам рабочие сценарии и закрепляем регламенты.'],
-	['rocket', 'Запуск и развитие', 'Запускаем систему, контролируем первые результаты и донастраиваем процессы.'],
+	['filter', 'Аудит', 'Фиксируем цели, процессы, роли, данные и\u00A0точки потерь.'],
+	['file', 'Техническое задание', 'Описываем модули, карточки, поля, документы, интеграции и\u00A0критерии готовности.'],
+	['settings', 'Настройка', 'Конфигурируем CRM/ERP, права, воронки, рабочие столы, документы и\u00A0отчеты.'],
+	['layers', 'Интеграции', 'Связываем РосБизнесСофт с\u00A01С, сайтом, телефонией, почтой, API\u00A0и\u00A0внешними сервисами.'],
+	['database', 'Перенос данных', 'Импортируем и\u00A0проверяем клиентов, товары, сделки, остатки, документы и\u00A0историю.'],
+	['users', 'Обучение', 'Показываем сотрудникам рабочие сценарии и\u00A0закрепляем регламенты.'],
+	['rocket', 'Запуск и\u00A0развитие', 'Запускаем систему, контролируем первые результаты и\u00A0донастраиваем процессы.'],
 ] as const;
 
-const clients = [
+const clientLogos = [
 	{ name: 'Perola Sky', src: '/clients/client-perola.png' },
 	{ name: 'William Grant & Sons Ltd.', src: '/clients/client-wgs.png' },
 	{ name: 'Альфа-страхование', src: '/clients/client-alfa.png' },
 	{ name: 'Донстрой', src: '/clients/client-donstroy.png' },
 ] as const;
 
-const trustItems = [
-	'работаем с CRM/ERP, автоматизацией и интеграциями',
-	'настраиваем систему под реальные процессы, а не только по инструкции',
-	'подключаем 1С, сайт, телефонию, почту и внешние сервисы',
-	'готовим регламенты и обучающие материалы для сотрудников',
-	'работаем по договору, с этапами, сметой и понятным результатом',
-] as const;
-
 const outcomes = [
-	['Стало понятно, где сделки', 'После настройки воронок, задач и отчетов руководитель видит загрузку, просрочки и прогноз продаж.'],
-	['Документы готовятся быстрее', 'Шаблоны счетов, договоров и КП уменьшают ручной ввод и количество ошибок.'],
-	['Заявки не теряются', 'Формы сайта, почта и телефония связаны с CRM, поэтому каждое обращение попадает в работу.'],
+	['Стало понятно, где\u00A0сделки', 'После настройки воронок, задач и\u00A0отчетов руководитель видит загрузку, просрочки и\u00A0прогноз продаж.'],
+	['Документы готовятся быстрее', 'Шаблоны счетов, договоров и\u00A0КП\u00A0уменьшают ручной ввод и\u00A0количество ошибок.'],
+	['Заявки не\u00A0теряются', 'Формы сайта, почта и\u00A0телефония связаны с\u00A0CRM, поэтому каждое обращение попадает в\u00A0работу.'],
 ] as const;
 
 const faqs = [
-	['Сколько стоит внедрение РосБизнесСофт?', 'Быстрое внедрение в IT TIME NOW стоит от 80 000 ₽. Проектное внедрение - от 300 000 ₽. Итог зависит от количества пользователей, модулей, интеграций, объема данных и сложности процессов.'],
-	['Чем РосБизнесСофт отличается от обычной CRM?', 'Обычная CRM чаще закрывает продажи, задачи и клиентскую базу. РосБизнесСофт может работать как CRM/ERP-система: продажи, склад, закупки, производство, сервис, документы, отчеты и интеграции.'],
-	['Можно ли интегрировать РосБизнесСофт с 1С?', 'Да. Настраиваем обмен по клиентам, товарам, счетам, заказам, оплатам, остаткам и другим данным. Состав обмена зависит от конфигурации 1С и ваших процессов.'],
-	['Можно ли перенести данные из Excel или старой CRM?', 'Да. Переносим клиентов, компании, контакты, сделки, товары, остатки и другую информацию из Excel, 1С, старой CRM или внешних систем.'],
-	['Сколько времени занимает внедрение?', 'Быстрый запуск выполняется в рамках первичного внедрения. Проектное внедрение обычно идет этапами: обследование, ТЗ, настройка, интеграции, перенос данных, обучение и запуск.'],
-	['Подходит ли РосБизнесСофт для производства?', 'Да. Система подходит компаниям, которым нужно связать продажи, производство, склад, закупки, документы и отгрузки.'],
-	['Подходит ли РосБизнесСофт для сервисного центра?', 'Да. Можно настроить обращения, тикеты, сервисные заявки, оборудование клиентов, задачи инженеров и отчеты.'],
-	['Можно ли подключить сайт к РосБизнесСофт?', 'Да. Заявки с сайта можно передавать в CRM, создавать лиды, сделки, задачи и уведомления для менеджеров.'],
-	['Что входит в первичное внедрение?', 'Базовая настройка CRM, структура компании, пользователи, роли, поля, воронка, шаблоны документов, почта, телефония, доступные интеграции и обучение по базовому сценарию.'],
-	['Что лучше: РосБизнесСофт или Битрикс24?', 'Если нужна простая CRM для продаж, задач и коммуникаций, часто рассматривают Bitrix24. Если важны склад, производство, сервис, закупки, документы и глубокая ERP-логика, стоит рассмотреть РосБизнесСофт.'],
+	['Сколько стоит внедрение РосБизнесСофт?', 'Быстрое внедрение в\u00A0IT\u00A0TIME\u00A0NOW стоит от\u00A080\u00A0000\u00A0₽. Проектное внедрение - от\u00A0300\u00A0000\u00A0₽. Итог зависит от\u00A0количества пользователей, модулей, интеграций, объема данных и\u00A0сложности процессов.'],
+	['Чем РосБизнесСофт отличается от\u00A0обычной CRM?', 'Обычная CRM чаще закрывает продажи, задачи и\u00A0клиентскую базу. РосБизнесСофт может работать как\u00A0CRM/ERP-система: продажи, склад, закупки, производство, сервис, документы, отчеты и\u00A0интеграции.'],
+	['Можно ли\u00A0интегрировать РосБизнесСофт с\u00A01С?', 'Да. Настраиваем обмен по\u00A0клиентам, товарам, счетам, заказам, оплатам, остаткам и\u00A0другим данным. Состав обмена зависит от\u00A0конфигурации 1С\u00A0и\u00A0ваших процессов.'],
+	['Можно ли\u00A0перенести данные из\u00A0Excel или\u00A0старой CRM?', 'Да. Переносим клиентов, компании, контакты, сделки, товары, остатки и\u00A0другую информацию из\u00A0Excel, 1С, старой CRM\u00A0или\u00A0внешних систем.'],
+	['Сколько времени занимает внедрение?', 'Быстрый запуск выполняется в\u00A0рамках первичного внедрения это от\u00A0недели. Проектное внедрение обычно идет этапами: обследование, ТЗ, настройка, интеграции, перенос данных, обучение и\u00A0запуск. Проектное внедрение может занять от\u00A02\u00A0до\u00A06\u00A0месяцев.'],
+	['Подходит ли\u00A0РосБизнесСофт для\u00A0производства?', 'Да. Система подходит компаниям, которым нужно связать продажи, производство, склад, закупки, документы и\u00A0отгрузки.'],
+	['Подходит ли\u00A0РосБизнесСофт для\u00A0сервисного центра?', 'Да. Есть тариф service desk: обращения, тикеты, сервисные заявки, оборудование клиентов, задачи инженеров.'],
+	['Можно ли\u00A0подключить сайт к\u00A0РосБизнесСофт?', 'Да. Заявки с\u00A0сайта можно передавать в\u00A0CRM, создавать лиды, сделки, задачи и\u00A0уведомления для\u00A0менеджеров.'],
+	['Что входит в\u00A0первичное внедрение?', 'Базовая настройка CRM, структура компании, пользователи, роли, поля, воронка, шаблоны документов, почта, телефония, доступные интеграции и\u00A0обучение по\u00A0базовому сценарию.'],
+	['Что лучше: РосБизнесСофт или\u00A0Битрикс24?', 'Если нужна простая CRM\u00A0для\u00A0продаж, задач и\u00A0коммуникаций, часто рассматривают Bitrix24. Если важны склад, производство, сервис, закупки, документы и\u00A0глубокая ERP-логика, стоит рассмотреть РосБизнесСофт.'],
 ] as const;
 
 const schema = [
 	{
 		'@context': 'https://schema.org',
 		'@type': 'Service',
-		name: 'Внедрение CRM / ERP системы РосБизнесСофт',
+		name: 'Внедрение CRM\u00A0/\u00A0ERP\u00A0системы РосБизнесСофт',
 		provider: {
 			'@type': 'Organization',
-			name: 'IT TIME NOW',
+			name: 'IT\u00A0TIME\u00A0NOW',
 		},
 		areaServed: 'RU',
 		serviceType: 'CRM/ERP implementation',
 		description:
-			'Внедрение и настройка CRM/ERP системы РосБизнесСофт для продаж, склада, производства, сервиса и B2B.',
+			'Внедрение и\u00A0настройка CRM/ERP\u00A0системы РосБизнесСофт для\u00A0продаж, склада, производства, сервиса и\u00A0B2B.',
 		offers: {
 			'@type': 'AggregateOffer',
 			priceCurrency: 'RUB',
@@ -222,24 +203,20 @@ const schema = [
 				<nav class="rbs-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services">Все услуги</a>
 					<UiIcon name="chevron" class="h-3.5 w-3.5" />
-					<span>РосБизнесСофт CRM / ERP</span>
+					<span>РосБизнесСофт CRM&nbsp;/&nbsp;ERP</span>
 				</nav>
-				<h1 transition:name="service-rbs">Внедрение CRM / ERP системы РосБизнесСофт</h1>
+				<h1 transition:name="service-rbs">Внедрение CRM&nbsp;/&nbsp;ERP&nbsp;системы РосБизнесСофт</h1>
 				<p class="rbs-lead">
-					Внедрим РосБизнесСофт под ваши продажи, склад, производство и сервис. Поможем перейти
-					от Excel, разрозненных таблиц и ручного контроля к единой CRM/ERP системе, где виден
-					весь путь клиента: от первого обращения и сделки до счета, отгрузки, сервиса и
-					повторной продажи.
+					Внедрим РосБизнесСофт под&nbsp;ваши продажи, склад, производство и&nbsp;сервис. Поможем перейти
+					от&nbsp;Excel, разрозненных таблиц и&nbsp;ручного контроля к&nbsp;единой CRM/ERP&nbsp;системе, где виден
+					весь путь клиента: от&nbsp;первого обращения и&nbsp;сделки до&nbsp;счета, отгрузки, сервиса и&nbsp;повторной продажи.
 				</p>
 				<div class="rbs-actions">
 					<a class="ds2-btn ds2-btn-primary" href="#rbs-request">
 						<span>Получить консультацию</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</a>
-					<a class="ds2-btn ds2-btn-secondary" href="#rbs-prices">
-						<span>Рассчитать внедрение</span>
-						<UiIcon name="file" class="h-4 w-4" />
-					</a>
+					<p class="rbs-free-label">Бесплатно!</p>
 				</div>
 				<div class="ds2-testimonial rbs-hero-benefit">
 					<div class="rbs-hero-benefit-head">
@@ -247,8 +224,8 @@ const schema = [
 						<p class="ds2-kicker">Ваша выгода</p>
 					</div>
 					<blockquote>
-						После внедрения РосБизнесСофт компания получает единую систему для продаж,
-						операций и управленческого контроля.
+						После внедрения РосБизнесСофт компания получает единую систему для&nbsp;продаж,
+						операций и&nbsp;управленческого контроля.
 					</blockquote>
 					<ul>
 						{heroBenefits.map((item) => (
@@ -264,7 +241,7 @@ const schema = [
 			<picture class="rbs-hero-media">
 				<img
 					src="/main-rbs.png"
-					alt="Интерфейс РосБизнесСофт с CRM, ERP-модулями и операционными данными"
+					alt="Интерфейс РосБизнесСофт с&nbsp;CRM, ERP-модулями и&nbsp;операционными данными"
 					width="1086"
 					height="1448"
 					loading="eager"
@@ -279,11 +256,11 @@ const schema = [
 			<div class="ds2-section-head rbs-wide-head">
 				<div>
 					<p class="ds2-kicker">Кому подойдет</p>
-					<h2>Когда простой CRM уже недостаточно</h2>
+					<h2>Когда простой CRM&nbsp;уже недостаточно</h2>
 				</div>
 				<p>
-					РосБизнесСофт / RBS360 подходит компаниям, где CRM должна быть связана с реальными
-					операциями: продажами, складом, производством, сервисом, закупками и документами.
+					РосБизнесСофт&nbsp;/&nbsp;RBS360 подходит компаниям, где&nbsp;CRM&nbsp;должна быть связана с&nbsp;реальными
+					операциями: продажами, складом, производством, сервисом, закупками и&nbsp;документами.
 				</p>
 			</div>
 			<div class="rbs-fit-grid">
@@ -302,11 +279,11 @@ const schema = [
 			<div class="ds2-section-head">
 				<div>
 					<p class="ds2-kicker">Задачи внедрения</p>
-					<h2>Настраиваем систему под работу отделов, а не отдельную CRM-карточку</h2>
+					<h2>Настраиваем систему под&nbsp;работу отделов, а&nbsp;не&nbsp;отдельную CRM-карточку</h2>
 				</div>
 				<p>
-					IT TIME NOW внедряет РосБизнесСофт под реальные бизнес-процессы: структуру компании,
-					права доступа, карточки, воронки, документы, интеграции, отчеты и регламенты.
+					IT&nbsp;TIME&nbsp;NOW внедряет РосБизнесСофт под&nbsp;реальные бизнес-процессы: структуру компании,
+					права доступа, карточки, воронки, документы, интеграции, отчеты и&nbsp;регламенты.
 				</p>
 			</div>
 			<div class="rbs-task-grid">
@@ -327,10 +304,10 @@ const schema = [
 		<div class="ds2-container rbs-benefit-layout">
 			<div>
 				<p class="ds2-kicker">Ваша выгода</p>
-				<h2>Единый процесс от заявки до повторной продажи</h2>
+				<h2>Единый процесс от&nbsp;заявки до&nbsp;повторной продажи</h2>
 				<p>
-					Мы не просто включаем CRM. Цель внедрения - сделать так, чтобы менеджеры, склад,
-					производство, сервис и руководство работали в одной системе.
+					Мы не&nbsp;просто включаем CRM. Цель внедрения - сделать так, чтобы менеджеры, склад,
+					производство, сервис и&nbsp;руководство работали в&nbsp;одной системе.
 				</p>
 			</div>
 			<div class="rbs-benefits">
@@ -350,11 +327,11 @@ const schema = [
 			<div class="ds2-section-head">
 				<div>
 					<p class="ds2-kicker">Стоимость внедрения</p>
-					<h2>Пакеты IT TIME NOW для РосБизнесСофт</h2>
+					<h2>Пакеты внедрения РосБизнесСофт</h2>
 				</div>
 				<p>
-					Итоговая стоимость зависит от количества пользователей, модулей, интеграций, объема
-					данных для переноса и сложности бизнес-процессов.
+					Итоговая стоимость зависит от&nbsp;количества пользователей, модулей, интеграций, объема
+					данных для&nbsp;переноса и&nbsp;сложности бизнес-процессов.
 				</p>
 			</div>
 			<div class="rbs-prices">
@@ -378,40 +355,11 @@ const schema = [
 							))}
 						</ul>
 						<a class="ds2-btn ds2-btn-secondary" href="#rbs-request">
-							<span>Обсудить состав</span>
+							<span>{pack.name === 'Предпроектное обследование' ? 'Заказать аудит' : 'Заказать внедрение'}</span>
 						</a>
 					</article>
 				))}
 			</div>
-			<section class="ds2-card rbs-price-table-card" aria-label="Отдельные работы по внедрению РосБизнесСофт">
-				<div class="rbs-table-head">
-					<div>
-						<p class="ds2-kicker">Отдельные работы</p>
-						<h3>Можно собрать внедрение по модулям</h3>
-					</div>
-					<p>После короткого интервью подготовим план работ и понятную смету.</p>
-				</div>
-				<div class="rbs-table-wrap">
-					<table class="ds2-table">
-						<thead>
-							<tr>
-								<th>Работа</th>
-								<th>Что входит</th>
-								<th>Стоимость</th>
-							</tr>
-						</thead>
-						<tbody>
-							{extraPrices.map(([name, description, price]) => (
-								<tr>
-									<td>{name}</td>
-									<td>{description}</td>
-									<td>{price}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			</section>
 		</div>
 	</section>
 
@@ -420,11 +368,11 @@ const schema = [
 			<div class="ds2-section-head">
 				<div>
 					<p class="ds2-kicker">Состав проекта</p>
-					<h2>Услуги по внедрению РосБизнесСофт</h2>
+					<h2>Услуги по&nbsp;внедрению РосБизнесСофт</h2>
 				</div>
 				<p>
-					Проект можно запустить поэтапно: сначала обследование и быстрый контур продаж, затем
-					ERP-модули, интеграции, миграция данных, отчеты и сопровождение.
+					Проект можно запустить поэтапно: сначала обследование и&nbsp;быстрый контур продаж, затем
+					ERP-модули, интеграции, миграция данных, отчеты и&nbsp;сопровождение.
 				</p>
 			</div>
 			<div class="rbs-services">
@@ -452,10 +400,10 @@ const schema = [
 		<div class="ds2-container rbs-process-grid">
 			<div>
 				<p class="ds2-kicker">Как проходит внедрение</p>
-				<h2>Семь этапов с понятным результатом</h2>
+				<h2>Семь этапов с&nbsp;понятным результатом</h2>
 				<p>
-					Фиксируем границы каждого этапа: что настраиваем, какие данные переносим, кто проверяет
-					результат и как команда начинает работать в системе.
+					Фиксируем границы каждого этапа: что&nbsp;настраиваем, какие данные переносим, кто&nbsp;проверяет
+					результат и&nbsp;как&nbsp;команда начинает работать в&nbsp;системе.
 				</p>
 				<a class="ds2-btn ds2-btn-dark" href="#rbs-request">
 					<span>Собрать план внедрения</span>
@@ -485,24 +433,25 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
+	<section class="ds2-section bitrix-clients-section">
 		<div class="ds2-container">
-			<div class="ds2-section-head rbs-wide-head">
+			<div class="ds2-section-head bitrix-wide-head">
 				<div>
-					<p class="ds2-kicker">Доверие</p>
-					<h2>Работаем с компаниями, где CRM связана с реальными операциями</h2>
+					<p class="ds2-kicker">Наши клиенты</p>
+					<h2>Нам доверяют компании с&nbsp;работающими процессами продаж</h2>
 				</div>
 				<p>
-					Помогаем производственным компаниям, оптовым поставщикам, сервисным центрам, B2B-отделам
-					продаж и бизнесу, который вырос из Excel и простой CRM.
+					Нам доверяют компании, которым важно не&nbsp;просто купить CRM, а&nbsp;выстроить в&nbsp;ней работающий
+					процесс продаж и&nbsp;внутренних коммуникаций.
 				</p>
 			</div>
-			<div class="rbs-logo-marquee" aria-label="Логотипы клиентов">
-				<div class="rbs-logo-track">
+
+			<div class="bitrix-logo-marquee" aria-label="Логотипы клиентов">
+				<div class="bitrix-logo-track">
 					{[0, 1, 2].map((group) => (
-						<div class="rbs-logo-group" aria-hidden={group === 0 ? 'false' : 'true'}>
-							{clients.map((client) => (
-								<figure class="rbs-logo-card">
+						<div class="bitrix-logo-group" aria-hidden={group === 0 ? 'false' : 'true'}>
+							{clientLogos.map((client) => (
+								<figure class="bitrix-logo-card">
 									<img src={client.src} alt={client.name} loading="lazy" decoding="async" />
 								</figure>
 							))}
@@ -510,17 +459,6 @@ const schema = [
 					))}
 				</div>
 			</div>
-			<section class="ds2-testimonial rbs-trust-card">
-				<div>
-					<p class="ds2-kicker">Почему IT TIME NOW</p>
-					<blockquote>Говорим на языке бизнеса и доводим CRM/ERP до использования сотрудниками.</blockquote>
-				</div>
-				<div class="rbs-trust-list">
-					{trustItems.map((item) => (
-						<span><UiIcon name="check" class="h-4 w-4" />{item}</span>
-					))}
-				</div>
-			</section>
 		</div>
 	</section>
 
@@ -532,8 +470,8 @@ const schema = [
 					<h2>Какие изменения должна дать система</h2>
 				</div>
 				<p>
-					На старте фиксируем не только список настроек, но и ожидаемые изменения в работе:
-					прозрачность сделок, скорость документов, контроль заявок и снижение ручных ошибок.
+					На&nbsp;старте фиксируем не&nbsp;только список настроек, но&nbsp;и&nbsp;ожидаемые изменения в&nbsp;работе:
+					прозрачность сделок, скорость документов, контроль заявок и&nbsp;снижение ручных ошибок.
 				</p>
 			</div>
 			<div class="rbs-outcomes">
@@ -552,10 +490,10 @@ const schema = [
 		<div class="ds2-container rbs-faq-grid">
 			<div>
 				<p class="ds2-kicker">FAQ</p>
-				<h2>Частые вопросы о внедрении РосБизнесСофт</h2>
+				<h2>Частые вопросы о&nbsp;внедрении РосБизнесСофт</h2>
 				<p>
 					Ответы закрывают ключевые вопросы перед заявкой: цена, сроки, 1С, перенос данных,
-					производство, сервис и выбор между РосБизнесСофт и Bitrix24.
+					производство, сервис и&nbsp;выбор между РосБизнесСофт и&nbsp;Bitrix24.
 				</p>
 			</div>
 			<div class="rbs-faq-list">
@@ -581,14 +519,14 @@ const schema = [
 					<p class="ds2-kicker">Рассчитать внедрение</p>
 					<h2>Узнайте, какой вариант РосБизнесСофт подойдет вашей компании</h2>
 					<p>
-						Ответим, с чего начать внедрение, какие модули нужны и сколько будет стоить запуск
-						РосБизнесСофт под ваши процессы.
+						Ответим, с&nbsp;чего начать внедрение, какие модули нужны и&nbsp;сколько будет стоить запуск
+						РосБизнесСофт под&nbsp;ваши процессы.
 					</p>
 					<div class="rbs-dark-pills">
 						{[
 							['users', 'количество сотрудников'],
-							['database', 'есть ли 1С'],
-							['phone', 'сайт и телефония'],
+							['database', 'есть\u00A0ли\u00A01С'],
+							['phone', 'сайт и\u00A0телефония'],
 							['workflow', 'продажи, склад, производство'],
 						].map(([icon, text]) => (
 							<div class="ds2-dark-pill">
@@ -606,7 +544,7 @@ const schema = [
 						</label>
 						<label>
 							<span>Телефон</span>
-							<input class="ds2-input" required type="tel" name="phone" placeholder="+7 000 000-00-00" />
+							<input class="ds2-input" required type="tel" name="phone" placeholder="+7&nbsp;000&nbsp;000-00-00" />
 						</label>
 					</div>
 					<div class="rbs-form-grid">
@@ -635,7 +573,7 @@ const schema = [
 						<span>Получить план внедрения</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</button>
-					<p>После заявки свяжемся с вами, зададим уточняющие вопросы и подскажем, с каких настроек лучше начать.</p>
+					<p>После заявки свяжемся с&nbsp;вами, зададим уточняющие вопросы и&nbsp;подскажем, с&nbsp;каких настроек лучше начать.</p>
 				</form>
 			</div>
 		</div>
@@ -824,7 +762,8 @@ const schema = [
 		align-items: end;
 	}
 
-	.rbs-wide-head {
+	.rbs-wide-head,
+	.bitrix-wide-head {
 		align-items: start;
 	}
 
@@ -849,12 +788,15 @@ const schema = [
 		display: inline-flex;
 		align-items: center;
 		min-height: 28px;
-		border-radius: 24px;
+		border-radius: 9999px;
 		background: rgba(35, 43, 255, 0.09);
 		padding: 4px 12px;
 		color: var(--ds2-primary);
-		font-size: 13px;
-		font-weight: 700;
+		font-family: var(--ds2-font-system);
+		font-size: var(--ds2-label-size);
+		font-weight: var(--ds2-label-weight);
+		line-height: var(--ds2-label-line);
+		letter-spacing: 0;
 	}
 
 	.ds2-card,
@@ -1144,8 +1086,7 @@ const schema = [
 	}
 
 	.ds2-price-card li :global(svg),
-	.rbs-services li :global(svg),
-	.rbs-trust-list :global(svg) {
+	.rbs-services li :global(svg) {
 		flex: 0 0 auto;
 		color: var(--ds2-success);
 	}
@@ -1195,7 +1136,10 @@ const schema = [
 		overflow: hidden;
 		border-radius: 20px;
 		padding: 20px;
-		transition: background 200ms ease, box-shadow 200ms ease;
+		transition:
+			background 200ms ease,
+			border-color 200ms ease,
+			box-shadow 200ms ease;
 	}
 
 	.ds2-faq summary {
@@ -1205,18 +1149,26 @@ const schema = [
 		align-items: center;
 		justify-content: space-between;
 		gap: 20px;
+		margin: -20px;
+		padding: 20px;
 		font-weight: 700;
 		transition: color 200ms ease;
+	}
+
+	.ds2-faq[open] summary {
+		margin-bottom: 0;
 	}
 
 	.ds2-faq summary::-webkit-details-marker {
 		display: none;
 	}
 
-	.ds2-faq summary :global(svg) {
+	:global(.ds2-faq summary svg) {
 		flex: 0 0 auto;
 		opacity: 0.6;
-		transition: transform 200ms ease, opacity 200ms ease;
+		transition:
+			opacity 200ms ease,
+			transform 200ms ease;
 	}
 
 	.ds2-faq:hover {
@@ -1227,7 +1179,7 @@ const schema = [
 		background: var(--ds2-card);
 	}
 
-	.ds2-faq[open] summary :global(svg) {
+	:global(.ds2-faq[open] summary svg) {
 		opacity: 1;
 		transform: rotate(180deg);
 	}
@@ -1416,8 +1368,23 @@ const schema = [
 	.rbs-actions {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		gap: 12px;
 		margin-top: 32px;
+	}
+
+	.rbs-free-label {
+		margin-left: 12px;
+		color: var(--ds2-primary);
+		font-size: clamp(42px, 6vw, 76px);
+		font-weight: 800;
+		line-height: 1;
+		will-change: transform;
+	}
+
+	.rbs-actions .ds2-btn-primary:hover + .rbs-free-label,
+	.rbs-actions .ds2-btn-primary:focus-visible + .rbs-free-label {
+		animation: rbs-free-hop 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
 	.rbs-hero-benefit {
@@ -1556,9 +1523,38 @@ const schema = [
 	.rbs-benefit-layout,
 	.rbs-process-grid,
 	.rbs-faq-grid {
+		min-width: 0;
 		display: grid;
 		gap: 44px;
 		align-items: start;
+	}
+
+	.rbs-faq-grid {
+		gap: 32px;
+	}
+
+	.rbs-faq-grid h2 {
+		margin-top: 14px;
+	}
+
+	.rbs-benefit-layout > div > p:not(.ds2-kicker) {
+		margin-top: 28px;
+	}
+
+	.rbs-faq-grid > div > p:not(.ds2-kicker) {
+		margin-top: 22px;
+	}
+
+	.rbs-process-grid h2 {
+		margin-top: 14px;
+	}
+
+	.rbs-process-grid > div > p:not(.ds2-kicker) {
+		margin-top: 26px;
+	}
+
+	.rbs-process-grid .ds2-btn {
+		margin-top: 32px;
 	}
 
 	.rbs-benefit-card :global(svg),
@@ -1580,96 +1576,122 @@ const schema = [
 		font-weight: 700;
 	}
 
-	.rbs-price-table-card {
-		margin-top: 20px;
-	}
-
-	.rbs-table-head {
-		display: grid;
-		gap: 18px;
-		align-items: end;
-	}
-
-	.rbs-table-head h3 {
-		margin-top: 12px;
-		font-size: 32px;
-		line-height: 1.08;
-	}
-
-	.rbs-table-head > p {
-		color: var(--ds2-muted);
-	}
-
-	.rbs-table-wrap {
-		margin-top: 24px;
-		overflow-x: auto;
-	}
-
 	.rbs-services ul {
 		display: grid;
 		gap: 12px;
 		margin-top: 22px;
 	}
 
-	.rbs-timeline {
+	.rbs-faq-list {
 		display: grid;
-		gap: 0;
+		gap: 12px;
+	}
+
+	.rbs-timeline {
+		overflow: hidden;
+		border-radius: 24px;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		background: var(--ds2-card);
+		box-shadow: var(--ds2-shadow);
+		backdrop-filter: blur(40px);
+	}
+
+	:global(.dark) .rbs-timeline {
+		border-color: rgba(255, 255, 255, 0.1);
 	}
 
 	.rbs-timeline-item {
 		display: grid;
-		grid-template-columns: 68px 36px 1fr;
-		gap: 16px;
-		min-height: 108px;
+		grid-template-columns: 52px 1fr;
+		min-height: 132px;
+		transition: background 180ms ease;
+	}
+
+	.rbs-timeline-item:hover {
+		background: rgba(35, 43, 255, 0.05);
+	}
+
+	.rbs-timeline-date {
+		grid-column: 2;
+		grid-row: 1;
+		padding: 22px 22px 0 0;
+		color: var(--ds2-muted);
 	}
 
 	.rbs-timeline-date span {
 		display: block;
-		color: var(--ds2-muted);
 		font-size: 12px;
 		font-weight: 700;
+		line-height: 16px;
+		text-transform: uppercase;
 	}
 
 	.rbs-timeline-date time {
 		display: block;
-		margin-top: 4px;
+		margin-top: 2px;
 		color: var(--ds2-primary);
-		font-size: 28px;
-		line-height: 1;
+		font-size: 18px;
 		font-weight: 700;
+		line-height: 24px;
 	}
 
 	.rbs-timeline-track {
-		display: grid;
-		grid-template-rows: 28px 1fr;
-		justify-items: center;
-	}
-
-	.rbs-timeline-dot {
-		display: grid;
-		width: 36px;
-		height: 36px;
-		place-items: center;
-		border-radius: 9999px;
-		background: var(--ds2-primary);
-		color: #ffffff;
-		box-shadow: var(--ds2-glow);
+		position: relative;
+		grid-column: 1;
+		grid-row: 1 / span 2;
+		min-height: 132px;
 	}
 
 	.rbs-timeline-line {
-		width: 2px;
-		height: 100%;
-		background: var(--ds2-border);
-		grid-row: 2;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		border-left: 1px solid var(--ds2-border);
+		transform: translateX(-50%);
+	}
+
+	.rbs-timeline-item:first-child .rbs-timeline-line {
+		top: 34px;
+	}
+
+	.rbs-timeline-item:last-child .rbs-timeline-line {
+		bottom: calc(100% - 34px);
+	}
+
+	.rbs-timeline-dot {
+		position: absolute;
+		top: 22px;
+		left: 50%;
+		z-index: 1;
+		display: grid;
+		width: 30px;
+		height: 30px;
+		place-items: center;
+		border-radius: 9999px;
+		border: 1px solid rgba(35, 43, 255, 0.22);
+		background: var(--ds2-primary);
+		color: #ffffff;
+		box-shadow: 0 0 0 7px rgba(35, 43, 255, 0.1);
+		transform: translateX(-50%);
+		transition: box-shadow 180ms ease, transform 180ms ease;
+	}
+
+	.rbs-timeline-item:hover .rbs-timeline-dot {
+		box-shadow: 0 0 0 10px rgba(35, 43, 255, 0.14);
+		transform: translateX(-50%) scale(1.04);
 	}
 
 	.rbs-timeline-content {
-		border-bottom: 1px solid var(--ds2-border);
-		padding-bottom: 24px;
+		grid-column: 2;
+		grid-row: 2;
+		padding: 6px 22px 24px 0;
 	}
 
 	.rbs-timeline-content h3 {
-		font-size: 22px;
+		color: var(--ds2-ink);
+		font-size: 24px;
+		font-weight: 500;
 		line-height: 1.18;
 	}
 
@@ -1677,69 +1699,84 @@ const schema = [
 		margin-top: 8px;
 		color: var(--ds2-muted);
 		font-size: 14px;
-		line-height: 1.7;
+		line-height: 1.65;
 	}
 
-	.rbs-logo-marquee {
+	@media (min-width: 768px) {
+		.rbs-timeline {
+			padding-block: 8px;
+		}
+
+		.rbs-timeline-item {
+			grid-template-columns: 128px 60px 1fr;
+			min-height: 116px;
+			align-items: start;
+		}
+
+		.rbs-timeline-date {
+			grid-column: 1;
+			grid-row: 1;
+			padding: 28px 0 0 24px;
+		}
+
+		.rbs-timeline-track {
+			grid-column: 2;
+			grid-row: 1;
+			min-height: 116px;
+		}
+
+		.rbs-timeline-content {
+			grid-column: 3;
+			grid-row: 1;
+			padding: 24px 28px 24px 0;
+		}
+	}
+
+	.bitrix-clients-section {
 		overflow: hidden;
-		margin-top: 44px;
-		border-block: 1px solid var(--ds2-border);
-		padding-block: 20px;
 	}
 
-	.rbs-logo-track {
+	.bitrix-logo-marquee {
+		position: relative;
+		margin-top: 44px;
+		overflow: hidden;
+		mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+	}
+
+	.bitrix-logo-track {
 		display: flex;
 		width: max-content;
-		animation: rbs-logo-scroll 34s linear infinite;
+		will-change: transform;
+		animation: bitrix-logo-marquee 18s linear infinite;
 	}
 
-	.rbs-logo-group {
+	.bitrix-logo-group {
 		display: flex;
-		gap: 16px;
-		padding-right: 16px;
+		flex: 0 0 auto;
+		gap: 40px;
+		padding-right: 40px;
 	}
 
-	.rbs-logo-card {
+	.bitrix-logo-card {
 		display: grid;
-		width: 220px;
-		height: 86px;
+		width: clamp(240px, 24vw, 340px);
+		min-height: 150px;
 		place-items: center;
-		border-radius: 20px;
-		border: 1px solid var(--ds2-border);
-		background: var(--ds2-card-strong);
-		padding: 18px;
+		border: 0;
+		background: transparent;
+		padding: 10px;
 	}
 
-	.rbs-logo-card img {
-		display: block;
+	.bitrix-logo-card img {
 		max-width: 100%;
-		max-height: 42px;
+		max-height: 108px;
 		object-fit: contain;
 	}
 
-	.rbs-trust-card {
-		display: grid;
-		gap: 28px;
-		margin-top: 44px;
-	}
-
-	.rbs-trust-list,
 	.rbs-dark-pills,
 	.rbs-form-checks {
 		display: grid;
 		gap: 12px;
-	}
-
-	.rbs-trust-list span {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		border-radius: 16px;
-		border: 1px solid rgba(255, 255, 255, 0.12);
-		background: rgba(255, 255, 255, 0.06);
-		padding: 10px 12px;
-		color: rgba(255, 255, 255, 0.78);
-		font-size: 14px;
 	}
 
 	.rbs-request-section {
@@ -1779,12 +1816,50 @@ const schema = [
 		background: rgba(9, 9, 11, 0.86);
 	}
 
-	@keyframes rbs-logo-scroll {
+	@keyframes bitrix-logo-marquee {
 		from {
 			transform: translateX(0);
 		}
 		to {
-			transform: translateX(-33.333%);
+			transform: translate3d(-33.333333%, 0, 0);
+		}
+	}
+
+	@keyframes rbs-free-hop {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg) scale(1);
+		}
+
+		22% {
+			transform: translateY(-18px) rotate(-3deg) scale(1.06);
+		}
+
+		42% {
+			transform: translateY(0) rotate(2deg) scale(1);
+		}
+
+		58% {
+			transform: translateY(-10px) rotate(-1deg) scale(1.03);
+		}
+
+		76% {
+			transform: translateY(0) rotate(1deg) scale(1);
+		}
+
+		88% {
+			transform: translateY(-4px) rotate(0deg) scale(1.01);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.bitrix-logo-track {
+			animation: none;
+		}
+
+		.rbs-actions .ds2-btn-primary:hover + .rbs-free-label,
+		.rbs-actions .ds2-btn-primary:focus-visible + .rbs-free-label {
+			animation: none;
 		}
 	}
 
@@ -1824,12 +1899,11 @@ const schema = [
 			grid-template-columns: 1fr minmax(320px, 520px);
 		}
 
-		.rbs-wide-head {
+		.rbs-wide-head,
+		.bitrix-wide-head {
 			grid-template-columns: 1fr;
 		}
 
-		.rbs-table-head,
-		.rbs-trust-card,
 		.ds2-final-cta {
 			grid-template-columns: 1fr minmax(360px, 480px);
 		}
@@ -1870,9 +1944,12 @@ const schema = [
 		}
 
 		.rbs-benefit-layout,
-		.rbs-process-grid,
-		.rbs-faq-grid {
+		.rbs-process-grid {
 			grid-template-columns: 0.54fr 1fr;
+		}
+
+		.rbs-faq-grid {
+			grid-template-columns: 0.72fr 1.28fr;
 		}
 
 		.rbs-prices {
@@ -1920,18 +1997,17 @@ const schema = [
 			width: 100%;
 		}
 
-		.rbs-timeline-item {
-			grid-template-columns: 52px 28px 1fr;
-			gap: 12px;
-		}
+	}
 
-		.rbs-timeline-dot {
-			width: 28px;
-			height: 28px;
-		}
+	.ds2 :where(.ds2-kicker, .ds2-btn, .ds2-chip, .ds2-status, .ds2-tab, .ds2-check, .ds2-dark-pill) {
+		font-family: var(--ds2-font-system);
+		font-size: var(--ds2-label-size);
+		font-weight: var(--ds2-label-weight);
+		line-height: var(--ds2-label-line);
+		letter-spacing: 0;
+	}
 
-		.rbs-logo-card {
-			width: 176px;
-		}
+	.ds2 :where(b, strong, .font-bold, .ds2-metric p, .ds2-stat-card p, .ds2-faq summary, .ds2-step p, .ds2-table th) {
+		font-weight: var(--ds2-display-weight);
 	}
 </style>

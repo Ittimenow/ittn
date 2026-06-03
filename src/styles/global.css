@@ -111,6 +111,23 @@ body :where(h1, h2, h3, h4, blockquote) {
 	letter-spacing: 0;
 }
 
+.ds2 :where(.ds2-kicker) {
+	display: inline-flex;
+	align-items: center;
+	min-height: 28px !important;
+	border-radius: 9999px;
+	padding: 4px 12px !important;
+	font-family: var(--ds2-font-system) !important;
+	font-size: var(--ds2-label-size) !important;
+	font-weight: var(--ds2-label-weight) !important;
+	line-height: var(--ds2-label-line) !important;
+	letter-spacing: 0 !important;
+}
+
+.ds2-kicker + :where(h1, h2, h3, h4, blockquote) {
+	padding-top: 10px;
+}
+
 body :where(p, li, td, th, input, textarea, select, button) {
 	font-family: var(--ds2-font-system);
 	letter-spacing: 0;
