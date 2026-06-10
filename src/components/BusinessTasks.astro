@@ -1,0 +1,51 @@
+---
+const tasks = [
+	{
+		problem: 'Заявки приходят, но теряются по пути',
+		solution: 'Настраиваем CRM, роли, воронки, уведомления и автоматизацию работы с лидами.',
+	},
+	{
+		problem: 'Сайт есть, но он не помогает продажам',
+		solution: 'Проектируем сайт как часть воронки и связываем его с CRM, аналитикой и внутренними процессами.',
+	},
+	{
+		problem: 'Отделы работают в разных таблицах и чатах',
+		solution: 'Собираем продажи, документы, статусы и взаимодействие в одной системе.',
+	},
+	{
+		problem: 'Слишком много ручной работы',
+		solution: 'Автоматизируем типовые действия, документы, маршруты согласования и обработку заявок.',
+	},
+	{
+		problem: 'Нет прозрачности по складу, производству или сервису',
+		solution: 'Внедряем ERP, BPM и CRM-решения, которые объединяют операционные процессы.',
+	},
+	{
+		problem: 'Бизнес растёт, а процессы не масштабируются',
+		solution: 'Проектируем архитектуру системы под развитие компании, а не только под текущую боль.',
+	},
+];
+---
+
+<section class="bg-neutral-50 py-16 dark:bg-neutral-950 sm:py-24">
+	<div class="mx-auto max-w-[1440px] px-6">
+		<div class="mb-10 max-w-3xl">
+			<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Задачи бизнеса</p>
+			<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
+				Решаем не абстрактные IT-задачи, а конкретные проблемы бизнеса
+			</h2>
+		</div>
+
+		<div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/40">
+			{tasks.map((task, index) => (
+				<div class:list={[
+					'grid gap-4 px-5 py-5 sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)] sm:px-6',
+					index > 0 && 'border-t border-neutral-200 dark:border-neutral-800',
+				]}>
+					<p class="font-medium text-neutral-950 dark:text-white">{task.problem}</p>
+					<p class="text-sm leading-6 text-neutral-600 dark:text-neutral-400">{task.solution}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

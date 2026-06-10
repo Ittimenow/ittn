@@ -179,9 +179,9 @@ const checklist = [
 ] as const;
 ---
 
-<div class="ds2 bitrix-ds2">
-	<section class="ds2-hero bitrix-hero">
-		<div class="ds2-container bitrix-hero-grid">
+<div class="ds bitrix-ds">
+	<section class="ds-hero bitrix-hero">
+		<div class="ds-container bitrix-hero-grid">
 			<div>
 				<nav class="bitrix-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services">Все услуги</a>
@@ -197,16 +197,16 @@ const checklist = [
 					данные и обучим команду работать без хаоса и Excel.
 				</p>
 				<div class="bitrix-actions">
-					<a class="ds2-btn ds2-btn-primary" href="#bitrix-request">
+					<a class="ds-btn ds-btn-primary" href="#bitrix-request">
 						<span>Получить консультацию</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</a>
 					<p class="bitrix-free-label">Бесплатно!</p>
 				</div>
-				<div class="ds2-testimonial bitrix-hero-benefit">
+				<div class="ds-testimonial bitrix-hero-benefit">
 					<div class="bitrix-hero-benefit-head">
 						<UiIcon name="thumbs-up" class="bitrix-hero-benefit-icon h-[52px] w-[52px] shrink-0 text-white/90" />
-						<p class="ds2-kicker">Ваша выгода</p>
+						<p class="ds-kicker">Ваша выгода</p>
 					</div>
 					<blockquote>
 						После внедрения Bitrix24 бизнес получает не еще один сервис, а управляемый процесс.
@@ -235,11 +235,11 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container">
-			<div class="ds2-section-head bitrix-wide-head">
+	<section class="ds-section">
+		<div class="ds-container">
+			<div class="ds-section-head bitrix-wide-head">
 				<div>
-					<p class="ds2-kicker">Зачем внедрять</p>
+					<p class="ds-kicker">Зачем внедрять</p>
 					<h2>Bitrix24 нужен не ради CRM, а чтобы убрать потери данных и ручную работу</h2>
 				</div>
 				<p>
@@ -251,8 +251,8 @@ const checklist = [
 
 			<div class="bitrix-problems">
 				{problems.map(({ icon, title, text }) => (
-					<article class="ds2-service-card bitrix-problem-card">
-						<div class="ds2-service-icon">
+					<article class="ds-service-card bitrix-problem-card">
+						<div class="ds-service-icon">
 							<UiIcon name={icon} class="h-5 w-5" />
 						</div>
 						<p>{title}</p>
@@ -263,11 +263,11 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container">
-			<div class="ds2-section-head">
+	<section class="ds-section">
+		<div class="ds-container">
+			<div class="ds-section-head">
 				<div>
-					<p class="ds2-kicker">Стоимость внедрения</p>
+					<p class="ds-kicker">Стоимость внедрения</p>
 					<h2>Пакеты работ с понятным составом</h2>
 				</div>
 				<p>
@@ -276,12 +276,12 @@ const checklist = [
 				</p>
 			</div>
 			<div class="bitrix-prices">
-				<article class="ds2-price-card bitrix-audit-card">
+				<article class="ds-price-card bitrix-audit-card">
 					<div class="bitrix-card-top">
-						<div class="ds2-service-icon">
+						<div class="ds-service-icon">
 							<UiIcon name={auditPackage.icon} class="h-5 w-5" />
 						</div>
-						<span class="ds2-chip">{auditPackage.tag}</span>
+						<span class="ds-chip">{auditPackage.tag}</span>
 					</div>
 					<div class="bitrix-audit-body">
 						<div>
@@ -298,17 +298,17 @@ const checklist = [
 							</li>
 						))}
 					</ul>
-					<a class="ds2-btn ds2-btn-secondary" href="#bitrix-request">
+					<a class="ds-btn ds-btn-secondary" href="#bitrix-request">
 						<span>Заказать аудит</span>
 					</a>
 				</article>
 				{implementationPackages.map((pack) => (
-					<article class:list={['ds2-price-card', pack.featured && 'is-featured']}>
+					<article class:list={['ds-price-card', pack.featured && 'is-featured']}>
 						<div class="bitrix-card-top">
-							<div class="ds2-service-icon">
+							<div class="ds-service-icon">
 								<UiIcon name={pack.icon} class="h-5 w-5" />
 							</div>
-							<span class="ds2-chip">{pack.tag}</span>
+							<span class="ds-chip">{pack.tag}</span>
 						</div>
 						<h3>{pack.name}</h3>
 						<p class="bitrix-price">{pack.price}</p>
@@ -321,7 +321,7 @@ const checklist = [
 								</li>
 							))}
 						</ul>
-						<a class="ds2-btn ds2-btn-secondary" href="#bitrix-request">
+						<a class="ds-btn ds-btn-secondary" href="#bitrix-request">
 							<span>Заказать внедрение</span>
 						</a>
 					</article>
@@ -330,16 +330,16 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section ds2-section-soft">
-		<div class="ds2-container bitrix-process-grid">
+	<section class="ds-section ds-section-soft">
+		<div class="ds-container bitrix-process-grid">
 			<div>
-				<p class="ds2-kicker">Как проходит внедрение</p>
+				<p class="ds-kicker">Как проходит внедрение</p>
 				<h2>Пять этапов магии интегратора</h2>
 				<p>
 					Вместо длинной абстрактной схемы показываем управляемый проект: что делаем, что
 					проверяем и где фиксируем результат.
 				</p>
-				<a class="ds2-btn ds2-btn-dark" href="#bitrix-request">
+				<a class="ds-btn ds-btn-dark" href="#bitrix-request">
 					<span>Собрать состав работ</span>
 					<UiIcon name="arrow" class="h-4 w-4" />
 				</a>
@@ -367,11 +367,11 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section bitrix-clients-section">
-		<div class="ds2-container">
-			<div class="ds2-section-head bitrix-wide-head">
+	<section class="ds-section bitrix-clients-section">
+		<div class="ds-container">
+			<div class="ds-section-head bitrix-wide-head">
 				<div>
-					<p class="ds2-kicker">Наши клиенты</p>
+					<p class="ds-kicker">Наши клиенты</p>
 					<h2>Нам доверяют компании с работающими процессами продаж</h2>
 				</div>
 				<p>
@@ -396,11 +396,11 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container">
-			<div class="ds2-section-head">
+	<section class="ds-section">
+		<div class="ds-container">
+			<div class="ds-section-head">
 				<div>
-					<p class="ds2-kicker">Услуги в проекте</p>
+					<p class="ds-kicker">Услуги в проекте</p>
 					<h2>Настраиваем не только CRM</h2>
 				</div>
 				<p>
@@ -410,8 +410,8 @@ const checklist = [
 			</div>
 			<div class="bitrix-services">
 				{services.map((group) => (
-					<article class:list={['ds2-service-card', group.title === 'Индивидуальные доработки' ? 'is-accent' : '']}>
-						<div class="ds2-service-icon">
+					<article class:list={['ds-service-card', group.title === 'Индивидуальные доработки' ? 'is-accent' : '']}>
+						<div class="ds-service-icon">
 							<UiIcon name={group.icon} class="h-5 w-5" />
 						</div>
 						<h3>{group.title}</h3>
@@ -429,19 +429,19 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section ds2-section-soft">
-		<div class="ds2-container bitrix-version-grid">
+	<section class="ds-section ds-section-soft">
+		<div class="ds-container bitrix-version-grid">
 			<div class="bitrix-version-copy">
-				<p class="ds2-kicker">Облако или коробка</p>
+				<p class="ds-kicker">Облако или коробка</p>
 				<h2>Поможем выбрать версию Bitrix24 под задачу</h2>
 				<p>
 					Не продаем «коробку» там, где достаточно облака. Выбор версии привязываем к
 					инфраструктуре, безопасности, интеграциям и будущей нагрузке.
 				</p>
 			</div>
-			<section class="ds2-card bitrix-version-table-card" aria-label="Сравнение облачной и коробочной версии Bitrix24">
+			<section class="ds-card bitrix-version-table-card" aria-label="Сравнение облачной и коробочной версии Bitrix24">
 				<div class="bitrix-table-wrap">
-					<table class="ds2-table">
+					<table class="ds-table">
 						<thead>
 							<tr>
 								<th>Критерий</th>
@@ -464,11 +464,11 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container">
-			<section class="ds2-testimonial bitrix-reasons-card">
+	<section class="ds-section">
+		<div class="ds-container">
+			<section class="ds-testimonial bitrix-reasons-card">
 				<div>
-				<p class="ds2-kicker">Почему с нами удобно</p>
+				<p class="ds-kicker">Почему с нами удобно</p>
 				<blockquote>
 					Сначала фиксируем бизнес-задачу и границы этапа, потом настраиваем инструменты.
 				</blockquote>
@@ -482,10 +482,10 @@ const checklist = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container bitrix-faq-grid">
+	<section class="ds-section">
+		<div class="ds-container bitrix-faq-grid">
 			<div>
-				<p class="ds2-kicker">FAQ</p>
+				<p class="ds-kicker">FAQ</p>
 				<h2>Частые вопросы о внедрении Bitrix24</h2>
 				<p>
 					Ответы оставлены широкими, чтобы длинные коммерческие формулировки читались
@@ -494,12 +494,12 @@ const checklist = [
 			</div>
 			<div class="bitrix-faq-list">
 				{faqs.map(([question, answer]) => (
-					<details class="ds2-faq">
+					<details class="ds-faq">
 						<summary>
 							<span>{question}</span>
 							<UiIcon name="chevron" class="h-4 w-4" />
 						</summary>
-						<div class="ds2-faq-content">
+						<div class="ds-faq-content">
 							<p>{answer}</p>
 						</div>
 					</details>
@@ -508,11 +508,11 @@ const checklist = [
 		</div>
 	</section>
 
-	<section id="bitrix-request" class="ds2-section bitrix-request-section">
-		<div class="ds2-container">
-			<div class="ds2-final-cta bitrix-request">
+	<section id="bitrix-request" class="ds-section bitrix-request-section">
+		<div class="ds-container">
+			<div class="ds-final-cta bitrix-request">
 				<div>
-					<p class="ds2-kicker">Получить расчет внедрения</p>
+					<p class="ds-kicker">Получить расчет внедрения</p>
 					<h2>Нужен Bitrix24, который действительно работает под ваш бизнес?</h2>
 					<p>
 						Покажем, с чего начать, что можно запустить быстро, а что лучше вынести в следующий
@@ -520,7 +520,7 @@ const checklist = [
 					</p>
 					<div class="bitrix-dark-pills">
 						{checklist.map(([icon, text]) => (
-							<div class="ds2-dark-pill">
+							<div class="ds-dark-pill">
 								<UiIcon name={icon} class="h-4 w-4" />
 								{text}
 							</div>
@@ -528,26 +528,26 @@ const checklist = [
 					</div>
 				</div>
 
-				<form class="ds2-form" method="post" action="#">
+				<form class="ds-form" method="post" action="#">
 					<label>
 						<span>Имя</span>
-						<input class="ds2-input" required type="text" name="name" placeholder="Анна" />
+						<input class="ds-input" required type="text" name="name" placeholder="Анна" />
 					</label>
 					<label>
 						<span>Телефон или email</span>
-						<input class="ds2-input" required type="text" name="contact" placeholder="+7 000 000-00-00" />
+						<input class="ds-input" required type="text" name="contact" placeholder="+7 000 000-00-00" />
 					</label>
 					<label>
 						<span>Что нужно настроить</span>
-						<textarea class="ds2-input" name="message" rows="4" placeholder="CRM, воронки, телефония, 1С"></textarea>
+						<textarea class="ds-input" name="message" rows="4" placeholder="CRM, воронки, телефония, 1С"></textarea>
 					</label>
 					<div class="bitrix-form-checks">
-						<label class="ds2-check"><input type="checkbox" name="needs" value="crm" /> CRM</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="integration" /> Интеграции</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="automation" /> Автоматизация</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="audit" /> Аудит</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="crm" /> CRM</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="integration" /> Интеграции</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="automation" /> Автоматизация</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="audit" /> Аудит</label>
 					</div>
-					<button class="ds2-btn ds2-btn-primary" type="submit">
+					<button class="ds-btn ds-btn-primary" type="submit">
 						<span>Получить расчет</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</button>
@@ -558,11 +558,11 @@ const checklist = [
 	</section>
 
 	<div class="bitrix-mobile-cta">
-		<a class="ds2-btn ds2-btn-primary" href="#bitrix-request">
+		<a class="ds-btn ds-btn-primary" href="#bitrix-request">
 			<span>Расчет</span>
 			<UiIcon name="file" class="h-4 w-4" />
 		</a>
-		<a class="ds2-btn ds2-btn-secondary" href="tel:+74951335888">
+		<a class="ds-btn ds-btn-secondary" href="tel:+74951335888">
 			<span>Позвонить</span>
 			<UiIcon name="phone" class="h-4 w-4" />
 		</a>
@@ -571,12 +571,12 @@ const checklist = [
 
 <script>
 	function bindBitrixFaq() {
-		document.querySelectorAll<HTMLDetailsElement>('.bitrix-ds2 .ds2-faq').forEach((details) => {
+		document.querySelectorAll<HTMLDetailsElement>('.bitrix-ds .ds-faq').forEach((details) => {
 			if (details.dataset.faqBound) return;
 			details.dataset.faqBound = '1';
 
 			const summary = details.querySelector('summary');
-			const content = details.querySelector<HTMLElement>('.ds2-faq-content');
+			const content = details.querySelector<HTMLElement>('.ds-faq-content');
 			if (!summary || !content) return;
 
 			summary.addEventListener('click', (event) => {
@@ -649,107 +649,107 @@ const checklist = [
 </script>
 
 <style>
-	.ds2 {
-		--ds2-primary: #232bff;
-		--ds2-secondary: #5f66ff;
-		--ds2-tertiary: #8b5cff;
-		--ds2-bg: #ffffff;
-		--ds2-soft: #f6f7fb;
-		--ds2-card: rgba(255, 255, 255, 0.74);
-		--ds2-card-strong: #ffffff;
-		--ds2-ink: #18181b;
-		--ds2-muted: #71717a;
-		--ds2-border: #e4e4e7;
-		--ds2-success: #0f9f6e;
-		--ds2-warning: #d97706;
-		--ds2-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
-		--ds2-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
-		--ds2-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-		--ds2-display-size: 72px;
-		--ds2-display-line: 72px;
-		--ds2-display-weight: 500;
-		--ds2-body-size: 16px;
-		--ds2-body-line: 26px;
-		--ds2-body-weight: 400;
-		--ds2-label-size: 14px;
-		--ds2-label-line: 20px;
-		--ds2-label-weight: 500;
-		background: var(--ds2-bg);
-		color: var(--ds2-ink);
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds {
+		--ds-primary: #232bff;
+		--ds-secondary: #5f66ff;
+		--ds-tertiary: #8b5cff;
+		--ds-bg: #ffffff;
+		--ds-soft: #f6f7fb;
+		--ds-card: rgba(255, 255, 255, 0.74);
+		--ds-card-strong: #ffffff;
+		--ds-ink: #18181b;
+		--ds-muted: #71717a;
+		--ds-border: #e4e4e7;
+		--ds-success: #0f9f6e;
+		--ds-warning: #d97706;
+		--ds-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
+		--ds-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
+		--ds-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		--ds-display-size: 72px;
+		--ds-display-line: 72px;
+		--ds-display-weight: 500;
+		--ds-body-size: 16px;
+		--ds-body-line: 26px;
+		--ds-body-weight: 400;
+		--ds-label-size: 14px;
+		--ds-label-line: 20px;
+		--ds-label-weight: 500;
+		background: var(--ds-bg);
+		color: var(--ds-ink);
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 		letter-spacing: 0;
 		overflow-x: clip;
 	}
 
-	:global(.dark) .ds2 {
-		--ds2-bg: #09090b;
-		--ds2-soft: #111116;
-		--ds2-card: rgba(24, 24, 27, 0.74);
-		--ds2-card-strong: #18181b;
-		--ds2-ink: #ffffff;
-		--ds2-muted: #a1a1aa;
-		--ds2-border: #27272a;
-		--ds2-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
-		background: var(--ds2-bg);
+	:global(.dark) .ds {
+		--ds-bg: #09090b;
+		--ds-soft: #111116;
+		--ds-card: rgba(24, 24, 27, 0.74);
+		--ds-card-strong: #18181b;
+		--ds-ink: #ffffff;
+		--ds-muted: #a1a1aa;
+		--ds-border: #27272a;
+		--ds-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
+		background: var(--ds-bg);
 	}
 
-	.ds2 :where(p, li, td, th, input, textarea, select) {
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds :where(p, li, td, th, input, textarea, select) {
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 		letter-spacing: 0;
 	}
 
-	.ds2 :where(h1, h2, h3, h4, blockquote) {
-		font-family: var(--ds2-font-system);
-		font-weight: var(--ds2-display-weight);
+	.ds :where(h1, h2, h3, h4, blockquote) {
+		font-family: var(--ds-font-system);
+		font-weight: var(--ds-display-weight);
 		letter-spacing: 0;
 	}
 
-	.ds2-container {
+	.ds-container {
 		width: min(100%, 1400px);
 		margin: 0 auto;
 		padding-inline: 24px;
 	}
 
 	@media (min-width: 1024px) {
-		.ds2-container {
+		.ds-container {
 			padding-inline: 32px;
 		}
 	}
 
-	.ds2-hero {
+	.ds-hero {
 		background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(246, 247, 251, 0.92));
 	}
 
-	:global(.dark) .ds2-hero {
+	:global(.dark) .ds-hero {
 		background: linear-gradient(180deg, rgba(9, 9, 11, 0.72), rgba(17, 17, 22, 0.92));
 	}
 
-	.ds2-section {
+	.ds-section {
 		padding-block: 80px;
 	}
 
-	.ds2-section-soft {
+	.ds-section-soft {
 		background: rgba(246, 247, 251, 0.78);
 	}
 
-	:global(.dark) .ds2-section-soft {
+	:global(.dark) .ds-section-soft {
 		background: rgba(17, 17, 22, 0.78);
 	}
 
-	.ds2-section-head {
+	.ds-section-head {
 		display: grid;
 		gap: 24px;
 		align-items: end;
 	}
 
 	@media (min-width: 900px) {
-		.ds2-section-head {
+		.ds-section-head {
 			grid-template-columns: 1fr minmax(320px, 520px);
 		}
 	}
@@ -772,169 +772,169 @@ const checklist = [
 		max-width: 980px;
 	}
 
-	.ds2-section-head h2,
-	.ds2-final-cta h2,
+	.ds-section-head h2,
+	.ds-final-cta h2,
 	.bitrix-process-grid h2,
 	.bitrix-version-grid h2,
 	.bitrix-faq-grid h2 {
-		font-size: var(--ds2-display-size);
-		font-weight: var(--ds2-display-weight);
-		line-height: var(--ds2-display-line);
+		font-size: var(--ds-display-size);
+		font-weight: var(--ds-display-weight);
+		line-height: var(--ds-display-line);
 		letter-spacing: 0;
 	}
 
-	.ds2-section-head > p,
-	.ds2-final-cta p,
-	.bitrix-process-grid > div > p:not(.ds2-kicker),
-	.bitrix-version-copy > p:not(.ds2-kicker),
-	.bitrix-faq-grid > div > p:not(.ds2-kicker) {
-		color: var(--ds2-muted);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds-section-head > p,
+	.ds-final-cta p,
+	.bitrix-process-grid > div > p:not(.ds-kicker),
+	.bitrix-version-copy > p:not(.ds-kicker),
+	.bitrix-faq-grid > div > p:not(.ds-kicker) {
+		color: var(--ds-muted);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 	}
 
-	.ds2-kicker {
+	.ds-kicker {
 		display: inline-flex;
 		align-items: center;
 		min-height: 28px;
 		border-radius: 9999px;
 		background: rgba(35, 43, 255, 0.09);
 		padding: 4px 12px;
-		color: var(--ds2-primary);
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+		color: var(--ds-primary);
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		letter-spacing: 0;
 	}
 
-	.ds2-card,
-	.ds2-dashboard,
-	.ds2-price-card,
-	.ds2-testimonial {
+	.ds-card,
+	.ds-dashboard,
+	.ds-price-card,
+	.ds-testimonial {
 		min-width: 0;
 		border: 1px solid rgba(255, 255, 255, 0.78);
 		border-radius: 24px;
-		background: var(--ds2-card);
+		background: var(--ds-card);
 		padding: 24px;
-		box-shadow: var(--ds2-shadow);
+		box-shadow: var(--ds-shadow);
 		backdrop-filter: blur(40px);
 	}
 
-	:global(.dark) .ds2-card,
-	:global(.dark) .ds2-dashboard,
-	:global(.dark) .ds2-price-card,
-	:global(.dark) .ds2-testimonial {
+	:global(.dark) .ds-card,
+	:global(.dark) .ds-dashboard,
+	:global(.dark) .ds-price-card,
+	:global(.dark) .ds-testimonial {
 		border-color: rgba(255, 255, 255, 0.1);
 	}
 
 	@media (min-width: 768px) {
-		.ds2-card,
-		.ds2-dashboard,
-		.ds2-price-card,
-		.ds2-testimonial {
+		.ds-card,
+		.ds-dashboard,
+		.ds-price-card,
+		.ds-testimonial {
 			padding: 32px;
 		}
 	}
 
-	.ds2-dashboard {
+	.ds-dashboard {
 		position: relative;
 		border-radius: 40px;
-		box-shadow: var(--ds2-shadow), var(--ds2-glow);
+		box-shadow: var(--ds-shadow), var(--ds-glow);
 	}
 
-	.ds2-metric {
-		border: 1px solid var(--ds2-border);
+	.ds-metric {
+		border: 1px solid var(--ds-border);
 		border-radius: 16px;
 		background: rgba(255, 255, 255, 0.58);
 		padding: 16px;
 	}
 
-	:global(.dark) .ds2-metric {
+	:global(.dark) .ds-metric {
 		background: rgba(255, 255, 255, 0.05);
 	}
 
-	.ds2-metric p,
-	.ds2-stat-card p {
+	.ds-metric p,
+	.ds-stat-card p {
 		font-size: 28px;
 		line-height: 1;
 		font-weight: 700;
 	}
 
-	.ds2-metric span,
-	.ds2-stat-card span {
+	.ds-metric span,
+	.ds-stat-card span {
 		margin-top: 8px;
 		display: block;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 13px;
 		line-height: 1.45;
 	}
 
-	.ds2-progress {
+	.ds-progress {
 		height: 8px;
 		overflow: hidden;
 		border-radius: 9999px;
 		background: rgba(113, 113, 122, 0.16);
 	}
 
-	.ds2-progress span {
+	.ds-progress span {
 		display: block;
 		height: 100%;
 		border-radius: inherit;
-		background: linear-gradient(90deg, var(--ds2-primary), var(--ds2-secondary));
+		background: linear-gradient(90deg, var(--ds-primary), var(--ds-secondary));
 	}
 
-	.ds2-chip,
-	.ds2-status,
-	.ds2-tab {
+	.ds-chip,
+	.ds-status,
+	.ds-tab {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		border-radius: 9999px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: rgba(255, 255, 255, 0.7);
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 13px;
 		font-weight: 700;
 	}
 
-	.ds2-chip {
+	.ds-chip {
 		min-height: 34px;
 		padding: 6px 14px;
 		white-space: nowrap;
 	}
 
-	.ds2-status {
+	.ds-status {
 		padding: 5px 10px;
 	}
 
-	.ds2-status-success {
+	.ds-status-success {
 		border-color: transparent;
 		background: rgba(15, 159, 110, 0.1);
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
-	:global(.dark) .ds2-chip,
-	:global(.dark) .ds2-tab {
+	:global(.dark) .ds-chip,
+	:global(.dark) .ds-tab {
 		background: rgba(255, 255, 255, 0.05);
 	}
 
-	.ds2-tab {
+	.ds-tab {
 		min-height: 40px;
 		padding: 0 16px;
 	}
 
-	.ds2-tab.is-active {
+	.ds-tab.is-active {
 		border-color: transparent;
 		background: rgba(35, 43, 255, 0.09);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-btn {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: transparent;
+	.ds-btn {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: transparent;
 		display: inline-flex;
 		min-height: 44px;
 		position: relative;
@@ -957,7 +957,7 @@ const checklist = [
 			transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
 
-	.ds2-btn::before {
+	.ds-btn::before {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -965,7 +965,7 @@ const checklist = [
 		width: 16px;
 		height: 16px;
 		border-radius: 9999px;
-		background: var(--ds2-btn-fill);
+		background: var(--ds-btn-fill);
 		opacity: 0;
 		content: "";
 		transform: translate(-50%, -50%);
@@ -975,7 +975,7 @@ const checklist = [
 			opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
 
-	.ds2-btn::after {
+	.ds-btn::after {
 		position: absolute;
 		top: 50%;
 		left: -28px;
@@ -990,94 +990,94 @@ const checklist = [
 			color 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-btn > span,
-	:global(.ds2-btn > svg) {
+	.ds-btn > span,
+	:global(.ds-btn > svg) {
 		position: relative;
 		z-index: 1;
 	}
 
-	.ds2-btn > span {
+	.ds-btn > span {
 		transform: translateX(-4px);
 		transition: transform 800ms ease;
 	}
 
-	:global(.ds2-btn > svg) {
+	:global(.ds-btn > svg) {
 		flex: 0 0 auto;
 		transition:
 			opacity 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
 			transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-btn:hover {
-		border-color: var(--ds2-btn-hover-border);
-		color: var(--ds2-btn-hover-color);
+	.ds-btn:hover {
+		border-color: var(--ds-btn-hover-border);
+		color: var(--ds-btn-hover-color);
 	}
 
-	.ds2-btn:hover::before {
+	.ds-btn:hover::before {
 		width: 340px;
 		height: 340px;
 		opacity: 1;
 	}
 
-	.ds2-btn:hover::after {
+	.ds-btn:hover::after {
 		left: 16px;
-		color: var(--ds2-btn-hover-color);
+		color: var(--ds-btn-hover-color);
 	}
 
-	.ds2-btn:hover > span {
+	.ds-btn:hover > span {
 		transform: translateX(10px);
 	}
 
-	:global(.ds2-btn:hover > svg:last-child) {
+	:global(.ds-btn:hover > svg:last-child) {
 		opacity: 0;
 		transform: translateX(64px);
 	}
 
-	.ds2-btn:active {
+	.ds-btn:active {
 		transform: scale(0.96);
 	}
 
-	.ds2-btn-primary {
-		--ds2-btn-fill: var(--ds2-card-strong);
-		--ds2-btn-hover-color: var(--ds2-primary);
-		--ds2-btn-hover-border: var(--ds2-border);
-		background: var(--ds2-primary);
+	.ds-btn-primary {
+		--ds-btn-fill: var(--ds-card-strong);
+		--ds-btn-hover-color: var(--ds-primary);
+		--ds-btn-hover-border: var(--ds-border);
+		background: var(--ds-primary);
 		color: #ffffff;
 		box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.75);
 	}
 
-	.ds2-btn-primary:hover {
-		background: var(--ds2-card-strong);
+	.ds-btn-primary:hover {
+		background: var(--ds-card-strong);
 		box-shadow: none;
 	}
 
-	.ds2-btn-secondary {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: transparent;
-		border-color: var(--ds2-border);
+	.ds-btn-secondary {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: transparent;
+		border-color: var(--ds-border);
 		background: rgba(255, 255, 255, 0.76);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	:global(.dark) .ds2-btn-secondary {
+	:global(.dark) .ds-btn-secondary {
 		background: rgba(255, 255, 255, 0.06);
 	}
 
-	.ds2-btn-secondary:hover,
-	.ds2-btn-dark:hover {
-		background: var(--ds2-primary);
+	.ds-btn-secondary:hover,
+	.ds-btn-dark:hover {
+		background: var(--ds-primary);
 	}
 
-	.ds2-btn-dark {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: transparent;
-		background: var(--ds2-ink);
-		color: var(--ds2-bg);
+	.ds-btn-dark {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: transparent;
+		background: var(--ds-ink);
+		color: var(--ds-bg);
 	}
 
-	.ds2-icon-button {
+	.ds-icon-button {
 		display: inline-grid;
 		width: 44px;
 		height: 44px;
@@ -1085,18 +1085,18 @@ const checklist = [
 		place-items: center;
 		overflow: hidden;
 		border-radius: 9999px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: rgba(255, 255, 255, 0.72);
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
 	}
 
-	:global(.dark) .ds2-icon-button {
+	:global(.dark) .ds-icon-button {
 		background: rgba(255, 255, 255, 0.05);
 	}
 
-	.ds2-icon-main,
-	.ds2-icon-clone {
+	.ds-icon-main,
+	.ds-icon-clone {
 		position: absolute;
 		inset: 0;
 		display: grid;
@@ -1106,41 +1106,41 @@ const checklist = [
 			transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-icon-main {
+	.ds-icon-main {
 		opacity: 1;
 		transform: translateX(0);
 	}
 
-	.ds2-icon-clone {
+	.ds-icon-clone {
 		opacity: 0;
 		transform: translateX(-120%);
 	}
 
-	.ds2-icon-button:hover {
+	.ds-icon-button:hover {
 		border-color: transparent;
 		background: rgba(35, 43, 255, 0.09);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-icon-button:hover .ds2-icon-main {
+	.ds-icon-button:hover .ds-icon-main {
 		opacity: 0;
 		transform: translateX(120%);
 	}
 
-	.ds2-icon-button:hover .ds2-icon-clone {
+	.ds-icon-button:hover .ds-icon-clone {
 		opacity: 1;
 		transform: translateX(0);
 	}
 
-	.ds2-service-card,
-	.ds2-stat-card,
-	.ds2-step,
-	.ds2-faq {
-		border: 1px solid var(--ds2-border);
-		background: var(--ds2-card-strong);
+	.ds-service-card,
+	.ds-stat-card,
+	.ds-step,
+	.ds-faq {
+		border: 1px solid var(--ds-border);
+		background: var(--ds-card-strong);
 	}
 
-	.ds2-service-card {
+	.ds-service-card {
 		min-width: 0;
 		min-height: 260px;
 		border-radius: 24px;
@@ -1148,51 +1148,51 @@ const checklist = [
 		transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 	}
 
-	.ds2-service-card:hover {
+	.ds-service-card:hover {
 		transform: translateY(-2px);
-		border-color: var(--ds2-border);
-		box-shadow: var(--ds2-glow);
+		border-color: var(--ds-border);
+		box-shadow: var(--ds-glow);
 	}
 
-	.ds2-service-icon {
+	.ds-service-icon {
 		display: grid;
 		width: 48px;
 		height: 48px;
 		place-items: center;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-service-icon :global(svg) {
+	.ds-service-icon :global(svg) {
 		width: 48px;
 		height: 48px;
 	}
 
-	.ds2-stat-card {
+	.ds-stat-card {
 		border-radius: 24px;
 		padding: 24px;
 	}
 
-	.ds2-price-card {
+	.ds-price-card {
 		display: flex;
 		min-height: 430px;
 		flex-direction: column;
 	}
 
-	.ds2-price-card.is-featured {
+	.ds-price-card.is-featured {
 		border-color: transparent;
-		background: linear-gradient(180deg, rgba(35, 43, 255, 0.1), var(--ds2-card));
-		box-shadow: var(--ds2-shadow), var(--ds2-glow);
+		background: linear-gradient(180deg, rgba(35, 43, 255, 0.1), var(--ds-card));
+		box-shadow: var(--ds-shadow), var(--ds-glow);
 	}
 
-	.ds2-price-card ul {
+	.ds-price-card ul {
 		margin-bottom: 28px;
 	}
 
-	.ds2-price-card .ds2-btn {
+	.ds-price-card .ds-btn {
 		margin-top: auto;
 	}
 
-	.ds2-step {
+	.ds-step {
 		display: grid;
 		grid-template-columns: auto auto 1fr;
 		gap: 14px;
@@ -1201,55 +1201,55 @@ const checklist = [
 		padding: 16px;
 	}
 
-	.ds2-step-number {
-		color: var(--ds2-primary);
+	.ds-step-number {
+		color: var(--ds-primary);
 		font-size: 13px;
 		font-weight: 700;
 	}
 
-	.ds2-step p {
+	.ds-step p {
 		font-weight: 700;
 	}
 
-	.ds2-step span {
+	.ds-step span {
 		margin-top: 4px;
 		display: block;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.55;
 	}
 
-	.ds2-table {
+	.ds-table {
 		width: 100%;
 		min-width: 620px;
 		border-collapse: collapse;
 		font-size: 14px;
 	}
 
-	.ds2-table th,
-	.ds2-table td {
-		border-bottom: 1px solid var(--ds2-border);
+	.ds-table th,
+	.ds-table td {
+		border-bottom: 1px solid var(--ds-border);
 		padding: 14px;
 		text-align: left;
 	}
 
-	.ds2-table th {
-		color: var(--ds2-primary);
+	.ds-table th {
+		color: var(--ds-primary);
 		font-weight: 700;
 	}
 
-	.ds2-testimonial {
+	.ds-testimonial {
 		background: #18181b;
 		color: #ffffff;
 	}
 
-	.ds2-testimonial blockquote {
+	.ds-testimonial blockquote {
 		margin-top: 18px;
 		font-size: 28px;
 		line-height: 1.22;
 	}
 
-	.ds2-faq {
+	.ds-faq {
 		overflow: hidden;
 		border-radius: 20px;
 		padding: 20px;
@@ -1259,7 +1259,7 @@ const checklist = [
 			box-shadow 200ms ease;
 	}
 
-	.ds2-faq summary {
+	.ds-faq summary {
 		display: flex;
 		cursor: pointer;
 		list-style: none;
@@ -1272,15 +1272,15 @@ const checklist = [
 		transition: color 200ms ease;
 	}
 
-	.ds2-faq[open] summary {
+	.ds-faq[open] summary {
 		margin-bottom: 0;
 	}
 
-	.ds2-faq summary::-webkit-details-marker {
+	.ds-faq summary::-webkit-details-marker {
 		display: none;
 	}
 
-	:global(.ds2-faq summary svg) {
+	:global(.ds-faq summary svg) {
 		flex: 0 0 auto;
 		opacity: 0.6;
 		transition:
@@ -1288,20 +1288,20 @@ const checklist = [
 			transform 200ms ease;
 	}
 
-	.ds2-faq:hover {
+	.ds-faq:hover {
 		box-shadow: 0 18px 44px -28px rgba(24, 24, 27, 0.28);
 	}
 
-	.ds2-faq[open] {
-		background: var(--ds2-card);
+	.ds-faq[open] {
+		background: var(--ds-card);
 	}
 
-	:global(.ds2-faq[open] summary svg) {
+	:global(.ds-faq[open] summary svg) {
 		opacity: 1;
 		transform: rotate(180deg);
 	}
 
-	.ds2-faq-content {
+	.ds-faq-content {
 		display: grid;
 		grid-template-rows: 0fr;
 		opacity: 0;
@@ -1310,26 +1310,26 @@ const checklist = [
 			opacity 200ms ease;
 	}
 
-	.ds2-faq[open] .ds2-faq-content {
+	.ds-faq[open] .ds-faq-content {
 		grid-template-rows: 1fr;
 		opacity: 1;
-		animation: ds2-accordion-down 220ms ease-out;
+		animation: ds-accordion-down 220ms ease-out;
 	}
 
-	.ds2-faq.is-closing .ds2-faq-content {
-		animation: ds2-accordion-up 220ms ease-in;
+	.ds-faq.is-closing .ds-faq-content {
+		animation: ds-accordion-up 220ms ease-in;
 	}
 
-	.ds2-faq-content p {
+	.ds-faq-content p {
 		min-height: 0;
 		overflow: hidden;
 		margin-top: 12px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.7;
 	}
 
-	@keyframes ds2-accordion-down {
+	@keyframes ds-accordion-down {
 		from {
 			opacity: 0;
 			transform: translateY(-4px);
@@ -1340,7 +1340,7 @@ const checklist = [
 		}
 	}
 
-	@keyframes ds2-accordion-up {
+	@keyframes ds-accordion-up {
 		from {
 			opacity: 1;
 			transform: translateY(0);
@@ -1378,7 +1378,7 @@ const checklist = [
 		}
 	}
 
-	.ds2-final-cta {
+	.ds-final-cta {
 		display: grid;
 		gap: 32px;
 		align-items: center;
@@ -1386,28 +1386,28 @@ const checklist = [
 		background: linear-gradient(135deg, #18181b, #232bff);
 		padding: 32px;
 		color: #ffffff;
-		box-shadow: var(--ds2-glow);
+		box-shadow: var(--ds-glow);
 	}
 
 	@media (min-width: 900px) {
-		.ds2-final-cta {
+		.ds-final-cta {
 			grid-template-columns: 1fr minmax(360px, 480px);
 			padding: 48px;
 		}
 	}
 
-	.ds2-final-cta .ds2-kicker {
+	.ds-final-cta .ds-kicker {
 		background: rgba(255, 255, 255, 0.12);
 		color: #ffffff;
 	}
 
-	.ds2-final-cta p {
+	.ds-final-cta p {
 		margin-top: 18px;
 		max-width: 720px;
 		color: rgba(255, 255, 255, 0.78);
 	}
 
-	.ds2-form {
+	.ds-form {
 		display: grid;
 		gap: 16px;
 		border-radius: 24px;
@@ -1417,16 +1417,16 @@ const checklist = [
 		box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
 	}
 
-	.ds2-form label:not(.ds2-check) > span {
+	.ds-form label:not(.ds-check) > span {
 		margin-bottom: 8px;
 		display: block;
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		color: #3f3f46;
 	}
 
-	.ds2-input {
+	.ds-input {
 		width: 100%;
 		min-height: 48px;
 		border-radius: 16px;
@@ -1439,13 +1439,13 @@ const checklist = [
 		transition: border-color 150ms ease, box-shadow 150ms ease;
 	}
 
-	.ds2-input:focus {
-		border-color: var(--ds2-border);
+	.ds-input:focus {
+		border-color: var(--ds-border);
 		box-shadow: 0 0 0 4px rgba(113, 113, 122, 0.16);
 	}
 
-	.ds2-check,
-	.ds2-dark-pill {
+	.ds-check,
+	.ds-dark-pill {
 		display: flex;
 		min-height: 48px;
 		align-items: center;
@@ -1453,20 +1453,20 @@ const checklist = [
 		border-radius: 16px;
 	}
 
-	.ds2-check {
+	.ds-check {
 		border: 1px solid #e4e4e7;
 		padding: 0 14px;
 		color: #3f3f46;
 		font-size: 14px;
 	}
 
-	.ds2-check input {
+	.ds-check input {
 		width: 16px;
 		height: 16px;
-		accent-color: var(--ds2-primary);
+		accent-color: var(--ds-primary);
 	}
 
-	.ds2-dark-pill {
+	.ds-dark-pill {
 		border: 1px solid rgba(255, 255, 255, 0.12);
 		background: rgba(255, 255, 255, 0.06);
 		padding: 0 14px;
@@ -1494,23 +1494,23 @@ const checklist = [
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		font-weight: 500;
 		line-height: 20px;
 	}
 
 	.bitrix-breadcrumbs a {
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		transition: color 150ms ease;
 	}
 
 	.bitrix-breadcrumbs a:hover {
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
 	.bitrix-breadcrumbs span {
-		color: var(--ds2-ink);
+		color: var(--ds-ink);
 	}
 
 	.bitrix-breadcrumbs :global(svg) {
@@ -1521,15 +1521,15 @@ const checklist = [
 	.bitrix-hero h1 {
 		margin-top: 20px;
 		max-width: 920px;
-		font-size: var(--ds2-display-size);
-		font-weight: var(--ds2-display-weight);
-		line-height: var(--ds2-display-line);
+		font-size: var(--ds-display-size);
+		font-weight: var(--ds-display-weight);
+		line-height: var(--ds-display-line);
 	}
 
 	.bitrix-lead {
 		margin-top: 24px;
 		max-width: 760px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 18px;
 		line-height: 1.75;
 	}
@@ -1547,32 +1547,32 @@ const checklist = [
 
 	.bitrix-free-label {
 		margin-left: 12px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: clamp(42px, 6vw, 76px);
 		font-weight: 800;
 		line-height: 1;
 		will-change: transform;
 	}
 
-	.bitrix-actions .ds2-btn-primary:hover + .bitrix-free-label,
-	.bitrix-actions .ds2-btn-primary:focus-visible + .bitrix-free-label {
+	.bitrix-actions .ds-btn-primary:hover + .bitrix-free-label,
+	.bitrix-actions .ds-btn-primary:focus-visible + .bitrix-free-label {
 		animation: bitrix-free-hop 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
-	:global(.dark) .bitrix-actions .ds2-btn-secondary {
-		--ds2-btn-hover-border: transparent;
+	:global(.dark) .bitrix-actions .ds-btn-secondary {
+		--ds-btn-hover-border: transparent;
 		border-color: rgba(255, 255, 255, 0.74);
 		background: transparent;
 		color: #ffffff;
 	}
 
-	:global(.dark) .bitrix-actions .ds2-btn-secondary:hover {
+	:global(.dark) .bitrix-actions .ds-btn-secondary:hover {
 		border-color: transparent;
 	}
 
-	:global(.dark) .bitrix-actions .ds2-btn-primary {
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: rgba(255, 255, 255, 0.74);
+	:global(.dark) .bitrix-actions .ds-btn-primary {
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: rgba(255, 255, 255, 0.74);
 	}
 
 	.bitrix-hero-benefit {
@@ -1583,7 +1583,7 @@ const checklist = [
 		max-width: 760px;
 	}
 
-	.bitrix-hero-benefit .ds2-kicker {
+	.bitrix-hero-benefit .ds-kicker {
 		background: rgba(255, 255, 255, 0.12);
 		color: #ffffff;
 	}
@@ -1624,7 +1624,7 @@ const checklist = [
 
 	.bitrix-hero-benefit li :global(svg) {
 		flex: 0 0 auto;
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
 	@media (min-width: 640px) {
@@ -1687,7 +1687,7 @@ const checklist = [
 
 	.bitrix-dashboard-head p,
 	.bitrix-pipeline-title p {
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 	}
 
@@ -1712,7 +1712,7 @@ const checklist = [
 	.bitrix-pipeline {
 		margin-top: 28px;
 		border-radius: 24px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: rgba(255, 255, 255, 0.48);
 		padding: 18px;
 	}
@@ -1730,12 +1730,12 @@ const checklist = [
 		justify-content: space-between;
 		gap: 16px;
 		margin-bottom: 8px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 13px;
 	}
 
 	.bitrix-progress-row b {
-		color: var(--ds2-ink);
+		color: var(--ds-ink);
 		font-weight: 700;
 	}
 
@@ -1757,19 +1757,19 @@ const checklist = [
 		align-items: center;
 		gap: 10px;
 		border-radius: 16px;
-		border: 1px solid var(--ds2-border);
-		background: var(--ds2-card-strong);
+		border: 1px solid var(--ds-border);
+		background: var(--ds-card-strong);
 		padding: 10px 12px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 	}
 
 	.bitrix-integrations :global(svg),
 	.bitrix-reasons :global(svg),
-	.ds2-price-card li :global(svg),
+	.ds-price-card li :global(svg),
 	.bitrix-services li :global(svg) {
 		flex: 0 0 auto;
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
 	.bitrix-problems,
@@ -1806,11 +1806,11 @@ const checklist = [
 			margin-bottom: 32px;
 		}
 
-		.bitrix-prices .ds2-price-card:not(.bitrix-audit-card) {
+		.bitrix-prices .ds-price-card:not(.bitrix-audit-card) {
 			height: 100%;
 		}
 
-		.bitrix-prices .ds2-price-card.is-featured {
+		.bitrix-prices .ds-price-card.is-featured {
 			position: relative;
 			z-index: 1;
 			margin-top: -18px;
@@ -1825,7 +1825,7 @@ const checklist = [
 
 	.bitrix-problem-card p {
 		margin-top: 22px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 14px;
 		font-weight: 700;
 	}
@@ -1850,7 +1850,7 @@ const checklist = [
 		margin-top: 0;
 	}
 
-	.bitrix-audit-card .ds2-btn {
+	.bitrix-audit-card .ds-btn {
 		margin-top: 24px;
 	}
 
@@ -1880,7 +1880,7 @@ const checklist = [
 			margin-top: 0;
 		}
 
-		.bitrix-audit-card .ds2-btn {
+		.bitrix-audit-card .ds-btn {
 			grid-column: 1 / -1;
 			width: max-content;
 		}
@@ -1896,14 +1896,14 @@ const checklist = [
 			grid-column: auto;
 		}
 
-		.bitrix-audit-card .ds2-btn {
+		.bitrix-audit-card .ds-btn {
 			grid-column: auto;
 			justify-self: end;
 			margin-top: 0;
 		}
 	}
 
-	.ds2-price-card h3 {
+	.ds-price-card h3 {
 		margin-top: 24px;
 		font-size: 26px;
 		line-height: 1.12;
@@ -1915,7 +1915,7 @@ const checklist = [
 
 	.bitrix-price {
 		margin-top: 12px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 30px;
 		font-weight: 700;
 		line-height: 1.1;
@@ -1923,23 +1923,23 @@ const checklist = [
 
 	.bitrix-card-text {
 		margin-top: 12px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.65;
 	}
 
-	.ds2-price-card ul,
+	.ds-price-card ul,
 	.bitrix-services ul {
 		display: grid;
 		gap: 12px;
 		margin-top: 24px;
 	}
 
-	.ds2-price-card li,
+	.ds-price-card li,
 	.bitrix-services li {
 		display: flex;
 		gap: 10px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.5;
 	}
@@ -1976,13 +1976,13 @@ const checklist = [
 		line-height: 54px;
 	}
 
-	.bitrix-process-grid > div > p:not(.ds2-kicker),
-	.bitrix-version-copy > p:not(.ds2-kicker),
-	.bitrix-faq-grid > div > p:not(.ds2-kicker) {
+	.bitrix-process-grid > div > p:not(.ds-kicker),
+	.bitrix-version-copy > p:not(.ds-kicker),
+	.bitrix-faq-grid > div > p:not(.ds-kicker) {
 		margin-top: 22px;
 	}
 
-	.bitrix-process-grid .ds2-btn {
+	.bitrix-process-grid .ds-btn {
 		margin-top: 28px;
 	}
 
@@ -1995,8 +1995,8 @@ const checklist = [
 		overflow: hidden;
 		border-radius: 24px;
 		border: 1px solid rgba(255, 255, 255, 0.78);
-		background: var(--ds2-card);
-		box-shadow: var(--ds2-shadow);
+		background: var(--ds-card);
+		box-shadow: var(--ds-shadow);
 		backdrop-filter: blur(40px);
 	}
 
@@ -2019,7 +2019,7 @@ const checklist = [
 		grid-column: 2;
 		grid-row: 1;
 		padding: 22px 22px 0 0;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 	}
 
 	.bitrix-timeline-date span {
@@ -2033,7 +2033,7 @@ const checklist = [
 	.bitrix-timeline-date time {
 		display: block;
 		margin-top: 2px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 18px;
 		font-weight: 700;
 		line-height: 24px;
@@ -2051,7 +2051,7 @@ const checklist = [
 		top: 0;
 		bottom: 0;
 		left: 50%;
-		border-left: 1px solid var(--ds2-border);
+		border-left: 1px solid var(--ds-border);
 		transform: translateX(-50%);
 	}
 
@@ -2074,7 +2074,7 @@ const checklist = [
 		place-items: center;
 		border-radius: 9999px;
 		border: 1px solid rgba(35, 43, 255, 0.22);
-		background: var(--ds2-primary);
+		background: var(--ds-primary);
 		color: #ffffff;
 		box-shadow: 0 0 0 7px rgba(35, 43, 255, 0.1);
 		transform: translateX(-50%);
@@ -2093,7 +2093,7 @@ const checklist = [
 	}
 
 	.bitrix-timeline-content h3 {
-		color: var(--ds2-ink);
+		color: var(--ds-ink);
 		font-size: 24px;
 		font-weight: 500;
 		line-height: 1.18;
@@ -2101,7 +2101,7 @@ const checklist = [
 
 	.bitrix-timeline-content p {
 		margin-top: 8px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.65;
 	}
@@ -2192,13 +2192,13 @@ const checklist = [
 			animation: none;
 		}
 
-		.bitrix-actions .ds2-btn-primary:hover + .bitrix-free-label,
-		.bitrix-actions .ds2-btn-primary:focus-visible + .bitrix-free-label {
+		.bitrix-actions .ds-btn-primary:hover + .bitrix-free-label,
+		.bitrix-actions .ds-btn-primary:focus-visible + .bitrix-free-label {
 			animation: none;
 		}
 	}
 
-	.bitrix-services .ds2-service-card {
+	.bitrix-services .ds-service-card {
 		min-height: 330px;
 	}
 
@@ -2213,7 +2213,7 @@ const checklist = [
 		color: #ffffff;
 	}
 
-	.bitrix-services .is-accent .ds2-service-icon {
+	.bitrix-services .is-accent .ds-service-icon {
 		color: #ffffff;
 	}
 
@@ -2222,7 +2222,7 @@ const checklist = [
 	}
 
 	.bitrix-services .is-accent li :global(svg) {
-		color: var(--ds2-secondary);
+		color: var(--ds-secondary);
 	}
 
 	.bitrix-table-wrap {
@@ -2287,14 +2287,14 @@ const checklist = [
 		}
 
 		.bitrix-problem-card,
-		.bitrix-services .ds2-service-card {
+		.bitrix-services .ds-service-card {
 			min-height: 320px;
 		}
 
 		.bitrix-problems .bitrix-problem-card {
 			border-color: rgba(35, 43, 255, 0.24);
-			background: linear-gradient(180deg, rgba(35, 43, 255, 0.08), var(--ds2-card-strong));
-			box-shadow: var(--ds2-shadow), var(--ds2-glow);
+			background: linear-gradient(180deg, rgba(35, 43, 255, 0.08), var(--ds-card-strong));
+			box-shadow: var(--ds-shadow), var(--ds-glow);
 		}
 
 		.bitrix-problems {
@@ -2306,7 +2306,7 @@ const checklist = [
 
 		:global(.dark) .bitrix-problems .bitrix-problem-card {
 			border-color: rgba(95, 102, 255, 0.34);
-			background: linear-gradient(180deg, rgba(95, 102, 255, 0.16), var(--ds2-card-strong));
+			background: linear-gradient(180deg, rgba(95, 102, 255, 0.16), var(--ds-card-strong));
 		}
 
 		.bitrix-services {
@@ -2316,28 +2316,28 @@ const checklist = [
 			margin-bottom: -60px;
 		}
 
-		.bitrix-services .ds2-service-card {
+		.bitrix-services .ds-service-card {
 			border-color: rgba(35, 43, 255, 0.24);
-			box-shadow: var(--ds2-shadow), var(--ds2-glow);
+			box-shadow: var(--ds-shadow), var(--ds-glow);
 		}
 
-		.bitrix-services .ds2-service-card:not(.is-accent) {
-			background: linear-gradient(180deg, rgba(35, 43, 255, 0.08), var(--ds2-card-strong));
+		.bitrix-services .ds-service-card:not(.is-accent) {
+			background: linear-gradient(180deg, rgba(35, 43, 255, 0.08), var(--ds-card-strong));
 		}
 
 		.bitrix-services .is-accent {
 			border-color: rgba(95, 102, 255, 0.42);
 		}
 
-		:global(.dark) .bitrix-services .ds2-service-card {
+		:global(.dark) .bitrix-services .ds-service-card {
 			border-color: rgba(95, 102, 255, 0.34);
 		}
 
-		:global(.dark) .bitrix-services .ds2-service-card:not(.is-accent) {
-			background: linear-gradient(180deg, rgba(95, 102, 255, 0.16), var(--ds2-card-strong));
+		:global(.dark) .bitrix-services .ds-service-card:not(.is-accent) {
+			background: linear-gradient(180deg, rgba(95, 102, 255, 0.16), var(--ds-card-strong));
 		}
 
-		.bitrix-table-wrap .ds2-table {
+		.bitrix-table-wrap .ds-table {
 			min-width: 520px;
 		}
 
@@ -2372,7 +2372,7 @@ const checklist = [
 		padding-bottom: 112px;
 	}
 
-	.bitrix-request .ds2-form {
+	.bitrix-request .ds-form {
 		width: 100%;
 	}
 
@@ -2387,7 +2387,7 @@ const checklist = [
 		}
 	}
 
-	.ds2-form > p {
+	.ds-form > p {
 		color: #71717a;
 		font-size: 12px;
 		line-height: 1.6;
@@ -2402,7 +2402,7 @@ const checklist = [
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 8px;
-		border-top: 1px solid var(--ds2-border);
+		border-top: 1px solid var(--ds-border);
 		background: rgba(255, 255, 255, 0.92);
 		padding: 10px;
 		backdrop-filter: blur(24px);
@@ -2412,7 +2412,7 @@ const checklist = [
 		background: rgba(9, 9, 11, 0.92);
 	}
 
-	.bitrix-mobile-cta .ds2-btn {
+	.bitrix-mobile-cta .ds-btn {
 		width: 100%;
 		padding: 0 16px;
 	}
@@ -2427,20 +2427,20 @@ const checklist = [
 		}
 	}
 
-	.ds2 :where(.ds2-kicker, .ds2-btn, .ds2-chip, .ds2-status, .ds2-tab, .ds2-check, .ds2-dark-pill) {
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+	.ds :where(.ds-kicker, .ds-btn, .ds-chip, .ds-status, .ds-tab, .ds-check, .ds-dark-pill) {
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		letter-spacing: 0;
 	}
 
-	.ds2 :where(b, strong, .font-bold, .ds2-metric p, .ds2-stat-card p, .ds2-faq summary, .ds2-step p, .ds2-table th) {
-		font-weight: var(--ds2-display-weight);
+	.ds :where(b, strong, .font-bold, .ds-metric p, .ds-stat-card p, .ds-faq summary, .ds-step p, .ds-table th) {
+		font-weight: var(--ds-display-weight);
 	}
 
 	@media (max-width: 640px) {
-		.ds2-section {
+		.ds-section {
 			padding-block: 56px;
 		}
 
@@ -2450,8 +2450,8 @@ const checklist = [
 		}
 
 		.bitrix-hero h1,
-		.ds2-section-head h2,
-		.ds2-final-cta h2,
+		.ds-section-head h2,
+		.ds-final-cta h2,
 		.bitrix-process-grid h2,
 		.bitrix-version-grid h2,
 		.bitrix-faq-grid h2 {
@@ -2464,7 +2464,7 @@ const checklist = [
 			line-height: 1.65;
 		}
 
-		.bitrix-actions .ds2-btn {
+		.bitrix-actions .ds-btn {
 			width: 100%;
 		}
 
@@ -2478,7 +2478,7 @@ const checklist = [
 			grid-template-columns: 1fr;
 		}
 
-		.ds2-final-cta {
+		.ds-final-cta {
 			border-radius: 28px;
 			padding: 24px;
 		}

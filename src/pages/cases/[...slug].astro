@@ -12,24 +12,24 @@ const { Content } = await render(c);
 ---
 
 <Layout title={`${c.data.title} — ittimenow`} description={c.data.summary}>
-	<article class="mx-auto max-w-3xl px-6 py-16">
+	<article class="case-article mx-auto max-w-4xl px-6 py-16">
 		<a href="/cases" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
 			← все кейсы
 		</a>
 
-		<header class="mt-6 border-b border-neutral-200 pb-8 dark:border-neutral-800">
+		<header class="mt-6 pb-8">
 			<div class="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
-				<span class="font-medium text-neutral-700 dark:text-neutral-300">{c.data.client}</span>
-				{c.data.industry && <><span>·</span><span>{c.data.industry}</span></>}
-				{c.data.year && <><span>·</span><span>{c.data.year}</span></>}
+				{c.data.industry && <span>{c.data.industry}</span>}
+				{c.data.industry && c.data.year && <span>·</span>}
+				{c.data.year && <span>{c.data.year}</span>}
 			</div>
+
 			<h1
-				class="mt-3 text-4xl font-bold tracking-tight"
+				class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl"
 				transition:name={`case-${c.id}`}
 			>
 				{c.data.title}
 			</h1>
-			<p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{c.data.summary}</p>
 
 			{c.data.stack.length > 0 && (
 				<div class="mt-5 flex flex-wrap gap-1.5">
@@ -40,9 +40,19 @@ const { Content } = await render(c);
 					))}
 				</div>
 			)}
+
+			{c.data.cover && (
+				<img
+					src={c.data.cover}
+					alt={c.data.title}
+					class="case-cover"
+					loading="eager"
+					decoding="async"
+				/>
+			)}
 		</header>
 
-		<div class="prose-content mt-8">
+		<div class:list={['prose-content mt-8', c.data.cover && 'has-cover']}>
 			<Content />
 		</div>
 	</article>
@@ -50,9 +60,413 @@ const { Content } = await render(c);
 
 <style>
 	.prose-content :global(h2) { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600; }
+	.prose-content :global(h3) { margin-top: 1.75rem; margin-bottom: 0.75rem; font-size: 1.375rem; font-weight: 600; }
+	.prose-content :global(h4) { margin: 0.875rem 0 0.25rem; font-size: 1.25rem; font-weight: 600; }
 	.prose-content :global(p) { margin: 0.75rem 0; line-height: 1.75; color: var(--prose-text); }
 	.prose-content :global(ul) { margin: 0.75rem 0; padding-left: 1.5rem; list-style: disc; color: var(--prose-text); }
 	.prose-content :global(li + li) { margin-top: 0.25rem; }
+	.case-article {
+		--case-image-width: min(960px, calc(100vw - 1.5rem));
+		--case-video-width: min(720px, 100%);
+	}
+	.case-cover,
+	.prose-content :global(img) {
+		display: block;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 2.5rem calc((100% - var(--case-image-width)) / 2);
+		border-radius: 24px;
+		box-shadow: var(--ds-shadow);
+	}
+	.prose-content :global(.case-video) {
+		display: block;
+		background: #000000;
+		width: var(--case-video-width);
+		max-width: none;
+		margin: 1.5rem 0 2.5rem calc((100% - var(--case-video-width)) / 2);
+		border-radius: 24px;
+		box-shadow: var(--ds-shadow);
+		margin-left: calc((100% - var(--case-video-width)) / 2);
+	}
+	.prose-content :global(.case-slider) {
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.case-slider-viewport) {
+		position: relative;
+		overflow: hidden;
+		border-radius: 24px;
+		background: #000000;
+		box-shadow: var(--ds-shadow);
+	}
+	.prose-content :global(.case-slider-track) {
+		display: flex;
+		transition: transform 420ms ease;
+	}
+	.prose-content :global(.case-slider-slide) {
+		min-width: 100%;
+	}
+	.prose-content :global(.case-slider-slide img) {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+	.prose-content :global(.case-slider-controls) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	.prose-content :global(.case-slider-button) {
+		display: inline-flex;
+		flex: 0 0 45px;
+		width: 45px;
+		height: 45px;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		background: transparent;
+		color: rgba(113, 113, 122, 0.42);
+		font-size: 40px;
+		font-weight: 300;
+		line-height: 1;
+		transition: color 180ms ease, transform 180ms ease;
+	}
+	.prose-content :global(.case-slider-button:hover) {
+		color: #232bff;
+		transform: scale(1.03);
+	}
+	.prose-content :global(.case-slider-dots) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+	.prose-content :global(.case-slider-dot) {
+		width: 10px;
+		height: 10px;
+		border: 0;
+		border-radius: 9999px;
+		background: rgba(113, 113, 122, 0.42);
+		padding: 0;
+		transition: background 180ms ease, transform 180ms ease, width 180ms ease;
+	}
+	.prose-content :global(.case-slider-dot.is-active) {
+		width: 28px;
+		background: var(--ds-primary);
+	}
+	.case-cover {
+		margin-top: 2rem;
+	}
+	.prose-content.has-cover :global(h2:first-child + p + p:has(> img:only-child)) {
+		display: none;
+	}
+	.prose-content :global(.case-results-cta) {
+		display: grid;
+		gap: 2rem;
+		align-items: center;
+		margin: 2.5rem 0;
+		border-radius: 2.5rem;
+		background: linear-gradient(135deg, #18181b, #232bff);
+		padding: 2rem;
+		color: #ffffff;
+		box-shadow: var(--ds-glow);
+	}
+	.prose-content :global(.case-results-cta h2) {
+		margin: 0 0 1rem;
+		color: #ffffff;
+	}
+	.prose-content :global(.case-results-cta p),
+	.prose-content :global(.case-results-cta ul),
+	.prose-content :global(.case-results-cta ol) {
+		max-width: 720px;
+		margin: 0;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 1.125rem;
+		line-height: 1.7;
+	}
+	.prose-content :global(.case-results-cta ul),
+	.prose-content :global(.case-results-cta ol) {
+		margin-top: 0.75rem;
+		padding-left: 1.25rem;
+	}
+	.prose-content :global(.case-results-cta ::selection) {
+		background: #232bff;
+		color: #ffffff;
+	}
+	.prose-content :global(.case-results-button) {
+		display: inline-flex;
+		min-height: 44px;
+		align-items: center;
+		justify-content: center;
+		justify-self: start;
+		border-radius: 9999px;
+		background: #ffffff;
+		padding: 0 1.5rem;
+		color: #18181b;
+		font-size: 0.875rem;
+		font-weight: 700;
+		line-height: 1;
+		text-decoration: none;
+		transition: transform 180ms ease, background 180ms ease;
+	}
+	.prose-content :global(.case-results-button:hover) {
+		background: #f4f4f5;
+		transform: translateY(-1px);
+	}
+	.prose-content :global(.case-configurator-quote),
+	.prose-content :global(.case-quote) {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 1.25rem;
+		align-items: center;
+		margin: 2rem 0;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-left: 4px solid var(--ds-primary);
+		border-radius: 1.5rem;
+		background: var(--ds-card);
+		padding: 1.5rem;
+		box-shadow: var(--ds-shadow);
+		backdrop-filter: blur(40px);
+	}
+	:global(.dark) .prose-content :global(.case-configurator-quote),
+	:global(.dark) .prose-content :global(.case-quote) {
+		border-color: rgba(255, 255, 255, 0.1);
+		border-left-color: var(--ds-primary);
+	}
+	.prose-content :global(.case-configurator-quote img),
+	.prose-content :global(.case-quote img) {
+		width: 100px;
+		max-width: 100px;
+		margin: 0;
+		border-radius: 1rem;
+	}
+	.prose-content :global(.case-configurator-quote p),
+	.prose-content :global(.case-quote p) {
+		margin: 0;
+		color: #232bff;
+		font-size: 1.25rem;
+		line-height: 1.65;
+	}
+	.prose-content :global(.case-quote h3) {
+		margin: 0 0 0.5rem;
+		color: #232bff;
+		font-size: 1.375rem;
+		line-height: 1.25;
+	}
+	.prose-content :global(.case-team) {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	.prose-content :global(.case-team-card) {
+		width: 100%;
+		max-width: 180px;
+		border-radius: 1rem;
+		padding: 0;
+		background: transparent;
+	}
+	.prose-content :global(.case-team-card img) {
+		aspect-ratio: 1;
+		width: 100%;
+		max-width: 150px;
+		object-fit: cover;
+		margin: 0 0 0.75rem;
+		border-radius: 9999px;
+	}
+	.prose-content :global(.case-team-card h4) { margin: 0.75rem 0 0.125rem; line-height: 1.15; }
+	.prose-content :global(.case-team-card p) { margin: 0; font-size: 0.925rem; line-height: 1.25; }
 	.prose-content { --prose-text: oklch(0.371 0 0); }
 	:global(.dark) .prose-content { --prose-text: oklch(0.872 0 0); }
+	@media (max-width: 640px) {
+		.prose-content :global(.case-configurator-quote),
+		.prose-content :global(.case-quote) {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+			padding: 1.25rem;
+		}
+		.prose-content :global(.case-results-cta) {
+			border-radius: 1.5rem;
+			padding: 1.5rem;
+		}
+		.prose-content :global(.case-team) {
+			display: flex;
+			gap: 0.875rem;
+			width: 100%;
+			margin-left: 0;
+			overflow-x: auto;
+			overscroll-behavior-x: contain;
+			scroll-snap-type: x proximity;
+			-webkit-overflow-scrolling: touch;
+		}
+		.prose-content :global(.case-team-card) {
+			flex: 0 0 calc((100% - 1.75rem) / 2.5);
+			max-width: 180px;
+			scroll-snap-align: start;
+		}
+	}
+	@media (min-width: 640px) {
+		.case-article {
+			--case-image-width: min(960px, calc(100vw - 3rem));
+		}
+	}
+	@media (min-width: 900px) {
+		.prose-content :global(.case-results-cta) {
+			grid-template-columns: 1fr auto;
+			padding: 3rem;
+		}
+	}
 </style>
+
+<script>
+	function buildCaseResultsCta() {
+		const content = document.querySelector('.prose-content');
+		if (!content) return;
+
+		const resultHeading = [...content.querySelectorAll('h2')].find((heading) =>
+			heading.textContent?.trim().toLowerCase() === 'результаты'
+		);
+		if (!resultHeading || resultHeading.closest('.case-results-cta')) return;
+
+		const resultBlocks = [];
+		let node = resultHeading.nextElementSibling;
+		while (node && node.tagName !== 'H2') {
+			resultBlocks.push(node);
+			node = node.nextElementSibling;
+		}
+		if (resultBlocks.length === 0) return;
+
+		const cta = document.createElement('section');
+		cta.className = 'case-results-cta';
+
+		const body = document.createElement('div');
+		body.className = 'case-results-body';
+
+		const button = document.createElement('a');
+		button.className = 'case-results-button';
+		button.href = '/#consultation';
+		button.textContent = 'Хочу также!';
+
+		resultHeading.replaceWith(cta);
+		body.append(resultHeading, ...resultBlocks);
+		cta.append(body, button);
+	}
+
+	function buildCaseConfiguratorQuote() {
+		const content = document.querySelector('.prose-content');
+		if (!content) return;
+
+		const image = [...content.querySelectorAll('img')].find((img) =>
+			img.getAttribute('src')?.includes('illustration-configurator.png')
+		);
+		if (!image || image.closest('.case-configurator-quote')) return;
+
+		const imageWrapper = image.parentElement;
+		const text = imageWrapper?.nextElementSibling;
+		if (!(imageWrapper instanceof HTMLParagraphElement) || !(text instanceof HTMLParagraphElement)) return;
+
+		const quote = document.createElement('section');
+		quote.className = 'case-configurator-quote';
+
+		imageWrapper.replaceWith(quote);
+		quote.append(image, text);
+	}
+
+	function initCaseSliders() {
+		const sliders = document.querySelectorAll('[data-case-slider]');
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		sliders.forEach((slider) => {
+			if (!(slider instanceof HTMLElement) || slider.dataset.sliderInitialized === 'true') return;
+
+			const viewport = slider.querySelector('.case-slider-viewport');
+			const track = slider.querySelector('.case-slider-track');
+			const slides = [...slider.querySelectorAll('.case-slider-slide')];
+			const prev = slider.querySelector('.case-slider-button-prev');
+			const next = slider.querySelector('.case-slider-button-next');
+			const dots = [...slider.querySelectorAll('.case-slider-dot')];
+			if (!(track instanceof HTMLElement) || slides.length === 0) return;
+
+			slider.dataset.sliderInitialized = 'true';
+			let current = 0;
+			let timer;
+			let touchStartX = 0;
+			let touchDeltaX = 0;
+			const isMobile = window.matchMedia('(max-width: 640px)').matches;
+			const autoplayDelay = isMobile ? 4500 : 3000;
+
+			const update = (index) => {
+				current = (index + slides.length) % slides.length;
+				track.style.transform = `translateX(-${current * 100}%)`;
+				slides.forEach((slide, slideIndex) => {
+					slide.setAttribute('aria-hidden', slideIndex === current ? 'false' : 'true');
+				});
+				dots.forEach((dot, dotIndex) => {
+					dot.classList.toggle('is-active', dotIndex === current);
+					dot.setAttribute('aria-current', dotIndex === current ? 'true' : 'false');
+				});
+			};
+
+			const stop = () => {
+				if (timer) window.clearInterval(timer);
+			};
+			const start = () => {
+				stop();
+				if (!reduceMotion && slides.length > 1) {
+					timer = window.setInterval(() => update(current + 1), autoplayDelay);
+				}
+			};
+
+			if (prev instanceof HTMLButtonElement) prev.addEventListener('click', () => {
+				update(current - 1);
+				start();
+			});
+			if (next instanceof HTMLButtonElement) next.addEventListener('click', () => {
+				update(current + 1);
+				start();
+			});
+			dots.forEach((dot, dotIndex) => {
+				if (!(dot instanceof HTMLButtonElement)) return;
+				dot.addEventListener('click', () => {
+					update(dotIndex);
+					start();
+				});
+			});
+			if (viewport instanceof HTMLElement) {
+				viewport.addEventListener('touchstart', (event) => {
+					touchStartX = event.touches[0]?.clientX ?? 0;
+					touchDeltaX = 0;
+					stop();
+				}, { passive: true });
+				viewport.addEventListener('touchmove', (event) => {
+					touchDeltaX = (event.touches[0]?.clientX ?? touchStartX) - touchStartX;
+				}, { passive: true });
+				viewport.addEventListener('touchend', () => {
+					if (Math.abs(touchDeltaX) > 48) {
+						update(current + (touchDeltaX < 0 ? 1 : -1));
+					}
+					start();
+				});
+			}
+			slider.addEventListener('mouseenter', stop);
+			slider.addEventListener('mouseleave', start);
+			slider.addEventListener('focusin', stop);
+			slider.addEventListener('focusout', start);
+
+			update(0);
+			start();
+		});
+	}
+
+	buildCaseResultsCta();
+	buildCaseConfiguratorQuote();
+	initCaseSliders();
+	document.addEventListener('astro:page-load', buildCaseResultsCta);
+	document.addEventListener('astro:page-load', buildCaseConfiguratorQuote);
+	document.addEventListener('astro:page-load', initCaseSliders);
+</script>

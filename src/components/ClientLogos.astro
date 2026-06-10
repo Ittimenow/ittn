@@ -1,19 +1,33 @@
 ---
 const clients = [
-	'Альфа-Страхование', 'Донстрой', 'Россельхозбанк', 'РТ-Капитал',
-	'ВкусВилл', 'Северсталь', 'Газпром нефть', 'МТС',
+	{ name: 'Альфа-Страхование', logo: '/clients/client-alfa.png' },
+	{ name: 'Донстрой', logo: '/clients/client-donstroy.png' },
+	{ name: 'William Grant & Sons', logo: '/clients/client-wgs.png' },
+	{ name: 'Perola Sky', logo: '/clients/client-perola.png' },
+	{ name: 'Россельхозбанк' },
+	{ name: 'РТ-Капитал' },
+	{ name: 'ВкусВилл' },
+	{ name: 'Северсталь' },
+	{ name: 'Газпром нефть' },
+	{ name: 'МТС' },
+	{ name: 'Amaffi' },
+	{ name: 'Americhip' },
 ];
 ---
 
-<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-	<div class="mb-8">
+<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+	<div class="mb-8 max-w-3xl">
 		<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Клиенты</p>
-		<h2 class="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Нам доверяют</h2>
+		<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">Компании, с которыми уже работали</h2>
 	</div>
-	<div class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 sm:grid-cols-4 dark:border-neutral-800 dark:bg-neutral-800">
-		{clients.map((c) => (
+	<div class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 sm:grid-cols-3 lg:grid-cols-6 dark:border-neutral-800 dark:bg-neutral-800">
+		{clients.map((client) => (
 			<div class="flex h-24 items-center justify-center bg-white px-4 text-center text-sm font-medium text-neutral-600 dark:bg-neutral-950 dark:text-neutral-400">
-				{c}
+				{client.logo ? (
+					<img src={client.logo} alt={client.name} class="max-h-10 max-w-32 object-contain dark:brightness-0 dark:invert" loading="lazy" decoding="async" />
+				) : (
+					client.name
+				)}
 			</div>
 		))}
 	</div>

@@ -1,21 +1,50 @@
 ---
-const stack = [
+const technologies = [
 	'NestJS', 'React', 'Next.js', 'Astro', 'PostgreSQL', 'MongoDB',
 	'Redis', 'Docker', 'Kubernetes', 'Python', 'FastAPI', 'TypeScript',
-	'Битрикс24', 'РосБизнесСофт', 'ЭЛМА', 'OpenAI', 'YandexGPT',
+	'OpenAI', 'YandexGPT',
+];
+
+const integrations = [
+	'Bitrix24', 'РосБизнесСофт', 'ЭЛМА', '1С', 'Mango Office', 'Sipuni',
+	'UIS', 'Zadarma', 'WhatsApp Business', 'Telegram', 'VK', 'Wazzup',
+	'Unisender', 'SendPulse', 'Mindbox', 'Yandex Cloud', 'Selectel', 'Cloud.ru', 'Timeweb',
 ];
 ---
 
-<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-	<div class="mb-8">
+<section class="bg-neutral-50 py-16 dark:bg-neutral-950 sm:py-24">
+	<div class="mx-auto max-w-[1440px] px-6">
+	<div class="mb-8 max-w-3xl">
 		<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Технологии</p>
-		<h2 class="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">С чем работаем</h2>
+		<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
+			Технологии и экосистема интеграций
+		</h2>
+		<p class="mt-4 text-neutral-600 dark:text-neutral-400">
+			Технический стек показываем компактно: главное, чтобы платформа, данные и процесс работали вместе.
+		</p>
 	</div>
-	<div class="flex flex-wrap gap-2">
-		{stack.map((t) => (
-			<span class="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-300">
-				{t}
-			</span>
-		))}
+
+	<div class="grid gap-8 lg:grid-cols-2">
+		<div>
+			<h3 class="text-[22px] font-semibold leading-[1.2]">Разработка и данные</h3>
+			<div class="mt-4 flex flex-wrap gap-2">
+				{technologies.map((item) => (
+					<span class="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-300">
+						{item}
+					</span>
+				))}
+			</div>
+		</div>
+		<div>
+			<h3 class="text-[22px] font-semibold leading-[1.2]">Платформы и интеграции</h3>
+			<div class="mt-4 flex flex-wrap gap-2">
+				{integrations.map((item) => (
+					<span class="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-300">
+						{item}
+					</span>
+				))}
+			</div>
+		</div>
+	</div>
 	</div>
 </section>

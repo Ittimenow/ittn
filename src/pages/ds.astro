@@ -4,11 +4,11 @@ import Layout from '../layouts/Layout.astro';
 import UiIcon from '../components/UiIcon.astro';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
-const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
 
 const navigation = [
 	['Токены', '#tokens'],
 	['Текст', '#typography'],
+	['Элементы', '#type-elements'],
 	['Действия', '#actions'],
 	['Формы', '#forms'],
 	['Секции', '#sections'],
@@ -39,9 +39,9 @@ const typography = [
 	},
 	{
 		name: 'body-md',
-		size: '16px',
+		size: '18px',
 		weight: '400',
-		leading: '26px',
+		leading: '30px',
 		text: 'Сначала фиксируем бизнес-задачу и границы этапа, потом настраиваем инструменты и обучаем команду.',
 		note: 'System Font / основной текст',
 	},
@@ -52,6 +52,116 @@ const typography = [
 		leading: '20px',
 		text: 'Получить консультацию / CRM / SLA 24/7',
 		note: 'System Font / кнопки, бейджи, навигация, подписи',
+	},
+];
+
+const typeScale = [
+	{
+		label: 'Hero H1',
+		where: 'Главная, DS, Bitrix24, RBS',
+		size: '72px',
+		line: '72px',
+		weight: '500',
+		mobile: '44px / 44px',
+		className: 'ds-specimen-hero',
+		text: 'Цифровые системы эффективного бизнеса',
+		note: 'Самый крупный стиль. На Bitrix24/RBS есть локальный крупный акцент clamp(42px, 6vw, 76px), 800.',
+	},
+	{
+		label: 'Section H2',
+		where: 'Продающие секции DS, Bitrix24, RBS',
+		size: '72px',
+		line: '72px',
+		weight: '500',
+		mobile: '44px / 44px',
+		className: 'ds-specimen-section',
+		text: 'Настраиваем систему под работу отделов',
+		note: 'Используется для заголовков секций. В обычных компонентах главной встречается Tailwind-вариант 30-36px, 600.',
+	},
+	{
+		label: 'Content H1',
+		where: 'Посты, услуги, кейсы',
+		size: '48px',
+		line: '50px',
+		weight: '700',
+		mobile: '36px / 40px',
+		className: 'ds-specimen-content-h1',
+		text: 'Внедрение CRM под ключ',
+		note: 'Контентные страницы визуально плотнее: max-width 3xl для услуг/постов и 6xl для кейсов.',
+	},
+	{
+		label: 'Content H2',
+		where: 'Markdown: посты, услуги, кейсы',
+		size: '24px',
+		line: '30px',
+		weight: '600',
+		mobile: '24px / 30px',
+		className: 'ds-specimen-content-h2',
+		text: 'Что входит в проект',
+		note: 'В постах H2 отступает сильнее: 2.5rem сверху. В услугах и кейсах: 2rem.',
+	},
+	{
+		label: 'Card H3',
+		where: 'Карточки услуг, тарифы, этапы',
+		size: '26px',
+		line: '29px',
+		weight: '500',
+		mobile: '22-24px',
+		className: 'ds-specimen-card-title',
+		text: 'Комплексное внедрение',
+		note: 'На Bitrix24 карточки услуг используют 26px, на RBS часть карточек 22-24px.',
+	},
+	{
+		label: 'Lead',
+		where: 'Hero и вводные абзацы',
+		size: '18px',
+		line: '32px',
+		weight: '400',
+		mobile: '16px / 26px',
+		className: 'ds-specimen-lead',
+		text: 'Разрабатываем сайты и сервисы, внедряем CRM и ERP, обучаем ИИ-ассистентов и сопровождаем IT-инфраструктуру.',
+		note: 'Главный вводный стиль. Цвет обычно muted, в темных секциях белый с прозрачностью.',
+	},
+	{
+		label: 'Body',
+		where: 'Основной текст, списки, таблицы',
+		size: '18px',
+		line: '30px',
+		weight: '400',
+		mobile: '18px / 30px',
+		className: 'ds-specimen-body',
+		text: 'Сначала фиксируем бизнес-задачу и границы этапа, потом настраиваем инструменты и обучаем команду.',
+		note: 'Базовый системный токен. В markdown-страницах line-height увеличен до 1.75.',
+	},
+	{
+		label: 'Meta / Caption',
+		where: 'Подписи, даты, статусы, описания карточек',
+		size: '13px',
+		line: '19px',
+		weight: '700',
+		mobile: '12-14px',
+		className: 'ds-specimen-caption',
+		text: 'SLA 24/7 / аудит / оценка проекта',
+		note: 'Для служебной информации. В тегах часто 13px 700, в формах 14px 500.',
+	},
+];
+
+const typeElements = [
+	{
+		title: 'Списки',
+		note: 'Контентные страницы используют обычные disc/decimal с padding-left 1.5rem. Продающие блоки чаще заменяют маркеры на иконки.',
+	},
+	{
+		title: 'Теги и статусы',
+		note: 'Pill-форма, 13px 700 в DS. В кейсах стек технологий компактнее: text-xs, нейтральная рамка.',
+	},
+	{
+		title: 'Цитаты',
+		note: 'DS testimonial: 28px/1.22. Hero-цитаты Bitrix/RBS компактнее: 24px/1.24 на темной поверхности.',
+	},
+	{
+		title: 'Формы',
+		note: 'Labels 14/20 500, поля 14px, min-height 48px. В темных CTA форма остается светлой.',
 	},
 ];
 
@@ -277,85 +387,49 @@ const serviceIcon = {
 ---
 
 <Layout
-	title="DS2 — новая дизайн-система IT Time Now"
+	title="DS — новая дизайн-система IT Time Now"
 	description="Новая страница дизайн-системы IT Time Now: типографика, кнопки, формы, карточки и продающие секции."
 	headerVariant="glass"
 >
-	<div class="ds2">
-		<section class="ds2-hero">
-			<div class="ds2-container grid gap-10 py-16 sm:py-20 lg:grid-cols-[1fr_0.86fr] lg:items-center">
+	<div class="ds">
+		<section class="ds-hero">
+			<div class="ds-container grid gap-10 py-16 sm:py-20">
 				<div>
-					<div class="ds2-kicker">DS2 / Dimensional Interface Schema</div>
+					<div class="ds-kicker">DS / Dimensional Interface Schema</div>
 					<h1 class="mt-5 max-w-5xl text-[44px] leading-none sm:text-[64px] lg:text-[72px]">
 						Новая дизайн-система для продающих страниц IT Time Now
 					</h1>
-					<p class="mt-6 max-w-3xl text-lg leading-8 text-[color:var(--ds2-muted)] sm:text-xl">
+					<p class="mt-6 max-w-3xl text-lg leading-8 text-[color:var(--ds-muted)] sm:text-xl">
 						Страница-библиотека, откуда можно брать готовые элементы: текст, заголовки, плашки,
 						кнопки, формы, карточки, блоки услуг, тарифы, кейсы, FAQ и CTA.
 					</p>
-					<div class="mt-8 flex flex-wrap gap-3">
-						<a class="ds2-btn ds2-btn-primary" href="#actions">
-							<span>Компоненты</span>
+					<div class="ds-consultation-action">
+						<a class="ds-btn ds-btn-consultation" href="#forms">
+							<span>Получить консультацию</span>
 							<UiIcon name="arrow" class="h-4 w-4" />
 						</a>
-						<a class="ds2-btn ds2-btn-secondary" href="#sections">
+						<p class="ds-free-label">Бесплатно!</p>
+					</div>
+					<div class="mt-5 flex flex-wrap gap-3">
+						<a class="ds-btn ds-btn-secondary" href="#sections">
 							<span>Продающие блоки</span>
 							<UiIcon name="layers" class="h-4 w-4" />
 						</a>
 					</div>
-					<nav class="mt-8 flex flex-wrap gap-2" aria-label="Разделы DS2">
+					<nav class="mt-8 flex flex-wrap gap-2" aria-label="Разделы DS">
 						{navigation.map(([title, href]) => (
-							<a class="ds2-nav-pill" href={href}>{title}</a>
+							<a class="ds-nav-pill" href={href}>{title}</a>
 						))}
 					</nav>
-				</div>
-
-				<div class="ds2-dashboard" aria-label="Пример стеклянного интерфейсного блока">
-					<div class="flex items-start justify-between gap-4">
-						<div>
-							<p class="text-sm text-[color:var(--ds2-muted)]">Воронка внедрения</p>
-							<h2 class="mt-1 text-2xl">CRM + AI + интеграции</h2>
-						</div>
-						<span class="ds2-status ds2-status-success">готово</span>
-					</div>
-					<div class="mt-6 grid gap-3 sm:grid-cols-3">
-						{stats.slice(0, 3).map(([value, label]) => (
-							<div class="ds2-metric">
-								<p>{value}</p>
-								<span>{label}</span>
-							</div>
-						))}
-					</div>
-					<div class="mt-6 grid gap-3">
-						{[
-							['Новая заявка', '82%'],
-							['Квалификация', '64%'],
-							['КП и договор', '38%'],
-							['Запуск', '24%'],
-						].map(([label, value]) => (
-							<div>
-								<div class="mb-2 flex justify-between text-sm">
-									<span>{label}</span>
-									<span class="font-bold text-[color:var(--ds2-primary)]">{value}</span>
-								</div>
-								<div class="ds2-progress"><span style={`width:${value}`}></span></div>
-							</div>
-						))}
-					</div>
-					<div class="mt-6 flex flex-wrap gap-2">
-						{['Bitrix24', '1С', 'OpenAI', 'FastAPI'].map((item) => (
-							<span class="ds2-chip">{item}</span>
-						))}
-					</div>
 				</div>
 			</div>
 		</section>
 
-		<section id="tokens" class="ds2-section">
-			<div class="ds2-container">
-				<div class="ds2-section-head">
+		<section id="tokens" class="ds-section">
+			<div class="ds-container">
+				<div class="ds-section-head">
 					<div>
-						<p class="ds2-kicker">01 / Tokens</p>
+						<p class="ds-kicker">01 / Tokens</p>
 						<h2>Цвет, сетка, радиусы и материал</h2>
 					</div>
 					<p>
@@ -366,30 +440,30 @@ const serviceIcon = {
 
 				<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					{palette.map((color) => (
-						<article class="ds2-card ds2-token-card">
-							<div class="ds2-swatch" style={`background:${color.value}`}></div>
+						<article class="ds-card ds-token-card">
+							<div class="ds-swatch" style={`background:${color.value}`}></div>
 							<p class="mt-5 text-lg">{color.name}</p>
-							<p class="mt-1 font-mono text-sm text-[color:var(--ds2-primary)]">{color.value}</p>
-							<p class="mt-3 text-sm leading-6 text-[color:var(--ds2-muted)]">{color.usage}</p>
+							<p class="mt-1 font-mono text-sm text-[color:var(--ds-primary)]">{color.value}</p>
+							<p class="mt-3 text-sm leading-6 text-[color:var(--ds-muted)]">{color.usage}</p>
 						</article>
 					))}
 				</div>
 
 				<div class="mt-5 grid gap-5 lg:grid-cols-[1fr_0.7fr]">
-					<div class="ds2-card">
+					<div class="ds-card">
 						<div class="flex flex-wrap items-end justify-between gap-5">
 							<div>
-								<p class="ds2-kicker">Spacing</p>
+								<p class="ds-kicker">Spacing</p>
 								<h3 class="mt-2 text-2xl">4px-ритм</h3>
 							</div>
-							<p class="max-w-md text-sm leading-6 text-[color:var(--ds2-muted)]">
+							<p class="max-w-md text-sm leading-6 text-[color:var(--ds-muted)]">
 								Шкала подходит для компактных интерфейсов, больших лендинговых секций и плотных
 								коммерческих карточек.
 							</p>
 						</div>
 						<div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 							{spacing.map((item) => (
-								<div class="ds2-scale-row">
+								<div class="ds-scale-row">
 									<span style={`width:${Number(item) * 2}px`}></span>
 									<b>{item}px</b>
 								</div>
@@ -397,12 +471,12 @@ const serviceIcon = {
 						</div>
 					</div>
 
-					<div class="ds2-card">
-						<p class="ds2-kicker">Radius</p>
+					<div class="ds-card">
+						<p class="ds-kicker">Radius</p>
 						<h3 class="mt-2 text-2xl">Семейство углов</h3>
 						<div class="mt-6 grid grid-cols-3 gap-3">
 							{radii.map((item) => (
-								<div class="ds2-radius-sample" style={`border-radius:${item}px`}>
+								<div class="ds-radius-sample" style={`border-radius:${item}px`}>
 									{item === '9999' ? 'pill' : `${item}px`}
 								</div>
 							))}
@@ -412,28 +486,28 @@ const serviceIcon = {
 			</div>
 		</section>
 
-		<section id="typography" class="ds2-section ds2-section-soft">
-			<div class="ds2-container">
-				<div class="ds2-section-head">
+		<section id="typography" class="ds-section ds-section-soft">
+			<div class="ds-container">
+				<div class="ds-section-head">
 					<div>
-						<p class="ds2-kicker">02 / Typography</p>
-						<h2>Текстовые стили и плашки</h2>
+						<p class="ds-kicker">02 / Typography</p>
+						<h2>Текстовые стили сайта</h2>
 					</div>
 					<p>
-						Готовые размеры для первого экрана, секций, карточек, лид-абзацев, обычного текста,
-						цитат, списков и метаданных.
+						Сводка охватывает заголовки, основной текст, подписи и метаданные на обычных страницах,
+						в блоге, кейсах и лендингах Bitrix24/RBS.
 					</p>
 				</div>
 
 				<div class="mt-10 grid gap-5">
 					{typography.map((item) => (
-						<div class="ds2-type-row">
+						<div class="ds-type-row">
 							<div>
-								<p class="ds2-type-name">{item.name}</p>
-								<p class="mt-2 text-[color:var(--ds2-muted)]">{item.note}</p>
+								<p class="ds-type-name">{item.name}</p>
+								<p class="mt-2 text-[color:var(--ds-muted)]">{item.note}</p>
 							</div>
 							<p
-								class="ds2-type-example"
+								class="ds-type-example"
 								style={`--type-size:${item.size};--type-line:${item.leading};--type-weight:${item.weight};font-size:${item.size};line-height:${item.leading};font-weight:${item.weight}`}
 							>
 								{item.text}
@@ -442,17 +516,59 @@ const serviceIcon = {
 					))}
 				</div>
 
-				<div class="mt-5 grid gap-5 lg:grid-cols-[1fr_0.72fr]">
-					<article class="ds2-card">
-						<p class="ds2-kicker">Editorial</p>
+				<div class="mt-10 grid gap-4">
+					{typeScale.map((item) => (
+						<article class="ds-specimen-row">
+							<div class="ds-specimen-info">
+								<p>{item.label}</p>
+								<span>{item.where}</span>
+								<b>desktop: {item.size} / {item.line}</b>
+								<b>mobile: {item.mobile}</b>
+							</div>
+							<div>
+								<div class="ds-specimen-metrics">
+									<span><b>{item.size}</b> font-size</span>
+									<span><b>{item.line}</b> line-height</span>
+									<span><b>{item.weight}</b> weight</span>
+								</div>
+								<div class="ds-specimen-sample" style={`--spec-size:${item.size};--spec-line:${item.line}`}>
+									<div class="ds-specimen-ruler" aria-hidden="true">
+										<span>{item.size}</span>
+									</div>
+									<p class={item.className}>{item.text}</p>
+								</div>
+								<p class="ds-specimen-note">{item.note}</p>
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section id="type-elements" class="ds-section">
+			<div class="ds-container">
+				<div class="ds-section-head">
+					<div>
+						<p class="ds-kicker">02.1 / Дополнительные элементы</p>
+						<h2>Плашки, цитаты и контентные примеры</h2>
+					</div>
+					<p>
+						Отдельные элементы для editorial-блоков, цитат, коммерческих акцентов, rich text,
+						тегов, форм и таблиц.
+					</p>
+				</div>
+
+				<div class="mt-10 grid gap-5 lg:grid-cols-[1fr_0.72fr]">
+					<article class="ds-card">
+						<p class="ds-kicker">Editorial</p>
 						<h3 class="mt-3 max-w-3xl text-[36px] leading-[1.05]">
 							От прототипа до промышленного внедрения
 						</h3>
-						<p class="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--ds2-muted)]">
+						<p class="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--ds-muted)]">
 							Подбираем стек под задачу, а не задачу под стек. Разрабатываем сайты и сервисы,
 							внедряем CRM и ERP, обучаем ИИ-ассистентов и сопровождаем IT-инфраструктуру.
 						</p>
-						<ul class="mt-6 grid gap-3 text-[color:var(--ds2-ink)] sm:grid-cols-2">
+						<ul class="mt-6 grid gap-3 text-[color:var(--ds-ink)] sm:grid-cols-2">
 							{[
 								'одна мысль на строку',
 								'понятный следующий шаг',
@@ -460,19 +576,19 @@ const serviceIcon = {
 								'ссылки подсвечены основным синим',
 							].map((item) => (
 								<li class="flex gap-3">
-									<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0 text-[color:var(--ds2-primary)]" />
+									<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0 text-[color:var(--ds-primary)]" />
 									<span>{item}</span>
 								</li>
 							))}
 						</ul>
 					</article>
 
-					<article class="ds2-quote">
-						<p class="ds2-kicker">Quote</p>
+					<article class="ds-quote">
+						<p class="ds-kicker">Quote</p>
 						<blockquote class="mt-4 text-2xl leading-9">
 							“Сначала фиксируем бизнес-задачу и границы этапа, потом настраиваем инструменты.”
 						</blockquote>
-						<p class="mt-5 text-sm leading-6 text-[color:var(--ds2-muted)]">
+						<p class="mt-5 text-sm leading-6 text-[color:var(--ds-muted)]">
 							Плашка для принципов, отзывов, важных ограничений и коротких экспертных выводов.
 						</p>
 					</article>
@@ -480,20 +596,184 @@ const serviceIcon = {
 
 				<div class="mt-5 grid gap-4 md:grid-cols-3">
 					{callouts.map((item) => (
-						<article class={`ds2-callout ds2-callout-${item.type}`}>
+						<article class={`ds-callout ds-callout-${item.type}`}>
 							<p>{item.title}</p>
 							<span>{item.text}</span>
+						</article>
+					))}
+				</div>
+
+				<div class="mt-5 grid gap-5 lg:grid-cols-[1fr_0.78fr]">
+					<article class="ds-card ds-rich-text-card">
+						<p class="ds-kicker">Rich Text</p>
+						<h3>Пример контентного блока</h3>
+						<p>
+							Этот блок имитирует markdown-страницы постов, услуг и кейсов: обычные абзацы,
+							подзаголовки, ссылки, выделение, списки и кодовые фрагменты.
+						</p>
+						<h4>Маркированный список</h4>
+						<ul>
+							<li>аудит текущих процессов и воронок;</li>
+							<li>карта интеграций с сайтом, телефонией и 1С;</li>
+							<li>план внедрения с этапами и ответственными.</li>
+						</ul>
+						<h4>Нумерованный список</h4>
+						<ol>
+							<li>Согласовать границы первого этапа.</li>
+							<li>Настроить роли, поля, статусы и автоматизацию.</li>
+							<li>Проверить сценарии на пилотной группе.</li>
+						</ol>
+						<p>
+							Ссылка выглядит как <a href="/posts">переход в раздел статей</a>, а inline-code
+							используется для коротких технических имен вроде <code>prose-content</code>.
+						</p>
+					</article>
+
+					<div class="grid gap-5">
+						<article class="ds-card ds-tag-showcase">
+							<p class="ds-kicker">Tags</p>
+							<div class="mt-5 flex flex-wrap gap-2">
+								<span class="ds-chip">CRM</span>
+								<span class="ds-chip">Bitrix24</span>
+								<span class="ds-chip">ИИ</span>
+								<span class="ds-case-tag">портал</span>
+								<span class="ds-case-tag">2026</span>
+								<span class="ds-status ds-status-success">готово</span>
+								<span class="ds-status ds-status-warning">оценка</span>
+							</div>
+							<p>
+								DS-теги крупнее и контрастнее. Теги кейсов компактные: text-xs, легкая рамка и
+								нейтральный фон.
+							</p>
+						</article>
+
+						<article class="ds-quote ds-specimen-quote">
+							<p class="ds-kicker">Quote</p>
+							<blockquote>
+								Сначала фиксируем бизнес-задачу и границы этапа, потом настраиваем инструменты.
+							</blockquote>
+							<p>Цитаты в лендингах используются как доверительный или экспертный акцент.</p>
+						</article>
+					</div>
+				</div>
+
+				<article class="ds-card ds-case-media-showcase mt-5">
+					<p class="ds-kicker">Case Media</p>
+					<div class="ds-case-media-head">
+						<h3>Изображения, видео и слайдер кейсов</h3>
+						<p>
+							Единый медиа-стиль для markdown-кейсов: ширина чуть больше текстовой колонки,
+							радиус 24px, тень дизайн-системы и нижняя навигация слайдера.
+						</p>
+					</div>
+
+					<div class="ds-case-media-grid">
+						<div>
+							<p class="ds-case-media-label">Image</p>
+							<img
+								class="ds-case-media"
+								src="/cases/el-rey-digitalization/elrey-b24-sdelka.png"
+								alt="Карточка сделки в Битрикс24"
+							/>
+						</div>
+						<div>
+							<p class="ds-case-media-label">Video</p>
+							<video class="ds-case-media" autoplay loop muted playsinline>
+								<source src="/cases/el-rey-digitalization/elrey-vybor-uslugi.mp4" type="video/mp4" />
+							</video>
+						</div>
+					</div>
+
+					<section class="ds-case-slider" aria-label="Пример слайдера кейса">
+						<div class="ds-case-slider-viewport">
+							<div class="ds-case-slider-track">
+								<div class="ds-case-slider-slide">
+									<img src="/cases/el-rey-digitalization/elrey-b24-sdelka.png" alt="Карточка сделки" />
+								</div>
+								<div class="ds-case-slider-slide">
+									<img src="/cases/el-rey-digitalization/elrey-b24-roboty.png" alt="Роботы" />
+								</div>
+								<div class="ds-case-slider-slide">
+									<img src="/cases/el-rey-digitalization/elrey-b24-voronka-prodazhi.png" alt="Воронка продаж" />
+								</div>
+							</div>
+						</div>
+						<div class="ds-case-slider-controls">
+							<button class="ds-case-slider-button" type="button" aria-label="Предыдущий слайд">&larr;</button>
+							<div class="ds-case-slider-dots" aria-label="Навигация по слайдам">
+								<button class="ds-case-slider-dot is-active" type="button" aria-label="Слайд 1"></button>
+								<button class="ds-case-slider-dot" type="button" aria-label="Слайд 2"></button>
+								<button class="ds-case-slider-dot" type="button" aria-label="Слайд 3"></button>
+							</div>
+							<button class="ds-case-slider-button" type="button" aria-label="Следующий слайд">&rarr;</button>
+						</div>
+					</section>
+				</article>
+
+				<div class="mt-5 grid gap-5 lg:grid-cols-[0.82fr_1fr]">
+					<article class="ds-card">
+						<p class="ds-kicker">Form Text</p>
+						<div class="mt-5 grid gap-4">
+							<label class="ds-specimen-field">
+								<span>Label 14/20</span>
+								<input class="ds-input" type="text" value="Поле формы, 14px" />
+							</label>
+							<label class="ds-check"><input type="checkbox" checked /> Checkbox label 14/20</label>
+							<p class="text-xs leading-5 text-[color:var(--ds-muted)]">
+								Юридические строки и вспомогательные подписи используют text-xs или 12px с line-height 1.6.
+							</p>
+						</div>
+					</article>
+
+					<article class="ds-card">
+						<p class="ds-kicker">Tables</p>
+						<div class="mt-5 overflow-x-auto">
+							<table class="ds-table">
+								<thead>
+									<tr>
+										<th>Элемент</th>
+										<th>Размер</th>
+										<th>Где используется</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Body</td>
+										<td>18/30</td>
+										<td>абзацы, списки, таблицы</td>
+									</tr>
+									<tr>
+										<td>Label</td>
+										<td>14/20</td>
+										<td>формы, кнопки, бейджи</td>
+									</tr>
+									<tr>
+										<td>Caption</td>
+										<td>12-13px</td>
+										<td>метаданные, даты, служебные строки</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</article>
+				</div>
+
+				<div class="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+					{typeElements.map((item) => (
+						<article class="ds-callout">
+							<p>{item.title}</p>
+							<span>{item.note}</span>
 						</article>
 					))}
 				</div>
 			</div>
 		</section>
 
-		<section id="actions" class="ds2-section">
-			<div class="ds2-container">
-				<div class="ds2-section-head">
+		<section id="actions" class="ds-section">
+			<div class="ds-container">
+				<div class="ds-section-head">
 					<div>
-						<p class="ds2-kicker">03 / Actions</p>
+						<p class="ds-kicker">03 / Actions</p>
 						<h2>Кнопки, бейджи, табы и навигация</h2>
 					</div>
 					<p>
@@ -503,91 +783,91 @@ const serviceIcon = {
 				</div>
 
 				<div class="mt-10 grid gap-5 lg:grid-cols-[1fr_0.82fr]">
-					<div class="ds2-card">
-						<p class="ds2-kicker">Buttons</p>
-						<div class="mt-5 flex flex-wrap gap-3">
+					<div class="ds-card">
+						<p class="ds-kicker">Buttons</p>
+						<div class="mt-5 grid justify-items-start gap-3">
 							{actionButtons.map((button) => (
-								<a class={`ds2-btn ds2-btn-${button.variant}`} href="#forms">
+								<a class={`ds-btn ds-btn-${button.variant}`} href="#forms">
 									<span>{button.label}</span>
 									<UiIcon name={button.icon} class="h-4 w-4" />
 								</a>
 							))}
 						</div>
-						<div class="ds2-free-action">
-							<a class="ds2-btn ds2-btn-primary" href="#forms">
+						<div class="ds-consultation-action ds-consultation-action-stack mt-5">
+							<a class="ds-btn ds-btn-consultation" href="#forms">
 								<span>Получить консультацию</span>
 								<UiIcon name="arrow" class="h-4 w-4" />
 							</a>
-							<p class="ds2-free-label">Бесплатно!</p>
+							<p class="ds-free-label">Бесплатно!</p>
 						</div>
 						<div class="mt-6 flex flex-wrap gap-3">
-							<button class="ds2-icon-button" type="button" aria-label="Фильтр">
-								<span class="ds2-icon-main"><UiIcon name="filter" class="h-4 w-4" /></span>
-								<span class="ds2-icon-clone" aria-hidden="true"><UiIcon name="filter" class="h-4 w-4" /></span>
+							<button class="ds-icon-button" type="button" aria-label="Фильтр">
+								<span class="ds-icon-main"><UiIcon name="filter" class="h-4 w-4" /></span>
+								<span class="ds-icon-clone" aria-hidden="true"><UiIcon name="filter" class="h-4 w-4" /></span>
 							</button>
-							<button class="ds2-icon-button is-active" type="button" aria-label="Слои">
-								<span class="ds2-icon-main"><UiIcon name="layers" class="h-4 w-4" /></span>
-								<span class="ds2-icon-clone" aria-hidden="true"><UiIcon name="layers" class="h-4 w-4" /></span>
+							<button class="ds-icon-button is-active" type="button" aria-label="Слои">
+								<span class="ds-icon-main"><UiIcon name="layers" class="h-4 w-4" /></span>
+								<span class="ds-icon-clone" aria-hidden="true"><UiIcon name="layers" class="h-4 w-4" /></span>
 							</button>
-							<button class="ds2-icon-button" type="button" aria-label="Настройки">
-								<span class="ds2-icon-main"><UiIcon name="settings" class="h-4 w-4" /></span>
-								<span class="ds2-icon-clone" aria-hidden="true"><UiIcon name="settings" class="h-4 w-4" /></span>
+							<button class="ds-icon-button" type="button" aria-label="Настройки">
+								<span class="ds-icon-main"><UiIcon name="settings" class="h-4 w-4" /></span>
+								<span class="ds-icon-clone" aria-hidden="true"><UiIcon name="settings" class="h-4 w-4" /></span>
 							</button>
-							<button class="ds2-icon-button" type="button" aria-label="Сообщение">
-								<span class="ds2-icon-main"><UiIcon name="message" class="h-4 w-4" /></span>
-								<span class="ds2-icon-clone" aria-hidden="true"><UiIcon name="message" class="h-4 w-4" /></span>
+							<button class="ds-icon-button" type="button" aria-label="Сообщение">
+								<span class="ds-icon-main"><UiIcon name="message" class="h-4 w-4" /></span>
+								<span class="ds-icon-clone" aria-hidden="true"><UiIcon name="message" class="h-4 w-4" /></span>
 							</button>
 						</div>
 					</div>
 
-					<div class="ds2-card">
-						<p class="ds2-kicker">Badges</p>
+					<div class="ds-card">
+						<p class="ds-kicker">Badges</p>
 						<div class="mt-5 flex flex-wrap gap-2">
-							{chips.map((item) => <span class="ds2-chip">{item}</span>)}
+							{chips.map((item) => <span class="ds-chip">{item}</span>)}
 						</div>
 						<div class="mt-6 flex flex-wrap gap-2">
-							<span class="ds2-status ds2-status-success">в работе</span>
-							<span class="ds2-status ds2-status-info">аудит</span>
-							<span class="ds2-status ds2-status-warning">оценка</span>
+							<span class="ds-status ds-status-success">в работе</span>
+							<span class="ds-status ds-status-info">аудит</span>
+							<span class="ds-status ds-status-warning">оценка</span>
 						</div>
 					</div>
 				</div>
 
 				<div class="mt-5 grid gap-5 lg:grid-cols-2">
-					<div class="ds2-card">
-						<p class="ds2-kicker">Tabs</p>
+					<div class="ds-card">
+						<p class="ds-kicker">Tabs</p>
 						<div class="mt-5 flex flex-wrap gap-2">
-							<button class="ds2-tab is-active" type="button">Продажи</button>
-							<button class="ds2-tab" type="button">Интеграции</button>
-							<button class="ds2-tab" type="button">Документы</button>
-							<button class="ds2-tab" type="button">Поддержка</button>
+							<button class="ds-tab is-active" type="button">Продажи</button>
+							<button class="ds-tab" type="button">Интеграции</button>
+							<button class="ds-tab" type="button">Документы</button>
+							<button class="ds-tab" type="button">Поддержка</button>
 						</div>
 					</div>
-					<div class="ds2-card">
-						<p class="ds2-kicker">Breadcrumbs / Pagination</p>
-						<div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-[color:var(--ds2-muted)]">
-							<a href="/" class="hover:text-[color:var(--ds2-primary)]">Главная</a>
+					<div class="ds-card">
+						<p class="ds-kicker">Breadcrumbs / Pagination</p>
+						<div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-[color:var(--ds-muted)]">
+							<a href="/" class="hover:text-[color:var(--ds-primary)]">Главная</a>
 							<UiIcon name="chevron" class="h-4 w-4" />
-							<a href="/services" class="hover:text-[color:var(--ds2-primary)]">Услуги</a>
+							<a href="/services" class="hover:text-[color:var(--ds-primary)]">Услуги</a>
 							<UiIcon name="chevron" class="h-4 w-4" />
-							<span class="text-[color:var(--ds2-ink)]">Bitrix24</span>
+							<span class="text-[color:var(--ds-ink)]">Bitrix24</span>
 						</div>
 						<div class="mt-5 flex gap-2">
-							<button class="ds2-page-button" type="button">
-								<span class="ds2-page-main">1</span>
-								<span class="ds2-page-clone" aria-hidden="true">1</span>
+							<button class="ds-page-button" type="button">
+								<span class="ds-page-main">1</span>
+								<span class="ds-page-clone" aria-hidden="true">1</span>
 							</button>
-							<button class="ds2-page-button is-active" type="button">
-								<span class="ds2-page-main">2</span>
-								<span class="ds2-page-clone" aria-hidden="true">2</span>
+							<button class="ds-page-button is-active" type="button">
+								<span class="ds-page-main">2</span>
+								<span class="ds-page-clone" aria-hidden="true">2</span>
 							</button>
-							<button class="ds2-page-button" type="button">
-								<span class="ds2-page-main">3</span>
-								<span class="ds2-page-clone" aria-hidden="true">3</span>
+							<button class="ds-page-button" type="button">
+								<span class="ds-page-main">3</span>
+								<span class="ds-page-clone" aria-hidden="true">3</span>
 							</button>
-							<button class="ds2-page-button" type="button" aria-label="Следующая страница">
-								<span class="ds2-page-main"><UiIcon name="arrow" class="h-4 w-4" /></span>
-								<span class="ds2-page-clone" aria-hidden="true"><UiIcon name="arrow" class="h-4 w-4" /></span>
+							<button class="ds-page-button" type="button" aria-label="Следующая страница">
+								<span class="ds-page-main"><UiIcon name="arrow" class="h-4 w-4" /></span>
+								<span class="ds-page-clone" aria-hidden="true"><UiIcon name="arrow" class="h-4 w-4" /></span>
 							</button>
 						</div>
 					</div>
@@ -595,11 +875,11 @@ const serviceIcon = {
 			</div>
 		</section>
 
-		<section id="forms" class="ds2-section ds2-section-dark">
-			<div class="ds2-container">
-				<div class="ds2-section-head">
+		<section id="forms" class="ds-section ds-section-dark">
+			<div class="ds-container">
+				<div class="ds-section-head">
 					<div>
-						<p class="ds2-kicker">04 / Forms</p>
+						<p class="ds-kicker">04 / Forms</p>
 						<h2>Формы заявки и поля</h2>
 					</div>
 					<p>
@@ -622,7 +902,7 @@ const serviceIcon = {
 								['phone', 'телефония и сайт'],
 								['shield', 'SLA и безопасность'],
 							].map(([icon, text]) => (
-								<div class="ds2-dark-pill">
+								<div class="ds-dark-pill">
 									<UiIcon name={icon} class="h-4 w-4" />
 									{text}
 								</div>
@@ -630,51 +910,51 @@ const serviceIcon = {
 						</div>
 					</div>
 
-					<form class="ds2-form" method="post" action="#">
+					<form class="ds-form" method="post" action="#">
 						<div class="grid gap-4 sm:grid-cols-2">
 							<label>
 								<span>Имя</span>
-								<input class="ds2-input" required type="text" name="name" placeholder="Анна" />
+								<input class="ds-input" required type="text" name="name" placeholder="Анна" />
 							</label>
 							<label>
 								<span>Телефон или email</span>
-								<input class="ds2-input" required type="text" name="contact" placeholder="+7 000 000-00-00" />
+								<input class="ds-input" required type="text" name="contact" placeholder="+7 000 000-00-00" />
 							</label>
 						</div>
-						<div class="ds2-form-field">
-							<span id="ds2-form-service-label" class="ds2-form-label">Услуга</span>
-							<div class="ds2-select ds2-select-form" data-ds2-select>
-								<input type="hidden" name="service" value={selectOptions[0]} data-ds2-select-input />
+						<div class="ds-form-field">
+							<span id="ds-form-service-label" class="ds-form-label">Услуга</span>
+							<div class="ds-select ds-select-form" data-ds-select>
+								<input type="hidden" name="service" value={selectOptions[0]} data-ds-select-input />
 								<button
-									class="ds2-select-trigger ds2-select-trigger-lg"
+									class="ds-select-trigger ds-select-trigger-lg"
 									type="button"
 									aria-haspopup="listbox"
 									aria-expanded="false"
-									aria-labelledby="ds2-form-service-label"
+									aria-labelledby="ds-form-service-label"
 								>
-									<span class="ds2-select-value">{selectOptions[0]}</span>
-									<UiIcon name="chevron" class="ds2-select-chevron h-4 w-4" />
+									<span class="ds-select-value">{selectOptions[0]}</span>
+									<UiIcon name="chevron" class="ds-select-chevron h-4 w-4" />
 								</button>
-								<div class="ds2-select-content" role="listbox" aria-labelledby="ds2-form-service-label">
-									<button class="ds2-select-scroll ds2-select-scroll-up" type="button" tabindex="-1" aria-hidden="true">
+								<div class="ds-select-content" role="listbox" aria-labelledby="ds-form-service-label">
+									<button class="ds-select-scroll ds-select-scroll-up" type="button" tabindex="-1" aria-hidden="true">
 										<UiIcon name="chevron" class="h-4 w-4" />
 									</button>
-									<div class="ds2-select-viewport">
-										<p class="ds2-select-label">Выберите услугу</p>
+									<div class="ds-select-viewport">
+										<p class="ds-select-label">Выберите услугу</p>
 										{selectOptions.map((option, index) => (
 											<button
-												class:list={['ds2-select-item', index === 0 && 'is-selected']}
+												class:list={['ds-select-item', index === 0 && 'is-selected']}
 												type="button"
 												role="option"
 												aria-selected={index === 0 ? 'true' : 'false'}
 												data-value={option}
 											>
-												<span class="ds2-select-indicator"><UiIcon name="check" class="h-4 w-4" /></span>
+												<span class="ds-select-indicator"><UiIcon name="check" class="h-4 w-4" /></span>
 												<span>{option}</span>
 											</button>
 										))}
 									</div>
-									<button class="ds2-select-scroll ds2-select-scroll-down" type="button" tabindex="-1" aria-hidden="true">
+									<button class="ds-select-scroll ds-select-scroll-down" type="button" tabindex="-1" aria-hidden="true">
 										<UiIcon name="chevron" class="h-4 w-4" />
 									</button>
 								</div>
@@ -682,112 +962,35 @@ const serviceIcon = {
 						</div>
 						<label>
 							<span>Коротко о задаче</span>
-							<textarea class="ds2-input" name="message" rows="4" placeholder="Нужно связать CRM, сайт, телефонию и 1С"></textarea>
+							<textarea class="ds-input" name="message" rows="4" placeholder="Нужно связать CRM, сайт, телефонию и 1С"></textarea>
 						</label>
 						<div class="grid gap-3 sm:grid-cols-2">
-							<label class="ds2-check"><input type="checkbox" checked /> CRM и воронки</label>
-							<label class="ds2-check"><input type="checkbox" /> Интеграции</label>
-							<label class="ds2-check"><input type="checkbox" /> ИИ-ассистент</label>
-							<label class="ds2-check"><input type="checkbox" /> Поддержка SLA</label>
+							<label class="ds-check"><input type="checkbox" checked /> CRM и воронки</label>
+							<label class="ds-check"><input type="checkbox" /> Интеграции</label>
+							<label class="ds-check"><input type="checkbox" /> ИИ-ассистент</label>
+							<label class="ds-check"><input type="checkbox" /> Поддержка SLA</label>
 						</div>
 						<div class="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
-							<label class="ds2-toggle"><input type="checkbox" checked /><span></span>Нужен NDA</label>
-							<button class="ds2-btn ds2-btn-primary" type="submit">
+							<label class="ds-toggle"><input type="checkbox" checked /><span></span>Нужен NDA</label>
+							<button class="ds-btn ds-btn-primary" type="submit">
 								<span>Отправить заявку</span>
 								<UiIcon name="arrow" class="h-4 w-4" />
 							</button>
 						</div>
-						<p class="text-xs leading-5 text-[color:var(--ds2-muted)]">
+						<p class="text-xs leading-5 text-[color:var(--ds-muted)]">
 							Отправляя форму, вы соглашаетесь с обработкой персональных данных.
 						</p>
 					</form>
 				</div>
 
-				<div class="mt-6 grid gap-6 lg:grid-cols-[0.8fr_1fr]">
-					<article class="ds2-select-note">
-						<p class="ds2-kicker">Select</p>
-						<h3>Выпадающий список с анимацией</h3>
-						<p>
-							Компонент повторяет структуру Radix Select: trigger, value, content, viewport,
-							label, item, indicator, separator и scroll controls. Анимация раскрытия использует
-							fade, zoom и slide from top.
-						</p>
-					</article>
-
-					<div class="ds2-select-lab">
-						<div class="ds2-select" data-ds2-select>
-							<button
-								class="ds2-select-trigger ds2-select-trigger-lg"
-								type="button"
-								aria-haspopup="listbox"
-								aria-expanded="false"
-							>
-								<span class="ds2-select-value">{selectOptions[0]}</span>
-								<UiIcon name="chevron" class="ds2-select-chevron h-4 w-4" />
-							</button>
-							<div class="ds2-select-content" role="listbox">
-								<button class="ds2-select-scroll ds2-select-scroll-up" type="button" tabindex="-1" aria-hidden="true">
-									<UiIcon name="chevron" class="h-4 w-4" />
-								</button>
-								<div class="ds2-select-viewport">
-									<p class="ds2-select-label">Услуги</p>
-									{selectOptions.slice(0, 3).map((option, index) => (
-										<button
-											class:list={['ds2-select-item', index === 0 && 'is-selected']}
-											type="button"
-											role="option"
-											aria-selected={index === 0 ? 'true' : 'false'}
-											data-value={option}
-										>
-											<span class="ds2-select-indicator"><UiIcon name="check" class="h-4 w-4" /></span>
-											<span>{option}</span>
-										</button>
-									))}
-									<div class="ds2-select-separator"></div>
-									<p class="ds2-select-label">Дополнительно</p>
-									{selectOptions.slice(3).map((option) => (
-										<button
-											class="ds2-select-item"
-											type="button"
-											role="option"
-											aria-selected="false"
-											data-value={option}
-										>
-											<span class="ds2-select-indicator"><UiIcon name="check" class="h-4 w-4" /></span>
-											<span>{option}</span>
-										</button>
-									))}
-								</div>
-								<button class="ds2-select-scroll ds2-select-scroll-down" type="button" tabindex="-1" aria-hidden="true">
-									<UiIcon name="chevron" class="h-4 w-4" />
-								</button>
-							</div>
-						</div>
-
-						<div class="mt-4 grid gap-3 sm:grid-cols-3">
-							<button class="ds2-select-trigger ds2-select-trigger-sm" type="button">
-								<span>Small</span>
-								<UiIcon name="chevron" class="ds2-select-chevron h-4 w-4" />
-							</button>
-							<button class="ds2-select-trigger" type="button">
-								<span>Medium</span>
-								<UiIcon name="chevron" class="ds2-select-chevron h-4 w-4" />
-							</button>
-							<button class="ds2-select-trigger ds2-select-trigger-lg" type="button">
-								<span>Large</span>
-								<UiIcon name="chevron" class="ds2-select-chevron h-4 w-4" />
-							</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		</section>
 
-		<section id="sections" class="ds2-section">
-			<div class="ds2-container">
-				<div class="ds2-section-head">
+		<section id="sections" class="ds-section">
+			<div class="ds-container">
+				<div class="ds-section-head">
 					<div>
-						<p class="ds2-kicker">05 / Selling Sections</p>
+						<p class="ds-kicker">05 / Selling Sections</p>
 						<h2>Готовые блоки для продающего сайта</h2>
 					</div>
 					<p>
@@ -797,32 +1000,7 @@ const serviceIcon = {
 				</div>
 
 				<div class="mt-10 grid gap-5">
-					<section class="ds2-mini-hero">
-						<div>
-							<p class="ds2-kicker">Hero block</p>
-							<h3>Цифровые системы эффективного бизнеса</h3>
-							<p>
-								Разрабатываем сайты и сервисы, внедряем CRM и ERP, обучаем ИИ-ассистентов и
-								сопровождаем IT-инфраструктуру под ключ.
-							</p>
-							<div class="mt-6 flex flex-wrap gap-3">
-								<a class="ds2-btn ds2-btn-primary" href="#sales"><span>Получить консультацию</span></a>
-								<a class="ds2-btn ds2-btn-secondary" href="/cases"><span>Смотреть кейсы</span></a>
-							</div>
-						</div>
-						<div class="ds2-mini-visual">
-							<div class="ds2-mini-line"></div>
-							<div class="ds2-mini-line is-short"></div>
-							<div class="grid grid-cols-2 gap-3">
-								<div class="ds2-mini-tile">CRM</div>
-								<div class="ds2-mini-tile">AI</div>
-								<div class="ds2-mini-tile">ERP</div>
-								<div class="ds2-mini-tile">Web</div>
-							</div>
-						</div>
-					</section>
-
-					<section class="ds2-logo-strip" aria-label="Пример полосы клиентов">
+					<section class="ds-logo-strip" aria-label="Пример полосы клиентов">
 						{['ВкусВилл', 'Россельхозбанк', 'Северсталь', 'АльфаСтрахование', 'Donstroy'].map((item) => (
 							<span>{item}</span>
 						))}
@@ -830,20 +1008,20 @@ const serviceIcon = {
 
 					<section class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 						{services.slice(0, 6).map((service) => (
-							<a class="ds2-service-card" href={`/services/${service.id}/`}>
-								<div class="ds2-service-icon">
+							<a class="ds-service-card" href={`/services/${service.id}/`}>
+								<div class="ds-service-icon">
 									<UiIcon name={serviceIcon[service.data.group] ?? 'layers'} class="h-5 w-5" />
 								</div>
-								<p class="mt-5 text-sm text-[color:var(--ds2-primary)]">{service.data.group}</p>
+								<p class="mt-5 text-sm text-[color:var(--ds-primary)]">{service.data.group}</p>
 								<h3 class="mt-2 text-2xl">{service.data.title}</h3>
-								<p class="mt-3 text-sm leading-6 text-[color:var(--ds2-muted)]">{service.data.summary}</p>
+								<p class="mt-3 text-sm leading-6 text-[color:var(--ds-muted)]">{service.data.summary}</p>
 							</a>
 						))}
 					</section>
 
 					<section class="grid gap-4 md:grid-cols-4">
 						{stats.map(([value, label]) => (
-							<div class="ds2-stat-card">
+							<div class="ds-stat-card">
 								<p>{value}</p>
 								<span>{label}</span>
 							</div>
@@ -853,11 +1031,11 @@ const serviceIcon = {
 			</div>
 		</section>
 
-		<section id="sales" class="ds2-section ds2-section-soft">
-			<div class="ds2-container">
-				<div class="ds2-section-head">
+		<section id="sales" class="ds-section ds-section-soft">
+			<div class="ds-container">
+				<div class="ds-section-head">
 					<div>
-						<p class="ds2-kicker">06 / Conversion Blocks</p>
+						<p class="ds-kicker">06 / Conversion Blocks</p>
 						<h2>Тарифы, кейсы, сравнение и FAQ</h2>
 					</div>
 					<p>
@@ -868,75 +1046,35 @@ const serviceIcon = {
 
 				<div class="mt-10 grid gap-5 lg:grid-cols-3">
 					{packages.map((pack) => (
-						<article class:list={['ds2-price-card', pack.featured && 'is-featured']}>
+						<article class:list={['ds-price-card', pack.featured && 'is-featured']}>
 							<div class="flex items-start justify-between gap-4">
-								<div class="ds2-service-icon">
+								<div class="ds-service-icon">
 									<UiIcon name={pack.icon} class="h-5 w-5" />
 								</div>
-								<span class="ds2-chip">{pack.tag}</span>
+								<span class="ds-chip">{pack.tag}</span>
 							</div>
 							<h3 class="mt-6 text-2xl">{pack.name}</h3>
-							<p class="mt-3 text-3xl text-[color:var(--ds2-primary)]">{pack.price}</p>
-							<p class="mt-3 text-sm leading-6 text-[color:var(--ds2-muted)]">{pack.text}</p>
+							<p class="mt-3 text-3xl text-[color:var(--ds-primary)]">{pack.price}</p>
+							<p class="mt-3 text-sm leading-6 text-[color:var(--ds-muted)]">{pack.text}</p>
 							<ul class="mt-6 grid gap-3 text-sm">
 								{pack.items.map((item) => (
 									<li class="flex gap-2">
-										<UiIcon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--ds2-success)]" />
+										<UiIcon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--ds-success)]" />
 										<span>{item}</span>
 									</li>
 								))}
 							</ul>
-							<a class="ds2-btn ds2-btn-secondary mt-7 w-full" href="#forms"><span>Рассчитать проект</span></a>
+							<a class="ds-btn ds-btn-secondary mt-7 w-full" href="#forms"><span>Рассчитать проект</span></a>
 						</article>
 					))}
 				</div>
 
-				<div class="mt-5 grid gap-5 lg:grid-cols-[0.72fr_1fr]">
-					<section class="ds2-card">
-						<p class="ds2-kicker">Process</p>
-						<h3 class="mt-2 text-3xl">Пять этапов внедрения</h3>
-						<div class="mt-6 grid gap-3">
-							{process.map(([icon, title, text], index) => (
-								<div class="ds2-step">
-									<div class="ds2-step-number">{String(index + 1).padStart(2, '0')}</div>
-									<UiIcon name={icon} class="h-5 w-5 text-[color:var(--ds2-primary)]" />
-									<div>
-										<p>{title}</p>
-										<span>{text}</span>
-									</div>
-								</div>
-							))}
-						</div>
-					</section>
-
-					<section class="ds2-card">
-						<p class="ds2-kicker">Cases</p>
-						<h3 class="mt-2 text-3xl">Кейсы как карточки доверия</h3>
-						<div class="mt-6 grid gap-4">
-							{cases.map((item) => (
-								<a class="ds2-case-row" href={`/cases/${item.id}/`}>
-									<div>
-										<p class="text-sm text-[color:var(--ds2-muted)]">
-											{item.data.client}
-											{item.data.industry && ` / ${item.data.industry}`}
-											{item.data.year && ` / ${item.data.year}`}
-										</p>
-										<h4 class="mt-1 text-xl">{item.data.title}</h4>
-										<p class="mt-2 text-sm leading-6 text-[color:var(--ds2-muted)]">{item.data.summary}</p>
-									</div>
-									<UiIcon name="arrow" class="h-5 w-5 shrink-0 text-[color:var(--ds2-primary)]" />
-								</a>
-							))}
-						</div>
-					</section>
-				</div>
-
 				<div class="mt-5 grid gap-5 lg:grid-cols-[1fr_0.78fr]">
-					<section class="ds2-card">
-						<p class="ds2-kicker">Comparison</p>
+					<section class="ds-card">
+						<p class="ds-kicker">Comparison</p>
 						<h3 class="mt-2 text-3xl">Облако или коробка</h3>
 						<div class="mt-6 overflow-x-auto">
-							<table class="ds2-table">
+							<table class="ds-table">
 								<thead>
 									<tr>
 										<th>Критерий</th>
@@ -957,14 +1095,14 @@ const serviceIcon = {
 						</div>
 					</section>
 
-					<section class="ds2-testimonial">
-						<p class="ds2-kicker">Testimonial</p>
+					<section class="ds-testimonial">
+						<p class="ds-kicker">Testimonial</p>
 						<blockquote>
 							“Время оформления полиса сократилось в 3 раза, а 800+ агентов работают в новом
 							портале каждый день.”
 						</blockquote>
 						<div class="mt-6 flex items-center gap-3">
-							<div class="ds2-avatar">АС</div>
+							<div class="ds-avatar">АС</div>
 							<div>
 								<p>АльфаСтрахование</p>
 								<span>B2B-портал для страховых агентов</span>
@@ -975,17 +1113,17 @@ const serviceIcon = {
 
 				<section class="mt-5 grid gap-4 lg:grid-cols-[0.5fr_1fr]">
 					<div>
-						<p class="ds2-kicker">FAQ</p>
+						<p class="ds-kicker">FAQ</p>
 						<h3 class="mt-2 text-3xl">Частые вопросы</h3>
 					</div>
 					<div class="grid gap-3">
 						{faqs.map(([question, answer]) => (
-							<details class="ds2-faq">
+							<details class="ds-faq">
 								<summary>
 									<span>{question}</span>
 									<UiIcon name="chevron" class="h-4 w-4" />
 								</summary>
-								<div class="ds2-faq-content">
+								<div class="ds-faq-content">
 									<p>{answer}</p>
 								</div>
 							</details>
@@ -995,11 +1133,11 @@ const serviceIcon = {
 			</div>
 		</section>
 
-		<section id="bitrix24" class="ds2-section">
-			<div class="ds2-container">
-				<div class="ds2-section-head bitrix-wide-head">
+		<section id="bitrix24" class="ds-section">
+			<div class="ds-container">
+				<div class="ds-section-head bitrix-wide-head">
 					<div>
-						<p class="ds2-kicker">07 / Bitrix24 Patterns</p>
+						<p class="ds-kicker">07 / Bitrix24 Patterns</p>
 						<h2>Обновленные паттерны со страницы внедрения Bitrix24</h2>
 					</div>
 					<p>
@@ -1011,8 +1149,8 @@ const serviceIcon = {
 
 				<div class="bitrix-problems">
 					{bitrixProblems.map(({ icon, title, text }) => (
-						<article class="ds2-service-card bitrix-problem-card">
-							<div class="ds2-service-icon">
+						<article class="ds-service-card bitrix-problem-card">
+							<div class="ds-service-icon">
 								<UiIcon name={icon} class="h-5 w-5" />
 							</div>
 							<p>{title}</p>
@@ -1022,12 +1160,12 @@ const serviceIcon = {
 				</div>
 
 				<div class="bitrix-prices">
-					<article class="ds2-price-card bitrix-audit-card">
+					<article class="ds-price-card bitrix-audit-card">
 						<div class="bitrix-card-top">
-							<div class="ds2-service-icon">
+							<div class="ds-service-icon">
 								<UiIcon name={bitrixAuditPackage.icon} class="h-5 w-5" />
 							</div>
-							<span class="ds2-chip">{bitrixAuditPackage.tag}</span>
+							<span class="ds-chip">{bitrixAuditPackage.tag}</span>
 						</div>
 						<div class="bitrix-audit-body">
 							<div>
@@ -1044,18 +1182,18 @@ const serviceIcon = {
 								</li>
 							))}
 						</ul>
-						<a class="ds2-btn ds2-btn-secondary" href="#forms">
+						<a class="ds-btn ds-btn-secondary" href="#forms">
 							<span>Заказать аудит</span>
 						</a>
 					</article>
 
 					{bitrixImplementationPackages.map((pack) => (
-						<article class:list={['ds2-price-card', pack.featured && 'is-featured']}>
+						<article class:list={['ds-price-card', pack.featured && 'is-featured']}>
 							<div class="bitrix-card-top">
-								<div class="ds2-service-icon">
+								<div class="ds-service-icon">
 									<UiIcon name={pack.icon} class="h-5 w-5" />
 								</div>
-								<span class="ds2-chip">{pack.tag}</span>
+								<span class="ds-chip">{pack.tag}</span>
 							</div>
 							<h3>{pack.name}</h3>
 							<p class="bitrix-price">{pack.price}</p>
@@ -1068,7 +1206,7 @@ const serviceIcon = {
 									</li>
 								))}
 							</ul>
-							<a class="ds2-btn ds2-btn-secondary" href="#forms">
+							<a class="ds-btn ds-btn-secondary" href="#forms">
 								<span>Рассчитать</span>
 							</a>
 						</article>
@@ -1076,14 +1214,14 @@ const serviceIcon = {
 				</div>
 
 				<div class="mt-5 grid gap-5 lg:grid-cols-[0.72fr_1fr]">
-					<section class="ds2-card bitrix-pattern-copy">
-						<p class="ds2-kicker">Project Timeline</p>
+					<section class="ds-card bitrix-pattern-copy">
+						<p class="ds-kicker">Project Timeline</p>
 						<h3>Пять этапов управляемого внедрения</h3>
 						<p>
 							Паттерн подходит для услуг, где важно показать контроль: этап, действие,
 							результат и следующий шаг без перегруженной схемы.
 						</p>
-						<a class="ds2-btn ds2-btn-dark" href="#forms">
+						<a class="ds-btn ds-btn-dark" href="#forms">
 							<span>Собрать состав работ</span>
 							<UiIcon name="arrow" class="h-4 w-4" />
 						</a>
@@ -1127,8 +1265,8 @@ const serviceIcon = {
 
 				<div class="bitrix-services">
 					{bitrixServices.map((group) => (
-						<article class:list={['ds2-service-card', group.accent && 'is-accent']}>
-							<div class="ds2-service-icon">
+						<article class:list={['ds-service-card', group.accent && 'is-accent']}>
+							<div class="ds-service-icon">
 								<UiIcon name={group.icon} class="h-5 w-5" />
 							</div>
 							<h3>{group.title}</h3>
@@ -1144,9 +1282,9 @@ const serviceIcon = {
 					))}
 				</div>
 
-				<section class="ds2-testimonial bitrix-reasons-card mt-5">
+				<section class="ds-testimonial bitrix-reasons-card mt-5">
 					<div>
-						<p class="ds2-kicker">Trust Card</p>
+						<p class="ds-kicker">Trust Card</p>
 						<blockquote>
 							Сначала фиксируем бизнес-задачу и границы этапа, потом настраиваем инструменты.
 						</blockquote>
@@ -1160,11 +1298,11 @@ const serviceIcon = {
 			</div>
 		</section>
 
-		<section id="interface" class="ds2-section">
-			<div class="ds2-container">
-				<div class="ds2-section-head">
+		<section id="interface" class="ds-section">
+			<div class="ds-container">
+				<div class="ds-section-head">
 					<div>
-						<p class="ds2-kicker">08 / Interface Pieces</p>
+						<p class="ds-kicker">08 / Interface Pieces</p>
 						<h2>Элементы для интерфейсных вставок</h2>
 					</div>
 					<p>
@@ -1174,15 +1312,15 @@ const serviceIcon = {
 				</div>
 
 				<div class="mt-10 grid gap-5 lg:grid-cols-[0.8fr_1fr]">
-					<section class="ds2-card">
-						<p class="ds2-kicker">Dashboard fragment</p>
+					<section class="ds-card">
+						<p class="ds-kicker">Dashboard fragment</p>
 						<div class="mt-5 grid gap-3">
 							{[
 								['Новые заявки', '128', '+18%'],
 								['Сделки в работе', '47', '+9%'],
 								['Документы на согласовании', '16', '-22%'],
 							].map(([label, value, delta]) => (
-								<div class="ds2-kpi-row">
+								<div class="ds-kpi-row">
 									<div>
 										<p>{label}</p>
 										<span>{value}</span>
@@ -1192,13 +1330,13 @@ const serviceIcon = {
 							))}
 						</div>
 						<div class="mt-5">
-							<label class="text-sm text-[color:var(--ds2-muted)]" for="maturity">Готовность проекта</label>
-							<input id="maturity" class="ds2-range mt-3" type="range" min="0" max="100" value="72" />
+							<label class="text-sm text-[color:var(--ds-muted)]" for="maturity">Готовность проекта</label>
+							<input id="maturity" class="ds-range mt-3" type="range" min="0" max="100" value="72" />
 						</div>
 					</section>
 
-					<section class="ds2-card">
-						<p class="ds2-kicker">Timeline</p>
+					<section class="ds-card">
+						<p class="ds-kicker">Timeline</p>
 						<div class="mt-6 grid gap-4">
 							{[
 								['09:30', 'Поступила заявка с сайта'],
@@ -1206,7 +1344,7 @@ const serviceIcon = {
 								['11:20', 'Отправлено КП по шаблону'],
 								['12:10', 'Сделка перешла в согласование'],
 							].map(([time, text]) => (
-								<div class="ds2-timeline-row">
+								<div class="ds-timeline-row">
 									<time>{time}</time>
 									<span></span>
 									<p>{text}</p>
@@ -1216,16 +1354,16 @@ const serviceIcon = {
 					</section>
 				</div>
 
-				<section class="ds2-final-cta mt-5">
+				<section class="ds-final-cta mt-5">
 					<div>
-						<p class="ds2-kicker">Final CTA</p>
-						<h2>Соберите продающую страницу из DS2-блоков</h2>
+						<p class="ds-kicker">Final CTA</p>
+						<h2>Соберите продающую страницу из DS-блоков</h2>
 						<p>
 							Используйте эту страницу как витрину компонентов для новых страниц ITTN: услуги,
 							кейсы, посадочные страницы, промо для Bitrix24, AI и разработки.
 						</p>
 					</div>
-					<a class="ds2-btn ds2-btn-primary" href="#tokens">
+					<a class="ds-btn ds-btn-primary" href="#tokens">
 						<span>Вернуться к токенам</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</a>
@@ -1237,12 +1375,12 @@ const serviceIcon = {
 
 <script>
 	function bindDs2Faq() {
-		document.querySelectorAll<HTMLDetailsElement>('.ds2-faq').forEach((details) => {
+		document.querySelectorAll<HTMLDetailsElement>('.ds-faq').forEach((details) => {
 			if (details.dataset.faqBound) return;
 			details.dataset.faqBound = '1';
 
 			const summary = details.querySelector('summary');
-			const content = details.querySelector<HTMLElement>('.ds2-faq-content');
+			const content = details.querySelector<HTMLElement>('.ds-faq-content');
 			if (!summary || !content) return;
 
 			summary.addEventListener('click', (event) => {
@@ -1312,14 +1450,14 @@ const serviceIcon = {
 	}
 
 	function bindDs2Select() {
-		document.querySelectorAll<HTMLElement>('[data-ds2-select]').forEach((select) => {
+		document.querySelectorAll<HTMLElement>('[data-ds-select]').forEach((select) => {
 			if (select.dataset.selectBound) return;
 			select.dataset.selectBound = '1';
 
-			const trigger = select.querySelector<HTMLButtonElement>('.ds2-select-trigger');
-			const value = select.querySelector<HTMLElement>('.ds2-select-value');
-			const input = select.querySelector<HTMLInputElement>('[data-ds2-select-input]');
-			const items = select.querySelectorAll<HTMLButtonElement>('.ds2-select-item');
+			const trigger = select.querySelector<HTMLButtonElement>('.ds-select-trigger');
+			const value = select.querySelector<HTMLElement>('.ds-select-value');
+			const input = select.querySelector<HTMLInputElement>('[data-ds-select-input]');
+			const items = select.querySelectorAll<HTMLButtonElement>('.ds-select-item');
 
 			const close = () => {
 				select.removeAttribute('data-open');
@@ -1375,294 +1513,257 @@ const serviceIcon = {
 </script>
 
 <style>
-	.ds2 {
-		--ds2-primary: #232bff;
-		--ds2-secondary: #5f66ff;
-		--ds2-tertiary: #8b5cff;
-		--ds2-bg: #ffffff;
-		--ds2-soft: #f6f7fb;
-		--ds2-card: rgba(255, 255, 255, 0.74);
-		--ds2-card-strong: #ffffff;
-		--ds2-ink: #18181b;
-		--ds2-muted: #71717a;
-		--ds2-border: #e4e4e7;
-		--ds2-success: #0f9f6e;
-		--ds2-warning: #d97706;
-		--ds2-danger: #e11d48;
-		--ds2-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
-		--ds2-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
-		--ds2-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-		--ds2-display-size: 72px;
-		--ds2-display-line: 72px;
-		--ds2-display-weight: 500;
-		--ds2-body-size: 16px;
-		--ds2-body-line: 26px;
-		--ds2-body-weight: 400;
-		--ds2-label-size: 14px;
-		--ds2-label-line: 20px;
-		--ds2-label-weight: 500;
-		background: var(--ds2-bg);
-		color: var(--ds2-ink);
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds {
+		--ds-primary: #232bff;
+		--ds-secondary: #5f66ff;
+		--ds-tertiary: #8b5cff;
+		--ds-bg: #ffffff;
+		--ds-soft: #f6f7fb;
+		--ds-card: rgba(255, 255, 255, 0.74);
+		--ds-card-strong: #ffffff;
+		--ds-ink: #18181b;
+		--ds-muted: #71717a;
+		--ds-border: #e4e4e7;
+		--ds-success: #0f9f6e;
+		--ds-warning: #d97706;
+		--ds-danger: #e11d48;
+		--ds-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
+		--ds-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
+		--ds-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		--ds-display-size: 72px;
+		--ds-display-line: 72px;
+		--ds-display-weight: 500;
+	--ds-body-size: 18px;
+	--ds-body-line: 30px;
+		--ds-body-weight: 400;
+		--ds-label-size: 14px;
+		--ds-label-line: 20px;
+		--ds-label-weight: 500;
+		background: var(--ds-bg);
+		color: var(--ds-ink);
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 		letter-spacing: 0;
 		overflow-x: clip;
 	}
 
-	:global(.dark) .ds2 {
-		--ds2-bg: #09090b;
-		--ds2-soft: #111116;
-		--ds2-card: rgba(24, 24, 27, 0.74);
-		--ds2-card-strong: #18181b;
-		--ds2-ink: #ffffff;
-		--ds2-muted: #a1a1aa;
-		--ds2-border: #27272a;
-		--ds2-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
-		background: var(--ds2-bg);
+	:global(.dark) .ds {
+		--ds-bg: #09090b;
+		--ds-soft: #111116;
+		--ds-card: rgba(24, 24, 27, 0.74);
+		--ds-card-strong: #18181b;
+		--ds-ink: #ffffff;
+		--ds-muted: #a1a1aa;
+		--ds-border: #27272a;
+		--ds-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
+		background: var(--ds-bg);
 	}
 
-	.ds2 :where(p, li, td, th, input, textarea, select) {
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds :where(p, li, td, th, input, textarea, select) {
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 		letter-spacing: 0;
 	}
 
-	.ds2 :where(h1, h2, h3, h4, blockquote) {
-		font-family: var(--ds2-font-system);
-		font-weight: var(--ds2-display-weight);
+	.ds :where(h1, h2, h3, h4, blockquote) {
+		font-family: var(--ds-font-system);
+		font-weight: var(--ds-display-weight);
 		letter-spacing: 0;
 	}
 
-	.ds2-hero h1 {
-		font-size: var(--ds2-display-size);
-		font-weight: var(--ds2-display-weight);
-		line-height: var(--ds2-display-line);
+	.ds-hero h1 {
+		font-size: var(--ds-display-size);
+		font-weight: var(--ds-display-weight);
+		line-height: var(--ds-display-line);
 		letter-spacing: 0;
 	}
 
-	.ds2-container {
+	.ds-container {
 		width: min(100%, 1400px);
 		margin: 0 auto;
 		padding-inline: 24px;
 	}
 
 	@media (min-width: 1024px) {
-		.ds2-container {
+		.ds-container {
 			padding-inline: 32px;
 		}
 	}
 
-	.ds2-hero {
+	.ds-hero {
 		background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(246, 247, 251, 0.92));
 	}
 
-	:global(.dark) .ds2-hero {
+	:global(.dark) .ds-hero {
 		background: linear-gradient(180deg, rgba(9, 9, 11, 0.72), rgba(17, 17, 22, 0.92));
 	}
 
-	.ds2-section {
+	.ds-section {
 		padding-block: 80px;
 	}
 
-	.ds2-section-soft {
+	.ds-section-soft {
 		background: rgba(246, 247, 251, 0.78);
 	}
 
-	:global(.dark) .ds2-section-soft {
+	:global(.dark) .ds-section-soft {
 		background: rgba(17, 17, 22, 0.78);
 	}
 
-	.ds2-section-dark {
+	.ds-section-dark {
 		background: #18181b;
 		color: #ffffff;
 	}
 
-	.ds2-section-dark .ds2-section-head > p,
-	.ds2-section-dark .ds2-kicker {
+	.ds-section-dark .ds-section-head > p,
+	.ds-section-dark .ds-kicker {
 		color: rgba(255, 255, 255, 0.68);
 	}
 
-	.ds2-section-head {
+	.ds-section-head {
 		display: grid;
 		gap: 24px;
 		align-items: end;
 	}
 
 	@media (min-width: 900px) {
-		.ds2-section-head {
+		.ds-section-head {
 			grid-template-columns: 1fr minmax(320px, 520px);
 		}
 	}
 
-	.ds2-section-head h2,
-	.ds2-final-cta h2 {
-		font-size: var(--ds2-display-size);
-		font-weight: var(--ds2-display-weight);
-		line-height: var(--ds2-display-line);
+	.ds-section-head h2,
+	.ds-final-cta h2 {
+		font-size: var(--ds-display-size);
+		font-weight: var(--ds-display-weight);
+		line-height: var(--ds-display-line);
 		letter-spacing: 0;
 	}
 
-	.ds2-section-head > p,
-	.ds2-final-cta p {
-		color: var(--ds2-muted);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds-section-head > p,
+	.ds-final-cta p {
+		color: var(--ds-muted);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 	}
 
-	.ds2-kicker {
+	.ds-kicker {
 		display: inline-flex;
 		align-items: center;
 		min-height: 28px;
 		border-radius: 9999px;
 		background: rgba(35, 43, 255, 0.09);
 		padding: 4px 12px;
-		color: var(--ds2-primary);
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+		color: var(--ds-primary);
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		letter-spacing: 0;
 	}
 
-	.ds2-card,
-	.ds2-dashboard,
-	.ds2-quote,
-	.ds2-price-card,
-	.ds2-testimonial {
+	.ds-card,
+	.ds-quote,
+	.ds-price-card,
+	.ds-testimonial {
 		min-width: 0;
 		border: 1px solid rgba(255, 255, 255, 0.78);
 		border-radius: 24px;
-		background: var(--ds2-card);
-		box-shadow: var(--ds2-shadow);
+		background: var(--ds-card);
+		box-shadow: var(--ds-shadow);
 		backdrop-filter: blur(40px);
 	}
 
-	:global(.dark) .ds2-card,
-	:global(.dark) .ds2-dashboard,
-	:global(.dark) .ds2-quote,
-	:global(.dark) .ds2-price-card,
-	:global(.dark) .ds2-testimonial {
+	:global(.dark) .ds-card,
+	:global(.dark) .ds-quote,
+	:global(.dark) .ds-price-card,
+	:global(.dark) .ds-testimonial {
 		border-color: rgba(255, 255, 255, 0.1);
 	}
 
-	.ds2-card,
-	.ds2-dashboard,
-	.ds2-price-card,
-	.ds2-testimonial {
+	.ds-card,
+	.ds-price-card,
+	.ds-testimonial {
 		padding: 24px;
 	}
 
 	@media (min-width: 768px) {
-		.ds2-card,
-		.ds2-dashboard,
-		.ds2-price-card,
-		.ds2-testimonial {
+		.ds-card,
+		.ds-price-card,
+		.ds-testimonial {
 			padding: 32px;
 		}
 	}
 
-	.ds2-dashboard {
-		position: relative;
-		border-radius: 40px;
-		box-shadow: var(--ds2-shadow), var(--ds2-glow);
-	}
-
-	.ds2-metric {
-		border: 1px solid var(--ds2-border);
-		border-radius: 16px;
-		background: rgba(255, 255, 255, 0.58);
-		padding: 16px;
-	}
-
-	:global(.dark) .ds2-metric {
-		background: rgba(255, 255, 255, 0.05);
-	}
-
-	.ds2-metric p,
-	.ds2-stat-card p,
-	.ds2-kpi-row span {
+	.ds-stat-card p,
+	.ds-kpi-row span {
 		font-size: 28px;
 		line-height: 1;
 		font-weight: 700;
 	}
 
-	.ds2-metric span,
-	.ds2-stat-card span,
-	.ds2-kpi-row p {
+	.ds-stat-card span,
+	.ds-kpi-row p {
 		margin-top: 8px;
 		display: block;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 13px;
 		line-height: 1.45;
 	}
 
-	.ds2-progress {
-		height: 8px;
-		overflow: hidden;
-		border-radius: 9999px;
-		background: rgba(113, 113, 122, 0.16);
-	}
-
-	.ds2-progress span {
-		display: block;
-		height: 100%;
-		border-radius: inherit;
-		background: linear-gradient(90deg, var(--ds2-primary), var(--ds2-secondary));
-	}
-
-	.ds2-nav-pill,
-	.ds2-chip,
-	.ds2-status,
-	.ds2-tab,
-	.ds2-page-button {
+	.ds-nav-pill,
+	.ds-chip,
+	.ds-status,
+	.ds-tab,
+	.ds-page-button {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		border-radius: 9999px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: rgba(255, 255, 255, 0.7);
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 13px;
 		font-weight: 700;
 	}
 
-	.ds2-chip {
+	.ds-chip {
 		min-height: 34px;
 		padding: 6px 14px;
 		white-space: nowrap;
 	}
 
-	:global(.dark) .ds2-nav-pill,
-	:global(.dark) .ds2-chip,
-	:global(.dark) .ds2-tab,
-	:global(.dark) .ds2-page-button {
+	:global(.dark) .ds-nav-pill,
+	:global(.dark) .ds-chip,
+	:global(.dark) .ds-tab,
+	:global(.dark) .ds-page-button {
 		background: rgba(255, 255, 255, 0.05);
 	}
 
-	.ds2-nav-pill {
+	.ds-nav-pill {
 		min-height: 36px;
 		padding: 0 14px;
 		transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
 	}
 
-	.ds2-nav-pill:hover,
-	.ds2-page-button:hover,
-	.ds2-tab.is-active,
-	.ds2-page-button.is-active {
+	.ds-nav-pill:hover,
+	.ds-page-button:hover,
+	.ds-tab.is-active,
+	.ds-page-button.is-active {
 		border-color: transparent;
 		background: rgba(35, 43, 255, 0.09);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-btn {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: transparent;
+	.ds-btn {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: transparent;
 		display: inline-flex;
 		min-height: 44px;
 		position: relative;
@@ -1685,7 +1786,7 @@ const serviceIcon = {
 			transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
 
-	.ds2-btn::before {
+	.ds-btn::before {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -1693,7 +1794,7 @@ const serviceIcon = {
 		width: 16px;
 		height: 16px;
 		border-radius: 9999px;
-		background: var(--ds2-btn-fill);
+		background: var(--ds-btn-fill);
 		opacity: 0;
 		content: "";
 		transform: translate(-50%, -50%);
@@ -1703,7 +1804,7 @@ const serviceIcon = {
 			opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
 
-	.ds2-btn::after {
+	.ds-btn::after {
 		position: absolute;
 		top: 50%;
 		left: -28px;
@@ -1718,127 +1819,150 @@ const serviceIcon = {
 			color 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-btn > span,
-	:global(.ds2-btn > svg) {
+	.ds-btn > span,
+	:global(.ds-btn > svg) {
 		position: relative;
 		z-index: 1;
 	}
 
-	.ds2-btn > span {
+	.ds-btn > span {
 		transform: translateX(-4px);
 		transition: transform 800ms ease;
 	}
 
-	:global(.ds2-btn > svg) {
+	:global(.ds-btn > svg) {
 		flex: 0 0 auto;
 		transition:
 			opacity 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
 			transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-btn:hover {
-		border-color: var(--ds2-btn-hover-border);
-		color: var(--ds2-btn-hover-color);
+	.ds-btn:hover {
+		border-color: var(--ds-btn-hover-border);
+		color: var(--ds-btn-hover-color);
 	}
 
-	.ds2-btn:hover::before {
+	.ds-btn:hover::before {
 		width: 340px;
 		height: 340px;
 		opacity: 1;
 	}
 
-	.ds2-btn:hover::after {
+	.ds-btn:hover::after {
 		left: 16px;
-		color: var(--ds2-btn-hover-color);
+		color: var(--ds-btn-hover-color);
 	}
 
-	.ds2-btn:hover > span {
+	.ds-btn:hover > span {
 		transform: translateX(10px);
 	}
 
-	:global(.ds2-btn:hover > svg:last-child) {
+	:global(.ds-btn:hover > svg:last-child) {
 		opacity: 0;
 		transform: translateX(64px);
 	}
 
-	.ds2-btn:active {
+	.ds-btn:active {
 		transform: scale(0.96);
 	}
 
-	.ds2-btn-primary {
-		--ds2-btn-fill: var(--ds2-card-strong);
-		--ds2-btn-hover-color: var(--ds2-primary);
-		--ds2-btn-hover-border: var(--ds2-border);
-		background: var(--ds2-primary);
+	.ds-btn-primary {
+		--ds-btn-fill: var(--ds-card-strong);
+		--ds-btn-hover-color: var(--ds-primary);
+		--ds-btn-hover-border: var(--ds-border);
+		background: var(--ds-primary);
 		color: #ffffff;
 		box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.75);
 	}
 
-	.ds2-btn-primary:hover {
-		background: var(--ds2-card-strong);
+	.ds-btn-primary:hover {
+		background: var(--ds-card-strong);
 		box-shadow: none;
 	}
 
-	.ds2-btn-secondary {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: transparent;
-		border-color: var(--ds2-border);
-		background: rgba(255, 255, 255, 0.76);
-		color: var(--ds2-primary);
+	.ds-btn-consultation {
+		--ds-btn-fill: var(--ds-card-strong);
+		--ds-btn-hover-color: var(--ds-primary);
+		--ds-btn-hover-border: var(--ds-border);
+		background: var(--ds-primary);
+		color: #ffffff;
+		box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.75);
 	}
 
-	:global(.dark) .ds2-btn-secondary {
-		background: rgba(255, 255, 255, 0.06);
+	.ds-btn-consultation:hover,
+	.ds-btn-consultation:focus-visible {
+		background: var(--ds-card-strong);
+		box-shadow: none;
 	}
 
-	.ds2-btn-secondary:hover,
-	.ds2-btn-dark:hover {
-		background: var(--ds2-primary);
-	}
-
-	.ds2-btn-dark {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: transparent;
-		background: var(--ds2-ink);
-		color: var(--ds2-bg);
-	}
-
-	.ds2-btn-ghost {
-		--ds2-btn-fill: var(--ds2-card-strong);
-		--ds2-btn-hover-color: var(--ds2-ink);
-		--ds2-btn-hover-border: var(--ds2-border);
-		color: var(--ds2-muted);
-	}
-
-	.ds2-btn-ghost:hover {
-		background: var(--ds2-card-strong);
-	}
-
-	.ds2-free-action {
+	.ds-consultation-action {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 12px;
-		margin-top: 24px;
+		margin-top: 32px;
 	}
 
-	.ds2-free-label {
+	.ds-consultation-action-stack {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+		margin-top: 20px;
+	}
+
+	.ds-free-label {
 		margin-left: 12px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: clamp(42px, 6vw, 76px);
 		font-weight: 800;
 		line-height: 1;
 		will-change: transform;
 	}
 
-	.ds2-free-action .ds2-btn-primary:hover + .ds2-free-label,
-	.ds2-free-action .ds2-btn-primary:focus-visible + .ds2-free-label {
-		animation: ds2-free-hop 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
+	.ds-consultation-action .ds-btn-consultation:hover + .ds-free-label,
+	.ds-consultation-action .ds-btn-consultation:focus-visible + .ds-free-label {
+		animation: ds-free-hop 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
-	.ds2-icon-button {
+	.ds-btn-secondary {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: transparent;
+		border-color: var(--ds-border);
+		background: rgba(255, 255, 255, 0.76);
+		color: var(--ds-primary);
+	}
+
+	:global(.dark) .ds-btn-secondary {
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	.ds-btn-secondary:hover,
+	.ds-btn-dark:hover {
+		background: var(--ds-primary);
+	}
+
+	.ds-btn-dark {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: transparent;
+		background: var(--ds-ink);
+		color: var(--ds-bg);
+	}
+
+	.ds-btn-ghost {
+		--ds-btn-fill: var(--ds-card-strong);
+		--ds-btn-hover-color: var(--ds-ink);
+		--ds-btn-hover-border: var(--ds-border);
+		color: var(--ds-muted);
+	}
+
+	.ds-btn-ghost:hover {
+		background: var(--ds-card-strong);
+	}
+
+	.ds-icon-button {
 		display: inline-grid;
 		width: 44px;
 		height: 44px;
@@ -1846,18 +1970,18 @@ const serviceIcon = {
 		place-items: center;
 		overflow: hidden;
 		border-radius: 9999px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: rgba(255, 255, 255, 0.72);
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
 	}
 
-	:global(.dark) .ds2-icon-button {
+	:global(.dark) .ds-icon-button {
 		background: rgba(255, 255, 255, 0.05);
 	}
 
-	.ds2-icon-main,
-	.ds2-icon-clone {
+	.ds-icon-main,
+	.ds-icon-clone {
 		position: absolute;
 		inset: 0;
 		display: grid;
@@ -1867,167 +1991,579 @@ const serviceIcon = {
 			transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-icon-main {
+	.ds-icon-main {
 		opacity: 1;
 		transform: translateX(0);
 	}
 
-	.ds2-icon-clone {
+	.ds-icon-clone {
 		opacity: 0;
 		transform: translateX(-120%);
 	}
 
-	.ds2-icon-button:hover,
-	.ds2-icon-button.is-active {
+	.ds-icon-button:hover,
+	.ds-icon-button.is-active {
 		border-color: transparent;
 		background: rgba(35, 43, 255, 0.09);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-icon-button:hover .ds2-icon-main {
+	.ds-icon-button:hover .ds-icon-main {
 		opacity: 0;
 		transform: translateX(120%);
 	}
 
-	.ds2-icon-button:hover .ds2-icon-clone {
+	.ds-icon-button:hover .ds-icon-clone {
 		opacity: 1;
 		transform: translateX(0);
 	}
 
-	.ds2-status {
+	.ds-status {
 		padding: 5px 10px;
 	}
 
-	.ds2-status-success {
+	.ds-status-success {
 		border-color: transparent;
 		background: rgba(15, 159, 110, 0.1);
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
-	.ds2-status-info {
+	.ds-status-info {
 		border-color: transparent;
 		background: rgba(35, 43, 255, 0.09);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-status-warning {
+	.ds-status-warning {
 		border-color: transparent;
 		background: rgba(217, 119, 6, 0.1);
-		color: var(--ds2-warning);
+		color: var(--ds-warning);
 	}
 
-	.ds2-token-card {
+	.ds-token-card {
 		min-height: 248px;
 	}
 
-	.ds2-swatch {
+	.ds-swatch {
 		height: 96px;
 		border-radius: 16px;
 	}
 
-	.ds2-scale-row {
+	.ds-scale-row {
 		display: flex;
 		min-height: 40px;
 		align-items: center;
 		gap: 12px;
 		border-radius: 16px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		padding: 8px 12px;
 	}
 
-	.ds2-scale-row span {
+	.ds-scale-row span {
 		display: block;
 		height: 12px;
 		border-radius: 9999px;
-		background: var(--ds2-primary);
+		background: var(--ds-primary);
 	}
 
-	.ds2-scale-row b {
+	.ds-scale-row b {
 		font-size: 13px;
 	}
 
-	.ds2-radius-sample {
+	.ds-radius-sample {
 		display: grid;
 		aspect-ratio: 1;
 		place-items: center;
 		border: 1px solid transparent;
 		background: rgba(35, 43, 255, 0.08);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 13px;
 		font-weight: 700;
 	}
 
-	.ds2-type-row {
+	.ds-type-row {
 		display: grid;
 		gap: 24px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		border-radius: 24px;
-		background: var(--ds2-card);
+		background: var(--ds-card);
 		padding: 24px;
 		backdrop-filter: blur(40px);
 	}
 
 	@media (min-width: 900px) {
-		.ds2-type-row {
+		.ds-type-row {
 			grid-template-columns: 220px 1fr;
 			align-items: center;
 		}
 	}
 
-	.ds2-type-name {
-		color: var(--ds2-primary);
+	.ds-type-name {
+		color: var(--ds-primary);
 		font-size: 13px;
 		font-weight: 700;
 	}
 
-	.ds2-type-example {
+	.ds-type-example {
 		max-width: 960px;
 		line-height: 1.05;
 		overflow-wrap: anywhere;
 	}
 
-	.ds2-quote {
-		border-left: 4px solid var(--ds2-primary);
+	.ds-quote {
+		border-left: 4px solid var(--ds-primary);
 		padding: 32px;
 	}
 
-	.ds2-callout {
+	.ds-callout {
 		border-radius: 24px;
-		border: 1px solid var(--ds2-border);
-		background: var(--ds2-card-strong);
+		border: 1px solid var(--ds-border);
+		background: var(--ds-card-strong);
 		padding: 24px;
 	}
 
-	.ds2-callout p {
+	.ds-callout p {
 		font-size: 18px;
 	}
 
-	.ds2-callout span {
+	.ds-callout span {
 		margin-top: 10px;
 		display: block;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.7;
 	}
 
-	.ds2-callout-info {
-		border-color: var(--ds2-border);
+	.ds-callout-info {
+		border-color: var(--ds-border);
 	}
 
-	.ds2-callout-success {
-		border-color: var(--ds2-border);
+	.ds-callout-success {
+		border-color: var(--ds-border);
 	}
 
-	.ds2-callout-warning {
-		border-color: var(--ds2-border);
+	.ds-callout-warning {
+		border-color: var(--ds-border);
 	}
 
-	.ds2-tab {
+	.ds-specimen-row {
+		display: grid;
+		gap: 24px;
+		border: 1px solid var(--ds-border);
+		border-radius: 24px;
+		background: var(--ds-card-strong);
+		padding: 24px;
+	}
+
+	@media (min-width: 900px) {
+		.ds-specimen-row {
+			grid-template-columns: minmax(180px, 240px) 1fr;
+			align-items: start;
+		}
+	}
+
+	.ds-specimen-info p {
+		color: var(--ds-primary);
+		font-size: 13px;
+		font-weight: 700;
+		line-height: 18px;
+	}
+
+	.ds-specimen-info span,
+	.ds-specimen-info b {
+		display: block;
+		margin-top: 8px;
+		color: var(--ds-muted);
+		font-size: 13px;
+		line-height: 1.5;
+	}
+
+	.ds-specimen-info b {
+		color: var(--ds-ink);
+		font-weight: 500;
+	}
+
+	.ds-specimen-metrics {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 18px;
+	}
+
+	.ds-specimen-metrics span {
+		display: inline-flex;
+		min-height: 34px;
+		align-items: center;
+		gap: 8px;
+		border-radius: 9999px;
+		border: 1px solid var(--ds-border);
+		background: rgba(35, 43, 255, 0.06);
+		padding: 6px 12px;
+		color: var(--ds-muted);
+		font-size: 12px;
+		line-height: 16px;
+	}
+
+	.ds-specimen-metrics b {
+		color: var(--ds-primary);
+		font-size: 14px;
+		line-height: 18px;
+	}
+
+	.ds-specimen-sample {
+		display: grid;
+		grid-template-columns: 56px minmax(0, 1fr);
+		gap: 18px;
+		align-items: start;
+	}
+
+	.ds-specimen-ruler {
+		position: relative;
+		width: 56px;
+		height: max(var(--spec-size), 13px);
+		min-height: 13px;
+		border-top: 1px solid var(--ds-primary);
+		border-bottom: 1px solid var(--ds-primary);
+		color: var(--ds-primary);
+	}
+
+	.ds-specimen-ruler::before {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 9px;
+		width: 1px;
+		background: var(--ds-primary);
+		content: "";
+	}
+
+	.ds-specimen-ruler span {
+		position: absolute;
+		top: 50%;
+		left: 18px;
+		font-size: 11px;
+		font-weight: 700;
+		line-height: 1;
+		transform: translateY(-50%);
+		white-space: nowrap;
+	}
+
+	.ds-specimen-hero,
+	.ds-specimen-section {
+		max-width: 920px;
+		font-size: 72px;
+		font-weight: 500;
+		line-height: 72px;
+		overflow-wrap: anywhere;
+	}
+
+	.ds-specimen-content-h1 {
+		max-width: 760px;
+		font-size: 48px;
+		font-weight: 700;
+		line-height: 1.05;
+	}
+
+	.ds-specimen-content-h2 {
+		font-size: 24px;
+		font-weight: 600;
+		line-height: 1.24;
+	}
+
+	.ds-specimen-card-title {
+		font-size: 26px;
+		font-weight: 500;
+		line-height: 1.12;
+	}
+
+	.ds-specimen-lead {
+		max-width: 780px;
+		color: var(--ds-muted);
+		font-size: 18px;
+		line-height: 1.75;
+	}
+
+	.ds-specimen-body {
+		max-width: 760px;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 30px;
+	}
+
+	.ds-specimen-caption {
+		font-size: 13px;
+		font-weight: 700;
+		line-height: 1.45;
+	}
+
+	.ds-specimen-note {
+		margin-top: 14px;
+		max-width: 760px;
+		color: var(--ds-muted);
+		font-size: 14px;
+		line-height: 1.65;
+	}
+
+	.ds-rich-text-card h3,
+	.ds-differences h3 {
+		margin-top: 12px;
+		font-size: 36px;
+		font-weight: 500;
+		line-height: 1.08;
+	}
+
+	.ds-rich-text-card h4 {
+		margin-top: 24px;
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1.35;
+	}
+
+	.ds-rich-text-card p:not(.ds-kicker),
+	.ds-rich-text-card li {
+		max-width: 760px;
+		color: var(--ds-muted);
+		line-height: 1.75;
+	}
+
+	.ds-rich-text-card p:not(.ds-kicker) {
+		margin-top: 16px;
+	}
+
+	.ds-rich-text-card ul,
+	.ds-rich-text-card ol {
+		margin-top: 12px;
+		padding-left: 24px;
+	}
+
+	.ds-rich-text-card ul {
+		list-style: disc;
+	}
+
+	.ds-rich-text-card ol {
+		list-style: decimal;
+	}
+
+	.ds-rich-text-card a {
+		color: var(--ds-primary);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.ds-rich-text-card code {
+		border-radius: 6px;
+		background: rgba(113, 113, 122, 0.14);
+		padding: 2px 6px;
+		color: var(--ds-ink);
+		font-size: 14px;
+	}
+
+	.ds-tag-showcase p:not(.ds-kicker),
+	.ds-specimen-quote p:not(.ds-kicker) {
+		margin-top: 18px;
+		color: var(--ds-muted);
+		font-size: 14px;
+		line-height: 1.65;
+	}
+
+	.ds-case-tag {
+		display: inline-flex;
+		min-height: 28px;
+		align-items: center;
+		border-radius: 9999px;
+		border: 1px solid var(--ds-border);
+		background: var(--ds-soft);
+		padding: 4px 10px;
+		color: var(--ds-muted);
+		font-size: 12px;
+		line-height: 16px;
+	}
+
+	.ds-case-media-showcase {
+		display: grid;
+		gap: 28px;
+	}
+
+	.ds-case-media-head {
+		display: grid;
+		gap: 12px;
+	}
+
+	.ds-case-media-head h3 {
+		font-size: 28px;
+		font-weight: 700;
+		line-height: 1.15;
+	}
+
+	.ds-case-media-head p {
+		max-width: 760px;
+		color: var(--ds-muted);
+		line-height: 1.7;
+	}
+
+	.ds-case-media-grid {
+		display: grid;
+		gap: 24px;
+	}
+
+	@media (min-width: 900px) {
+		.ds-case-media-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.ds-case-media-label {
+		margin-bottom: 10px;
+		color: var(--ds-muted);
+		font-family: var(--ds-font-system);
+		font-size: 13px;
+		font-weight: 700;
+		line-height: 18px;
+		text-transform: uppercase;
+	}
+
+	.ds-case-media,
+	.ds-case-slider-viewport {
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		border-radius: 24px;
+		background: #000000;
+		box-shadow: var(--ds-shadow);
+	}
+
+	.ds-case-media {
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+	}
+
+	.ds-case-slider {
+		display: grid;
+		gap: 16px;
+	}
+
+	.ds-case-slider-track {
+		display: flex;
+	}
+
+	.ds-case-slider-slide {
+		min-width: 100%;
+	}
+
+	.ds-case-slider-slide img {
+		display: block;
+		width: 100%;
+		margin: 0;
+	}
+
+	.ds-case-slider-controls {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.ds-case-slider-button {
+		display: inline-flex;
+		flex: 0 0 45px;
+		width: 45px;
+		height: 45px;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		background: transparent;
+		color: rgba(113, 113, 122, 0.42);
+		font-size: 40px;
+		font-weight: 300;
+		line-height: 1;
+		transition:
+			color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.ds-case-slider-button:hover {
+		color: #232bff;
+		transform: scale(1.03);
+	}
+
+	.ds-case-slider-dots {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.ds-case-slider-dot {
+		width: 10px;
+		height: 10px;
+		border: 0;
+		border-radius: 9999px;
+		background: rgba(113, 113, 122, 0.42);
+		padding: 0;
+		transition:
+			background 180ms ease,
+			width 180ms ease;
+	}
+
+	.ds-case-slider-dot.is-active {
+		width: 28px;
+		background: var(--ds-primary);
+	}
+
+	.ds-specimen-quote blockquote {
+		margin-top: 16px;
+		font-size: 28px;
+		font-weight: 500;
+		line-height: 1.22;
+	}
+
+	.ds-specimen-field {
+		display: block;
+	}
+
+	.ds-specimen-field > span {
+		display: block;
+		margin-bottom: 8px;
+		color: var(--ds-muted);
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 20px;
+	}
+
+	.ds-difference-row {
+		display: grid;
+		gap: 8px;
+		border-radius: 16px;
+		border: 1px solid var(--ds-border);
+		padding: 16px;
+	}
+
+	@media (min-width: 768px) {
+		.ds-difference-row {
+			grid-template-columns: minmax(160px, 220px) 1fr;
+			align-items: start;
+		}
+	}
+
+	.ds-difference-row p {
+		color: var(--ds-primary);
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.45;
+	}
+
+	.ds-difference-row span {
+		color: var(--ds-muted);
+		font-size: 14px;
+		line-height: 1.65;
+	}
+
+	.ds-tab {
 		min-height: 40px;
 		padding: 0 16px;
 	}
 
-	.ds2-page-button {
+	.ds-page-button {
 		width: 40px;
 		height: 40px;
 		position: relative;
@@ -2035,8 +2571,8 @@ const serviceIcon = {
 		border-radius: 9999px;
 	}
 
-	.ds2-page-main,
-	.ds2-page-clone {
+	.ds-page-main,
+	.ds-page-clone {
 		position: absolute;
 		inset: 0;
 		display: grid;
@@ -2046,27 +2582,27 @@ const serviceIcon = {
 			transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-page-main {
+	.ds-page-main {
 		opacity: 1;
 		transform: translateX(0);
 	}
 
-	.ds2-page-clone {
+	.ds-page-clone {
 		opacity: 0;
 		transform: translateX(-120%);
 	}
 
-	.ds2-page-button:hover .ds2-page-main {
+	.ds-page-button:hover .ds-page-main {
 		opacity: 0;
 		transform: translateX(120%);
 	}
 
-	.ds2-page-button:hover .ds2-page-clone {
+	.ds-page-button:hover .ds-page-clone {
 		opacity: 1;
 		transform: translateX(0);
 	}
 
-	.ds2-dark-pill {
+	.ds-dark-pill {
 		display: flex;
 		min-height: 48px;
 		align-items: center;
@@ -2079,7 +2615,7 @@ const serviceIcon = {
 		font-size: 14px;
 	}
 
-	.ds2-form {
+	.ds-form {
 		display: grid;
 		gap: 16px;
 		border-radius: 24px;
@@ -2089,21 +2625,21 @@ const serviceIcon = {
 		box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
 	}
 
-	.ds2-form label:not(.ds2-check):not(.ds2-toggle) > span,
-	.ds2-form-label {
+	.ds-form label:not(.ds-check):not(.ds-toggle) > span,
+	.ds-form-label {
 		margin-bottom: 8px;
 		display: block;
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		color: #3f3f46;
 	}
 
-	.ds2-form-field {
+	.ds-form-field {
 		position: relative;
 	}
 
-	.ds2-input {
+	.ds-input {
 		width: 100%;
 		min-height: 48px;
 		border-radius: 16px;
@@ -2116,13 +2652,13 @@ const serviceIcon = {
 		transition: border-color 150ms ease, box-shadow 150ms ease;
 	}
 
-	.ds2-input:focus {
-		border-color: var(--ds2-border);
+	.ds-input:focus {
+		border-color: var(--ds-border);
 		box-shadow: 0 0 0 4px rgba(113, 113, 122, 0.16);
 	}
 
-	.ds2-check,
-	.ds2-toggle {
+	.ds-check,
+	.ds-toggle {
 		display: flex;
 		min-height: 48px;
 		align-items: center;
@@ -2134,19 +2670,19 @@ const serviceIcon = {
 		font-size: 14px;
 	}
 
-	.ds2-check input {
+	.ds-check input {
 		width: 16px;
 		height: 16px;
-		accent-color: var(--ds2-primary);
+		accent-color: var(--ds-primary);
 	}
 
-	.ds2-toggle input {
+	.ds-toggle input {
 		position: absolute;
 		opacity: 0;
 		pointer-events: none;
 	}
 
-	.ds2-toggle span {
+	.ds-toggle span {
 		position: relative;
 		display: block;
 		width: 42px;
@@ -2155,7 +2691,7 @@ const serviceIcon = {
 		background: #d4d4d8;
 	}
 
-	.ds2-toggle span::after {
+	.ds-toggle span::after {
 		position: absolute;
 		top: 3px;
 		left: 3px;
@@ -2167,57 +2703,19 @@ const serviceIcon = {
 		transition: transform 150ms ease;
 	}
 
-	.ds2-toggle input:checked + span {
-		background: var(--ds2-primary);
+	.ds-toggle input:checked + span {
+		background: var(--ds-primary);
 	}
 
-	.ds2-toggle input:checked + span::after {
+	.ds-toggle input:checked + span::after {
 		transform: translateX(18px);
 	}
 
-	.ds2-select-note,
-	.ds2-select-lab {
-		border-radius: 24px;
-		background: rgba(255, 255, 255, 0.06);
-		padding: 24px;
-		color: #ffffff;
-	}
-
-	.ds2-select-note {
-		border: 1px solid rgba(255, 255, 255, 0.12);
-	}
-
-	.ds2-select-lab {
-		border: 1px solid rgba(255, 255, 255, 0.12);
-	}
-
-	.ds2-select-note .ds2-kicker {
-		background: rgba(255, 255, 255, 0.12);
-		color: #ffffff;
-	}
-
-	.ds2-select-note h3 {
-		margin-top: 14px;
-		font-size: 32px;
-		font-weight: 500;
-		line-height: 1.08;
-		letter-spacing: 0;
-	}
-
-	.ds2-select-note p:not(.ds2-kicker) {
-		margin-top: 16px;
-		color: rgba(255, 255, 255, 0.72);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
-		letter-spacing: 0;
-	}
-
-	.ds2-select {
+	.ds-select {
 		position: relative;
 	}
 
-	.ds2-select-trigger {
+	.ds-select-trigger {
 		display: flex;
 		width: 100%;
 		min-height: 38px;
@@ -2225,7 +2723,7 @@ const serviceIcon = {
 		justify-content: space-between;
 		gap: 10px;
 		border-radius: 8px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: #ffffff;
 		padding: 0 14px;
 		color: #18181b;
@@ -2239,36 +2737,36 @@ const serviceIcon = {
 			color 180ms ease;
 	}
 
-	.ds2-select-trigger-sm {
+	.ds-select-trigger-sm {
 		min-height: 32px;
 		padding: 0 10px;
 		font-size: 12px;
 	}
 
-	.ds2-select-trigger-lg {
+	.ds-select-trigger-lg {
 		min-height: 44px;
 		padding: 0 16px;
 		font-size: 14px;
 	}
 
-	.ds2-select-trigger:hover,
-	.ds2-select-trigger:focus-visible,
-	.ds2-select[data-open="true"] .ds2-select-trigger {
-		border-color: var(--ds2-border);
+	.ds-select-trigger:hover,
+	.ds-select-trigger:focus-visible,
+	.ds-select[data-open="true"] .ds-select-trigger {
+		border-color: var(--ds-border);
 		box-shadow: 0 0 0 3px rgba(113, 113, 122, 0.18);
 	}
 
-	.ds2-select-form .ds2-select-trigger {
+	.ds-select-form .ds-select-trigger {
 		min-height: 48px;
 		border-radius: 16px;
 		padding: 12px 14px;
 	}
 
-	.ds2-select-form .ds2-select-content {
+	.ds-select-form .ds-select-content {
 		top: calc(100% + 8px);
 	}
 
-	:global(.ds2-select-chevron) {
+	:global(.ds-select-chevron) {
 		flex: 0 0 auto;
 		opacity: 0.6;
 		transform: rotate(90deg);
@@ -2277,12 +2775,12 @@ const serviceIcon = {
 			transform 200ms ease;
 	}
 
-	:global(.ds2-select[data-open="true"] .ds2-select-chevron) {
+	:global(.ds-select[data-open="true"] .ds-select-chevron) {
 		opacity: 1;
 		transform: rotate(-90deg);
 	}
 
-	.ds2-select-content {
+	.ds-select-content {
 		position: absolute;
 		top: calc(100% + 6px);
 		right: 0;
@@ -2290,7 +2788,7 @@ const serviceIcon = {
 		z-index: 50;
 		overflow: hidden;
 		border-radius: 10px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: #ffffff;
 		color: #18181b;
 		box-shadow: 0 18px 48px -22px rgba(0, 0, 0, 0.32);
@@ -2305,46 +2803,46 @@ const serviceIcon = {
 			visibility 180ms ease;
 	}
 
-	.ds2-select[data-open="true"] .ds2-select-content {
-		animation: ds2-select-in 180ms ease-out;
+	.ds-select[data-open="true"] .ds-select-content {
+		animation: ds-select-in 180ms ease-out;
 		opacity: 1;
 		pointer-events: auto;
 		transform: translateY(0) scale(1);
 		visibility: visible;
 	}
 
-	.ds2-select-viewport {
+	.ds-select-viewport {
 		max-height: 260px;
 		overflow: auto;
 		padding: 6px;
 	}
 
-	.ds2-select-scroll {
+	.ds-select-scroll {
 		display: grid;
 		width: 100%;
 		min-height: 24px;
 		place-items: center;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		cursor: default;
 	}
 
-	:global(.ds2-select-scroll-up svg) {
+	:global(.ds-select-scroll-up svg) {
 		transform: rotate(-90deg);
 	}
 
-	:global(.ds2-select-scroll-down svg) {
+	:global(.ds-select-scroll-down svg) {
 		transform: rotate(90deg);
 	}
 
-	.ds2-select-label {
+	.ds-select-label {
 		padding: 6px 8px 6px 32px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 12px;
 		font-weight: 500;
 		line-height: 18px;
 	}
 
-	.ds2-select-item {
+	.ds-select-item {
 		position: relative;
 		display: flex;
 		width: 100%;
@@ -2360,16 +2858,16 @@ const serviceIcon = {
 			color 150ms ease;
 	}
 
-	.ds2-select-item:hover,
-	.ds2-select-item:focus-visible {
+	.ds-select-item:hover,
+	.ds-select-item:focus-visible {
 		background: rgba(35, 43, 255, 0.09);
 	}
 
-	.ds2-select-item.is-selected {
-		color: var(--ds2-primary);
+	.ds-select-item.is-selected {
+		color: var(--ds-primary);
 	}
 
-	.ds2-select-indicator {
+	.ds-select-indicator {
 		position: absolute;
 		top: 50%;
 		left: 10px;
@@ -2377,23 +2875,23 @@ const serviceIcon = {
 		width: 14px;
 		height: 14px;
 		place-items: center;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		opacity: 0;
 		transform: translateY(-50%);
 		transition: opacity 150ms ease;
 	}
 
-	.ds2-select-item.is-selected .ds2-select-indicator {
+	.ds-select-item.is-selected .ds-select-indicator {
 		opacity: 1;
 	}
 
-	.ds2-select-separator {
+	.ds-select-separator {
 		height: 1px;
 		margin: 6px;
-		background: var(--ds2-border);
+		background: var(--ds-border);
 	}
 
-	@keyframes ds2-select-in {
+	@keyframes ds-select-in {
 		from {
 			opacity: 0;
 			transform: translateY(-8px) scale(0.96);
@@ -2404,113 +2902,42 @@ const serviceIcon = {
 		}
 	}
 
-	.ds2-mini-hero {
-		display: grid;
-		gap: 32px;
-		align-items: center;
-		border-radius: 40px;
-		background: linear-gradient(135deg, var(--ds2-card-strong), rgba(35, 43, 255, 0.08));
-		padding: 32px;
-		box-shadow: var(--ds2-shadow);
-	}
-
-	@media (min-width: 900px) {
-		.ds2-mini-hero {
-			grid-template-columns: 1fr 420px;
-			padding: 48px;
-		}
-	}
-
-	.ds2-mini-hero h3 {
-		margin-top: 12px;
-		max-width: 720px;
-		font-size: 48px;
-		line-height: 1.02;
-	}
-
-	.ds2-mini-hero p {
-		margin-top: 20px;
-		max-width: 660px;
-		color: var(--ds2-muted);
-		font-size: 18px;
-		line-height: 1.75;
-	}
-
-	.ds2-mini-visual {
-		border-radius: 24px;
-		border: 1px solid rgba(255, 255, 255, 0.78);
-		background: rgba(255, 255, 255, 0.72);
-		padding: 20px;
-		backdrop-filter: blur(40px);
-	}
-
-	:global(.dark) .ds2-mini-visual {
-		border-color: rgba(255, 255, 255, 0.1);
-		background: rgba(255, 255, 255, 0.06);
-	}
-
-	.ds2-mini-line {
-		height: 16px;
-		width: 78%;
-		border-radius: 9999px;
-		background: rgba(35, 43, 255, 0.18);
-	}
-
-	.ds2-mini-line.is-short {
-		margin-top: 12px;
-		width: 52%;
-	}
-
-	.ds2-mini-tile {
-		margin-top: 20px;
-		display: grid;
-		min-height: 96px;
-		place-items: center;
-		border-radius: 20px;
-		background: var(--ds2-ink);
-		color: var(--ds2-bg);
-		font-size: 22px;
-		font-weight: 700;
-	}
-
-	.ds2-logo-strip {
+	.ds-logo-strip {
 		display: grid;
 		gap: 1px;
 		overflow: hidden;
 		border-radius: 24px;
-		border: 1px solid var(--ds2-border);
-		background: var(--ds2-border);
+		border: 1px solid var(--ds-border);
+		background: var(--ds-border);
 	}
 
 	@media (min-width: 768px) {
-		.ds2-logo-strip {
+		.ds-logo-strip {
 			grid-template-columns: repeat(5, 1fr);
 		}
 	}
 
-	.ds2-logo-strip span {
+	.ds-logo-strip span {
 		display: grid;
 		min-height: 84px;
 		place-items: center;
-		background: var(--ds2-card-strong);
+		background: var(--ds-card-strong);
 		padding: 16px;
 		text-align: center;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 15px;
 		font-weight: 700;
 	}
 
-	.ds2-service-card,
-	.ds2-stat-card,
-	.ds2-case-row,
-	.ds2-step,
-	.ds2-kpi-row,
-	.ds2-faq {
-		border: 1px solid var(--ds2-border);
-		background: var(--ds2-card-strong);
+	.ds-service-card,
+	.ds-stat-card,
+	.ds-kpi-row,
+	.ds-faq {
+		border: 1px solid var(--ds-border);
+		background: var(--ds-card-strong);
 	}
 
-	.ds2-service-card {
+	.ds-service-card {
 		min-width: 0;
 		min-height: 260px;
 		border-radius: 24px;
@@ -2518,47 +2945,47 @@ const serviceIcon = {
 		transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 	}
 
-	.ds2-service-card:hover {
+	.ds-service-card:hover {
 		transform: translateY(-2px);
-		border-color: var(--ds2-border);
-		box-shadow: var(--ds2-glow);
+		border-color: var(--ds-border);
+		box-shadow: var(--ds-glow);
 	}
 
-	.ds2-service-icon {
+	.ds-service-icon {
 		display: grid;
 		width: 48px;
 		height: 48px;
 		place-items: center;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-service-icon :global(svg) {
+	.ds-service-icon :global(svg) {
 		width: 48px;
 		height: 48px;
 	}
 
-	.ds2-stat-card {
+	.ds-stat-card {
 		border-radius: 24px;
 		padding: 24px;
 	}
 
-	.ds2-price-card {
+	.ds-price-card {
 		display: flex;
 		min-height: 430px;
 		flex-direction: column;
 	}
 
-	.ds2-price-card.is-featured {
+	.ds-price-card.is-featured {
 		border-color: transparent;
-		background: linear-gradient(180deg, rgba(35, 43, 255, 0.1), var(--ds2-card));
-		box-shadow: var(--ds2-shadow), var(--ds2-glow);
+		background: linear-gradient(180deg, rgba(35, 43, 255, 0.1), var(--ds-card));
+		box-shadow: var(--ds-shadow), var(--ds-glow);
 	}
 
-	.ds2-price-card ul {
+	.ds-price-card ul {
 		margin-bottom: 28px;
 	}
 
-	.ds2-price-card .ds2-btn {
+	.ds-price-card .ds-btn {
 		margin-top: auto;
 	}
 
@@ -2614,11 +3041,11 @@ const serviceIcon = {
 			margin-bottom: 32px;
 		}
 
-		.bitrix-prices .ds2-price-card:not(.bitrix-audit-card) {
+		.bitrix-prices .ds-price-card:not(.bitrix-audit-card) {
 			height: 100%;
 		}
 
-		.bitrix-prices .ds2-price-card.is-featured {
+		.bitrix-prices .ds-price-card.is-featured {
 			position: relative;
 			z-index: 1;
 			margin-top: -18px;
@@ -2649,7 +3076,7 @@ const serviceIcon = {
 
 	.bitrix-problem-card p {
 		margin-top: 22px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 14px;
 		font-weight: 700;
 	}
@@ -2665,7 +3092,7 @@ const serviceIcon = {
 		margin-top: 0;
 	}
 
-	.bitrix-audit-card .ds2-btn {
+	.bitrix-audit-card .ds-btn {
 		margin-top: 24px;
 	}
 
@@ -2695,7 +3122,7 @@ const serviceIcon = {
 			margin-top: 0;
 		}
 
-		.bitrix-audit-card .ds2-btn {
+		.bitrix-audit-card .ds-btn {
 			grid-column: 1 / -1;
 			width: max-content;
 		}
@@ -2711,14 +3138,14 @@ const serviceIcon = {
 			grid-column: auto;
 		}
 
-		.bitrix-audit-card .ds2-btn {
+		.bitrix-audit-card .ds-btn {
 			grid-column: auto;
 			justify-self: end;
 			margin-top: 0;
 		}
 	}
 
-	.ds2-price-card h3 {
+	.ds-price-card h3 {
 		margin-top: 24px;
 		font-size: 26px;
 		line-height: 1.12;
@@ -2730,7 +3157,7 @@ const serviceIcon = {
 
 	.bitrix-price {
 		margin-top: 12px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 30px;
 		font-weight: 700;
 		line-height: 1.1;
@@ -2738,49 +3165,49 @@ const serviceIcon = {
 
 	.bitrix-card-text {
 		margin-top: 12px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.65;
 	}
 
-	.ds2-price-card ul,
+	.ds-price-card ul,
 	.bitrix-services ul {
 		display: grid;
 		gap: 12px;
 		margin-top: 24px;
 	}
 
-	.ds2-price-card li,
+	.ds-price-card li,
 	.bitrix-services li {
 		display: flex;
 		gap: 10px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.5;
 	}
 
-	.ds2-price-card li :global(svg),
+	.ds-price-card li :global(svg),
 	.bitrix-services li :global(svg),
 	.bitrix-reasons :global(svg) {
 		flex: 0 0 auto;
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
 	.bitrix-pattern-copy h3 {
 		margin-top: 14px;
 		font-size: 52px;
-		font-weight: var(--ds2-display-weight);
+		font-weight: var(--ds-display-weight);
 		line-height: 54px;
 	}
 
-	.bitrix-pattern-copy p:not(.ds2-kicker) {
+	.bitrix-pattern-copy p:not(.ds-kicker) {
 		margin-top: 22px;
-		color: var(--ds2-muted);
-		font-size: var(--ds2-body-size);
-		line-height: var(--ds2-body-line);
+		color: var(--ds-muted);
+		font-size: var(--ds-body-size);
+		line-height: var(--ds-body-line);
 	}
 
-	.bitrix-pattern-copy .ds2-btn {
+	.bitrix-pattern-copy .ds-btn {
 		margin-top: 28px;
 	}
 
@@ -2788,8 +3215,8 @@ const serviceIcon = {
 		overflow: hidden;
 		border-radius: 24px;
 		border: 1px solid rgba(255, 255, 255, 0.78);
-		background: var(--ds2-card);
-		box-shadow: var(--ds2-shadow);
+		background: var(--ds-card);
+		box-shadow: var(--ds-shadow);
 		backdrop-filter: blur(40px);
 	}
 
@@ -2812,7 +3239,7 @@ const serviceIcon = {
 		grid-column: 2;
 		grid-row: 1;
 		padding: 22px 22px 0 0;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 	}
 
 	.bitrix-timeline-date span {
@@ -2826,7 +3253,7 @@ const serviceIcon = {
 	.bitrix-timeline-date time {
 		display: block;
 		margin-top: 2px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 18px;
 		font-weight: 700;
 		line-height: 24px;
@@ -2844,7 +3271,7 @@ const serviceIcon = {
 		top: 0;
 		bottom: 0;
 		left: 50%;
-		border-left: 1px solid var(--ds2-border);
+		border-left: 1px solid var(--ds-border);
 		transform: translateX(-50%);
 	}
 
@@ -2867,7 +3294,7 @@ const serviceIcon = {
 		place-items: center;
 		border-radius: 9999px;
 		border: 1px solid rgba(35, 43, 255, 0.22);
-		background: var(--ds2-primary);
+		background: var(--ds-primary);
 		color: #ffffff;
 		box-shadow: 0 0 0 7px rgba(35, 43, 255, 0.1);
 		transform: translateX(-50%);
@@ -2886,7 +3313,7 @@ const serviceIcon = {
 	}
 
 	.bitrix-timeline-content h3 {
-		color: var(--ds2-ink);
+		color: var(--ds-ink);
 		font-size: 24px;
 		font-weight: 500;
 		line-height: 1.18;
@@ -2894,7 +3321,7 @@ const serviceIcon = {
 
 	.bitrix-timeline-content p {
 		margin-top: 8px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.65;
 	}
@@ -2976,7 +3403,7 @@ const serviceIcon = {
 		}
 	}
 
-	@keyframes ds2-free-hop {
+	@keyframes ds-free-hop {
 		0%,
 		100% {
 			transform: translateY(0) rotate(0deg) scale(1);
@@ -3004,17 +3431,14 @@ const serviceIcon = {
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.bitrix-logo-track {
-			animation: none;
-		}
-
-		.ds2-free-action .ds2-btn-primary:hover + .ds2-free-label,
-		.ds2-free-action .ds2-btn-primary:focus-visible + .ds2-free-label {
+		.bitrix-logo-track,
+		.ds-consultation-action .ds-btn-consultation:hover + .ds-free-label,
+		.ds-consultation-action .ds-btn-consultation:focus-visible + .ds-free-label {
 			animation: none;
 		}
 	}
 
-	.bitrix-services .ds2-service-card {
+	.bitrix-services .ds-service-card {
 		min-height: 330px;
 	}
 
@@ -3029,7 +3453,7 @@ const serviceIcon = {
 		color: #ffffff;
 	}
 
-	.bitrix-services .is-accent .ds2-service-icon {
+	.bitrix-services .is-accent .ds-service-icon {
 		color: #ffffff;
 	}
 
@@ -3038,7 +3462,7 @@ const serviceIcon = {
 	}
 
 	.bitrix-services .is-accent li :global(svg) {
-		color: var(--ds2-secondary);
+		color: var(--ds-secondary);
 	}
 
 	.bitrix-reasons-card {
@@ -3110,7 +3534,7 @@ const serviceIcon = {
 		}
 
 		.bitrix-problem-card,
-		.bitrix-services .ds2-service-card {
+		.bitrix-services .ds-service-card {
 			min-height: 320px;
 		}
 
@@ -3129,95 +3553,70 @@ const serviceIcon = {
 		}
 	}
 
-	.ds2-step {
-		display: grid;
-		grid-template-columns: auto auto 1fr;
-		gap: 14px;
-		align-items: start;
-		border-radius: 18px;
-		padding: 16px;
-	}
-
-	.ds2-step-number {
-		color: var(--ds2-primary);
-		font-size: 13px;
-		font-weight: 700;
-	}
-
-	.ds2-step p {
-		font-weight: 700;
-	}
-
-	.ds2-step span {
-		margin-top: 4px;
-		display: block;
-		color: var(--ds2-muted);
-		font-size: 14px;
-		line-height: 1.55;
-	}
-
-	.ds2-case-row {
-		display: grid;
-		grid-template-columns: 1fr auto;
-		gap: 20px;
-		align-items: center;
-		border-radius: 20px;
-		padding: 20px;
-		transition: border-color 150ms ease, transform 150ms ease;
-	}
-
-	.ds2-case-row:hover {
-		transform: translateX(2px);
-		border-color: var(--ds2-border);
-	}
-
-	.ds2-table {
+	.ds-table {
 		width: 100%;
 		min-width: 620px;
 		border-collapse: collapse;
 		font-size: 14px;
 	}
 
-	.ds2-table th,
-	.ds2-table td {
-		border-bottom: 1px solid var(--ds2-border);
+	.ds-table th,
+	.ds-table td {
+		border-bottom: 1px solid var(--ds-border);
 		padding: 14px;
 		text-align: left;
 	}
 
-	.ds2-table th {
-		color: var(--ds2-primary);
+	.ds-table th {
+		color: var(--ds-primary);
 		font-weight: 700;
 	}
 
-	.ds2-testimonial {
+	.ds-table tbody tr {
+		transition: background-color 150ms ease;
+	}
+
+	.ds-table tbody tr:hover td {
+		background: #f4f4f5;
+	}
+
+	:global(.dark) .ds-table tbody tr:hover td {
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	.ds-testimonial {
 		background: #18181b;
 		color: #ffffff;
 	}
 
-	.ds2-testimonial blockquote {
+	.ds-testimonial .ds-kicker {
+		background: #232bff;
+		color: #ffffff;
+	}
+
+	.ds-testimonial blockquote {
 		margin-top: 18px;
 		font-size: 28px;
 		line-height: 1.22;
 	}
 
-	.ds2-avatar {
+	.ds-avatar {
 		display: grid;
 		width: 48px;
 		height: 48px;
 		place-items: center;
 		border-radius: 9999px;
-		background: var(--ds2-primary);
+		background: var(--ds-primary);
 		color: #ffffff;
 		font-weight: 700;
 	}
 
-	.ds2-testimonial span {
+	.ds-testimonial span {
 		color: rgba(255, 255, 255, 0.62);
 		font-size: 14px;
 	}
 
-	.ds2-faq {
+	.ds-faq {
 		overflow: hidden;
 		border-radius: 20px;
 		padding: 20px;
@@ -3227,7 +3626,7 @@ const serviceIcon = {
 			box-shadow 200ms ease;
 	}
 
-	.ds2-faq summary {
+	.ds-faq summary {
 		display: flex;
 		cursor: pointer;
 		list-style: none;
@@ -3240,19 +3639,19 @@ const serviceIcon = {
 		transition: color 200ms ease;
 	}
 
-	.ds2-faq[open] summary {
+	.ds-faq[open] summary {
 		margin-bottom: 0;
 	}
 
-	.ds2-faq summary::-webkit-details-marker {
+	.ds-faq summary::-webkit-details-marker {
 		display: none;
 	}
 
-	.ds2-faq summary span {
+	.ds-faq summary span {
 		transition: color 200ms ease;
 	}
 
-	:global(.ds2-faq summary svg) {
+	:global(.ds-faq summary svg) {
 		flex: 0 0 auto;
 		opacity: 0.6;
 		transition:
@@ -3260,20 +3659,20 @@ const serviceIcon = {
 			transform 200ms ease;
 	}
 
-	.ds2-faq:hover {
+	.ds-faq:hover {
 		box-shadow: 0 18px 44px -28px rgba(24, 24, 27, 0.28);
 	}
 
-	.ds2-faq[open] {
-		background: var(--ds2-card);
+	.ds-faq[open] {
+		background: var(--ds-card);
 	}
 
-	:global(.ds2-faq[open] summary svg) {
+	:global(.ds-faq[open] summary svg) {
 		opacity: 1;
 		transform: rotate(180deg);
 	}
 
-	.ds2-faq-content {
+	.ds-faq-content {
 		display: grid;
 		grid-template-rows: 0fr;
 		opacity: 0;
@@ -3282,26 +3681,26 @@ const serviceIcon = {
 			opacity 200ms ease;
 	}
 
-	.ds2-faq[open] .ds2-faq-content {
+	.ds-faq[open] .ds-faq-content {
 		grid-template-rows: 1fr;
 		opacity: 1;
-		animation: ds2-accordion-down 220ms ease-out;
+		animation: ds-accordion-down 220ms ease-out;
 	}
 
-	.ds2-faq.is-closing .ds2-faq-content {
-		animation: ds2-accordion-up 220ms ease-in;
+	.ds-faq.is-closing .ds-faq-content {
+		animation: ds-accordion-up 220ms ease-in;
 	}
 
-	.ds2-faq-content p {
+	.ds-faq-content p {
 		min-height: 0;
 		overflow: hidden;
 		margin-top: 12px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.7;
 	}
 
-	@keyframes ds2-accordion-down {
+	@keyframes ds-accordion-down {
 		from {
 			opacity: 0;
 			transform: translateY(-4px);
@@ -3313,7 +3712,7 @@ const serviceIcon = {
 		}
 	}
 
-	@keyframes ds2-accordion-up {
+	@keyframes ds-accordion-up {
 		from {
 			opacity: 1;
 			transform: translateY(0);
@@ -3325,7 +3724,7 @@ const serviceIcon = {
 		}
 	}
 
-	.ds2-kpi-row {
+	.ds-kpi-row {
 		display: flex;
 		min-height: 80px;
 		align-items: center;
@@ -3335,41 +3734,41 @@ const serviceIcon = {
 		padding: 16px;
 	}
 
-	.ds2-kpi-row b {
-		color: var(--ds2-success);
+	.ds-kpi-row b {
+		color: var(--ds-success);
 	}
 
-	.ds2-range {
+	.ds-range {
 		width: 100%;
-		accent-color: var(--ds2-primary);
+		accent-color: var(--ds-primary);
 	}
 
-	.ds2-timeline-row {
+	.ds-timeline-row {
 		display: grid;
 		grid-template-columns: 54px 12px 1fr;
 		gap: 12px;
 		align-items: start;
 	}
 
-	.ds2-timeline-row time {
-		color: var(--ds2-muted);
+	.ds-timeline-row time {
+		color: var(--ds-muted);
 		font-size: 13px;
 	}
 
-	.ds2-timeline-row span {
+	.ds-timeline-row span {
 		margin-top: 4px;
 		width: 12px;
 		height: 12px;
 		border-radius: 9999px;
-		background: var(--ds2-primary);
+		background: var(--ds-primary);
 		box-shadow: 0 0 0 5px rgba(35, 43, 255, 0.12);
 	}
 
-	.ds2-timeline-row p {
+	.ds-timeline-row p {
 		line-height: 1.55;
 	}
 
-	.ds2-final-cta {
+	.ds-final-cta {
 		display: grid;
 		gap: 32px;
 		align-items: center;
@@ -3377,74 +3776,66 @@ const serviceIcon = {
 		background: linear-gradient(135deg, #18181b, #232bff);
 		padding: 32px;
 		color: #ffffff;
-		box-shadow: var(--ds2-glow);
+		box-shadow: var(--ds-glow);
 	}
 
 	@media (min-width: 900px) {
-		.ds2-final-cta {
+		.ds-final-cta {
 			grid-template-columns: 1fr auto;
 			padding: 48px;
 		}
 	}
 
-	.ds2-final-cta .ds2-kicker {
+	.ds-final-cta .ds-kicker {
 		background: rgba(255, 255, 255, 0.12);
 		color: #ffffff;
 	}
 
-	.ds2-final-cta p {
+	.ds-final-cta p {
 		margin-top: 18px;
 		max-width: 720px;
 		color: rgba(255, 255, 255, 0.78);
 	}
 
-	.ds2-final-cta .ds2-btn-primary {
+	.ds-final-cta .ds-btn-primary {
 		background: #ffffff;
 		color: #18181b;
 	}
 
-	.ds2 :where(.ds2-kicker, .ds2-btn, .ds2-nav-pill, .ds2-chip, .ds2-status, .ds2-tab, .ds2-page-button, .ds2-type-name, .ds2-scale-row b, .ds2-dark-pill, .ds2-check, .ds2-toggle, .ds2-select-trigger, .ds2-select-item, .ds2-select-label, .ds2-form-label, .ds2-form label:not(.ds2-check):not(.ds2-toggle) > span, .ds2-timeline-row time) {
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+	.ds :where(.ds-kicker, .ds-btn, .ds-nav-pill, .ds-chip, .ds-status, .ds-tab, .ds-page-button, .ds-type-name, .ds-scale-row b, .ds-dark-pill, .ds-check, .ds-toggle, .ds-select-trigger, .ds-select-item, .ds-select-label, .ds-form-label, .ds-form label:not(.ds-check):not(.ds-toggle) > span, .ds-timeline-row time) {
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		letter-spacing: 0;
 	}
 
-	.ds2 :where(.ds2-section-head > p, .ds2-final-cta p, .ds2-mini-hero p, .ds2-callout span, .ds2-step span, .ds2-faq p, .ds2-case-row p, .ds2-testimonial span, .ds2-metric span, .ds2-stat-card span, .ds2-kpi-row p) {
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds :where(.ds-section-head > p, .ds-final-cta p, .ds-callout span, .ds-faq p, .ds-testimonial span, .ds-stat-card span, .ds-kpi-row p) {
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 		letter-spacing: 0;
 	}
 
-	.ds2-mini-hero h3 {
-		font-size: var(--ds2-display-size);
-		font-weight: var(--ds2-display-weight);
-		line-height: var(--ds2-display-line);
-		letter-spacing: 0;
-	}
-
-	.ds2 :where(b, strong, .font-bold, .ds2-metric p, .ds2-stat-card p, .ds2-kpi-row span, .ds2-avatar, .ds2-faq summary, .ds2-step p, .ds2-table th) {
-		font-weight: var(--ds2-display-weight);
+	.ds :where(b, strong, .font-bold, .ds-stat-card p, .ds-kpi-row span, .ds-avatar, .ds-faq summary, .ds-table th) {
+		font-weight: var(--ds-display-weight);
 	}
 
 	@media (max-width: 640px) {
-		.ds2-section {
+		.ds-section {
 			padding-block: 56px;
 		}
 
-		.ds2-hero h1,
-		.ds2-section-head h2,
-		.ds2-final-cta h2,
-		.ds2-mini-hero h3,
+		.ds-hero h1,
+		.ds-section-head h2,
+		.ds-final-cta h2,
 		.bitrix-pattern-copy h3 {
 			font-size: 44px;
 			line-height: 44px;
 		}
 
-		.ds2-type-example {
+		.ds-type-example {
 			font-size: min(var(--type-size, 32px), 42px) !important;
 			line-height: min(var(--type-line, 40px), 44px) !important;
 		}

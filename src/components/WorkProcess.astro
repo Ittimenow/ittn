@@ -1,0 +1,43 @@
+---
+const steps = [
+	{
+		title: 'Диагностика',
+		text: 'Разбираем задачу, ограничения, текущие процессы и точки потерь.',
+	},
+	{
+		title: 'Проектирование',
+		text: 'Определяем архитектуру, роли, маршруты, интерфейсы и состав решения.',
+	},
+	{
+		title: 'Реализация',
+		text: 'Разрабатываем, внедряем, настраиваем и интегрируем.',
+	},
+	{
+		title: 'Запуск и обучение',
+		text: 'Тестируем, переносим данные, обучаем команду и сопровождаем старт.',
+	},
+	{
+		title: 'Развитие',
+		text: 'Добавляем новые функции, оптимизируем процессы и поддерживаем систему.',
+	},
+];
+---
+
+<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+	<div class="mb-10 max-w-3xl">
+		<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Как мы работаем</p>
+		<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
+			Понятный процесс работы без магии за кадром
+		</h2>
+	</div>
+
+	<ol class="grid gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 md:grid-cols-5 dark:border-neutral-800 dark:bg-neutral-800">
+		{steps.map((step, index) => (
+			<li class="bg-white p-5 dark:bg-neutral-950">
+				<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{String(index + 1).padStart(2, '0')}</p>
+				<h3 class="mt-4 text-[22px] font-semibold leading-[1.2]">{step.title}</h3>
+				<p class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{step.text}</p>
+			</li>
+		))}
+	</ol>
+</section>

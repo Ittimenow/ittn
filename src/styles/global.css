@@ -19,7 +19,7 @@
 }
 
 @theme {
-	--font-sans: var(--ds2-font-system);
+	--font-sans: var(--ds-font-system);
 	--color-indigo-400: #5f66ff;
 	--color-indigo-500: #3e45ff;
 	--color-indigo-600: #232bff;
@@ -43,93 +43,222 @@
 }
 
 :root {
-	--ds2-primary: #232bff;
-	--ds2-secondary: #5f66ff;
-	--ds2-tertiary: #8b5cff;
-	--ds2-bg: #ffffff;
-	--ds2-soft: #f6f7fb;
-	--ds2-card: rgba(255, 255, 255, 0.74);
-	--ds2-card-strong: #ffffff;
-	--ds2-ink: #18181b;
-	--ds2-muted: #71717a;
-	--ds2-border: #e4e4e7;
-	--ds2-success: #0f9f6e;
-	--ds2-warning: #d97706;
-	--ds2-danger: #e11d48;
-	--ds2-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
-	--ds2-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
-	--ds2-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--ds2-display-size: 72px;
-	--ds2-display-line: 72px;
-	--ds2-display-weight: 500;
-	--ds2-body-size: 16px;
-	--ds2-body-line: 26px;
-	--ds2-body-weight: 400;
-	--ds2-label-size: 14px;
-	--ds2-label-line: 20px;
-	--ds2-label-weight: 500;
+	--ds-primary: #232bff;
+	--ds-secondary: #5f66ff;
+	--ds-tertiary: #8b5cff;
+	--ds-bg: #ffffff;
+	--ds-soft: #f6f7fb;
+	--ds-card: rgba(255, 255, 255, 0.74);
+	--ds-card-strong: #ffffff;
+	--ds-ink: #18181b;
+	--ds-muted: #71717a;
+	--ds-border: #e4e4e7;
+	--ds-success: #0f9f6e;
+	--ds-warning: #d97706;
+	--ds-danger: #e11d48;
+	--ds-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
+	--ds-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
+	--ds-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--ds-display-size: 72px;
+	--ds-display-line: 72px;
+	--ds-display-weight: 500;
+	--ds-body-size: 18px;
+	--ds-body-line: 30px;
+	--ds-body-weight: 400;
+	--ds-label-size: 14px;
+	--ds-label-line: 20px;
+	--ds-label-weight: 500;
 	color-scheme: light;
 }
 
 .dark {
-	--ds2-bg: #09090b;
-	--ds2-soft: #111116;
-	--ds2-card: rgba(24, 24, 27, 0.74);
-	--ds2-card-strong: #18181b;
-	--ds2-ink: #ffffff;
-	--ds2-muted: #a1a1aa;
-	--ds2-border: #27272a;
-	--ds2-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
+	--ds-bg: #09090b;
+	--ds-soft: #111116;
+	--ds-card: rgba(24, 24, 27, 0.74);
+	--ds-card-strong: #18181b;
+	--ds-ink: #ffffff;
+	--ds-muted: #a1a1aa;
+	--ds-border: #27272a;
+	--ds-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
 	color-scheme: dark;
 }
 
 html {
-	background: var(--ds2-bg);
+	background: var(--ds-bg);
 	scroll-behavior: smooth;
 }
 
 body {
-	background: var(--ds2-bg);
-	color: var(--ds2-ink);
-	font-family: var(--ds2-font-system);
-	font-size: var(--ds2-body-size);
-	font-weight: var(--ds2-body-weight);
-	line-height: var(--ds2-body-line);
+	background: var(--ds-bg);
+	color: var(--ds-ink);
+	font-family: var(--ds-font-system);
+	font-size: var(--ds-body-size);
+	font-weight: var(--ds-body-weight);
+	line-height: var(--ds-body-line);
 	letter-spacing: 0;
 	overflow-x: clip;
 	text-rendering: optimizeLegibility;
 }
 
 ::selection {
-	background: rgba(35, 43, 255, 0.18);
-	color: var(--ds2-ink);
+	background: #232bff;
+	color: #ffffff;
 }
 
-body :where(h1, h2, h3, h4, blockquote) {
-	font-family: var(--ds2-font-system);
-	font-weight: var(--ds2-display-weight);
+body :where(h1, h2, h3, h4, h5, h6, blockquote) {
+	font-family: var(--ds-font-system);
+	font-weight: var(--ds-display-weight);
 	letter-spacing: 0;
 }
 
-.ds2 :where(.ds2-kicker) {
+body :where(h1, h2, h3, h4, h5, h6) {
+	transition: color 180ms ease;
+}
+
+body :where(h1, h2, h3, h4, h5, h6):hover {
+	color: #232bff !important;
+}
+
+.ds :where(.ds-kicker) {
 	display: inline-flex;
 	align-items: center;
 	min-height: 28px !important;
 	border-radius: 9999px;
 	padding: 4px 12px !important;
-	font-family: var(--ds2-font-system) !important;
-	font-size: var(--ds2-label-size) !important;
-	font-weight: var(--ds2-label-weight) !important;
-	line-height: var(--ds2-label-line) !important;
+	font-family: var(--ds-font-system) !important;
+	font-size: var(--ds-label-size) !important;
+	font-weight: var(--ds-label-weight) !important;
+	line-height: var(--ds-label-line) !important;
 	letter-spacing: 0 !important;
 }
 
-.ds2-kicker + :where(h1, h2, h3, h4, blockquote) {
+.ds-kicker + :where(h1, h2, h3, h4, blockquote) {
 	padding-top: 10px;
 }
 
+.ds-btn {
+	--ds-btn-fill: var(--ds-primary);
+	--ds-btn-hover-color: #ffffff;
+	--ds-btn-hover-border: transparent;
+	position: relative;
+	isolation: isolate;
+	display: inline-flex;
+	min-height: 44px;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	overflow: hidden;
+	border: 1.5px solid transparent;
+	border-radius: 9999px;
+	padding: 0 30px;
+	font-family: var(--ds-font-system);
+	font-size: var(--ds-label-size);
+	font-weight: 700;
+	line-height: 1;
+	cursor: pointer;
+	transition:
+		border-color 800ms cubic-bezier(0.19, 1, 0.22, 1),
+		background 800ms cubic-bezier(0.19, 1, 0.22, 1),
+		color 800ms cubic-bezier(0.19, 1, 0.22, 1),
+		transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ds-btn::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 0;
+	width: 16px;
+	height: 16px;
+	border-radius: 9999px;
+	background: var(--ds-btn-fill);
+	opacity: 0;
+	content: "";
+	transform: translate(-50%, -50%);
+	transition:
+		width 800ms cubic-bezier(0.19, 1, 0.22, 1),
+		height 800ms cubic-bezier(0.19, 1, 0.22, 1),
+		opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ds-btn::after {
+	position: absolute;
+	top: 50%;
+	left: -28px;
+	z-index: 2;
+	color: currentColor;
+	content: "→";
+	font-size: 18px;
+	line-height: 1;
+	transform: translateY(-50%);
+	transition:
+		left 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
+		color 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ds-btn > span,
+.ds-btn > svg {
+	position: relative;
+	z-index: 1;
+}
+
+.ds-btn > span {
+	transform: translateX(-4px);
+	transition: transform 800ms ease;
+}
+
+.ds-btn > svg {
+	flex: 0 0 auto;
+	transition:
+		opacity 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
+		transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ds-btn:hover {
+	border-color: var(--ds-btn-hover-border);
+	color: var(--ds-btn-hover-color);
+}
+
+.ds-btn:hover::before {
+	width: 340px;
+	height: 340px;
+	opacity: 1;
+}
+
+.ds-btn:hover::after {
+	left: 16px;
+	color: var(--ds-btn-hover-color);
+}
+
+.ds-btn:hover > span {
+	transform: translateX(10px);
+}
+
+.ds-btn:hover > svg:last-child {
+	opacity: 0;
+	transform: translateX(64px);
+}
+
+.ds-btn:active {
+	transform: scale(0.96);
+}
+
+.ds-btn-primary {
+	--ds-btn-fill: var(--ds-card-strong);
+	--ds-btn-hover-color: var(--ds-primary);
+	--ds-btn-hover-border: var(--ds-border);
+	background: var(--ds-primary);
+	color: #ffffff;
+	box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.75);
+}
+
+.ds-btn-primary:hover {
+	background: var(--ds-card-strong);
+	box-shadow: none;
+}
+
 body :where(p, li, td, th, input, textarea, select, button) {
-	font-family: var(--ds2-font-system);
+	font-family: var(--ds-font-system);
 	letter-spacing: 0;
 }
 
@@ -144,9 +273,9 @@ body :where(a, button, input, textarea, select, summary):focus-visible {
 }
 
 body :where(input, textarea, select) {
-	caret-color: var(--ds2-primary);
+	caret-color: var(--ds-primary);
 }
 
 body :where(hr) {
-	border-color: var(--ds2-border);
+	border-color: var(--ds-border);
 }

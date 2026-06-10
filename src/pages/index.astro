@@ -1,25 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import AudienceSegments from '../components/AudienceSegments.astro';
+import BusinessTasks from '../components/BusinessTasks.astro';
 import DirectionsGrid from '../components/DirectionsGrid.astro';
+import PlatformChooser from '../components/PlatformChooser.astro';
+import BusinessOutcomes from '../components/BusinessOutcomes.astro';
 import CasesPreview from '../components/CasesPreview.astro';
 import ConsultationForm from '../components/ConsultationForm.astro';
-import Stats from '../components/Stats.astro';
+import TrustReasons from '../components/TrustReasons.astro';
 import TechStack from '../components/TechStack.astro';
 import ClientLogos from '../components/ClientLogos.astro';
-import PartnersGrid from '../components/PartnersGrid.astro';
+import WorkProcess from '../components/WorkProcess.astro';
 ---
 
 <Layout
-	title="ittimenow — цифровые системы эффективного бизнеса"
-	description="Разработка сайтов и сервисов, внедрение CRM и ERP, ИИ-ассистенты и сопровождение IT-проектов. С 2013 года, более 150 проектов."
+	title="IT TIME NOW — сайты, CRM/ERP и автоматизация процессов для бизнеса"
+	description="Проектируем и внедряем цифровые решения: сайты, CRM, ERP, BPM, интеграции и сопровождение процессов для B2B, производства, опта, сервиса и строительства."
 >
 	<Hero />
+	<AudienceSegments />
+	<BusinessTasks />
 	<DirectionsGrid />
+	<PlatformChooser />
+	<BusinessOutcomes />
 	<CasesPreview />
-	<ConsultationForm />
-	<Stats />
-	<TechStack />
+	<TrustReasons />
 	<ClientLogos />
-	<PartnersGrid />
+	<WorkProcess />
+	<TechStack />
+	<ConsultationForm />
 </Layout>

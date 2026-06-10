@@ -1,0 +1,80 @@
+---
+import UiIcon from './UiIcon.astro';
+
+interface Props {
+	href?: string;
+	label?: string;
+	freeLabel?: string;
+	class?: string;
+}
+
+const {
+	href = '#consultation',
+	label = 'Получить консультацию',
+	freeLabel = 'Бесплатно!',
+	class: className = '',
+} = Astro.props;
+---
+
+<div class:list={['consultation-cta', className]}>
+	<a class="ds-btn ds-btn-primary" href={href}>
+		<span>{label}</span>
+		<UiIcon name="arrow" class="h-4 w-4" />
+	</a>
+	<p class="consultation-free-label">{freeLabel}</p>
+</div>
+
+<style>
+	.consultation-cta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+		margin-top: 32px;
+	}
+
+	.consultation-free-label {
+		margin-left: 8px;
+		color: var(--ds-primary);
+		font-size: clamp(18px, 2vw, 28px);
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0;
+		will-change: transform;
+	}
+
+	.consultation-cta .ds-btn-primary:hover + .consultation-free-label,
+	.consultation-cta .ds-btn-primary:focus-visible + .consultation-free-label {
+		animation: consultation-free-hop 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	@keyframes consultation-free-hop {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg) scale(1);
+		}
+
+		22% {
+			transform: translateY(-10px) rotate(-2deg) scale(1.04);
+		}
+
+		42% {
+			transform: translateY(0) rotate(1deg) scale(1);
+		}
+
+		58% {
+			transform: translateY(-6px) rotate(-1deg) scale(1.02);
+		}
+
+		76% {
+			transform: translateY(0) rotate(1deg) scale(1);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.consultation-cta .ds-btn-primary:hover + .consultation-free-label,
+		.consultation-cta .ds-btn-primary:focus-visible + .consultation-free-label {
+			animation: none;
+		}
+	}
+</style>

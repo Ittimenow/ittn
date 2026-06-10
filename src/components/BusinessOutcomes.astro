@@ -1,0 +1,34 @@
+---
+const outcomes = [
+	'Прозрачная воронка продаж',
+	'Меньше ручной работы',
+	'Быстрее обработка заявок',
+	'Связанные между собой отделы и данные',
+	'Управляемые процессы вместо хаоса',
+	'Система, которую можно развивать и масштабировать',
+];
+---
+
+<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+	<div class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+		<div>
+			<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Результат для бизнеса</p>
+			<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
+				Что получает бизнес на выходе
+			</h2>
+			<p class="mt-4 text-neutral-600 dark:text-neutral-400">
+				Итогом становится не набор настроек, а управляемая система: понятная команде,
+				связанная с текущими процессами и готовая к развитию.
+			</p>
+		</div>
+
+		<ul class="grid gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 sm:grid-cols-2 dark:border-neutral-800 dark:bg-neutral-800">
+			{outcomes.map((outcome) => (
+				<li class="flex min-h-28 items-start gap-3 bg-white p-5 text-sm font-medium leading-6 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+					<span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-400"></span>
+					{outcome}
+				</li>
+			))}
+		</ul>
+	</div>
+</section>

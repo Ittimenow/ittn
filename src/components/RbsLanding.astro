@@ -196,9 +196,9 @@ const schema = [
 
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-<div class="ds2 rbs-ds2">
-	<section class="ds2-hero rbs-hero">
-		<div class="ds2-container rbs-hero-grid">
+<div class="ds rbs-ds">
+	<section class="ds-hero rbs-hero">
+		<div class="ds-container rbs-hero-grid">
 			<div>
 				<nav class="rbs-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services">Все услуги</a>
@@ -212,16 +212,16 @@ const schema = [
 					весь путь клиента: от&nbsp;первого обращения и&nbsp;сделки до&nbsp;счета, отгрузки, сервиса и&nbsp;повторной продажи.
 				</p>
 				<div class="rbs-actions">
-					<a class="ds2-btn ds2-btn-primary" href="#rbs-request">
+					<a class="ds-btn ds-btn-primary" href="#rbs-request">
 						<span>Получить консультацию</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</a>
 					<p class="rbs-free-label">Бесплатно!</p>
 				</div>
-				<div class="ds2-testimonial rbs-hero-benefit">
+				<div class="ds-testimonial rbs-hero-benefit">
 					<div class="rbs-hero-benefit-head">
 						<UiIcon name="thumbs-up" class="rbs-hero-benefit-icon h-[52px] w-[52px] shrink-0 text-white/90" />
-						<p class="ds2-kicker">Ваша выгода</p>
+						<p class="ds-kicker">Ваша выгода</p>
 					</div>
 					<blockquote>
 						После внедрения РосБизнесСофт компания получает единую систему для&nbsp;продаж,
@@ -251,11 +251,11 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container">
-			<div class="ds2-section-head rbs-wide-head">
+	<section class="ds-section">
+		<div class="ds-container">
+			<div class="ds-section-head rbs-wide-head">
 				<div>
-					<p class="ds2-kicker">Кому подойдет</p>
+					<p class="ds-kicker">Кому подойдет</p>
 					<h2>Когда простой CRM&nbsp;уже недостаточно</h2>
 				</div>
 				<p>
@@ -265,7 +265,7 @@ const schema = [
 			</div>
 			<div class="rbs-fit-grid">
 				{fitItems.map((item) => (
-					<article class="ds2-service-card rbs-fit-card">
+					<article class="ds-service-card rbs-fit-card">
 						<UiIcon name="check" class="h-5 w-5" />
 						<p>{item}</p>
 					</article>
@@ -274,11 +274,11 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section ds2-section-soft">
-		<div class="ds2-container">
-			<div class="ds2-section-head">
+	<section class="ds-section ds-section-soft">
+		<div class="ds-container">
+			<div class="ds-section-head">
 				<div>
-					<p class="ds2-kicker">Задачи внедрения</p>
+					<p class="ds-kicker">Задачи внедрения</p>
 					<h2>Настраиваем систему под&nbsp;работу отделов, а&nbsp;не&nbsp;отдельную CRM-карточку</h2>
 				</div>
 				<p>
@@ -288,8 +288,8 @@ const schema = [
 			</div>
 			<div class="rbs-task-grid">
 				{tasks.map(({ icon, title, text }) => (
-					<article class="ds2-service-card rbs-task-card">
-						<div class="ds2-service-icon">
+					<article class="ds-service-card rbs-task-card">
+						<div class="ds-service-icon">
 							<UiIcon name={icon} class="h-5 w-5" />
 						</div>
 						<h3>{title}</h3>
@@ -300,10 +300,10 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container rbs-benefit-layout">
+	<section class="ds-section">
+		<div class="ds-container rbs-benefit-layout">
 			<div>
-				<p class="ds2-kicker">Ваша выгода</p>
+				<p class="ds-kicker">Ваша выгода</p>
 				<h2>Единый процесс от&nbsp;заявки до&nbsp;повторной продажи</h2>
 				<p>
 					Мы не&nbsp;просто включаем CRM. Цель внедрения - сделать так, чтобы менеджеры, склад,
@@ -312,7 +312,7 @@ const schema = [
 			</div>
 			<div class="rbs-benefits">
 				{benefits.map(([title, text]) => (
-					<article class="ds2-card rbs-benefit-card">
+					<article class="ds-card rbs-benefit-card">
 						<UiIcon name="check" class="h-5 w-5" />
 						<h3>{title}</h3>
 						<p>{text}</p>
@@ -322,11 +322,11 @@ const schema = [
 		</div>
 	</section>
 
-	<section id="rbs-prices" class="ds2-section ds2-section-soft">
-		<div class="ds2-container">
-			<div class="ds2-section-head">
+	<section id="rbs-prices" class="ds-section ds-section-soft">
+		<div class="ds-container">
+			<div class="ds-section-head">
 				<div>
-					<p class="ds2-kicker">Стоимость внедрения</p>
+					<p class="ds-kicker">Стоимость внедрения</p>
 					<h2>Пакеты внедрения РосБизнесСофт</h2>
 				</div>
 				<p>
@@ -336,12 +336,12 @@ const schema = [
 			</div>
 			<div class="rbs-prices">
 				{packages.map((pack) => (
-					<article class:list={['ds2-price-card', pack.featured && 'is-featured']}>
+					<article class:list={['ds-price-card', pack.featured && 'is-featured']}>
 						<div class="rbs-card-top">
-							<div class="ds2-service-icon">
+							<div class="ds-service-icon">
 								<UiIcon name={pack.icon} class="h-5 w-5" />
 							</div>
-							<span class="ds2-chip">{pack.tag}</span>
+							<span class="ds-chip">{pack.tag}</span>
 						</div>
 						<h3>{pack.name}</h3>
 						<p class="rbs-price">{pack.price}</p>
@@ -354,7 +354,7 @@ const schema = [
 								</li>
 							))}
 						</ul>
-						<a class="ds2-btn ds2-btn-secondary" href="#rbs-request">
+						<a class="ds-btn ds-btn-secondary" href="#rbs-request">
 							<span>{pack.name === 'Предпроектное обследование' ? 'Заказать аудит' : 'Заказать внедрение'}</span>
 						</a>
 					</article>
@@ -363,11 +363,11 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container">
-			<div class="ds2-section-head">
+	<section class="ds-section">
+		<div class="ds-container">
+			<div class="ds-section-head">
 				<div>
-					<p class="ds2-kicker">Состав проекта</p>
+					<p class="ds-kicker">Состав проекта</p>
 					<h2>Услуги по&nbsp;внедрению РосБизнесСофт</h2>
 				</div>
 				<p>
@@ -377,8 +377,8 @@ const schema = [
 			</div>
 			<div class="rbs-services">
 				{services.map((group) => (
-					<article class="ds2-service-card">
-						<div class="ds2-service-icon">
+					<article class="ds-service-card">
+						<div class="ds-service-icon">
 							<UiIcon name={group.icon} class="h-5 w-5" />
 						</div>
 						<h3>{group.title}</h3>
@@ -396,16 +396,16 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section ds2-section-soft">
-		<div class="ds2-container rbs-process-grid">
+	<section class="ds-section ds-section-soft">
+		<div class="ds-container rbs-process-grid">
 			<div>
-				<p class="ds2-kicker">Как проходит внедрение</p>
+				<p class="ds-kicker">Как проходит внедрение</p>
 				<h2>Семь этапов с&nbsp;понятным результатом</h2>
 				<p>
 					Фиксируем границы каждого этапа: что&nbsp;настраиваем, какие данные переносим, кто&nbsp;проверяет
 					результат и&nbsp;как&nbsp;команда начинает работать в&nbsp;системе.
 				</p>
-				<a class="ds2-btn ds2-btn-dark" href="#rbs-request">
+				<a class="ds-btn ds-btn-dark" href="#rbs-request">
 					<span>Собрать план внедрения</span>
 					<UiIcon name="arrow" class="h-4 w-4" />
 				</a>
@@ -433,11 +433,11 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section bitrix-clients-section">
-		<div class="ds2-container">
-			<div class="ds2-section-head bitrix-wide-head">
+	<section class="ds-section bitrix-clients-section">
+		<div class="ds-container">
+			<div class="ds-section-head bitrix-wide-head">
 				<div>
-					<p class="ds2-kicker">Наши клиенты</p>
+					<p class="ds-kicker">Наши клиенты</p>
 					<h2>Нам доверяют компании с&nbsp;работающими процессами продаж</h2>
 				</div>
 				<p>
@@ -462,11 +462,11 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section ds2-section-soft">
-		<div class="ds2-container">
-			<div class="ds2-section-head">
+	<section class="ds-section ds-section-soft">
+		<div class="ds-container">
+			<div class="ds-section-head">
 				<div>
-					<p class="ds2-kicker">После запуска</p>
+					<p class="ds-kicker">После запуска</p>
 					<h2>Какие изменения должна дать система</h2>
 				</div>
 				<p>
@@ -476,7 +476,7 @@ const schema = [
 			</div>
 			<div class="rbs-outcomes">
 				{outcomes.map(([title, text]) => (
-					<article class="ds2-card">
+					<article class="ds-card">
 						<UiIcon name="thumbs-up" class="h-6 w-6" />
 						<h3>{title}</h3>
 						<p>{text}</p>
@@ -486,10 +486,10 @@ const schema = [
 		</div>
 	</section>
 
-	<section class="ds2-section">
-		<div class="ds2-container rbs-faq-grid">
+	<section class="ds-section">
+		<div class="ds-container rbs-faq-grid">
 			<div>
-				<p class="ds2-kicker">FAQ</p>
+				<p class="ds-kicker">FAQ</p>
 				<h2>Частые вопросы о&nbsp;внедрении РосБизнесСофт</h2>
 				<p>
 					Ответы закрывают ключевые вопросы перед заявкой: цена, сроки, 1С, перенос данных,
@@ -498,12 +498,12 @@ const schema = [
 			</div>
 			<div class="rbs-faq-list">
 				{faqs.map(([question, answer]) => (
-					<details class="ds2-faq">
+					<details class="ds-faq">
 						<summary>
 							<span>{question}</span>
 							<UiIcon name="chevron" class="h-4 w-4" />
 						</summary>
-						<div class="ds2-faq-content">
+						<div class="ds-faq-content">
 							<p>{answer}</p>
 						</div>
 					</details>
@@ -512,11 +512,11 @@ const schema = [
 		</div>
 	</section>
 
-	<section id="rbs-request" class="ds2-section rbs-request-section">
-		<div class="ds2-container">
-			<div class="ds2-final-cta rbs-request">
+	<section id="rbs-request" class="ds-section rbs-request-section">
+		<div class="ds-container">
+			<div class="ds-final-cta rbs-request">
 				<div>
-					<p class="ds2-kicker">Рассчитать внедрение</p>
+					<p class="ds-kicker">Рассчитать внедрение</p>
 					<h2>Узнайте, какой вариант РосБизнесСофт подойдет вашей компании</h2>
 					<p>
 						Ответим, с&nbsp;чего начать внедрение, какие модули нужны и&nbsp;сколько будет стоить запуск
@@ -529,47 +529,47 @@ const schema = [
 							['phone', 'сайт и\u00A0телефония'],
 							['workflow', 'продажи, склад, производство'],
 						].map(([icon, text]) => (
-							<div class="ds2-dark-pill">
+							<div class="ds-dark-pill">
 								<UiIcon name={icon} class="h-4 w-4" />
 								{text}
 							</div>
 						))}
 					</div>
 				</div>
-				<form class="ds2-form" method="post" action="#">
+				<form class="ds-form" method="post" action="#">
 					<div class="rbs-form-grid">
 						<label>
 							<span>Имя</span>
-							<input class="ds2-input" required type="text" name="name" placeholder="Анна" />
+							<input class="ds-input" required type="text" name="name" placeholder="Анна" />
 						</label>
 						<label>
 							<span>Телефон</span>
-							<input class="ds2-input" required type="tel" name="phone" placeholder="+7&nbsp;000&nbsp;000-00-00" />
+							<input class="ds-input" required type="tel" name="phone" placeholder="+7&nbsp;000&nbsp;000-00-00" />
 						</label>
 					</div>
 					<div class="rbs-form-grid">
 						<label>
 							<span>Email</span>
-							<input class="ds2-input" type="email" name="email" placeholder="mail@company.ru" />
+							<input class="ds-input" type="email" name="email" placeholder="mail@company.ru" />
 						</label>
 						<label>
 							<span>Компания</span>
-							<input class="ds2-input" type="text" name="company" placeholder="Название компании" />
+							<input class="ds-input" type="text" name="company" placeholder="Название компании" />
 						</label>
 					</div>
 					<label>
 						<span>Что нужно автоматизировать</span>
-						<textarea class="ds2-input" name="task" rows="4" placeholder="Продажи, склад, производство, сервис, 1С, сайт"></textarea>
+						<textarea class="ds-input" name="task" rows="4" placeholder="Продажи, склад, производство, сервис, 1С, сайт"></textarea>
 					</label>
 					<div class="rbs-form-checks">
-						<label class="ds2-check"><input type="checkbox" name="needs" value="sales" /> Продажи</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="warehouse" /> Склад</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="production" /> Производство</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="service" /> Сервис</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="1c" /> 1С</label>
-						<label class="ds2-check"><input type="checkbox" name="needs" value="site" /> Сайт</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="sales" /> Продажи</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="warehouse" /> Склад</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="production" /> Производство</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="service" /> Сервис</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="1c" /> 1С</label>
+						<label class="ds-check"><input type="checkbox" name="needs" value="site" /> Сайт</label>
 					</div>
-					<button class="ds2-btn ds2-btn-primary" type="submit">
+					<button class="ds-btn ds-btn-primary" type="submit">
 						<span>Получить план внедрения</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</button>
@@ -580,11 +580,11 @@ const schema = [
 	</section>
 
 	<div class="rbs-mobile-cta">
-		<a class="ds2-btn ds2-btn-primary" href="#rbs-request">
+		<a class="ds-btn ds-btn-primary" href="#rbs-request">
 			<span>Расчет</span>
 			<UiIcon name="file" class="h-4 w-4" />
 		</a>
-		<a class="ds2-btn ds2-btn-secondary" href="tel:+74951335888">
+		<a class="ds-btn ds-btn-secondary" href="tel:+74951335888">
 			<span>Позвонить</span>
 			<UiIcon name="phone" class="h-4 w-4" />
 		</a>
@@ -593,12 +593,12 @@ const schema = [
 
 <script>
 	function bindRbsFaq() {
-		document.querySelectorAll<HTMLDetailsElement>('.rbs-ds2 .ds2-faq').forEach((details) => {
+		document.querySelectorAll<HTMLDetailsElement>('.rbs-ds .ds-faq').forEach((details) => {
 			if (details.dataset.faqBound) return;
 			details.dataset.faqBound = '1';
 
 			const summary = details.querySelector('summary');
-			const content = details.querySelector<HTMLElement>('.ds2-faq-content');
+			const content = details.querySelector<HTMLElement>('.ds-faq-content');
 			if (!summary || !content) return;
 
 			summary.addEventListener('click', (event) => {
@@ -671,92 +671,92 @@ const schema = [
 </script>
 
 <style>
-	.ds2 {
-		--ds2-primary: #232bff;
-		--ds2-secondary: #5f66ff;
-		--ds2-tertiary: #8b5cff;
-		--ds2-bg: #ffffff;
-		--ds2-soft: #f6f7fb;
-		--ds2-card: rgba(255, 255, 255, 0.74);
-		--ds2-card-strong: #ffffff;
-		--ds2-ink: #18181b;
-		--ds2-muted: #71717a;
-		--ds2-border: #e4e4e7;
-		--ds2-success: #0f9f6e;
-		--ds2-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
-		--ds2-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
-		--ds2-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-		--ds2-display-size: 72px;
-		--ds2-display-line: 72px;
-		--ds2-display-weight: 500;
-		--ds2-body-size: 16px;
-		--ds2-body-line: 26px;
-		--ds2-body-weight: 400;
-		--ds2-label-size: 14px;
-		--ds2-label-line: 20px;
-		--ds2-label-weight: 500;
-		background: var(--ds2-bg);
-		color: var(--ds2-ink);
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds {
+		--ds-primary: #232bff;
+		--ds-secondary: #5f66ff;
+		--ds-tertiary: #8b5cff;
+		--ds-bg: #ffffff;
+		--ds-soft: #f6f7fb;
+		--ds-card: rgba(255, 255, 255, 0.74);
+		--ds-card-strong: #ffffff;
+		--ds-ink: #18181b;
+		--ds-muted: #71717a;
+		--ds-border: #e4e4e7;
+		--ds-success: #0f9f6e;
+		--ds-shadow: 0 30px 60px -15px rgba(24, 24, 27, 0.13);
+		--ds-glow: 0 24px 80px -28px rgba(35, 43, 255, 0.4);
+		--ds-font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		--ds-display-size: 72px;
+		--ds-display-line: 72px;
+		--ds-display-weight: 500;
+		--ds-body-size: 16px;
+		--ds-body-line: 26px;
+		--ds-body-weight: 400;
+		--ds-label-size: 14px;
+		--ds-label-line: 20px;
+		--ds-label-weight: 500;
+		background: var(--ds-bg);
+		color: var(--ds-ink);
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 		letter-spacing: 0;
 		overflow-x: clip;
 	}
 
-	:global(.dark) .ds2 {
-		--ds2-bg: #09090b;
-		--ds2-soft: #111116;
-		--ds2-card: rgba(24, 24, 27, 0.74);
-		--ds2-card-strong: #18181b;
-		--ds2-ink: #ffffff;
-		--ds2-muted: #a1a1aa;
-		--ds2-border: #27272a;
-		--ds2-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
+	:global(.dark) .ds {
+		--ds-bg: #09090b;
+		--ds-soft: #111116;
+		--ds-card: rgba(24, 24, 27, 0.74);
+		--ds-card-strong: #18181b;
+		--ds-ink: #ffffff;
+		--ds-muted: #a1a1aa;
+		--ds-border: #27272a;
+		--ds-shadow: 0 34px 80px -20px rgba(0, 0, 0, 0.55);
 	}
 
-	.ds2 :where(p, li, td, th, input, textarea, select) {
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-body-size);
-		font-weight: var(--ds2-body-weight);
-		line-height: var(--ds2-body-line);
+	.ds :where(p, li, td, th, input, textarea, select) {
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-body-size);
+		font-weight: var(--ds-body-weight);
+		line-height: var(--ds-body-line);
 		letter-spacing: 0;
 	}
 
-	.ds2 :where(h1, h2, h3, h4, blockquote) {
-		font-family: var(--ds2-font-system);
-		font-weight: var(--ds2-display-weight);
+	.ds :where(h1, h2, h3, h4, blockquote) {
+		font-family: var(--ds-font-system);
+		font-weight: var(--ds-display-weight);
 		letter-spacing: 0;
 	}
 
-	.ds2-container {
+	.ds-container {
 		width: min(100%, 1400px);
 		margin: 0 auto;
 		padding-inline: 24px;
 	}
 
-	.ds2-hero {
+	.ds-hero {
 		background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(246, 247, 251, 0.92));
 	}
 
-	:global(.dark) .ds2-hero {
+	:global(.dark) .ds-hero {
 		background: linear-gradient(180deg, rgba(9, 9, 11, 0.72), rgba(17, 17, 22, 0.92));
 	}
 
-	.ds2-section {
+	.ds-section {
 		padding-block: 80px;
 	}
 
-	.ds2-section-soft {
+	.ds-section-soft {
 		background: rgba(246, 247, 251, 0.78);
 	}
 
-	:global(.dark) .ds2-section-soft {
+	:global(.dark) .ds-section-soft {
 		background: rgba(17, 17, 22, 0.78);
 	}
 
-	.ds2-section-head {
+	.ds-section-head {
 		display: grid;
 		gap: 24px;
 		align-items: end;
@@ -767,126 +767,126 @@ const schema = [
 		align-items: start;
 	}
 
-	.ds2-section-head h2,
-	.ds2-final-cta h2,
+	.ds-section-head h2,
+	.ds-final-cta h2,
 	.rbs-benefit-layout h2,
 	.rbs-process-grid h2,
 	.rbs-faq-grid h2 {
-		font-size: var(--ds2-display-size);
-		font-weight: var(--ds2-display-weight);
-		line-height: var(--ds2-display-line);
+		font-size: var(--ds-display-size);
+		font-weight: var(--ds-display-weight);
+		line-height: var(--ds-display-line);
 	}
 
-	.ds2-section-head > p,
-	.rbs-benefit-layout > div > p:not(.ds2-kicker),
-	.rbs-process-grid > div > p:not(.ds2-kicker),
-	.rbs-faq-grid > div > p:not(.ds2-kicker) {
-		color: var(--ds2-muted);
+	.ds-section-head > p,
+	.rbs-benefit-layout > div > p:not(.ds-kicker),
+	.rbs-process-grid > div > p:not(.ds-kicker),
+	.rbs-faq-grid > div > p:not(.ds-kicker) {
+		color: var(--ds-muted);
 	}
 
-	.ds2-kicker {
+	.ds-kicker {
 		display: inline-flex;
 		align-items: center;
 		min-height: 28px;
 		border-radius: 9999px;
 		background: rgba(35, 43, 255, 0.09);
 		padding: 4px 12px;
-		color: var(--ds2-primary);
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+		color: var(--ds-primary);
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		letter-spacing: 0;
 	}
 
-	.ds2-card,
-	.ds2-dashboard,
-	.ds2-price-card,
-	.ds2-testimonial {
+	.ds-card,
+	.ds-dashboard,
+	.ds-price-card,
+	.ds-testimonial {
 		min-width: 0;
 		border: 1px solid rgba(255, 255, 255, 0.78);
 		border-radius: 24px;
-		background: var(--ds2-card);
+		background: var(--ds-card);
 		padding: 24px;
-		box-shadow: var(--ds2-shadow);
+		box-shadow: var(--ds-shadow);
 		backdrop-filter: blur(40px);
 	}
 
-	:global(.dark) .ds2-card,
-	:global(.dark) .ds2-dashboard,
-	:global(.dark) .ds2-price-card,
-	:global(.dark) .ds2-testimonial {
+	:global(.dark) .ds-card,
+	:global(.dark) .ds-dashboard,
+	:global(.dark) .ds-price-card,
+	:global(.dark) .ds-testimonial {
 		border-color: rgba(255, 255, 255, 0.1);
 	}
 
-	.ds2-dashboard {
+	.ds-dashboard {
 		border-radius: 40px;
-		box-shadow: var(--ds2-shadow), var(--ds2-glow);
+		box-shadow: var(--ds-shadow), var(--ds-glow);
 	}
 
-	.ds2-metric {
-		border: 1px solid var(--ds2-border);
+	.ds-metric {
+		border: 1px solid var(--ds-border);
 		border-radius: 16px;
 		background: rgba(255, 255, 255, 0.58);
 		padding: 16px;
 	}
 
-	:global(.dark) .ds2-metric {
+	:global(.dark) .ds-metric {
 		background: rgba(255, 255, 255, 0.05);
 	}
 
-	.ds2-metric p {
+	.ds-metric p {
 		font-size: 28px;
 		line-height: 1;
 		font-weight: 700;
-		color: var(--ds2-ink);
+		color: var(--ds-ink);
 	}
 
-	.ds2-metric span {
+	.ds-metric span {
 		margin-top: 8px;
 		display: block;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 13px;
 		line-height: 1.45;
 	}
 
-	.ds2-progress {
+	.ds-progress {
 		height: 8px;
 		overflow: hidden;
 		border-radius: 9999px;
 		background: rgba(113, 113, 122, 0.16);
 	}
 
-	.ds2-progress span {
+	.ds-progress span {
 		display: block;
 		height: 100%;
 		border-radius: inherit;
-		background: linear-gradient(90deg, var(--ds2-primary), var(--ds2-secondary));
+		background: linear-gradient(90deg, var(--ds-primary), var(--ds-secondary));
 	}
 
-	.ds2-chip {
+	.ds-chip {
 		display: inline-flex;
 		min-height: 34px;
 		align-items: center;
 		justify-content: center;
 		white-space: nowrap;
 		border-radius: 9999px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		background: rgba(255, 255, 255, 0.7);
 		padding: 6px 14px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 13px;
 		font-weight: 700;
 	}
 
-	:global(.dark) .ds2-chip {
+	:global(.dark) .ds-chip {
 		background: rgba(255, 255, 255, 0.05);
 	}
 
-	.ds2-btn {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		--ds2-btn-hover-border: transparent;
+	.ds-btn {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		--ds-btn-hover-border: transparent;
 		display: inline-flex;
 		min-height: 44px;
 		position: relative;
@@ -909,7 +909,7 @@ const schema = [
 			transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
 
-	.ds2-btn::before {
+	.ds-btn::before {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -917,7 +917,7 @@ const schema = [
 		width: 16px;
 		height: 16px;
 		border-radius: 9999px;
-		background: var(--ds2-btn-fill);
+		background: var(--ds-btn-fill);
 		opacity: 0;
 		content: "";
 		transform: translate(-50%, -50%);
@@ -927,7 +927,7 @@ const schema = [
 			opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
 
-	.ds2-btn::after {
+	.ds-btn::after {
 		position: absolute;
 		top: 50%;
 		left: -28px;
@@ -942,197 +942,197 @@ const schema = [
 			color 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-btn > span,
-	.ds2-btn :global(svg) {
+	.ds-btn > span,
+	.ds-btn :global(svg) {
 		position: relative;
 		z-index: 1;
 	}
 
-	.ds2-btn > span {
+	.ds-btn > span {
 		transform: translateX(-4px);
 		transition: transform 800ms ease;
 	}
 
-	.ds2-btn :global(svg) {
+	.ds-btn :global(svg) {
 		flex: 0 0 auto;
 		transition:
 			opacity 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
 			transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.ds2-btn:hover {
-		border-color: var(--ds2-btn-hover-border);
-		color: var(--ds2-btn-hover-color);
+	.ds-btn:hover {
+		border-color: var(--ds-btn-hover-border);
+		color: var(--ds-btn-hover-color);
 	}
 
-	.ds2-btn:hover::before {
+	.ds-btn:hover::before {
 		width: 340px;
 		height: 340px;
 		opacity: 1;
 	}
 
-	.ds2-btn:hover::after {
+	.ds-btn:hover::after {
 		left: 16px;
-		color: var(--ds2-btn-hover-color);
+		color: var(--ds-btn-hover-color);
 	}
 
-	.ds2-btn:hover > span {
+	.ds-btn:hover > span {
 		transform: translateX(10px);
 	}
 
-	.ds2-btn:hover :global(svg:last-child) {
+	.ds-btn:hover :global(svg:last-child) {
 		opacity: 0;
 		transform: translateX(64px);
 	}
 
-	.ds2-btn:active {
+	.ds-btn:active {
 		transform: scale(0.96);
 	}
 
-	.ds2-btn-primary {
-		--ds2-btn-fill: var(--ds2-card-strong);
-		--ds2-btn-hover-color: var(--ds2-primary);
-		--ds2-btn-hover-border: var(--ds2-border);
-		background: var(--ds2-primary);
+	.ds-btn-primary {
+		--ds-btn-fill: var(--ds-card-strong);
+		--ds-btn-hover-color: var(--ds-primary);
+		--ds-btn-hover-border: var(--ds-border);
+		background: var(--ds-primary);
 		color: #ffffff;
 		box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.75);
 	}
 
-	.ds2-btn-primary:hover {
-		background: var(--ds2-card-strong);
+	.ds-btn-primary:hover {
+		background: var(--ds-card-strong);
 		box-shadow: none;
 	}
 
-	.ds2-btn-secondary {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		border-color: var(--ds2-border);
+	.ds-btn-secondary {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		border-color: var(--ds-border);
 		background: rgba(255, 255, 255, 0.76);
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	:global(.dark) .ds2-btn-secondary {
+	:global(.dark) .ds-btn-secondary {
 		background: rgba(255, 255, 255, 0.06);
 	}
 
-	.ds2-btn-secondary:hover,
-	.ds2-btn-dark:hover {
-		background: var(--ds2-primary);
+	.ds-btn-secondary:hover,
+	.ds-btn-dark:hover {
+		background: var(--ds-primary);
 	}
 
-	.ds2-btn-dark {
-		--ds2-btn-fill: var(--ds2-primary);
-		--ds2-btn-hover-color: #ffffff;
-		background: var(--ds2-ink);
-		color: var(--ds2-bg);
+	.ds-btn-dark {
+		--ds-btn-fill: var(--ds-primary);
+		--ds-btn-hover-color: #ffffff;
+		background: var(--ds-ink);
+		color: var(--ds-bg);
 	}
 
-	.ds2-service-card,
-	.ds2-faq {
-		border: 1px solid var(--ds2-border);
-		background: var(--ds2-card-strong);
+	.ds-service-card,
+	.ds-faq {
+		border: 1px solid var(--ds-border);
+		background: var(--ds-card-strong);
 	}
 
-	.ds2-service-card {
+	.ds-service-card {
 		min-width: 0;
 		border-radius: 24px;
 		padding: 28px;
 		transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 	}
 
-	.ds2-service-card:hover {
+	.ds-service-card:hover {
 		transform: translateY(-2px);
-		box-shadow: var(--ds2-glow);
+		box-shadow: var(--ds-glow);
 	}
 
-	.ds2-service-icon {
+	.ds-service-icon {
 		display: grid;
 		width: 48px;
 		height: 48px;
 		place-items: center;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
-	.ds2-service-icon :global(svg) {
+	.ds-service-icon :global(svg) {
 		width: 48px;
 		height: 48px;
 	}
 
-	.ds2-price-card {
+	.ds-price-card {
 		display: flex;
 		min-height: 430px;
 		flex-direction: column;
 	}
 
-	.ds2-price-card.is-featured {
+	.ds-price-card.is-featured {
 		border-color: transparent;
-		background: linear-gradient(180deg, rgba(35, 43, 255, 0.1), var(--ds2-card));
-		box-shadow: var(--ds2-shadow), var(--ds2-glow);
+		background: linear-gradient(180deg, rgba(35, 43, 255, 0.1), var(--ds-card));
+		box-shadow: var(--ds-shadow), var(--ds-glow);
 	}
 
-	.ds2-price-card ul {
+	.ds-price-card ul {
 		display: grid;
 		gap: 12px;
 		margin: 24px 0 28px;
 	}
 
-	.ds2-price-card li,
+	.ds-price-card li,
 	.rbs-services li {
 		display: flex;
 		gap: 10px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.55;
 	}
 
-	.ds2-price-card li :global(svg),
+	.ds-price-card li :global(svg),
 	.rbs-services li :global(svg) {
 		flex: 0 0 auto;
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
-	.ds2-price-card .ds2-btn {
+	.ds-price-card .ds-btn {
 		margin-top: auto;
 	}
 
-	.ds2-table {
+	.ds-table {
 		width: 100%;
 		min-width: 720px;
 		border-collapse: collapse;
 		font-size: 14px;
 	}
 
-	.ds2-table th,
-	.ds2-table td {
-		border-bottom: 1px solid var(--ds2-border);
+	.ds-table th,
+	.ds-table td {
+		border-bottom: 1px solid var(--ds-border);
 		padding: 14px;
 		text-align: left;
 		vertical-align: top;
 	}
 
-	.ds2-table th {
-		color: var(--ds2-primary);
+	.ds-table th {
+		color: var(--ds-primary);
 		font-weight: 700;
 	}
 
-	.ds2-testimonial {
+	.ds-testimonial {
 		background: #18181b;
 		color: #ffffff;
 	}
 
-	.ds2-testimonial blockquote {
+	.ds-testimonial blockquote {
 		margin-top: 18px;
 		font-size: 28px;
 		line-height: 1.22;
 	}
 
-	.ds2-testimonial .ds2-kicker,
-	.ds2-final-cta .ds2-kicker {
+	.ds-testimonial .ds-kicker,
+	.ds-final-cta .ds-kicker {
 		background: rgba(255, 255, 255, 0.12);
 		color: #ffffff;
 	}
 
-	.ds2-faq {
+	.ds-faq {
 		overflow: hidden;
 		border-radius: 20px;
 		padding: 20px;
@@ -1142,7 +1142,7 @@ const schema = [
 			box-shadow 200ms ease;
 	}
 
-	.ds2-faq summary {
+	.ds-faq summary {
 		display: flex;
 		cursor: pointer;
 		list-style: none;
@@ -1155,15 +1155,15 @@ const schema = [
 		transition: color 200ms ease;
 	}
 
-	.ds2-faq[open] summary {
+	.ds-faq[open] summary {
 		margin-bottom: 0;
 	}
 
-	.ds2-faq summary::-webkit-details-marker {
+	.ds-faq summary::-webkit-details-marker {
 		display: none;
 	}
 
-	:global(.ds2-faq summary svg) {
+	:global(.ds-faq summary svg) {
 		flex: 0 0 auto;
 		opacity: 0.6;
 		transition:
@@ -1171,20 +1171,20 @@ const schema = [
 			transform 200ms ease;
 	}
 
-	.ds2-faq:hover {
+	.ds-faq:hover {
 		box-shadow: 0 18px 44px -28px rgba(24, 24, 27, 0.28);
 	}
 
-	.ds2-faq[open] {
-		background: var(--ds2-card);
+	.ds-faq[open] {
+		background: var(--ds-card);
 	}
 
-	:global(.ds2-faq[open] summary svg) {
+	:global(.ds-faq[open] summary svg) {
 		opacity: 1;
 		transform: rotate(180deg);
 	}
 
-	.ds2-faq-content {
+	.ds-faq-content {
 		display: grid;
 		grid-template-rows: 0fr;
 		opacity: 0;
@@ -1193,26 +1193,26 @@ const schema = [
 			opacity 200ms ease;
 	}
 
-	.ds2-faq[open] .ds2-faq-content {
+	.ds-faq[open] .ds-faq-content {
 		grid-template-rows: 1fr;
 		opacity: 1;
-		animation: ds2-accordion-down 220ms ease-out;
+		animation: ds-accordion-down 220ms ease-out;
 	}
 
-	.ds2-faq.is-closing .ds2-faq-content {
-		animation: ds2-accordion-up 220ms ease-in;
+	.ds-faq.is-closing .ds-faq-content {
+		animation: ds-accordion-up 220ms ease-in;
 	}
 
-	.ds2-faq-content p {
+	.ds-faq-content p {
 		min-height: 0;
 		overflow: hidden;
 		margin-top: 12px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.7;
 	}
 
-	@keyframes ds2-accordion-down {
+	@keyframes ds-accordion-down {
 		from {
 			opacity: 0;
 			transform: translateY(-4px);
@@ -1223,7 +1223,7 @@ const schema = [
 		}
 	}
 
-	@keyframes ds2-accordion-up {
+	@keyframes ds-accordion-up {
 		from {
 			opacity: 1;
 			transform: translateY(0);
@@ -1234,7 +1234,7 @@ const schema = [
 		}
 	}
 
-	.ds2-final-cta {
+	.ds-final-cta {
 		display: grid;
 		gap: 32px;
 		align-items: center;
@@ -1242,16 +1242,16 @@ const schema = [
 		background: linear-gradient(135deg, #18181b, #232bff);
 		padding: 32px;
 		color: #ffffff;
-		box-shadow: var(--ds2-glow);
+		box-shadow: var(--ds-glow);
 	}
 
-	.ds2-final-cta p {
+	.ds-final-cta p {
 		margin-top: 18px;
 		max-width: 720px;
 		color: rgba(255, 255, 255, 0.78);
 	}
 
-	.ds2-form {
+	.ds-form {
 		display: grid;
 		gap: 16px;
 		border-radius: 24px;
@@ -1261,16 +1261,16 @@ const schema = [
 		box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
 	}
 
-	.ds2-form label:not(.ds2-check) > span {
+	.ds-form label:not(.ds-check) > span {
 		margin-bottom: 8px;
 		display: block;
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		color: #3f3f46;
 	}
 
-	.ds2-input {
+	.ds-input {
 		width: 100%;
 		min-height: 48px;
 		border-radius: 16px;
@@ -1283,13 +1283,13 @@ const schema = [
 		transition: border-color 150ms ease, box-shadow 150ms ease;
 	}
 
-	.ds2-input:focus {
-		border-color: var(--ds2-primary);
+	.ds-input:focus {
+		border-color: var(--ds-primary);
 		box-shadow: 0 0 0 4px rgba(35, 43, 255, 0.14);
 	}
 
-	.ds2-check,
-	.ds2-dark-pill {
+	.ds-check,
+	.ds-dark-pill {
 		display: flex;
 		min-height: 48px;
 		align-items: center;
@@ -1297,20 +1297,20 @@ const schema = [
 		border-radius: 16px;
 	}
 
-	.ds2-check {
+	.ds-check {
 		border: 1px solid #e4e4e7;
 		padding: 0 14px;
 		color: #3f3f46;
 		font-size: 14px;
 	}
 
-	.ds2-check input {
+	.ds-check input {
 		width: 16px;
 		height: 16px;
-		accent-color: var(--ds2-primary);
+		accent-color: var(--ds-primary);
 	}
 
-	.ds2-dark-pill {
+	.ds-dark-pill {
 		border: 1px solid rgba(255, 255, 255, 0.12);
 		background: rgba(255, 255, 255, 0.06);
 		padding: 0 14px;
@@ -1330,37 +1330,37 @@ const schema = [
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		font-weight: 500;
 		line-height: 20px;
 	}
 
 	.rbs-breadcrumbs a {
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		transition: color 150ms ease;
 	}
 
 	.rbs-breadcrumbs a:hover {
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 	}
 
 	.rbs-breadcrumbs span {
-		color: var(--ds2-ink);
+		color: var(--ds-ink);
 	}
 
 	.rbs-hero h1 {
 		margin-top: 20px;
 		max-width: 980px;
-		font-size: var(--ds2-display-size);
-		font-weight: var(--ds2-display-weight);
-		line-height: var(--ds2-display-line);
+		font-size: var(--ds-display-size);
+		font-weight: var(--ds-display-weight);
+		line-height: var(--ds-display-line);
 	}
 
 	.rbs-lead {
 		margin-top: 24px;
 		max-width: 820px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 18px;
 		line-height: 1.75;
 	}
@@ -1375,15 +1375,15 @@ const schema = [
 
 	.rbs-free-label {
 		margin-left: 12px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: clamp(42px, 6vw, 76px);
 		font-weight: 800;
 		line-height: 1;
 		will-change: transform;
 	}
 
-	.rbs-actions .ds2-btn-primary:hover + .rbs-free-label,
-	.rbs-actions .ds2-btn-primary:focus-visible + .rbs-free-label {
+	.rbs-actions .ds-btn-primary:hover + .rbs-free-label,
+	.rbs-actions .ds-btn-primary:focus-visible + .rbs-free-label {
 		animation: rbs-free-hop 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
@@ -1395,7 +1395,7 @@ const schema = [
 		max-width: 760px;
 	}
 
-	.rbs-hero-benefit .ds2-kicker {
+	.rbs-hero-benefit .ds-kicker {
 		background: rgba(255, 255, 255, 0.12);
 		color: #ffffff;
 	}
@@ -1436,7 +1436,7 @@ const schema = [
 
 	.rbs-hero-benefit li :global(svg) {
 		flex: 0 0 auto;
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
 	.rbs-hero-media {
@@ -1491,7 +1491,7 @@ const schema = [
 
 	.rbs-fit-card :global(svg) {
 		flex: 0 0 auto;
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
 	.rbs-fit-card p {
@@ -1515,7 +1515,7 @@ const schema = [
 	.rbs-card-text,
 	.rbs-outcomes p {
 		margin-top: 12px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.7;
 	}
@@ -1537,11 +1537,11 @@ const schema = [
 		margin-top: 14px;
 	}
 
-	.rbs-benefit-layout > div > p:not(.ds2-kicker) {
+	.rbs-benefit-layout > div > p:not(.ds-kicker) {
 		margin-top: 28px;
 	}
 
-	.rbs-faq-grid > div > p:not(.ds2-kicker) {
+	.rbs-faq-grid > div > p:not(.ds-kicker) {
 		margin-top: 22px;
 	}
 
@@ -1549,17 +1549,17 @@ const schema = [
 		margin-top: 14px;
 	}
 
-	.rbs-process-grid > div > p:not(.ds2-kicker) {
+	.rbs-process-grid > div > p:not(.ds-kicker) {
 		margin-top: 26px;
 	}
 
-	.rbs-process-grid .ds2-btn {
+	.rbs-process-grid .ds-btn {
 		margin-top: 32px;
 	}
 
 	.rbs-benefit-card :global(svg),
 	.rbs-outcomes :global(svg) {
-		color: var(--ds2-success);
+		color: var(--ds-success);
 	}
 
 	.rbs-benefit-card h3 {
@@ -1570,7 +1570,7 @@ const schema = [
 
 	.rbs-price {
 		margin-top: 18px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 34px;
 		line-height: 1;
 		font-weight: 700;
@@ -1591,8 +1591,8 @@ const schema = [
 		overflow: hidden;
 		border-radius: 24px;
 		border: 1px solid rgba(255, 255, 255, 0.78);
-		background: var(--ds2-card);
-		box-shadow: var(--ds2-shadow);
+		background: var(--ds-card);
+		box-shadow: var(--ds-shadow);
 		backdrop-filter: blur(40px);
 	}
 
@@ -1615,7 +1615,7 @@ const schema = [
 		grid-column: 2;
 		grid-row: 1;
 		padding: 22px 22px 0 0;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 	}
 
 	.rbs-timeline-date span {
@@ -1629,7 +1629,7 @@ const schema = [
 	.rbs-timeline-date time {
 		display: block;
 		margin-top: 2px;
-		color: var(--ds2-primary);
+		color: var(--ds-primary);
 		font-size: 18px;
 		font-weight: 700;
 		line-height: 24px;
@@ -1647,7 +1647,7 @@ const schema = [
 		top: 0;
 		bottom: 0;
 		left: 50%;
-		border-left: 1px solid var(--ds2-border);
+		border-left: 1px solid var(--ds-border);
 		transform: translateX(-50%);
 	}
 
@@ -1670,7 +1670,7 @@ const schema = [
 		place-items: center;
 		border-radius: 9999px;
 		border: 1px solid rgba(35, 43, 255, 0.22);
-		background: var(--ds2-primary);
+		background: var(--ds-primary);
 		color: #ffffff;
 		box-shadow: 0 0 0 7px rgba(35, 43, 255, 0.1);
 		transform: translateX(-50%);
@@ -1689,7 +1689,7 @@ const schema = [
 	}
 
 	.rbs-timeline-content h3 {
-		color: var(--ds2-ink);
+		color: var(--ds-ink);
 		font-size: 24px;
 		font-weight: 500;
 		line-height: 1.18;
@@ -1697,7 +1697,7 @@ const schema = [
 
 	.rbs-timeline-content p {
 		margin-top: 8px;
-		color: var(--ds2-muted);
+		color: var(--ds-muted);
 		font-size: 14px;
 		line-height: 1.65;
 	}
@@ -1788,7 +1788,7 @@ const schema = [
 		gap: 16px;
 	}
 
-	.ds2-form > p {
+	.ds-form > p {
 		margin-top: 0;
 		color: #71717a;
 		font-size: 12px;
@@ -1804,11 +1804,11 @@ const schema = [
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 10px;
-		border: 1px solid var(--ds2-border);
+		border: 1px solid var(--ds-border);
 		border-radius: 24px;
 		background: rgba(255, 255, 255, 0.86);
 		padding: 10px;
-		box-shadow: var(--ds2-shadow);
+		box-shadow: var(--ds-shadow);
 		backdrop-filter: blur(24px);
 	}
 
@@ -1857,8 +1857,8 @@ const schema = [
 			animation: none;
 		}
 
-		.rbs-actions .ds2-btn-primary:hover + .rbs-free-label,
-		.rbs-actions .ds2-btn-primary:focus-visible + .rbs-free-label {
+		.rbs-actions .ds-btn-primary:hover + .rbs-free-label,
+		.rbs-actions .ds-btn-primary:focus-visible + .rbs-free-label {
 			animation: none;
 		}
 	}
@@ -1878,10 +1878,10 @@ const schema = [
 	}
 
 	@media (min-width: 768px) {
-		.ds2-card,
-		.ds2-dashboard,
-		.ds2-price-card,
-		.ds2-testimonial {
+		.ds-card,
+		.ds-dashboard,
+		.ds-price-card,
+		.ds-testimonial {
 			padding: 32px;
 		}
 
@@ -1895,7 +1895,7 @@ const schema = [
 	}
 
 	@media (min-width: 900px) {
-		.ds2-section-head {
+		.ds-section-head {
 			grid-template-columns: 1fr minmax(320px, 520px);
 		}
 
@@ -1904,17 +1904,17 @@ const schema = [
 			grid-template-columns: 1fr;
 		}
 
-		.ds2-final-cta {
+		.ds-final-cta {
 			grid-template-columns: 1fr minmax(360px, 480px);
 		}
 
-		.ds2-final-cta {
+		.ds-final-cta {
 			padding: 48px;
 		}
 	}
 
 	@media (min-width: 1024px) {
-		.ds2-container {
+		.ds-container {
 			padding-inline: 32px;
 		}
 
@@ -1974,12 +1974,12 @@ const schema = [
 	}
 
 	@media (max-width: 767px) {
-		.ds2 {
-			--ds2-display-size: 42px;
-			--ds2-display-line: 46px;
+		.ds {
+			--ds-display-size: 42px;
+			--ds-display-line: 46px;
 		}
 
-		.ds2-section {
+		.ds-section {
 			padding-block: 56px;
 		}
 
@@ -1993,21 +1993,21 @@ const schema = [
 			line-height: 1.65;
 		}
 
-		.rbs-actions .ds2-btn {
+		.rbs-actions .ds-btn {
 			width: 100%;
 		}
 
 	}
 
-	.ds2 :where(.ds2-kicker, .ds2-btn, .ds2-chip, .ds2-status, .ds2-tab, .ds2-check, .ds2-dark-pill) {
-		font-family: var(--ds2-font-system);
-		font-size: var(--ds2-label-size);
-		font-weight: var(--ds2-label-weight);
-		line-height: var(--ds2-label-line);
+	.ds :where(.ds-kicker, .ds-btn, .ds-chip, .ds-status, .ds-tab, .ds-check, .ds-dark-pill) {
+		font-family: var(--ds-font-system);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
 		letter-spacing: 0;
 	}
 
-	.ds2 :where(b, strong, .font-bold, .ds2-metric p, .ds2-stat-card p, .ds2-faq summary, .ds2-step p, .ds2-table th) {
-		font-weight: var(--ds2-display-weight);
+	.ds :where(b, strong, .font-bold, .ds-metric p, .ds-stat-card p, .ds-faq summary, .ds-step p, .ds-table th) {
+		font-weight: var(--ds-display-weight);
 	}
 </style>

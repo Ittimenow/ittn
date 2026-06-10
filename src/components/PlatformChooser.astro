@@ -1,0 +1,63 @@
+---
+const platforms = [
+	{
+		title: 'Bitrix24',
+		fit: 'Быстро навести порядок в продажах, коммуникациях и командной работе.',
+		bestFor: 'Малый и средний бизнес, отделы продаж, сервисные команды.',
+		automation: 'Лиды, сделки, телефония, задачи, уведомления, отчёты.',
+		href: '/services/bitrix24',
+	},
+	{
+		title: 'РосБизнесСофт',
+		fit: 'Связать продажи и операционный контур: производство, склад, дилеров, сервис, документы.',
+		bestFor: 'B2B, опт, промышленность, дилерские сети.',
+		automation: 'Сделки, заказы, склад, отгрузки, сервис, учёт процессов.',
+		href: '/services/rbs',
+	},
+	{
+		title: 'ЭЛМА',
+		fit: 'Упорядочить сложные внутренние процессы, согласования и документооборот.',
+		bestFor: 'Банки, крупные сервисные и корпоративные структуры, компании с несколькими департаментами.',
+		automation: 'Маршруты согласования, документооборот, внутренние бизнес-процессы.',
+		href: '/services/elma',
+	},
+];
+---
+
+<section class="bg-neutral-50 py-16 dark:bg-neutral-950 sm:py-24">
+	<div class="mx-auto max-w-[1440px] px-6">
+		<div class="mb-10 max-w-3xl">
+			<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Как выбрать решение</p>
+			<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
+				Подбираем не модную платформу, а решение под вашу модель бизнеса
+			</h2>
+			<p class="mt-4 text-neutral-600 dark:text-neutral-400">
+				Если вы не уверены, что вам подходит: CRM, ERP, BPM или кастомная разработка,
+				начинаем с диагностики и предлагаем понятный маршрут.
+			</p>
+		</div>
+
+		<div class="grid gap-4 lg:grid-cols-3">
+			{platforms.map((platform) => (
+				<a
+					href={platform.href}
+					class="group flex min-h-80 flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition hover:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-900/40 dark:hover:border-neutral-600"
+				>
+					<h3 class="text-2xl font-semibold">{platform.title}</h3>
+					<p class="mt-4 text-sm leading-6 text-neutral-700 dark:text-neutral-300">{platform.fit}</p>
+					<dl class="mt-6 space-y-4 text-sm">
+						<div>
+							<dt class="font-medium text-neutral-950 dark:text-white">Лучше всего для</dt>
+							<dd class="mt-1 leading-6 text-neutral-600 dark:text-neutral-400">{platform.bestFor}</dd>
+						</div>
+						<div>
+							<dt class="font-medium text-neutral-950 dark:text-white">Что автоматизируем</dt>
+							<dd class="mt-1 leading-6 text-neutral-600 dark:text-neutral-400">{platform.automation}</dd>
+						</div>
+					</dl>
+					<span class="mt-auto pt-6 text-sm font-medium text-indigo-600 dark:text-indigo-400">Подробнее →</span>
+				</a>
+			))}
+		</div>
+	</div>
+</section>

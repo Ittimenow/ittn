@@ -1,0 +1,50 @@
+---
+const segments = [
+	{
+		title: 'B2B-компании',
+		text: 'Длинный цикл сделки, несколько этапов и участников, нужен контроль воронки и коммуникаций.',
+	},
+	{
+		title: 'Производство',
+		text: 'Важно связать заявку, планирование, производство, склад и отгрузку.',
+	},
+	{
+		title: 'Оптовые компании',
+		text: 'Нужны повторные продажи, учёт заказов, быстрый документооборот и прозрачность по клиентам.',
+	},
+	{
+		title: 'Сервисные компании',
+		text: 'Важно управлять обращениями, статусами, сроками и качеством обслуживания.',
+	},
+	{
+		title: 'Строительство',
+		text: 'Много этапов, согласований, подрядчиков и документов.',
+	},
+	{
+		title: 'Сложные внутренние процессы',
+		text: 'Несколько департаментов, маршруты согласований и большая нагрузка на документооборот.',
+	},
+];
+---
+
+<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+	<div class="mb-10 max-w-3xl">
+		<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Кому подходим</p>
+		<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
+			Компаниям, которым уже тесно в таблицах, чатах и ручных процессах
+		</h2>
+		<p class="mt-4 text-neutral-600 dark:text-neutral-400">
+			Если растут заявки, отделы, документы и внутренние процессы, пора собирать систему,
+			а не латать хаос точечно.
+		</p>
+	</div>
+
+	<div class="grid gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3 dark:border-neutral-800 dark:bg-neutral-800">
+		{segments.map((segment) => (
+			<article class="min-h-44 bg-white p-6 dark:bg-neutral-950">
+				<h3 class="text-[22px] font-semibold leading-[1.2]">{segment.title}</h3>
+				<p class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{segment.text}</p>
+			</article>
+		))}
+	</div>
+</section>
