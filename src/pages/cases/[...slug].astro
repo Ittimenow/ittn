@@ -41,7 +41,19 @@ const { Content } = await render(c);
 				</div>
 			)}
 
-			{c.data.cover && (
+			{c.data.coverVideo ? (
+				<video
+					class="case-cover"
+					autoplay
+					loop
+					muted
+					playsinline
+					poster={c.data.cover}
+					aria-label={c.data.title}
+				>
+					<source src={c.data.coverVideo} type="video/mp4" />
+				</video>
+			) : c.data.cover && (
 				<img
 					src={c.data.cover}
 					alt={c.data.title}
@@ -52,7 +64,7 @@ const { Content } = await render(c);
 			)}
 		</header>
 
-		<div class:list={['prose-content mt-8', c.data.cover && 'has-cover']}>
+		<div class:list={['prose-content mt-8', (c.data.cover || c.data.coverVideo) && 'has-cover']}>
 			<Content />
 		</div>
 	</article>
@@ -65,6 +77,14 @@ const { Content } = await render(c);
 	.prose-content :global(p) { margin: 0.75rem 0; line-height: 1.75; color: var(--prose-text); }
 	.prose-content :global(ul) { margin: 0.75rem 0; padding-left: 1.5rem; list-style: disc; color: var(--prose-text); }
 	.prose-content :global(li + li) { margin-top: 0.25rem; }
+	.prose-content :global(a:not(.case-results-button)) {
+		color: var(--ds-primary);
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.prose-content :global(a:not(.case-results-button):hover) {
+		color: #1d24d9;
+	}
 	.case-article {
 		--case-image-width: min(960px, calc(100vw - 1.5rem));
 		--case-video-width: min(720px, 100%);
@@ -78,6 +98,9 @@ const { Content } = await render(c);
 		border-radius: 24px;
 		box-shadow: var(--ds-shadow);
 	}
+	video.case-cover {
+		background: #000000;
+	}
 	.prose-content :global(.case-video) {
 		display: block;
 		background: #000000;
@@ -87,6 +110,10 @@ const { Content } = await render(c);
 		border-radius: 24px;
 		box-shadow: var(--ds-shadow);
 		margin-left: calc((100% - var(--case-video-width)) / 2);
+	}
+	.prose-content :global(.case-portrait-video) {
+		width: min(320px, 100%);
+		margin: 1.5rem auto 2.5rem;
 	}
 	.prose-content :global(.case-slider) {
 		width: var(--case-image-width);
@@ -113,6 +140,139 @@ const { Content } = await render(c);
 		margin: 0;
 		border-radius: 0;
 		box-shadow: none;
+	}
+	.prose-content :global(.case-work-list) {
+		display: grid;
+		grid-template-columns: minmax(180px, 0.85fr) minmax(0, 1.65fr);
+		gap: 1.5rem;
+		align-items: start;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 2rem calc((100% - var(--case-image-width)) / 2);
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 24px;
+		background: var(--ds-card);
+		padding: 1.5rem;
+		box-shadow: var(--ds-shadow);
+		backdrop-filter: blur(40px);
+	}
+	:global(.dark) .prose-content :global(.case-work-list) {
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+	.prose-content :global(.case-work-list h3) {
+		margin: 0;
+		font-size: 1.375rem;
+		line-height: 1.2;
+	}
+	.prose-content :global(.case-work-list ol) {
+		margin: 0;
+		padding-left: 1.25rem;
+		list-style: decimal;
+		color: var(--prose-text);
+	}
+	.prose-content :global(.case-work-list li) {
+		line-height: 1.65;
+	}
+	.prose-content :global(.case-work-list li + li) {
+		margin-top: 0.375rem;
+	}
+	.prose-content :global(.case-waybills) {
+		display: grid;
+		gap: 1.5rem;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.case-waybill-row) {
+		display: grid;
+		grid-template-columns: minmax(180px, 1fr) minmax(0, 3fr);
+		gap: 1.5rem;
+		align-items: center;
+	}
+	.prose-content :global(.case-waybill-row.is-reversed) {
+		grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr);
+	}
+	.prose-content :global(.case-waybill-copy) {
+		min-width: 0;
+	}
+	.prose-content :global(.case-waybill-copy p) {
+		margin: 0;
+		font-size: 1.0625rem;
+		line-height: 1.7;
+	}
+	.prose-content :global(.case-waybill-media img),
+	.prose-content :global(.case-waybill-video) {
+		display: block;
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		border-radius: 24px;
+		box-shadow: var(--ds-shadow);
+	}
+	.prose-content :global(.case-waybill-video) {
+		background: #000000;
+	}
+	.prose-content :global(.case-waybill-video-narrow) {
+		width: min(320px, 100%);
+		justify-self: center;
+	}
+	.prose-content :global(.case-interface-features) {
+		display: grid;
+		gap: 1rem;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.case-interface-feature) {
+		display: grid;
+		grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.35fr);
+		gap: 1.25rem;
+		align-items: center;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 24px;
+		background: var(--ds-card);
+		padding: 1.25rem;
+		box-shadow: var(--ds-shadow);
+		backdrop-filter: blur(40px);
+	}
+	:global(.dark) .prose-content :global(.case-interface-feature) {
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+	.prose-content :global(.case-interface-feature.is-reversed) {
+		grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.85fr);
+	}
+	.prose-content :global(.case-interface-copy) {
+		min-width: 0;
+	}
+	.prose-content :global(.case-interface-copy h4) {
+		margin: 0;
+		color: var(--prose-text);
+		font-size: 1.25rem;
+		line-height: 1.25;
+	}
+	.prose-content :global(.case-interface-copy p) {
+		margin: 0;
+		font-size: 1.0625rem;
+		line-height: 1.65;
+	}
+	.prose-content :global(.case-interface-media) {
+		min-width: 0;
+	}
+	.prose-content :global(.case-interface-media img) {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		border-radius: 16px;
+		background: #ffffff;
+		box-shadow: none;
+	}
+	.prose-content :global(.case-interface-media-small) {
+		display: flex;
+		justify-content: center;
+	}
+	.prose-content :global(.case-interface-media-small img) {
+		width: min(390px, 100%);
+		border-radius: 12px;
 	}
 	.prose-content :global(.case-slider-controls) {
 		display: flex;
@@ -159,6 +319,63 @@ const { Content } = await render(c);
 		width: 28px;
 		background: var(--ds-primary);
 	}
+	.prose-content :global(.case-mobile-showcase) {
+		display: grid;
+		grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.35fr) minmax(180px, 0.8fr);
+		gap: 1.5rem;
+		align-items: center;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.case-mobile-showcase-video),
+	.prose-content :global(.case-mobile-showcase img) {
+		display: block;
+		width: min(280px, 100%);
+		max-width: none;
+		justify-self: center;
+		margin: 0;
+		border-radius: 24px;
+		background: #000000;
+		box-shadow: var(--ds-shadow);
+	}
+	.prose-content :global(.case-mobile-showcase img) {
+		background: transparent;
+	}
+	.prose-content :global(.case-mobile-showcase-copy) {
+		min-width: 0;
+	}
+	.prose-content :global(.case-mobile-showcase-copy p) {
+		margin: 0;
+		font-size: 1.0625rem;
+		line-height: 1.7;
+	}
+	.prose-content :global(.case-mobile-showcase-copy p + p) {
+		margin-top: 1rem;
+	}
+	.prose-content :global(.case-video-copy-row) {
+		display: grid;
+		grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+		gap: 1.5rem;
+		align-items: center;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.case-video-copy-row video) {
+		display: block;
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		border-radius: 24px;
+		background: #000000;
+		box-shadow: var(--ds-shadow);
+	}
+	.prose-content :global(.case-video-copy-row p) {
+		margin: 0;
+		font-size: 1.0625rem;
+		line-height: 1.7;
+	}
 	.case-cover {
 		margin-top: 2rem;
 	}
@@ -197,6 +414,14 @@ const { Content } = await render(c);
 	.prose-content :global(.case-results-cta ::selection) {
 		background: #232bff;
 		color: #ffffff;
+	}
+	.prose-content :global(.case-results-cta a:not(.case-results-button)) {
+		color: #ffffff;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.prose-content :global(.case-results-cta a:not(.case-results-button):hover) {
+		color: rgba(255, 255, 255, 0.82);
 	}
 	.prose-content :global(.case-results-button) {
 		display: inline-flex;
@@ -279,7 +504,11 @@ const { Content } = await render(c);
 		margin: 0 0 0.75rem;
 		border-radius: 9999px;
 	}
-	.prose-content :global(.case-team-card h4) { margin: 0.75rem 0 0.125rem; line-height: 1.15; }
+	.prose-content :global(.case-team-card h4) {
+		min-height: 2.3em;
+		margin: 0.75rem 0 0.125rem;
+		line-height: 1.15;
+	}
 	.prose-content :global(.case-team-card p) { margin: 0; font-size: 0.925rem; line-height: 1.25; }
 	.prose-content { --prose-text: oklch(0.371 0 0); }
 	:global(.dark) .prose-content { --prose-text: oklch(0.872 0 0); }
@@ -294,11 +523,89 @@ const { Content } = await render(c);
 			border-radius: 1.5rem;
 			padding: 1.5rem;
 		}
+		.prose-content :global(.case-work-list) {
+			grid-template-columns: 1fr;
+			width: 100%;
+			margin-left: 0;
+			padding: 1.25rem;
+		}
+		.prose-content :global(.case-work-list h3) {
+			font-size: 1.25rem;
+		}
+		.prose-content :global(.case-waybills) {
+			width: 100%;
+			margin-left: 0;
+		}
+		.prose-content :global(.case-waybill-row),
+		.prose-content :global(.case-waybill-row.is-reversed) {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+		.prose-content :global(.case-waybill-row.is-reversed .case-waybill-copy) {
+			order: 1;
+		}
+		.prose-content :global(.case-waybill-row.is-reversed .case-waybill-media) {
+			order: 2;
+		}
+		.prose-content :global(.case-waybill-copy p) {
+			font-size: 1rem;
+		}
+		.prose-content :global(.case-interface-features) {
+			width: 100%;
+			margin-left: 0;
+		}
+		.prose-content :global(.case-interface-feature),
+		.prose-content :global(.case-interface-feature.is-reversed) {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+			padding: 1rem;
+		}
+		.prose-content :global(.case-interface-feature.is-reversed .case-interface-copy) {
+			order: 1;
+		}
+		.prose-content :global(.case-interface-feature.is-reversed .case-interface-media) {
+			order: 2;
+		}
+		.prose-content :global(.case-interface-copy h4) {
+			font-size: 1.125rem;
+		}
+		.prose-content :global(.case-interface-copy p) {
+			font-size: 1rem;
+		}
+		.prose-content :global(.case-mobile-showcase) {
+			grid-template-columns: 1fr;
+			width: 100%;
+			margin-left: 0;
+			gap: 1.25rem;
+		}
+		.prose-content :global(.case-mobile-showcase-video),
+		.prose-content :global(.case-mobile-showcase img) {
+			width: min(300px, 100%);
+		}
+		.prose-content :global(.case-mobile-showcase-copy) {
+			order: 2;
+		}
+		.prose-content :global(.case-mobile-showcase img) {
+			order: 3;
+		}
+		.prose-content :global(.case-mobile-showcase-copy p) {
+			font-size: 1rem;
+		}
+		.prose-content :global(.case-video-copy-row) {
+			grid-template-columns: 1fr;
+			width: 100%;
+			margin-left: 0;
+			gap: 1rem;
+		}
+		.prose-content :global(.case-video-copy-row p) {
+			font-size: 1rem;
+		}
 		.prose-content :global(.case-team) {
 			display: flex;
 			gap: 0.875rem;
 			width: 100%;
 			margin-left: 0;
+			padding-bottom: 1rem;
 			overflow-x: auto;
 			overscroll-behavior-x: contain;
 			scroll-snap-type: x proximity;

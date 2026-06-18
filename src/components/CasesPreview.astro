@@ -6,29 +6,6 @@ const cases = all
 	.filter((c) => c.data.featured)
 	.sort((a, b) => a.data.order - b.data.order)
 	.slice(0, 5);
-
-const details = {
-	'alfastrah-portal': {
-		task: 'создать цифровой B2B-инструмент для агентов',
-		result: 'единый интерфейс работы для агентской сети',
-	},
-	'donstroy-crm': {
-		task: 'объединить продажи, бронирование и сервис',
-		result: 'более управляемый процесс между подразделениями',
-	},
-	'rsb-elma': {
-		task: 'выстроить документооборот и согласования',
-		result: 'работа с 200+ типами документов в едином процессе',
-	},
-	'vkusvill-ai-assistant': {
-		task: 'ускорить первую линию поддержки',
-		result: 'быстрый доступ к знаниям и повышение качества ответов',
-	},
-	'severstal-rbs': {
-		task: 'управлять дилерской сетью и сделками',
-		result: 'централизованная работа с дилерами и сделками',
-	},
-};
 ---
 
 <section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
@@ -67,16 +44,6 @@ const details = {
 				</div>
 				<h3 class="text-xl font-semibold leading-tight">{c.data.title}</h3>
 				<p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">{c.data.summary}</p>
-				<dl class="mt-5 grid gap-3 text-sm">
-					<div>
-						<dt class="font-medium text-neutral-950 dark:text-white">Задача</dt>
-						<dd class="mt-1 leading-6 text-neutral-600 dark:text-neutral-400">{details[c.id]?.task}</dd>
-					</div>
-					<div>
-						<dt class="font-medium text-neutral-950 dark:text-white">Результат</dt>
-						<dd class="mt-1 leading-6 text-neutral-600 dark:text-neutral-400">{details[c.id]?.result}</dd>
-					</div>
-				</dl>
 				{c.data.stack.length > 0 && (
 					<div class="mt-auto pt-6 flex flex-wrap gap-1.5">
 						{c.data.stack.slice(0, 4).map((s) => (

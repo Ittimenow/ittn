@@ -27,6 +27,7 @@ const cases = defineCollection({
 		featured: z.boolean().default(false),
 		order: z.number().int().default(0),
 		cover: z.string().optional(),
+		coverVideo: z.string().optional(),
 	}),
 });
 
