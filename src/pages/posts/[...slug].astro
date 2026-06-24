@@ -12,13 +12,67 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const coverUrl = post.data.cover ? new URL(post.data.cover, Astro.site ?? Astro.url).href : undefined;
+const articleSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: post.data.title,
+	description: post.data.description,
+	url: pageUrl,
+	inLanguage: 'ru-RU',
+	datePublished: post.data.pubDate.toISOString(),
+	...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+	...(coverUrl ? { image: coverUrl } : {}),
+	author: {
+		'@type': 'Organization',
+		name: 'IT TIME NOW',
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: 'IT TIME NOW',
+		logo: {
+			'@type': 'ImageObject',
+			url: new URL('/brand/ittn-logo.webp', Astro.site ?? Astro.url).href,
+		},
+	},
+};
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: 'Главная',
+			item: new URL('/', Astro.site ?? Astro.url).href,
+		},
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: 'Блог',
+			item: new URL('/posts/', Astro.site ?? Astro.url).href,
+		},
+		{
+			'@type': 'ListItem',
+			position: 3,
+			name: post.data.title,
+			item: pageUrl,
+		},
+	],
+};
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={post.data.cover}>
+<Layout
+	title={post.data.title}
+	description={post.data.description}
+	image={post.data.cover}
+	structuredData={[articleSchema, breadcrumbSchema]}
+>
 	<article class="mx-auto max-w-3xl px-6 py-16">
 		<div class="flex items-center justify-between gap-4 text-sm text-neutral-500">
-			<a href="/posts" class="transition hover:text-[#323bff] dark:hover:text-[#323bff]">
-				← к списку постов
+			<a href="/posts/" class="transition hover:text-[#323bff] dark:hover:text-[#323bff]">
+				← к списку постов
 			</a>
 			<time
 				datetime={post.data.pubDate.toISOString()}
@@ -43,7 +97,7 @@ const { Content } = await render(post);
 			{post.data.cover && (
 				<img
 					src={post.data.cover}
-					alt=""
+					alt={post.data.title}
 					class="relative left-1/2 mt-8 aspect-video w-screen max-w-4xl -translate-x-1/2 rounded-xl object-cover"
 					loading="eager"
 				/>

@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 const all = await getCollection('cases');
 const cases = all
 	.filter((c) => c.data.featured)
-	.sort((a, b) => a.data.order - b.data.order)
+	.sort((a, b) => b.data.order - a.data.order)
 	.slice(0, 5);
 ---
 
@@ -13,14 +13,14 @@ const cases = all
 		<div>
 			<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Портфолио</p>
 			<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
-				Кейсы: как это работает в реальном бизнесе
+				Кейсы: как это работает в реальном бизнесе
 			</h2>
 			<p class="mt-4 max-w-2xl text-neutral-600 dark:text-neutral-400">
-				Показываем не просто проекты, а задачи, решения и результат.
+				Показываем не просто проекты, а задачи, решения и результат.
 			</p>
 		</div>
 		<a
-			href="/cases"
+			href="/cases/"
 			class="hidden text-sm font-medium text-indigo-600 hover:text-indigo-700 sm:inline dark:text-indigo-400"
 		>
 			Все кейсы →
@@ -58,6 +58,6 @@ const cases = all
 	</div>
 
 	<div class="mt-6 sm:hidden">
-		<a href="/cases" class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Все кейсы →</a>
+		<a href="/cases/" class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Все кейсы →</a>
 	</div>
 </section>

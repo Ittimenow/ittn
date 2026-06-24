@@ -28,6 +28,8 @@ const cases = defineCollection({
 		order: z.number().int().default(0),
 		cover: z.string().optional(),
 		coverVideo: z.string().optional(),
+		listingCover: z.string().optional(),
+		resultsCta: z.boolean().default(true),
 	}),
 });
 

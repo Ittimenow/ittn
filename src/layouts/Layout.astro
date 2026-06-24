@@ -10,18 +10,45 @@ interface Props {
 	image?: string;
 	bare?: boolean;
 	headerVariant?: 'default' | 'glass';
+	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title = 'ittimenow',
-	description = 'ittimenow — сайт на Astro и Tailwind.',
+	description = 'ittimenow — сайт на Astro и Tailwind.',
 	image = '/og.png',
 	bare = false,
 	headerVariant = 'glass',
+	structuredData = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImage = new URL(image, Astro.site ?? Astro.url);
+const siteURL = new URL('/', Astro.site ?? Astro.url);
+const organizationSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: 'IT TIME NOW',
+	url: siteURL.href,
+	logo: new URL('/brand/ittn-logo.webp', siteURL).href,
+	email: 'hello@ittimenow.com',
+	telephone: '+7-495-133-58-88',
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Москва',
+		streetAddress: 'Варшавское ш., 28А',
+		addressCountry: 'RU',
+	},
+};
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'IT TIME NOW',
+	url: siteURL.href,
+	inLanguage: 'ru-RU',
+};
+const pageSchema = Array.isArray(structuredData) ? structuredData : [structuredData];
+const schema = [organizationSchema, websiteSchema, ...pageSchema.filter(Boolean)];
 ---
 
 <!doctype html>
@@ -50,6 +77,7 @@ const ogImage = new URL(image, Astro.site ?? Astro.url);
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 		<ClientRouter />
 

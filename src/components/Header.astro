@@ -9,15 +9,15 @@ const { variant = 'glass' } = Astro.props;
 const isGlass = variant === 'glass';
 
 const services = {
-	'Разработка': [{ title: 'Сайты и\u00A0сервисы', href: '/services/web' }],
+	'Разработка': [{ title: 'Сайты и\u00A0сервисы', href: '/services/web/' }],
 	'Автоматизация': [
-		{ title: 'Битрикс24', href: '/services/bitrix24' },
-		{ title: 'РосБизнесСофт', href: '/services/rbs' },
-		{ title: 'ЭЛМА', href: '/services/elma' },
+		{ title: 'Битрикс24', href: '/services/bitrix24/' },
+		{ title: 'РосБизнесСофт', href: '/services/rbs/' },
+		{ title: 'ЭЛМА', href: '/services/elma/' },
 	],
 	'Дополнительно': [
-		{ title: 'Искусственный интеллект', href: '/services/ai' },
-		{ title: 'Сопровождение IT-проектов', href: '/services/support' },
+		{ title: 'Искусственный интеллект', href: '/services/ai/' },
+		{ title: 'Сопровождение IT-проектов', href: '/services/support/' },
 	],
 };
 ---
@@ -46,7 +46,7 @@ const services = {
 
 		<a href="/" class="relative z-10 flex min-w-0 items-center gap-3 justify-self-start" aria-label="IT TIME NOW">
 			<img
-				src="https://ittimenow.com/wp-content/uploads/2022/03/%D0%A0%D0%B5%D1%81%D1%83%D1%80%D1%81-1-1.webp"
+				src="/brand/ittn-logo.webp"
 				alt="IT TIME NOW"
 				class="h-[26px] w-auto shrink-0 dark:brightness-0 dark:invert"
 				loading="eager"
@@ -61,7 +61,7 @@ const services = {
 		<nav class="relative z-10 hidden items-center justify-self-center text-sm md:flex">
 			<div class="group relative">
 				<a
-					href="/services"
+					href="/services/"
 					class="flex items-center gap-1 px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] group-hover:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF] dark:group-hover:text-[#6C7CFF]"
 					aria-haspopup="true"
 				>
@@ -106,13 +106,13 @@ const services = {
 				</div>
 			</div>
 
-			<a href="/cases" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
+			<a href="/cases/" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
 				Кейсы
 			</a>
-			<a href="/posts" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
+			<a href="/posts/" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
 				Блог
 			</a>
-			<a href="/about" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
+			<a href="/about/" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
 				О&nbsp;нас
 			</a>
 		</nav>
@@ -153,7 +153,7 @@ const services = {
 		]}
 	>
 		<nav class="flex flex-col gap-3 text-sm">
-			<a href="/services" class="font-medium">Услуги</a>
+			<a href="/services/" class="font-medium">Услуги</a>
 			{Object.entries(services).map(([group, items]) => (
 				<div class="ml-3 border-l border-neutral-200 pl-3 dark:border-neutral-800">
 					<p class="text-xs font-semibold uppercase tracking-wider text-neutral-500">{group}</p>
@@ -164,9 +164,9 @@ const services = {
 					</ul>
 				</div>
 			))}
-			<a href="/cases">Кейсы</a>
-			<a href="/posts">Блог</a>
-			<a href="/about">О&nbsp;нас</a>
+			<a href="/cases/">Кейсы</a>
+			<a href="/posts/">Блог</a>
+			<a href="/about/">О&nbsp;нас</a>
 		</nav>
 	</div>
 </header>

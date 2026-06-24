@@ -1,43 +1,259 @@
 ---
+import UiIcon from './UiIcon.astro';
+
 const steps = [
 	{
+		icon: 'filter',
 		title: 'Диагностика',
-		text: 'Разбираем задачу, ограничения, текущие процессы и точки потерь.',
+		text: 'Разбираем задачу, ограничения, текущие процессы и точки потерь.',
 	},
 	{
+		icon: 'workflow',
 		title: 'Проектирование',
-		text: 'Определяем архитектуру, роли, маршруты, интерфейсы и состав решения.',
+		text: 'Определяем архитектуру, роли, маршруты, интерфейсы и состав решения.',
 	},
 	{
+		icon: 'settings',
 		title: 'Реализация',
-		text: 'Разрабатываем, внедряем, настраиваем и интегрируем.',
+		text: 'Разрабатываем, внедряем, настраиваем и интегрируем.',
 	},
 	{
-		title: 'Запуск и обучение',
-		text: 'Тестируем, переносим данные, обучаем команду и сопровождаем старт.',
+		icon: 'rocket',
+		title: 'Запуск и обучение',
+		text: 'Тестируем, переносим данные, обучаем команду и сопровождаем старт.',
 	},
 	{
+		icon: 'bar-chart',
 		title: 'Развитие',
-		text: 'Добавляем новые функции, оптимизируем процессы и поддерживаем систему.',
+		text: 'Добавляем новые функции, оптимизируем процессы и поддерживаем систему.',
 	},
-];
+] as const;
 ---
 
-<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
-	<div class="mb-10 max-w-3xl">
-		<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Как мы работаем</p>
-		<h2 class="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
-			Понятный процесс работы без магии за кадром
-		</h2>
-	</div>
+<section class="work-process mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+	<div class="work-process-grid">
+		<section class="work-process-card" aria-labelledby="work-process-title">
+			<p class="work-process-kicker">Как мы работаем</p>
+			<h2 id="work-process-title">Понятный процесс работы без магии за кадром</h2>
+		</section>
 
-	<ol class="grid gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 md:grid-cols-5 dark:border-neutral-800 dark:bg-neutral-800">
-		{steps.map((step, index) => (
-			<li class="bg-white p-5 dark:bg-neutral-950">
-				<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{String(index + 1).padStart(2, '0')}</p>
-				<h3 class="mt-4 text-[22px] font-semibold leading-[1.2]">{step.title}</h3>
-				<p class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{step.text}</p>
-			</li>
-		))}
-	</ol>
+		<ol class="work-process-timeline" aria-label="Этапы работы">
+			{steps.map((step, index) => (
+				<li class="work-process-timeline-item">
+					<div class="work-process-timeline-date">
+						<span>Этап</span>
+						<time>{String(index + 1).padStart(2, '0')}</time>
+					</div>
+					<div class="work-process-timeline-track" aria-hidden="true">
+						<div class="work-process-timeline-line"></div>
+						<div class="work-process-timeline-dot">
+							<UiIcon name={step.icon} class="h-4 w-4" />
+						</div>
+					</div>
+					<div class="work-process-timeline-content">
+						<h3>{step.title}</h3>
+						<p>{step.text}</p>
+					</div>
+				</li>
+			))}
+		</ol>
+	</div>
 </section>
+
+<style>
+	.work-process-grid {
+		display: grid;
+		gap: 20px;
+	}
+
+	.work-process-card {
+		min-width: 0;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 24px;
+		background: var(--ds-card);
+		padding: 24px;
+		box-shadow: var(--ds-shadow);
+		backdrop-filter: blur(40px);
+	}
+
+	.work-process-kicker {
+		display: inline-flex;
+		align-items: center;
+		min-height: 28px;
+		border-radius: 9999px;
+		background: rgba(35, 43, 255, 0.08);
+		padding: 4px 12px;
+		color: var(--ds-primary);
+		font-size: var(--ds-label-size);
+		font-weight: var(--ds-label-weight);
+		line-height: var(--ds-label-line);
+	}
+
+	.work-process-card h2 {
+		margin-top: 14px;
+		color: var(--ds-ink);
+		font-size: clamp(36px, 6vw, 52px);
+		font-weight: var(--ds-display-weight);
+		line-height: 1.04;
+	}
+
+	.work-process-timeline {
+		margin: 0;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 24px;
+		background: var(--ds-card);
+		box-shadow: var(--ds-shadow);
+		list-style: none;
+		backdrop-filter: blur(40px);
+	}
+
+	.work-process-timeline-item {
+		display: grid;
+		grid-template-columns: 52px 1fr;
+		min-height: 132px;
+		transition: background 180ms ease;
+	}
+
+	.work-process-timeline-item:hover {
+		background: rgba(35, 43, 255, 0.05);
+	}
+
+	.work-process-timeline-date {
+		grid-column: 2;
+		grid-row: 1;
+		padding: 22px 22px 0 0;
+		color: var(--ds-muted);
+	}
+
+	.work-process-timeline-date span {
+		display: block;
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 16px;
+		text-transform: uppercase;
+	}
+
+	.work-process-timeline-date time {
+		display: block;
+		margin-top: 2px;
+		color: var(--ds-primary);
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 24px;
+	}
+
+	.work-process-timeline-track {
+		position: relative;
+		grid-column: 1;
+		grid-row: 1 / span 2;
+		min-height: 132px;
+	}
+
+	.work-process-timeline-line {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		border-left: 1px solid var(--ds-border);
+		transform: translateX(-50%);
+	}
+
+	.work-process-timeline-item:first-child .work-process-timeline-line {
+		top: 34px;
+	}
+
+	.work-process-timeline-item:last-child .work-process-timeline-line {
+		bottom: calc(100% - 34px);
+	}
+
+	.work-process-timeline-dot {
+		position: absolute;
+		top: 22px;
+		left: 50%;
+		z-index: 1;
+		display: grid;
+		width: 30px;
+		height: 30px;
+		place-items: center;
+		border: 1px solid rgba(35, 43, 255, 0.22);
+		border-radius: 9999px;
+		background: var(--ds-primary);
+		box-shadow: 0 0 0 7px rgba(35, 43, 255, 0.1);
+		color: #ffffff;
+		transform: translateX(-50%);
+		transition: box-shadow 180ms ease, transform 180ms ease;
+	}
+
+	.work-process-timeline-item:hover .work-process-timeline-dot {
+		box-shadow: 0 0 0 10px rgba(35, 43, 255, 0.14);
+		transform: translateX(-50%) scale(1.04);
+	}
+
+	.work-process-timeline-content {
+		grid-column: 2;
+		grid-row: 2;
+		padding: 6px 22px 24px 0;
+	}
+
+	.work-process-timeline-content h3 {
+		margin: 0;
+		color: var(--ds-ink);
+		font-size: 24px;
+		font-weight: 500;
+		line-height: 1.18;
+	}
+
+	.work-process-timeline-content p {
+		margin: 8px 0 0;
+		color: var(--ds-muted);
+		font-size: 14px;
+		line-height: 1.65;
+	}
+
+	:global(.dark) .work-process-card,
+	:global(.dark) .work-process-timeline {
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	@media (min-width: 1024px) {
+		.work-process-grid {
+			grid-template-columns: 0.72fr 1fr;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.work-process-card {
+			padding: 32px;
+		}
+
+		.work-process-timeline {
+			padding-block: 8px;
+		}
+
+		.work-process-timeline-item {
+			grid-template-columns: 128px 60px 1fr;
+			min-height: 116px;
+			align-items: start;
+		}
+
+		.work-process-timeline-date {
+			grid-column: 1;
+			grid-row: 1;
+			padding: 28px 0 0 24px;
+		}
+
+		.work-process-timeline-track {
+			grid-column: 2;
+			grid-row: 1;
+			min-height: 116px;
+		}
+
+		.work-process-timeline-content {
+			grid-column: 3;
+			grid-row: 1;
+			padding: 24px 28px 24px 0;
+		}
+	}
+</style>

@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Bitrix24Landing from '../../components/Bitrix24Landing.astro';
 import RbsLanding from '../../components/RbsLanding.astro';
+import WebLanding from '../../components/WebLanding.astro';
 
 export async function getStaticPaths() {
 	const services = await getCollection('services');
@@ -16,26 +17,74 @@ const { service } = Astro.props;
 const { Content } = await render(service);
 const isBitrix24 = service.id === 'bitrix24';
 const isRbs = service.id === 'rbs';
+const isWeb = service.id === 'web';
 const pageTitle = isBitrix24
-	? 'Внедрение и настройка Bitrix24 под ключ — цена от 39 000 ₽ | IT Time Now'
+	? 'Внедрение и настройка Bitrix24 под ключ — цена от 39 000 ₽ | IT Time Now'
 	: isRbs
 		? 'Внедрение CRM/ERP\u00A0РосБизнесСофт под\u00A0ключ — настройка RBS360 от\u00A080\u00A0000\u00A0₽ | IT\u00A0TIME\u00A0NOW'
-		: `${service.data.title} — ittimenow`;
+		: isWeb
+			? 'Разработка сайтов и веб-сервисов под ключ — IT TIME NOW'
+			: `${service.data.title} — ittimenow`;
 const pageDescription = isBitrix24
-	? 'Внедрение и настройка Bitrix24 для бизнеса: CRM, воронки, роботы, телефония, 1С, интеграции, обучение и сопровождение. Запуск от 39 000 ₽.'
+	? 'Внедрение и настройка Bitrix24 для бизнеса: CRM, воронки, роботы, телефония, 1С, интеграции, обучение и сопровождение. Запуск от 39 000 ₽.'
 	: isRbs
 		? 'Внедрим и\u00A0настроим CRM/ERP\u00A0систему РосБизнесСофт для\u00A0продаж, склада, производства, сервиса и\u00A0B2B. Интеграция с\u00A01С, сайтом, телефонией, почтой и\u00A0мессенджерами. Быстрый старт от\u00A080\u00A0000\u00A0₽, проектное внедрение от\u00A0300\u00A0000\u00A0₽.'
-		: service.data.summary;
+		: isWeb
+			? 'Разрабатываем лендинги, корпоративные сайты, интернет-магазины, личные кабинеты, порталы и индивидуальные веб-сервисы. Проектирование, UX/UI-дизайн, программирование и интеграция с CRM и ERP.'
+			: service.data.summary;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const serviceSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Service',
+	name: service.data.title,
+	description: pageDescription,
+	url: pageUrl,
+	provider: {
+		'@type': 'Organization',
+		name: 'IT TIME NOW',
+		url: new URL('/', Astro.site ?? Astro.url).href,
+	},
+	areaServed: {
+		'@type': 'Country',
+		name: 'Россия',
+	},
+};
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: 'Главная',
+			item: new URL('/', Astro.site ?? Astro.url).href,
+		},
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: 'Услуги',
+			item: new URL('/services/', Astro.site ?? Astro.url).href,
+		},
+		{
+			'@type': 'ListItem',
+			position: 3,
+			name: service.data.title,
+			item: pageUrl,
+		},
+	],
+};
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageTitle} description={pageDescription} structuredData={[serviceSchema, breadcrumbSchema]}>
 	{isBitrix24 ? (
 		<Bitrix24Landing />
 	) : isRbs ? (
 		<RbsLanding />
+	) : isWeb ? (
+		<WebLanding />
 	) : (
 		<article class="mx-auto max-w-3xl px-6 py-16">
-			<a href="/services" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
+			<a href="/services/" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
 				← все услуги
 			</a>
 
@@ -56,7 +105,7 @@ const pageDescription = isBitrix24
 
 			<div class="mt-12 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40">
 				<p class="text-sm text-neutral-700 dark:text-neutral-300">
-					Расскажите о задаче — обсудим, как лучше подойти.
+					Расскажите о задаче — обсудим, как лучше подойти.
 				</p>
 				<a
 					href="/#consultation"

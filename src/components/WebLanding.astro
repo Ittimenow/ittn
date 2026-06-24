@@ -1,0 +1,931 @@
+---
+import UiIcon from './UiIcon.astro';
+import ClientLogos from './ClientLogos.astro';
+
+const trustMarkers = [
+	'150+ реализованных проектов',
+	'Сайты, сервисы, CRM и ERP в одной команде',
+	'Проектирование, дизайн, разработка и запуск',
+] as const;
+const b24ButtonClass = 'b24-web-form-popup-btn-21';
+
+const problems = [
+	{
+		icon: 'shield',
+		title: 'Сайт устарел и не вызывает доверия',
+		text: 'Продукт развивается, компания растет, а сайт продолжает выглядеть так, будто его не обновляли несколько лет.',
+		action: 'Перерабатываем позиционирование, структуру, дизайн и пользовательский путь.',
+	},
+	{
+		icon: 'filter',
+		title: 'Посетители заходят, но не оставляют заявки',
+		text: 'На странице много информации, однако пользователю сложно понять предложение, преимущества и следующий шаг.',
+		action: 'Проектируем понятную структуру, формулируем ценностное предложение и расставляем точки конверсии.',
+	},
+	{
+		icon: 'database',
+		title: 'Менеджеры вручную переносят данные',
+		text: 'Заявки приходят из разных форм, мессенджеров и сервисов. Информация теряется или обрабатывается слишком долго.',
+		action: 'Связываем сайт с CRM, ERP, телефонией, платежами, складом и другими системами.',
+	},
+	{
+		icon: 'layers',
+		title: 'Готовые платформы ограничивают развитие',
+		text: 'Шаблонное решение больше не поддерживает нужные сценарии, роли пользователей или бизнес-логику.',
+		action: 'Создаем индивидуальный веб-сервис, портал или личный кабинет.',
+	},
+] as const;
+
+const productTypes = [
+	{
+		name: 'Продающий лендинг',
+		price: 'от 150 000 ₽',
+		tag: 'Реклама и гипотезы',
+		icon: 'rocket',
+		text: 'Одностраничный сайт для продвижения продукта, услуги, мероприятия или специального предложения.',
+		fit: ['запуск рекламы', 'проверка новой гипотезы', 'презентация отдельной услуги', 'сбор заявок', 'вывод продукта на рынок'],
+		includes: ['анализ продукта и аудитории', 'структура страницы', 'продающие тексты', 'прототип', 'индивидуальный дизайн', 'адаптивная разработка', 'формы и базовые интеграции', 'настройка аналитики'],
+		cta: 'Обсудить лендинг',
+	},
+	{
+		name: 'Корпоративный сайт',
+		price: 'от 250 000 ₽',
+		tag: 'Компания и экспертиза',
+		icon: 'briefcase',
+		text: 'Многостраничный сайт, который системно представляет компанию, услуги, проекты и экспертизу.',
+		fit: ['повысить доверие к бренду', 'представить несколько направлений', 'привлекать клиентов из поиска', 'публиковать кейсы и материалы', 'упростить работу отдела продаж'],
+		includes: ['информационная архитектура', 'прототипирование ключевых страниц', 'UX/UI-дизайн', 'система компонентов', 'CMS', 'формы и интеграции', 'перенос материалов', 'базовая техническая SEO-подготовка'],
+		cta: 'Обсудить корпоративный сайт',
+	},
+	{
+		name: 'Интернет-магазин',
+		price: 'от 400 000 ₽',
+		tag: 'Каталог и продажи',
+		icon: 'bar-chart',
+		text: 'Интернет-магазин с удобным каталогом, фильтрами, корзиной, оплатой и интеграцией с учетными системами.',
+		fit: ['каталог и карточки товаров', 'фильтрация и поиск', 'личный кабинет покупателя', 'онлайн-оплата', 'доставка', 'промокоды и скидки'],
+		includes: ['синхронизация остатков', 'интеграция с CRM или ERP', 'уведомления и статусы заказов', 'аналитика продаж'],
+		cta: 'Рассчитать интернет-магазин',
+	},
+	{
+		name: 'Интерактивный имиджевый сайт',
+		price: 'от 250 000 ₽',
+		tag: 'Бренд и впечатление',
+		icon: 'spark',
+		text: 'Выразительный сайт с анимацией, нестандартной навигацией, 3D-графикой или интерактивными сценариями.',
+		fit: ['премиальный продукт', 'девелоперский проект', 'культурное событие', 'технологичная компания', 'рекламная кампания', 'бренд, которому важно выделиться'],
+		includes: ['визуальная концепция', 'анимации', 'интерактивные сценарии', 'адаптивная разработка', 'оптимизация производительности'],
+		cta: 'Обсудить интерактивный сайт',
+	},
+	{
+		name: 'Портал или личный кабинет',
+		price: 'от 300 000 ₽',
+		tag: 'Роли и процессы',
+		icon: 'users',
+		text: 'Закрытая или публичная система для клиентов, партнеров, сотрудников и подрядчиков.',
+		fit: ['регистрация и авторизация', 'разные роли пользователей', 'документы и файлы', 'заявки и статусы', 'платежи', 'уведомления'],
+		includes: ['отчеты', 'история операций', 'интеграция с внутренними системами', 'административная панель'],
+		cta: 'Обсудить портал',
+	},
+	{
+		name: 'Индивидуальный веб-сервис',
+		price: 'от 600 000 ₽',
+		tag: 'MVP и платформы',
+		icon: 'workflow',
+		text: 'Цифровой продукт с уникальной бизнес-логикой: MVP, агрегатор, SaaS-сервис, внутренняя система или отраслевая платформа.',
+		fit: ['анализ идеи', 'ключевые пользовательские сценарии', 'состав первого релиза', 'архитектура', 'запуск без лишнего функционала'],
+		includes: ['frontend и backend', 'базы данных', 'API', 'интеграции', 'тестирование и запуск'],
+		cta: 'Обсудить веб-сервис',
+	},
+] as const;
+
+const outcomes = [
+	['message', 'Понятное предложение', 'Посетитель быстро понимает, чем занимается компания, какую задачу решает продукт и почему стоит обратиться именно к вам.'],
+	['filter', 'Продуманный путь пользователя', 'Структура и интерфейс помогают пройти от первого знакомства до заявки, заказа, оплаты или регистрации.'],
+	['database', 'Связь с бизнес-процессами', 'Данные с сайта автоматически поступают в CRM, ERP или другую систему и становятся доступны ответственным сотрудникам.'],
+	['bar-chart', 'Основа для продвижения', 'Проектируем логичную структуру страниц, управление метаданными, корректные адреса, адаптивность и скорость загрузки.'],
+	['layers', 'Возможность развития', 'Используем компонентный подход, чтобы добавлять новые разделы и функции без полной переделки продукта.'],
+	['check', 'Управляемый запуск', 'Разбиваем проект на понятные этапы, показываем промежуточный результат и согласовываем решения до программирования.'],
+] as const;
+
+const cases = [
+	{
+		title: 'Сайт для видео-арт-балета «Сказки сна»',
+		href: '/cases/skazki-sna-frontend/',
+		image: '/cases/skazki-sna-frontend/img-skazkisna-main-4x3-1.webp',
+		task: 'Создать атмосферный лендинг с игровой механикой и возможностью покупки билетов.',
+		done: ['адаптировали авторскую визуальную стилистику', 'разработали интерактивные эффекты', 'спроектировали интерфейс покупки билета', 'реализовали генерацию именного видео после покупки'],
+		result: ['28,7 тыс. посетителей', '166 сгенерированных видеооткрыток'],
+	},
+	{
+		title: 'Интерактивный сайт строительной компании',
+		href: '/cases/berkut-construction-website/',
+		image: '/cases/berkut/main-image-skberkut.webp',
+		task: 'Создать имиджевый сайт строительной компании с запоминающейся визуальной механикой.',
+		done: ['разработали концепцию бесконечно льющегося бетона', 'реализовали реакцию графики на движение курсора', 'добавили динамический счетчик объема бетона', 'создали карту реализованных объектов'],
+		result: ['Интерактивный сайт', 'Стоимость проекта 250 000 ₽'],
+	},
+	{
+		title: 'MVP агрегатора строительных отходов',
+		href: '/cases/ecocaravan-waste-removal-mvp/',
+		image: '/cases/ecocaravan/main-image-ecocaravan.webp',
+		task: 'За один месяц разработать первый релиз платформы для заказчиков, перевозчиков и переработчиков.',
+		done: ['описали бизнес-процессы', 'сформировали техническое задание', 'разработали сайт и личные кабинеты', 'интегрировали решение с CRM-ERP'],
+		result: ['MVP запущен в срок', 'Стоимость проекта 1 200 000 ₽'],
+	},
+] as const;
+
+const steps = [
+	['01', 'message', 'Знакомство и брифинг', 'Обсуждаем бизнес, продукт, аудиторию, текущие процессы, ограничения и ожидаемый результат.', 'Понимание задачи и предварительный состав проекта.'],
+	['02', 'filter', 'Аналитика', 'Изучаем материалы, конкурентов, пользовательские сценарии и технические требования.', 'Концепция решения и функциональные требования.'],
+	['03', 'layers', 'Структура и прототип', 'Проектируем страницы, навигацию, формы и ключевые действия пользователя.', 'Интерактивный прототип.'],
+	['04', 'spark', 'UX/UI-дизайн', 'Создаем визуальную концепцию, дизайн ключевых экранов и систему интерфейсных компонентов.', 'Согласованный дизайн для компьютеров и мобильных устройств.'],
+	['05', 'settings', 'Разработка', 'Программируем frontend и backend, подключаем CMS, личные кабинеты, базы данных и внешние системы.', 'Рабочая версия продукта на тестовом контуре.'],
+	['06', 'shield', 'Тестирование', 'Проверяем интерфейсы, формы, бизнес-логику, интеграции, адаптивность и основные сценарии.', 'Подготовленный к публикации продукт.'],
+	['07', 'rocket', 'Запуск', 'Размещаем проект на сервере, подключаем домен, аналитику и необходимые сервисы.', 'Работающий сайт или сервис.'],
+	['08', 'bar-chart', 'Развитие', 'Помогаем обновлять продукт, добавлять функции, развивать интеграции и улучшать сценарии.', 'Решение развивается вместе с бизнесом.'],
+] as const;
+
+const projectScope = [
+	['Аналитика и проектирование', 'интервью и сбор требований', 'пользовательские сценарии', 'структура сайта', 'прототипирование', 'техническое задание', 'проектирование интеграций'],
+	['Контент и дизайн', 'ценностное предложение', 'тексты ключевых блоков', 'UX/UI-дизайн', 'адаптивные версии', 'анимация', 'дизайн-система'],
+	['Разработка', 'frontend', 'backend', 'CMS', 'базы данных', 'личные кабинеты', 'API', 'внешние сервисы'],
+	['Запуск', 'тестирование', 'перенос на сервер', 'подключение домена', 'аналитика', 'базовая SEO-настройка', 'обучение работе с системой'],
+] as const;
+
+const integrations = [
+	['CRM и ERP', 'Битрикс24, РосБизнесСофт, ELMA365 и индивидуальные системы.'],
+	['Оплата и финансы', 'Платежные сервисы, онлайн-кассы, банки и системы выставления счетов.'],
+	['Коммуникации', 'Телефония, электронная почта, мессенджеры, SMS и сервисы рассылок.'],
+	['Товары и заказы', 'Складские системы, каталоги, службы доставки и маркетплейсы.'],
+	['Аналитика', 'Яндекс Метрика, системы сквозной аналитики и внутренние отчеты.'],
+] as const;
+
+const technologies = [
+	['Frontend', 'React', 'Astro', 'HTML', 'CSS', 'JavaScript'],
+	['Backend', 'NestJS', 'PHP', 'API'],
+	['Данные', 'PostgreSQL', 'Prisma'],
+	['CMS', 'WordPress', 'Bitrix', 'подходящие системы'],
+	['Инфраструктура', 'Docker', 'VPS'],
+] as const;
+
+const reasons = [
+	['Смотрим шире интерфейса', 'Учитываем, что происходит с заявкой после отправки формы и как сайт взаимодействует с внутренними процессами.'],
+	['Проектируем до разработки', 'Сначала проверяем структуру, сценарии и логику, затем переходим к визуалу и программированию.'],
+	['Реализуем нестандартную механику', 'Разрабатываем интерактивные интерфейсы, личные кабинеты, расчеты, генераторы, сложные формы и отраслевые сервисы.'],
+	['Объединяем компетенции', 'В проекте участвуют аналитик, UX/UI-дизайнер, frontend- и backend-разработчики, тестировщик и менеджер проекта.'],
+	['Думаем о дальнейшем развитии', 'Проектируем продукт так, чтобы его можно было расширять и интегрировать с новыми системами.'],
+] as const;
+
+const quiz = [
+	['Что нужно разработать?', ['Лендинг', 'Корпоративный сайт', 'Интернет-магазин', 'Портал или личный кабинет', 'MVP', 'Веб-сервис', 'Пока не знаю']],
+	['Дизайн уже есть?', ['Нужно разработать', 'Есть отдельные материалы', 'Есть готовый дизайн', 'Нужен редизайн текущего сайта']],
+	['Нужны ли интеграции?', ['CRM', 'ERP', 'Онлайн-оплата', 'Учетная система', 'Внешние API', 'Пока не знаю']],
+	['Ориентировочный бюджет', ['До 300 000 ₽', '300 000-600 000 ₽', '600 000-1 200 000 ₽', 'Более 1 200 000 ₽', 'Нужно оценить']],
+] as const;
+
+const faqs = [
+	['Сколько стоит разработка сайта?', 'Лендинги начинаются от 150 000 ₽, корпоративные и интерактивные сайты - от 250 000 ₽, интернет-магазины - от 400 000 ₽. Стоимость портала, личного кабинета или индивидуального сервиса зависит от количества ролей, бизнес-логики и интеграций.'],
+	['Можно ли начать без технического задания?', 'Да. Для первой встречи достаточно описания задачи, текущих материалов и примеров решений, которые вам нравятся. Требования и техническая часть формируются в процессе аналитики.'],
+	['Можно ли доработать существующий сайт?', 'Да. Сначала оцениваем его архитектуру, код, CMS и инфраструктуру. После этого предлагаем доработку либо объясняем, почему новый проект окажется надежнее и экономичнее.'],
+	['Вы разрабатываете только дизайн?', 'Можно заказать как полный цикл, так и отдельный этап: аналитику, прототипирование, UX/UI-дизайн, разработку или интеграцию.'],
+	['Сможем ли мы сами изменять информацию?', 'Для контентных сайтов предусматривается административная панель. Сотрудники смогут редактировать тексты, изображения, услуги, товары, новости и другие согласованные разделы.'],
+	['Можно ли подключить CRM?', 'Да. Можно передавать контакты, заявки, заказы, источники обращений, товары и другие данные, а также запускать автоматические действия после обращения пользователя.'],
+	['Работаете ли вы с нестандартными проектами?', 'Да. В портфолио представлены MVP, агрегаторы, финансовые сервисы, интерактивные сайты и проекты, объединяющие сайт с CRM-ERP-системой.'],
+	['Что происходит после запуска?', 'Можно продолжить работу в формате технической поддержки и развития: исправлять ошибки, обновлять компоненты, добавлять страницы, улучшать интерфейс и запускать новые функции.'],
+] as const;
+
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map(([question, answer]) => ({
+		'@type': 'Question',
+		name: question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: answer,
+		},
+	})),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script is:inline data-b24-form="click/21/8r4fh6" data-skip-moving="true">
+	(function(w,d,u){
+	var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/180000|0);
+	var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+	})(window,document,'https://cdn-ru.bitrix24.ru/b27699562/crm/form/loader_21.js');
+</script>
+<script>
+	function bindWebB24Buttons() {
+		document.querySelectorAll('[data-web-b24-form]').forEach((button) => {
+			if (button instanceof HTMLElement) {
+				button.addEventListener('click', (event) => event.preventDefault());
+			}
+		});
+	}
+
+	bindWebB24Buttons();
+	document.addEventListener('astro:page-load', bindWebB24Buttons);
+</script>
+
+<div class="ds web-landing">
+	<a class:list={['web-sticky-cta', b24ButtonClass]} href="#" data-web-b24-form>
+		<span>Обсудить проект</span>
+		<UiIcon name="arrow" class="h-4 w-4" />
+	</a>
+
+	<section class="relative isolate overflow-hidden border-b border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+		<div class="absolute inset-0 -z-10 bg-[linear-gradient(115deg,rgba(255,255,255,0.98)_0%,rgba(246,247,251,0.94)_45%,rgba(95,102,255,0.14)_100%)] dark:bg-[linear-gradient(115deg,rgba(9,9,11,1)_0%,rgba(17,17,22,0.96)_52%,rgba(95,102,255,0.2)_100%)]"></div>
+		<div class="mx-auto grid min-h-[calc(100vh-96px)] max-w-[1440px] items-center gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(420px,560px)] lg:py-24">
+			<div>
+				<nav class="mb-8 flex flex-wrap items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400" aria-label="Хлебные крошки">
+					<a href="/services/" class="hover:text-indigo-600 dark:hover:text-indigo-300">Все услуги</a>
+					<UiIcon name="chevron" class="h-3.5 w-3.5" />
+					<span>Разработка сайтов и веб-сервисов</span>
+				</nav>
+				<p class="ds-kicker border border-indigo-200 bg-white/72 text-indigo-700 backdrop-blur dark:border-indigo-500/30 dark:bg-neutral-950/60 dark:text-indigo-300">
+					Разработка сайтов и веб-сервисов для бизнеса
+				</p>
+				<h1 transition:name="service-web" class="mt-4 max-w-5xl text-4xl font-semibold leading-[1.04] text-neutral-950 sm:text-5xl lg:text-6xl dark:text-white">
+					Создаем сайты и цифровые сервисы, которые помогают продавать, автоматизировать и масштабировать бизнес
+				</h1>
+				<p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700 sm:text-xl dark:text-neutral-300">
+					Проектируем интерфейсы, разрабатываем дизайн, программируем и интегрируем решение с CRM, ERP, платежными системами и другими сервисами вашей компании.
+				</p>
+				<p class="mt-4 max-w-3xl text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+					От продающего лендинга до интернет-магазина, личного кабинета, корпоративного портала или сложной цифровой платформы.
+				</p>
+				<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+					<a class:list={['ds-btn ds-btn-primary w-full sm:w-auto', b24ButtonClass]} href="#" data-web-b24-form>
+						<span>Рассчитать стоимость проекта</span>
+						<UiIcon name="arrow" class="h-4 w-4" />
+					</a>
+					<a class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-neutral-300 bg-white/74 px-7 text-sm font-bold text-neutral-900 backdrop-blur transition hover:border-indigo-500 hover:text-indigo-600 sm:w-auto dark:border-neutral-700 dark:bg-neutral-950/54 dark:text-white dark:hover:border-indigo-400 dark:hover:text-indigo-300" href="#web-cases">
+						Посмотреть кейсы
+					</a>
+				</div>
+				<p class="mt-4 max-w-2xl text-sm leading-6 text-neutral-500 dark:text-neutral-400">
+					Расскажите о задаче - предложим подходящий формат разработки и подготовим предварительную оценку.
+				</p>
+				<div class="mt-8 grid gap-3 sm:grid-cols-3">
+					{trustMarkers.map((marker) => (
+						<div class="rounded-xl border border-neutral-200 bg-white/70 p-4 text-sm font-medium leading-6 text-neutral-800 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/54 dark:text-neutral-200">
+							{marker}
+						</div>
+					))}
+				</div>
+			</div>
+
+			<div class="web-product-map" aria-label="Схема сайта, личного кабинета, CRM и интеграций">
+				<div class="web-map-card web-map-site">
+					<p>Макет сайта</p>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+				<div class="web-map-card web-map-account">
+					<p>Личный кабинет</p>
+					<span>Документы</span>
+					<span>Заявки</span>
+					<span>Оплаты</span>
+				</div>
+				<div class="web-map-card web-map-crm">
+					<p>CRM</p>
+					<strong>Новая заявка</strong>
+					<span>Ответственный назначен</span>
+				</div>
+				<div class="web-map-card web-map-mobile">
+					<p>Mobile</p>
+					<div class="web-phone-screen"></div>
+				</div>
+				<div class="web-map-core">
+					<UiIcon name="layers" class="h-7 w-7" />
+					<span>API</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<ClientLogos />
+
+	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+			<div class="max-w-4xl">
+				<p class="ds-kicker bg-white text-indigo-700 dark:bg-neutral-900 dark:text-indigo-300">Задачи клиента</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Когда бизнесу нужна не просто красивая страница</h2>
+				<p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+					Хороший сайт должен не только рассказывать о компании. Он должен помогать пользователю принять решение, передавать заявки в нужные системы и становиться частью бизнес-процессов.
+				</p>
+			</div>
+			<div class="mt-10 grid gap-4 md:grid-cols-2">
+				{problems.map((problem) => (
+					<article class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-[0_20px_50px_-32px_rgba(24,24,27,0.34)] dark:border-neutral-800 dark:bg-neutral-900/46">
+						<div class="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-indigo-600 text-white">
+							<UiIcon name={problem.icon} class="h-5 w-5" />
+						</div>
+						<h3 class="text-xl font-semibold text-neutral-950 dark:text-white">{problem.title}</h3>
+						<p class="mt-3 text-neutral-600 dark:text-neutral-400">{problem.text}</p>
+						<p class="mt-4 text-sm font-medium leading-6 text-neutral-900 dark:text-neutral-100">
+							<span class="text-indigo-600 dark:text-indigo-300">Что делаем:</span> {problem.action}
+						</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="web-formats" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+		<div class="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:items-end">
+			<div>
+				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Форматы</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Разрабатываем решения под задачи и масштаб бизнеса</h2>
+			</div>
+			<p class="text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+				Не предлагаем сложный продукт там, где достаточно компактного лендинга. И не пытаемся собрать серьезную цифровую платформу на шаблоне.
+			</p>
+		</div>
+		<div class="mt-10 grid gap-5 lg:grid-cols-2">
+			{productTypes.map((item) => (
+				<article class:list={['rounded-2xl border p-6 transition hover:-translate-y-1 hover:shadow-[0_30px_70px_-36px_rgba(35,43,255,0.45)] dark:hover:shadow-[0_30px_70px_-36px_rgba(0,0,0,0.8)]', item.name === 'Индивидуальный веб-сервис' ? 'border-indigo-500 bg-indigo-600 text-white' : 'border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/42']}>
+					<div class="flex flex-wrap items-start justify-between gap-4">
+						<div class:list={['grid h-11 w-11 place-items-center rounded-xl', item.name === 'Индивидуальный веб-сервис' ? 'bg-white/16 text-white' : 'bg-indigo-600 text-white']}>
+							<UiIcon name={item.icon} class="h-5 w-5" />
+						</div>
+						<p class:list={['rounded-full px-3 py-1 text-sm font-medium', item.name === 'Индивидуальный веб-сервис' ? 'bg-white/14 text-white' : 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300']}>
+							{item.tag}
+						</p>
+					</div>
+					<h3 class="mt-5 text-2xl font-semibold">{item.name}</h3>
+					<p class:list={['mt-2 text-2xl font-semibold', item.name === 'Индивидуальный веб-сервис' ? 'text-white' : 'text-indigo-600 dark:text-indigo-300']}>{item.price}</p>
+					<p class:list={['mt-4 leading-7', item.name === 'Индивидуальный веб-сервис' ? 'text-white/82' : 'text-neutral-600 dark:text-neutral-400']}>{item.text}</p>
+					<div class="mt-6 grid gap-5 md:grid-cols-2">
+						<div>
+							<p class="text-sm font-semibold">Подойдет для</p>
+							<ul class="mt-3 space-y-2 text-sm leading-6">
+								{item.fit.map((fit) => (
+									<li class="flex gap-2">
+										<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0" />
+										<span>{fit}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+						<div>
+							<p class="text-sm font-semibold">В работу входит</p>
+							<ul class="mt-3 space-y-2 text-sm leading-6">
+								{item.includes.map((include) => (
+									<li class="flex gap-2">
+										<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0" />
+										<span>{include}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					</div>
+					<a class:list={['mt-6 inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-bold transition', b24ButtonClass, item.name === 'Индивидуальный веб-сервис' ? 'bg-white text-indigo-700 hover:bg-neutral-100' : 'bg-neutral-950 text-white hover:bg-indigo-600 dark:bg-white dark:text-neutral-950 dark:hover:bg-indigo-200']} href="#" data-web-b24-form>
+						{item.cta}
+					</a>
+				</article>
+			))}
+		</div>
+		<p class="mt-6 max-w-4xl text-sm leading-6 text-neutral-500 dark:text-neutral-400">
+			Стоимость зависит от количества страниц, сложности дизайна, бизнес-логики, интеграций и требований к инфраструктуре. После первой встречи подготовим предварительную оценку и предложим оптимальный формат реализации.
+		</p>
+	</section>
+
+	<section class="mx-auto max-w-[1440px] px-6 pb-16 sm:pb-24">
+		<div class="grid gap-8 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center dark:border-indigo-500/24 dark:bg-indigo-950/24">
+			<div>
+				<h2 class="text-3xl font-semibold leading-tight text-neutral-950 dark:text-white">Не знаете, какой формат вам подходит?</h2>
+				<p class="mt-4 max-w-3xl text-neutral-700 dark:text-neutral-300">
+					Необязательно заранее составлять техническое задание и выбирать технологию. Опишите задачу своими словами - мы поможем определить тип продукта, состав первого релиза, интеграции, порядок бюджета и лучший старт разработки.
+				</p>
+			</div>
+			<a class:list={['ds-btn ds-btn-primary', b24ButtonClass]} href="#" data-web-b24-form>
+				<span>Получить консультацию</span>
+				<UiIcon name="arrow" class="h-4 w-4" />
+			</a>
+		</div>
+	</section>
+
+	<section class="border-y border-neutral-200 bg-neutral-950 text-white dark:border-neutral-800">
+		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+			<div class="max-w-4xl">
+				<p class="ds-kicker bg-white/10 text-indigo-200">Бизнес-результат</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">Создаем не набор страниц, а рабочий инструмент</h2>
+			</div>
+			<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+				{outcomes.map(([icon, title, text]) => (
+					<article class="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+						<div class="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-white text-indigo-700">
+							<UiIcon name={icon} class="h-5 w-5" />
+						</div>
+						<h3 class="text-xl font-semibold">{title}</h3>
+						<p class="mt-3 text-sm leading-6 text-white/68">{text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="web-cases" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+		<div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+			<div>
+				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Кейсы</p>
+				<h2 class="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Показываем результат на реальных проектах</h2>
+			</div>
+			<a href="/cases/" class="text-sm font-bold text-indigo-600 hover:text-indigo-800 dark:text-indigo-300 dark:hover:text-indigo-200">Все кейсы</a>
+		</div>
+		<div class="mt-10 grid gap-6 lg:grid-cols-3">
+			{cases.map((item) => (
+				<article class="overflow-hidden rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/44">
+					<a href={item.href} class="block overflow-hidden">
+						<img class="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-105" src={item.image} alt={item.title} loading="lazy" decoding="async" />
+					</a>
+					<div class="p-6">
+						<h3 class="text-xl font-semibold leading-snug text-neutral-950 dark:text-white">{item.title}</h3>
+						<p class="mt-4 text-sm font-semibold text-neutral-500">Задача</p>
+						<p class="mt-1 text-sm leading-6 text-neutral-700 dark:text-neutral-300">{item.task}</p>
+						<p class="mt-4 text-sm font-semibold text-neutral-500">Что сделали</p>
+						<ul class="mt-2 space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
+							{item.done.map((done) => (
+								<li class="flex gap-2">
+									<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-300" />
+									<span>{done}</span>
+								</li>
+							))}
+						</ul>
+						<div class="mt-5 grid gap-2">
+							{item.result.map((result) => (
+								<p class="rounded-xl bg-neutral-50 px-4 py-3 text-sm font-semibold text-neutral-950 dark:bg-neutral-950 dark:text-white">{result}</p>
+							))}
+						</div>
+						<a class="mt-5 inline-flex text-sm font-bold text-indigo-600 hover:text-indigo-800 dark:text-indigo-300 dark:hover:text-indigo-200" href={item.href}>Смотреть кейс</a>
+					</div>
+				</article>
+			))}
+		</div>
+		<div class="mt-8 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 sm:p-8 dark:border-neutral-800 dark:bg-neutral-900/40">
+			<h3 class="text-2xl font-semibold text-neutral-950 dark:text-white">Есть похожая задача?</h3>
+			<p class="mt-3 max-w-3xl text-neutral-700 dark:text-neutral-300">Покажем релевантные проекты и расскажем, как можно реализовать ваше решение.</p>
+			<a class:list={['mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-indigo-600 px-6 text-sm font-bold text-white transition hover:bg-indigo-700', b24ButtonClass]} href="#" data-web-b24-form>Обсудить проект</a>
+		</div>
+	</section>
+
+	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+			<div class="max-w-4xl">
+				<p class="ds-kicker bg-white text-indigo-700 dark:bg-neutral-900 dark:text-indigo-300">Процесс</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Понятный процесс от идеи до запуска</h2>
+			</div>
+			<div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+				{steps.map(([num, icon, title, text, result]) => (
+					<article class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900/44">
+						<div class="flex items-center justify-between gap-4">
+							<span class="text-sm font-bold text-indigo-600 dark:text-indigo-300">{num}</span>
+							<UiIcon name={icon} class="h-5 w-5 text-neutral-400" />
+						</div>
+						<h3 class="mt-5 text-xl font-semibold text-neutral-950 dark:text-white">{title}</h3>
+						<p class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{text}</p>
+						<p class="mt-4 text-sm leading-6 text-neutral-900 dark:text-neutral-100"><span class="font-semibold">Результат:</span> {result}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+		<div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+			<div>
+				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Состав проекта</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Берем на себя весь цикл разработки</h2>
+			</div>
+			<div class="grid gap-4 sm:grid-cols-2">
+				{projectScope.map(([title, ...items]) => (
+					<article class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900/44">
+						<h3 class="text-xl font-semibold text-neutral-950 dark:text-white">{title}</h3>
+						<ul class="mt-4 space-y-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+							{items.map((item) => (
+								<li class="flex gap-2">
+									<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-300" />
+									<span>{item}</span>
+								</li>
+							))}
+						</ul>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+		<div class="mx-auto grid max-w-[1440px] gap-10 px-6 py-16 sm:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+			<div>
+				<p class="ds-kicker bg-white text-indigo-700 dark:bg-neutral-900 dark:text-indigo-300">Интеграции</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Связываем сайт с цифровой инфраструктурой компании</h2>
+				<p class="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+					Заявка не должна заканчиваться уведомлением на электронной почте. Мы можем передать данные в нужную систему, запустить бизнес-процесс и уведомить ответственного сотрудника.
+				</p>
+			</div>
+			<div class="grid gap-3">
+				{integrations.map(([title, text]) => (
+					<article class="rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900/44">
+						<h3 class="font-semibold text-neutral-950 dark:text-white">{title}</h3>
+						<p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+		<div class="max-w-4xl">
+			<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Технологии</p>
+			<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Подбираем технологии под задачу</h2>
+			<p class="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+				Не привязываем каждый проект к одной платформе. Выбираем стек с учетом функциональности, бюджета, планов развития и требований к поддержке.
+			</p>
+		</div>
+		<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+			{technologies.map(([group, ...items]) => (
+				<article class="rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900/44">
+					<h3 class="font-semibold text-neutral-950 dark:text-white">{group}</h3>
+					<div class="mt-4 flex flex-wrap gap-2">
+						{items.map((item) => (
+							<span class="rounded-full bg-neutral-100 px-3 py-1 text-sm text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">{item}</span>
+						))}
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="border-y border-neutral-200 bg-neutral-950 text-white dark:border-neutral-800">
+		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+			<div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+				<div>
+					<p class="ds-kicker bg-white/10 text-indigo-200">Почему IT TIME NOW</p>
+					<h2 class="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">Одна команда для сайта, автоматизации и интеграций</h2>
+				</div>
+				<div class="grid gap-4">
+					{reasons.map(([title, text], index) => (
+						<article class="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:grid-cols-[48px_minmax(0,1fr)]">
+							<span class="grid h-12 w-12 place-items-center rounded-xl bg-white text-sm font-bold text-indigo-700">{index + 1}</span>
+							<div>
+								<h3 class="text-xl font-semibold">{title}</h3>
+								<p class="mt-2 text-sm leading-6 text-white/68">{text}</p>
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="web-estimate" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+		<div class="grid gap-10 rounded-2xl border border-neutral-200 bg-white p-6 sm:p-10 lg:grid-cols-[0.85fr_1.15fr] dark:border-neutral-800 dark:bg-neutral-900/44">
+			<div>
+				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Предварительный расчет</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Узнайте ориентировочную стоимость проекта</h2>
+				<p class="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+					Ответьте на несколько вопросов. Это поможет нам понять масштаб задачи и подготовиться к первой встрече.
+				</p>
+			</div>
+			<form class="grid gap-6" method="post" action="#">
+				{quiz.map(([question, answers]) => (
+					<fieldset>
+						<legend class="mb-3 text-sm font-semibold text-neutral-950 dark:text-white">{question}</legend>
+						<div class="flex flex-wrap gap-2">
+							{answers.map((answer) => (
+								<label class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300">
+									<input class="h-4 w-4 rounded border-neutral-300 text-indigo-600" type="checkbox" name={question} value={answer} />
+									<span>{answer}</span>
+								</label>
+							))}
+						</div>
+					</fieldset>
+				))}
+				<div class="grid gap-3 sm:grid-cols-2">
+					<label class="grid gap-1.5 text-sm">
+						<span class="text-neutral-700 dark:text-neutral-300">Имя</span>
+						<input required type="text" name="name" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950" />
+					</label>
+					<label class="grid gap-1.5 text-sm">
+						<span class="text-neutral-700 dark:text-neutral-300">Телефон</span>
+						<input required type="tel" name="phone" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950" />
+					</label>
+					<label class="grid gap-1.5 text-sm">
+						<span class="text-neutral-700 dark:text-neutral-300">Email или Telegram</span>
+						<input type="text" name="contact" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950" />
+					</label>
+					<label class="grid gap-1.5 text-sm">
+						<span class="text-neutral-700 dark:text-neutral-300">Прикрепить файл</span>
+						<input type="file" name="file" class="rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm dark:border-neutral-800 dark:bg-neutral-950" />
+					</label>
+					<label class="grid gap-1.5 text-sm sm:col-span-2">
+						<span class="text-neutral-700 dark:text-neutral-300">Комментарий</span>
+						<textarea name="message" rows="4" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950"></textarea>
+					</label>
+				</div>
+				<button class:list={['min-h-11 rounded-full bg-indigo-600 px-6 text-sm font-bold text-white transition hover:bg-indigo-700', b24ButtonClass]} type="button" data-web-b24-form>Получить предварительную оценку</button>
+				<p class="text-xs leading-5 text-neutral-500 dark:text-neutral-400">Изучим задачу, свяжемся с вами и предложим следующий шаг. Отправка формы не обязывает заключать договор.</p>
+			</form>
+		</div>
+	</section>
+
+	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+			<h2 class="text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">FAQ</h2>
+			<div class="mt-10 grid gap-4 lg:grid-cols-2">
+				{faqs.map(([question, answer]) => (
+					<details class="group rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900/44">
+						<summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-lg font-semibold text-neutral-950 dark:text-white">
+							<span>{question}</span>
+							<span class="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-neutral-100 text-sm text-neutral-500 transition group-open:rotate-45 dark:bg-neutral-800">+</span>
+						</summary>
+						<p class="mt-4 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{answer}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="web-request" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
+		<div class="grid gap-10 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-950 p-6 text-white sm:p-10 lg:grid-cols-[0.9fr_1.1fr] dark:border-neutral-800">
+			<div>
+				<p class="ds-kicker bg-white/10 text-indigo-200">Финальный шаг</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">Обсудим ваш сайт или цифровой сервис?</h2>
+				<p class="mt-5 max-w-2xl text-lg leading-8 text-white/72">
+					Расскажите, что необходимо запустить или изменить. Мы поможем сформулировать задачу, определим подходящий формат решения и подготовим предварительную оценку.
+				</p>
+				<dl class="mt-8 grid gap-3 text-sm">
+					<div>
+						<dt class="text-white/44">Телефон</dt>
+						<dd class="mt-1"><a class="font-semibold hover:text-indigo-200" href="tel:+74951335888">+7 (495) 133-58-88</a></dd>
+					</div>
+					<div>
+						<dt class="text-white/44">Email</dt>
+						<dd class="mt-1"><a class="font-semibold hover:text-indigo-200" href="mailto:hello@ittimenow.com">hello@ittimenow.com</a></dd>
+					</div>
+				</dl>
+			</div>
+			<form class="grid gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-5 sm:p-6" method="post" action="#">
+				<label class="grid gap-1.5 text-sm">
+					<span class="text-white/78">Имя</span>
+					<input required type="text" name="name" class="rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 outline-none focus:border-indigo-300" />
+				</label>
+				<label class="grid gap-1.5 text-sm">
+					<span class="text-white/78">Телефон</span>
+					<input required type="tel" name="phone" class="rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 outline-none focus:border-indigo-300" />
+				</label>
+				<label class="grid gap-1.5 text-sm">
+					<span class="text-white/78">Краткое описание задачи</span>
+					<textarea name="message" rows="5" class="rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 outline-none focus:border-indigo-300"></textarea>
+				</label>
+				<label class="grid gap-1.5 text-sm">
+					<span class="text-white/78">Прикрепить файл</span>
+					<input type="file" name="file" class="rounded-md border border-white/10 bg-white px-3 py-2 text-sm text-neutral-950" />
+				</label>
+				<button class:list={['mt-2 min-h-11 rounded-full bg-white px-6 text-sm font-bold text-indigo-700 transition hover:bg-indigo-100', b24ButtonClass]} type="button" data-web-b24-form>Отправить задачу</button>
+				<p class="text-xs leading-5 text-white/48">Нажимая кнопку, пользователь соглашается с политикой обработки персональных данных.</p>
+			</form>
+		</div>
+	</section>
+</div>
+
+<style>
+	.web-sticky-cta {
+		position: fixed;
+		right: 18px;
+		bottom: 18px;
+		z-index: 30;
+		display: inline-flex;
+		min-height: 46px;
+		align-items: center;
+		gap: 8px;
+		border-radius: 9999px;
+		background: #232bff;
+		color: #fff;
+		padding: 0 18px;
+		font-size: 14px;
+		font-weight: 700;
+		box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.9);
+	}
+
+	.web-product-map {
+		position: relative;
+		min-height: 540px;
+		border: 1px solid rgba(228, 228, 231, 0.72);
+		border-radius: 24px;
+		background:
+			linear-gradient(90deg, rgba(35, 43, 255, 0.08) 1px, transparent 1px),
+			linear-gradient(rgba(35, 43, 255, 0.08) 1px, transparent 1px),
+			rgba(255, 255, 255, 0.68);
+		background-size: 42px 42px;
+		box-shadow: 0 30px 80px -42px rgba(24, 24, 27, 0.5);
+		backdrop-filter: blur(28px);
+	}
+
+	.web-product-map::before,
+	.web-product-map::after {
+		position: absolute;
+		inset: 22% 16%;
+		border: 1px solid rgba(35, 43, 255, 0.22);
+		border-radius: 9999px;
+		content: "";
+	}
+
+	.web-product-map::after {
+		inset: 34% 27%;
+	}
+
+	.web-map-card,
+	.web-map-core {
+		position: absolute;
+		z-index: 2;
+		border: 1px solid rgba(228, 228, 231, 0.88);
+		border-radius: 18px;
+		background: rgba(255, 255, 255, 0.88);
+		box-shadow: 0 22px 48px -32px rgba(24, 24, 27, 0.5);
+		backdrop-filter: blur(18px);
+	}
+
+	.web-map-card {
+		padding: 16px;
+	}
+
+	.web-map-card p {
+		margin: 0 0 12px;
+		color: #18181b;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.web-map-card span,
+	.web-map-card strong {
+		display: block;
+		color: #52525b;
+		font-size: 12px;
+		line-height: 1.5;
+	}
+
+	.web-map-site {
+		top: 42px;
+		left: 36px;
+		width: 250px;
+	}
+
+	.web-map-site div {
+		height: 36px;
+		margin-top: 8px;
+		border-radius: 10px;
+		background: linear-gradient(90deg, #232bff, #8b5cff);
+		opacity: 0.9;
+	}
+
+	.web-map-site div:nth-child(3) {
+		width: 72%;
+		background: #e4e4e7;
+	}
+
+	.web-map-site div:nth-child(4) {
+		width: 88%;
+		background: #f4f4f5;
+	}
+
+	.web-map-account {
+		top: 88px;
+		right: 34px;
+		width: 190px;
+	}
+
+	.web-map-account span {
+		margin-top: 7px;
+		border-radius: 9999px;
+		background: #f4f4f5;
+		padding: 6px 10px;
+	}
+
+	.web-map-crm {
+		right: 56px;
+		bottom: 70px;
+		width: 230px;
+	}
+
+	.web-map-crm strong {
+		color: #232bff;
+		font-size: 15px;
+	}
+
+	.web-map-mobile {
+		bottom: 42px;
+		left: 48px;
+		width: 142px;
+	}
+
+	.web-phone-screen {
+		height: 190px;
+		border-radius: 18px;
+		background:
+			linear-gradient(#fff, #fff) padding-box,
+			linear-gradient(135deg, #232bff, #8b5cff) border-box;
+		border: 6px solid transparent;
+	}
+
+	.web-map-core {
+		top: 50%;
+		left: 50%;
+		display: grid;
+		width: 116px;
+		height: 116px;
+		place-items: center;
+		background: #232bff;
+		color: white;
+		transform: translate(-50%, -50%);
+	}
+
+	.web-map-core span {
+		margin-top: -32px;
+		font-size: 13px;
+		font-weight: 700;
+	}
+
+	:global(.dark) .web-product-map {
+		border-color: rgba(255, 255, 255, 0.12);
+		background:
+			linear-gradient(90deg, rgba(95, 102, 255, 0.12) 1px, transparent 1px),
+			linear-gradient(rgba(95, 102, 255, 0.12) 1px, transparent 1px),
+			rgba(24, 24, 27, 0.58);
+	}
+
+	:global(.dark) .web-map-card {
+		border-color: rgba(255, 255, 255, 0.12);
+		background: rgba(24, 24, 27, 0.84);
+	}
+
+	:global(.dark) .web-map-card p {
+		color: white;
+	}
+
+	:global(.dark) .web-map-card span {
+		color: #a1a1aa;
+	}
+
+	:global(.dark) .web-map-account span {
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	@media (max-width: 1023px) {
+		.web-product-map {
+			min-height: 520px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.web-sticky-cta {
+			right: 12px;
+			bottom: 12px;
+			left: 12px;
+			justify-content: center;
+		}
+
+		.web-product-map {
+			min-height: 460px;
+		}
+
+		.web-map-site {
+			top: 24px;
+			left: 18px;
+			width: 210px;
+		}
+
+		.web-map-account {
+			top: 148px;
+			right: 16px;
+			width: 168px;
+		}
+
+		.web-map-crm {
+			right: 18px;
+			bottom: 38px;
+			width: 196px;
+		}
+
+		.web-map-mobile {
+			left: 18px;
+			bottom: 28px;
+			width: 118px;
+		}
+
+		.web-phone-screen {
+			height: 150px;
+		}
+
+		.web-map-core {
+			width: 88px;
+			height: 88px;
+		}
+	}
+</style>

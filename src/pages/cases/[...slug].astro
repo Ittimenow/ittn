@@ -9,11 +9,57 @@ export async function getStaticPaths() {
 
 const { c } = Astro.props;
 const { Content } = await render(c);
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const caseImage = c.data.cover ? new URL(c.data.cover, Astro.site ?? Astro.url).href : undefined;
+const caseSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'CreativeWork',
+	name: c.data.title,
+	description: c.data.summary,
+	url: pageUrl,
+	inLanguage: 'ru-RU',
+	...(caseImage ? { image: caseImage } : {}),
+	...(c.data.year ? { datePublished: String(c.data.year) } : {}),
+	about: c.data.services,
+	creator: {
+		'@type': 'Organization',
+		name: 'IT TIME NOW',
+	},
+};
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: 'Главная',
+			item: new URL('/', Astro.site ?? Astro.url).href,
+		},
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: 'Кейсы',
+			item: new URL('/cases/', Astro.site ?? Astro.url).href,
+		},
+		{
+			'@type': 'ListItem',
+			position: 3,
+			name: c.data.title,
+			item: pageUrl,
+		},
+	],
+};
 ---
 
-<Layout title={`${c.data.title} — ittimenow`} description={c.data.summary}>
+<Layout
+	title={`${c.data.title} — ittimenow`}
+	description={c.data.summary}
+	image={c.data.cover}
+	structuredData={[caseSchema, breadcrumbSchema]}
+>
 	<article class="case-article mx-auto max-w-4xl px-6 py-16">
-		<a href="/cases" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
+		<a href="/cases/" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
 			← все кейсы
 		</a>
 
@@ -48,10 +94,13 @@ const { Content } = await render(c);
 					loop
 					muted
 					playsinline
-					poster={c.data.cover}
+					preload="auto"
 					aria-label={c.data.title}
 				>
-					<source src={c.data.coverVideo} type="video/mp4" />
+					<source
+						src={c.data.coverVideo}
+						type={c.data.coverVideo.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+					/>
 				</video>
 			) : c.data.cover && (
 				<img
@@ -64,7 +113,10 @@ const { Content } = await render(c);
 			)}
 		</header>
 
-		<div class:list={['prose-content mt-8', (c.data.cover || c.data.coverVideo) && 'has-cover']}>
+		<div
+			class:list={['prose-content mt-8', (c.data.cover || c.data.coverVideo) && 'has-cover']}
+			data-results-cta={c.data.resultsCta ? 'true' : 'false'}
+		>
 			<Content />
 		</div>
 	</article>
@@ -76,6 +128,7 @@ const { Content } = await render(c);
 	.prose-content :global(h4) { margin: 0.875rem 0 0.25rem; font-size: 1.25rem; font-weight: 600; }
 	.prose-content :global(p) { margin: 0.75rem 0; line-height: 1.75; color: var(--prose-text); }
 	.prose-content :global(ul) { margin: 0.75rem 0; padding-left: 1.5rem; list-style: disc; color: var(--prose-text); }
+	.prose-content :global(ol) { margin: 0.75rem 0; padding-left: 1.5rem; list-style: decimal; color: var(--prose-text); }
 	.prose-content :global(li + li) { margin-top: 0.25rem; }
 	.prose-content :global(a:not(.case-results-button)) {
 		color: var(--ds-primary);
@@ -141,6 +194,19 @@ const { Content } = await render(c);
 		border-radius: 0;
 		box-shadow: none;
 	}
+	.prose-content :global(.wum-prototype-slider .case-slider-viewport) {
+		background: #f4f4f5;
+	}
+	.prose-content :global(.wum-prototype-slider .case-slider-slide) {
+		display: flex;
+		aspect-ratio: 4 / 3;
+		align-items: center;
+		justify-content: center;
+	}
+	.prose-content :global(.wum-prototype-slider .case-slider-slide img) {
+		height: 100%;
+		object-fit: contain;
+	}
 	.prose-content :global(.case-work-list) {
 		display: grid;
 		grid-template-columns: minmax(180px, 0.85fr) minmax(0, 1.65fr);
@@ -175,6 +241,63 @@ const { Content } = await render(c);
 	}
 	.prose-content :global(.case-work-list li + li) {
 		margin-top: 0.375rem;
+	}
+	.prose-content :global(.case-timeline) {
+		position: relative;
+		display: grid;
+		gap: 0;
+		width: min(760px, 100%);
+		margin: 2rem auto 3rem;
+		padding: 0;
+		list-style: none;
+		counter-reset: case-timeline;
+	}
+	.prose-content :global(.case-timeline::before) {
+		position: absolute;
+		top: 1.5rem;
+		bottom: 1.5rem;
+		left: 1.5rem;
+		width: 2px;
+		background: color-mix(in srgb, var(--ds-primary) 34%, transparent);
+		content: '';
+	}
+	.prose-content :global(.case-timeline li) {
+		position: relative;
+		min-height: 5rem;
+		margin: 0;
+		padding: 0 0 1.5rem 5rem;
+		counter-increment: case-timeline;
+	}
+	.prose-content :global(.case-timeline li:last-child) {
+		padding-bottom: 0;
+	}
+	.prose-content :global(.case-timeline li::before) {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		display: flex;
+		width: 3rem;
+		height: 3rem;
+		align-items: center;
+		justify-content: center;
+		border-radius: 9999px;
+		background: var(--ds-primary);
+		color: #ffffff;
+		content: counter(case-timeline);
+		font-size: 0.875rem;
+		font-weight: 700;
+		box-shadow: 0 0 0 8px var(--ds-bg);
+	}
+	.prose-content :global(.case-timeline h4) {
+		margin: 0 0 0.25rem;
+		color: var(--prose-text);
+		font-size: 1.125rem;
+		line-height: 1.3;
+	}
+	.prose-content :global(.case-timeline p) {
+		margin: 0;
+		line-height: 1.65;
 	}
 	.prose-content :global(.case-waybills) {
 		display: grid;
@@ -376,6 +499,161 @@ const { Content } = await render(c);
 		font-size: 1.0625rem;
 		line-height: 1.7;
 	}
+	.prose-content :global(.wum-video-grid) {
+		display: grid;
+		gap: 1rem;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.wum-video-grid-mobile) {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+	.prose-content :global(.wum-video-grid video) {
+		display: block;
+		width: 100%;
+		border-radius: 20px;
+		background: #000000;
+		box-shadow: var(--ds-shadow);
+	}
+	.prose-content :global(.wum-feature-video) {
+		width: min(540px, 100%);
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.prose-content :global(.case-stage-grid),
+	.prose-content :global(.case-media-grid) {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.case-stage-grid) {
+		position: relative;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1.5rem;
+		padding-top: 2.5rem;
+		counter-reset: case-stage;
+	}
+	.prose-content :global(.case-stage-grid::before) {
+		position: absolute;
+		top: 1rem;
+		right: 12.5%;
+		left: 12.5%;
+		height: 2px;
+		background: color-mix(in srgb, var(--ds-primary) 38%, transparent);
+		content: '';
+	}
+	.prose-content :global(.case-media-grid-four) {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+	.prose-content :global(.case-stage-grid-six) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		row-gap: 4rem;
+	}
+	.prose-content :global(.case-stage-grid-six::before) {
+		display: none;
+	}
+	.prose-content :global(.case-image-gallery),
+	.prose-content :global(.case-mobile-image-grid) {
+		display: grid;
+		gap: 1rem;
+		width: var(--case-image-width);
+		max-width: none;
+		margin: 1.5rem 0 3rem calc((100% - var(--case-image-width)) / 2);
+	}
+	.prose-content :global(.case-image-gallery-three) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	.prose-content :global(.case-mobile-image-grid) {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+	}
+	.prose-content :global(.case-image-gallery img),
+	.prose-content :global(.case-mobile-image-grid img) {
+		width: 100%;
+		max-width: none;
+		height: 100%;
+		margin: 0;
+		border-radius: 18px;
+		object-fit: cover;
+		box-shadow: var(--ds-shadow);
+	}
+	.prose-content :global(.case-stage-card),
+	.prose-content :global(.case-media-card) {
+		min-width: 0;
+		margin: 0;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 24px;
+		background: var(--ds-card);
+		padding: 1.5rem;
+		box-shadow: var(--ds-shadow);
+		backdrop-filter: blur(40px);
+	}
+	:global(.dark) .prose-content :global(.case-stage-card),
+	:global(.dark) .prose-content :global(.case-media-card) {
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+	.prose-content :global(.case-stage-card) {
+		position: relative;
+		border: 0;
+		background: transparent;
+		padding: 0;
+		box-shadow: none;
+		backdrop-filter: none;
+		counter-increment: case-stage;
+	}
+	.prose-content :global(.case-stage-card::before) {
+		position: absolute;
+		top: -2.5rem;
+		left: 50%;
+		display: flex;
+		width: 2rem;
+		height: 2rem;
+		align-items: center;
+		justify-content: center;
+		border-radius: 9999px;
+		background: var(--ds-primary);
+		color: #ffffff;
+		content: counter(case-stage);
+		font-size: 0.75rem;
+		font-weight: 700;
+		transform: translateX(-50%);
+		box-shadow: 0 0 0 6px var(--ds-bg);
+	}
+	.prose-content :global(.case-stage-card h4) {
+		margin: 0 0 0.5rem;
+		text-align: center;
+	}
+	.prose-content :global(.case-stage-card p) {
+		margin: 0;
+		font-size: 0.875rem;
+		line-height: 1.55;
+		text-align: center;
+	}
+	.prose-content :global(.case-media-card) {
+		display: grid;
+		gap: 1rem;
+	}
+	.prose-content :global(.case-media-card figcaption) {
+		font-size: 1rem;
+		font-weight: 600;
+		line-height: 1.35;
+	}
+	.prose-content :global(.case-media-card video) {
+		display: block;
+		width: 100%;
+		border-radius: 16px;
+		background: #000000;
+	}
+	.prose-content :global(.case-media-grid-four .case-media-card) {
+		border: 0;
+		background: transparent;
+		padding: 0;
+		box-shadow: none;
+		backdrop-filter: none;
+	}
 	.case-cover {
 		margin-top: 2rem;
 	}
@@ -510,9 +788,30 @@ const { Content } = await render(c);
 		line-height: 1.15;
 	}
 	.prose-content :global(.case-team-card p) { margin: 0; font-size: 0.925rem; line-height: 1.25; }
+	.prose-content :global(img.case-small-image) {
+		width: 200px;
+		max-width: 100%;
+		margin: 1.5rem auto 2.5rem;
+		box-shadow: none;
+	}
 	.prose-content { --prose-text: oklch(0.371 0 0); }
 	:global(.dark) .prose-content { --prose-text: oklch(0.872 0 0); }
 	@media (max-width: 640px) {
+		.prose-content :global(.case-timeline) {
+			margin: 1.5rem 0 2.5rem;
+		}
+		.prose-content :global(.case-timeline::before) {
+			left: 1.25rem;
+		}
+		.prose-content :global(.case-timeline li) {
+			min-height: 4.5rem;
+			padding-left: 4rem;
+		}
+		.prose-content :global(.case-timeline li::before) {
+			width: 2.5rem;
+			height: 2.5rem;
+			box-shadow: 0 0 0 6px var(--ds-bg);
+		}
 		.prose-content :global(.case-configurator-quote),
 		.prose-content :global(.case-quote) {
 			grid-template-columns: 1fr;
@@ -528,6 +827,57 @@ const { Content } = await render(c);
 			width: 100%;
 			margin-left: 0;
 			padding: 1.25rem;
+		}
+		.prose-content :global(.case-stage-grid),
+		.prose-content :global(.case-media-grid) {
+			grid-template-columns: 1fr;
+			width: 100%;
+			margin-left: 0;
+		}
+		.prose-content :global(.case-stage-grid-six) {
+			row-gap: 1.75rem;
+		}
+		.prose-content :global(.case-image-gallery),
+		.prose-content :global(.case-mobile-image-grid) {
+			display: flex;
+			width: 100%;
+			margin-left: 0;
+			padding-bottom: 0.75rem;
+			overflow-x: auto;
+			overscroll-behavior-x: contain;
+			scroll-snap-type: x proximity;
+			-webkit-overflow-scrolling: touch;
+		}
+		.prose-content :global(.case-image-gallery img) {
+			flex: 0 0 min(82vw, 560px);
+			height: auto;
+			scroll-snap-align: start;
+		}
+		.prose-content :global(.case-mobile-image-grid img) {
+			flex: 0 0 min(62vw, 230px);
+			height: auto;
+			scroll-snap-align: start;
+		}
+		.prose-content :global(.case-stage-grid) {
+			gap: 1.75rem;
+			padding-top: 0;
+			padding-left: 3rem;
+		}
+		.prose-content :global(.case-stage-grid::before) {
+			top: 1rem;
+			bottom: 1rem;
+			left: 1rem;
+			width: 2px;
+			height: auto;
+		}
+		.prose-content :global(.case-stage-card::before) {
+			top: 0;
+			left: -2rem;
+			transform: translateX(-50%);
+		}
+		.prose-content :global(.case-stage-card h4),
+		.prose-content :global(.case-stage-card p) {
+			text-align: left;
 		}
 		.prose-content :global(.case-work-list h3) {
 			font-size: 1.25rem;
@@ -600,6 +950,22 @@ const { Content } = await render(c);
 		.prose-content :global(.case-video-copy-row p) {
 			font-size: 1rem;
 		}
+		.prose-content :global(.wum-video-grid) {
+			width: 100%;
+			margin-left: 0;
+			padding-bottom: 0.75rem;
+			overflow-x: auto;
+			overscroll-behavior-x: contain;
+			scroll-snap-type: x proximity;
+			-webkit-overflow-scrolling: touch;
+		}
+		.prose-content :global(.wum-video-grid-mobile) {
+			display: flex;
+		}
+		.prose-content :global(.wum-video-grid-mobile video) {
+			flex: 0 0 min(62vw, 230px);
+			scroll-snap-align: start;
+		}
 		.prose-content :global(.case-team) {
 			display: flex;
 			gap: 0.875rem;
@@ -633,7 +999,7 @@ const { Content } = await render(c);
 <script>
 	function buildCaseResultsCta() {
 		const content = document.querySelector('.prose-content');
-		if (!content) return;
+		if (!content || content.getAttribute('data-results-cta') === 'false') return;
 
 		const resultHeading = [...content.querySelectorAll('h2')].find((heading) =>
 			heading.textContent?.trim().toLowerCase() === 'результаты'
@@ -669,7 +1035,7 @@ const { Content } = await render(c);
 		if (!content) return;
 
 		const image = [...content.querySelectorAll('img')].find((img) =>
-			img.getAttribute('src')?.includes('illustration-configurator.png')
+			img.getAttribute('src')?.includes('illustration-configurator.webp')
 		);
 		if (!image || image.closest('.case-configurator-quote')) return;
 
@@ -770,10 +1136,22 @@ const { Content } = await render(c);
 		});
 	}
 
+	function playCaseCoverVideo() {
+		const video = document.querySelector('video.case-cover');
+		if (!(video instanceof HTMLVideoElement)) return;
+
+		video.muted = true;
+		void video.play().catch(() => {
+			// The poster remains visible if the browser blocks autoplay.
+		});
+	}
+
 	buildCaseResultsCta();
 	buildCaseConfiguratorQuote();
 	initCaseSliders();
+	playCaseCoverVideo();
 	document.addEventListener('astro:page-load', buildCaseResultsCta);
 	document.addEventListener('astro:page-load', buildCaseConfiguratorQuote);
 	document.addEventListener('astro:page-load', initCaseSliders);
+	document.addEventListener('astro:page-load', playCaseCoverVideo);
 </script>

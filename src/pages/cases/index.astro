@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.data.order);
+const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.data.order);
 ---
 
 <Layout title="Кейсы — ittimenow" description="Реализованные проекты ittimenow: разработка, CRM, ИИ.">
@@ -10,34 +10,86 @@ const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.dat
 		<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Портфолио</p>
 		<h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Кейсы</h1>
 		<p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
-			Решения, которые уже работают в проде у наших клиентов.
+			Решения, которые уже работают в проде у наших клиентов.
 		</p>
 
 		<div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 			{cases.map((c) => (
 				<a
 					href={`/cases/${c.id}/`}
-					class="group flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition hover:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-900/40 dark:hover:border-neutral-600"
+					class="case-card group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition hover:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-900/40 dark:hover:border-neutral-600"
 					transition:name={`case-${c.id}`}
 				>
-					<div class="mb-3 flex items-center gap-2 text-xs text-neutral-500">
-						<span class="font-medium">{c.data.client}</span>
-						{c.data.industry && <><span>·</span><span>{c.data.industry}</span></>}
-						{c.data.year && <><span>·</span><span>{c.data.year}</span></>}
-					</div>
-					<h2 class="text-xl font-semibold leading-tight">{c.data.title}</h2>
-					<p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">{c.data.summary}</p>
-					{c.data.stack.length > 0 && (
-						<div class="mt-auto pt-6 flex flex-wrap gap-1.5">
-							{c.data.stack.slice(0, 4).map((s) => (
-								<span class="rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-xs text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
-									{s}
-								</span>
-							))}
-						</div>
+					{c.data.listingCover ? (
+						<img
+							src={c.data.listingCover}
+							alt={c.data.title}
+							class="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+							loading="lazy"
+						/>
+					) : c.data.coverVideo ? (
+						<video
+							src={c.data.coverVideo}
+							class="aspect-video w-full object-cover"
+							preload="auto"
+							muted
+							loop
+							playsinline
+							aria-hidden="true"
+						></video>
+					) : c.data.cover && (
+						<img
+							src={c.data.cover}
+							alt={c.data.title}
+							class="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+							loading="lazy"
+						/>
 					)}
+					<div class="flex flex-1 flex-col p-6">
+						{c.data.industry && (
+							<div class="mb-3 text-xs text-neutral-500">{c.data.industry}</div>
+						)}
+						<h2 class="text-xl font-semibold leading-tight">{c.data.title}</h2>
+					</div>
 				</a>
 			))}
 		</div>
 	</section>
 </Layout>
+
+<script>
+	const resetVideo = (video: HTMLVideoElement) => {
+		video.pause();
+		video.currentTime = 0;
+	};
+
+	const initializeCaseVideos = () => {
+		document.querySelectorAll<HTMLAnchorElement>('.case-card').forEach((card) => {
+			const video = card.querySelector<HTMLVideoElement>('video');
+			if (!video || card.dataset.videoInitialized) return;
+
+			card.dataset.videoInitialized = 'true';
+			video.addEventListener('loadeddata', () => resetVideo(video), { once: true });
+			card.addEventListener('mouseenter', () => void video.play().catch(() => {}));
+			card.addEventListener('mouseleave', () => resetVideo(video));
+		});
+	};
+
+	initializeCaseVideos();
+	document.addEventListener('astro:page-load', initializeCaseVideos);
+</script>
+
+<style>
+	.case-card {
+		transition:
+			transform 150ms ease,
+			border-color 150ms ease,
+			box-shadow 150ms ease;
+	}
+
+	.case-card:hover {
+		transform: translateY(-2px);
+		border-color: var(--ds-border);
+		box-shadow: var(--ds-glow);
+	}
+</style>

@@ -7,20 +7,20 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 );
 ---
 
-<Layout title="Блог — ittimenow" description="Заметки команды ittimenow о разработке, ИИ и автоматизации.">
+<Layout title="Блог — ittimenow" description="Заметки команды ittimenow о разработке, ИИ и автоматизации.">
 	<section class="mx-auto max-w-4xl px-6 py-16 sm:py-24">
 		<div>
 			<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Журнал</p>
 			<h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Блог</h1>
 			<p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
-				Заметки о разработке, внедрениях и ИИ в боевых проектах.
+				Заметки о разработке, внедрениях и ИИ в боевых проектах.
 			</p>
 		</div>
 
 		<div class="mt-12">
 			{posts.length === 0 ? (
 				<p class="rounded-xl border border-dashed border-neutral-300 p-10 text-center text-neutral-500 dark:border-neutral-800">
-					Пока пусто — добавь markdown в <code class="text-neutral-700 dark:text-neutral-300">src/content/posts</code>.
+					Пока пусто — добавь markdown в <code class="text-neutral-700 dark:text-neutral-300">src/content/posts</code>.
 				</p>
 			) : (
 				<ul class="space-y-16">
@@ -33,7 +33,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 								{post.data.cover && (
 									<img
 										src={post.data.cover}
-										alt=""
+										alt={post.data.title}
 										loading="lazy"
 										class="aspect-[16/9] w-full rounded-lg object-cover"
 									/>
