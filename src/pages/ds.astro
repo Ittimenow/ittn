@@ -1,15 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+export const prerender = false;
+
+if (!import.meta.env.DEV) {
+	return new Response(null, { status: 404 });
+}
+
+const currentDir = dirname(fileURLToPath(import.meta.url));
+const designSystemPath = resolve(
+	currentDir,
+	'../../temp/design_system-ittn-v2/IT TIME NOW - Design System.dc.html',
+);
+
+const designSystemHtml = readFileSync(designSystemPath, 'utf8')
+	.replaceAll('src="assets/', 'src="/ds-v2/assets/')
+	.replaceAll("src='assets/", "src='/ds-v2/assets/")
+	.replaceAll('href="assets/', 'href="/ds-v2/assets/')
+	.replaceAll("href='assets/", "href='/ds-v2/assets/")
+	.replaceAll("url('assets/", "url('/ds-v2/assets/")
+	.replaceAll('url("assets/', 'url("/ds-v2/assets/');
 ---
 
-<Layout
-	title="IT TIME NOW — Design System v2"
-	description="Новая дизайн-система IT TIME NOW v2."
-	bare
->
-	<iframe
-		src="/ds-v2/index.html"
-		title="IT TIME NOW Design System v2"
-		class="fixed inset-0 h-dvh w-screen border-0 bg-white"
-	></iframe>
-</Layout>
+<Fragment set:html={designSystemHtml} />
