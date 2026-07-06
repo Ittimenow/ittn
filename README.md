@@ -23,6 +23,7 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 | `npm run dev` | Запустить локальный dev-сервер Astro |
 | `npm run build` | Собрать production-версию в `dist/` |
 | `npm run preview` | Локально проверить production-сборку |
+| `npm run start` | Запустить собранный Astro server из `dist/server/entry.mjs` |
 | `npm run astro ...` | Запустить Astro CLI |
 
 ## Технологический стек
@@ -36,7 +37,7 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 
 ## Тестовый домен и индексация
 
-Текущий тестовый домен: `https://ittimenow-ittn-27f0.twc1.net/`.
+Текущий тестовый домен: `https://ittimenow-ittn-020d.twc1.net/`.
 
 Пока сайт размещен на тестовом домене, индексация закрыта:
 
@@ -46,6 +47,10 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 - `public/_headers` добавляет `X-Robots-Tag` для хостингов, которые поддерживают этот файл.
 
 Перед переводом на production-домен нужно заменить `site` на production URL и снять временные запреты индексации.
+
+## Деплой
+
+Сайт собирается как Astro server (`output: 'server'`) с `@astrojs/node`, поэтому на хостинге нужно запускать `npm run build` и затем `npm run start`, либо использовать `Dockerfile` из репозитория. Не публикуйте `public/ds-v2` как корневой статический каталог: это витрина дизайн-системы для маршрута `/ds/`, а не главная страница сайта.
 
 ## Архитектура
 
@@ -73,6 +78,7 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 │   │   └── global.css           # Tailwind CSS 4, DS-токены, темы и глобальные стили
 │   └── content.config.ts        # Схемы content collections
 ├── astro.config.mjs
+├── Dockerfile
 ├── package.json
 └── tsconfig.json
 ```
