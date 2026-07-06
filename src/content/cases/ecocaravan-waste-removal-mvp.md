@@ -9,7 +9,6 @@ services: ['Автоматизация', 'MVP', 'Разработка']
 featured: true
 order: 61
 cover: '/cases/ecocaravan/main-image-ecocaravan.webp'
-coverVideo: '/cases/ecocaravan/klient-zayavka-s-pk-cutted.webm'
 ---
 
 ## Клиент

@@ -8,11 +8,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "start": "astro preview --host 0.0.0.0 --port ${PORT:-4321}",
+    "start": "HOST=${HOST:-0.0.0.0} node ./dist/server/entry.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^10.1.4",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.10",
     "rollup": "^4.59.0",

@@ -4,6 +4,9 @@ import Layout from '../../layouts/Layout.astro';
 import Bitrix24Landing from '../../components/Bitrix24Landing.astro';
 import RbsLanding from '../../components/RbsLanding.astro';
 import WebLanding from '../../components/WebLanding.astro';
+import UiIcon from '../../components/UiIcon.astro';
+
+export const prerender = true;
 
 export async function getStaticPaths() {
 	const services = await getCollection('services');
@@ -107,12 +110,14 @@ const breadcrumbSchema = {
 				<p class="text-sm text-neutral-700 dark:text-neutral-300">
 					Расскажите о задаче — обсудим, как лучше подойти.
 				</p>
-				<a
-					href="/#consultation"
-					class="mt-3 inline-block rounded-md bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white dark:bg-white dark:text-neutral-900"
+				<button
+					type="button"
+					class="ds-btn ds-btn-primary b24-web-form-popup-btn-21 mt-3"
+					data-b24-form-trigger
 				>
-					Получить консультацию
-				</a>
+					<span>Получить консультацию</span>
+					<UiIcon name="arrow" class="h-4 w-4" />
+				</button>
 			</div>
 		</article>
 	)}

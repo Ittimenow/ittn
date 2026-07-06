@@ -2,6 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
 	const cases = await getCollection('cases');
 	return cases.map((c) => ({ params: { slug: c.id }, props: { c } }));
@@ -707,10 +709,12 @@ const breadcrumbSchema = {
 		align-items: center;
 		justify-content: center;
 		justify-self: start;
+		border: 0;
 		border-radius: 9999px;
 		background: #ffffff;
 		padding: 0 1.5rem;
 		color: #18181b;
+		cursor: pointer;
 		font-size: 0.875rem;
 		font-weight: 700;
 		line-height: 1;
@@ -1020,9 +1024,10 @@ const breadcrumbSchema = {
 		const body = document.createElement('div');
 		body.className = 'case-results-body';
 
-		const button = document.createElement('a');
-		button.className = 'case-results-button';
-		button.href = '/#consultation';
+		const button = document.createElement('button');
+		button.className = 'case-results-button b24-web-form-popup-btn-21';
+		button.type = 'button';
+		button.dataset.b24FormTrigger = '';
 		button.textContent = 'Хочу также!';
 
 		resultHeading.replaceWith(cta);

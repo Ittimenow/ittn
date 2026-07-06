@@ -1,259 +1,304 @@
 ---
 import UiIcon from './UiIcon.astro';
 
+const assetBase = '/ds-v2/assets/decorations-split';
+
 const steps = [
 	{
-		icon: 'filter',
+		circle: 'deco-circle-01.png',
+		digit: 'deco-digit-1.png',
 		title: 'Диагностика',
-		text: 'Разбираем задачу, ограничения, текущие процессы и точки потерь.',
+		text: 'Разбираем задачу, ограничения, текущие процессы и точки потерь.',
 	},
 	{
-		icon: 'workflow',
+		circle: 'deco-circle-02.png',
+		digit: 'deco-digit-2.png',
 		title: 'Проектирование',
-		text: 'Определяем архитектуру, роли, маршруты, интерфейсы и состав решения.',
+		text: 'Определяем архитектуру, роли, маршруты, интерфейсы и состав решения.',
 	},
 	{
-		icon: 'settings',
+		circle: 'deco-circle-03.png',
+		digit: 'deco-digit-3.png',
 		title: 'Реализация',
-		text: 'Разрабатываем, внедряем, настраиваем и интегрируем.',
+		text: 'Разрабатываем, внедряем, настраиваем и интегрируем.',
 	},
 	{
-		icon: 'rocket',
-		title: 'Запуск и обучение',
-		text: 'Тестируем, переносим данные, обучаем команду и сопровождаем старт.',
+		circle: 'deco-circle-04.png',
+		digit: 'deco-digit-4.png',
+		title: 'Запуск и обучение',
+		text: 'Тестируем, переносим данные, обучаем команду и сопровождаем старт.',
 	},
 	{
-		icon: 'bar-chart',
+		circle: 'deco-circle-01.png',
+		digit: 'deco-digit-5.png',
 		title: 'Развитие',
-		text: 'Добавляем новые функции, оптимизируем процессы и поддерживаем систему.',
+		text: 'Добавляем новые функции, оптимизируем процессы и поддерживаем систему.',
 	},
+] as const;
+
+const connectors = [
+	{ image: 'deco-underline-02.png', transform: 'rotate(-4deg)' },
+	{ image: 'deco-underline-01.png', transform: 'rotate(3deg)' },
+	{ image: 'deco-underline-03.png', transform: 'rotate(-3deg)' },
+	{ image: 'deco-underline-02.png', transform: 'rotate(5deg) scaleX(-1)' },
 ] as const;
 ---
 
-<section class="work-process mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
-	<div class="work-process-grid">
-		<section class="work-process-card" aria-labelledby="work-process-title">
-			<p class="work-process-kicker">Как мы работаем</p>
-			<h2 id="work-process-title">Понятный процесс работы без магии за кадром</h2>
-		</section>
+<section class="implementation-section" aria-labelledby="implementation-title">
+	<div class="implementation-container">
+		<p class="implementation-kicker">Как проходит внедрение</p>
+		<div class="implementation-header">
+			<div>
+				<h2 id="implementation-title">
+					Пять этапов<br />магии интегратора
+				</h2>
+			</div>
+			<div>
+				<p>
+					Вместо длинной абстрактной схемы показываем управляемый проект: что делаем, что проверяем
+					и где фиксируем результат.
+				</p>
+				<a class="ds-btn ds-btn-primary" href="#consultation">
+					<span>Собрать состав работ</span>
+					<UiIcon name="arrow" class="h-4 w-4" />
+				</a>
+			</div>
+		</div>
 
-		<ol class="work-process-timeline" aria-label="Этапы работы">
-			{steps.map((step, index) => (
-				<li class="work-process-timeline-item">
-					<div class="work-process-timeline-date">
-						<span>Этап</span>
-						<time>{String(index + 1).padStart(2, '0')}</time>
-					</div>
-					<div class="work-process-timeline-track" aria-hidden="true">
-						<div class="work-process-timeline-line"></div>
-						<div class="work-process-timeline-dot">
-							<UiIcon name={step.icon} class="h-4 w-4" />
-						</div>
-					</div>
-					<div class="work-process-timeline-content">
-						<h3>{step.title}</h3>
-						<p>{step.text}</p>
-					</div>
-				</li>
-			))}
-		</ol>
+		<div class="implementation-scroll">
+			<ol class="implementation-track" aria-label="Этапы внедрения">
+				{steps.map((step, index) => (
+					<>
+						<li class="implementation-card">
+							<div class="implementation-circle">
+								<div class="implementation-circle-inner">
+									<img src={`${assetBase}/${step.circle}`} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+									<div>
+										<span>Этап</span>
+										<img src={`${assetBase}/${step.digit}`} alt={String(index + 1)} loading="lazy" decoding="async" />
+									</div>
+								</div>
+							</div>
+							<h3>{step.title}</h3>
+							<p>{step.text}</p>
+						</li>
+
+						{connectors[index] && (
+							<li class="implementation-connector" aria-hidden="true">
+								<img
+									src={`${assetBase}/${connectors[index].image}`}
+									alt=""
+									loading="lazy"
+									decoding="async"
+									style={`transform:${connectors[index].transform};`}
+								/>
+							</li>
+						)}
+					</>
+				))}
+			</ol>
+		</div>
 	</div>
 </section>
 
 <style>
-	.work-process-grid {
-		display: grid;
-		gap: 20px;
-	}
-
-	.work-process-card {
-		min-width: 0;
+	.implementation-section {
 		overflow: hidden;
-		border: 1px solid rgba(255, 255, 255, 0.78);
-		border-radius: 24px;
-		background: var(--ds-card);
-		padding: 24px;
-		box-shadow: var(--ds-shadow);
-		backdrop-filter: blur(40px);
+		background: var(--ittn-cloud);
 	}
 
-	.work-process-kicker {
-		display: inline-flex;
-		align-items: center;
-		min-height: 28px;
-		border-radius: 9999px;
-		background: rgba(35, 43, 255, 0.08);
-		padding: 4px 12px;
-		color: var(--ds-primary);
-		font-size: var(--ds-label-size);
-		font-weight: var(--ds-label-weight);
-		line-height: var(--ds-label-line);
+	.implementation-container {
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: 88px 24px;
 	}
 
-	.work-process-card h2 {
-		margin-top: 14px;
-		color: var(--ds-ink);
-		font-size: clamp(36px, 6vw, 52px);
-		font-weight: var(--ds-display-weight);
-		line-height: 1.04;
-	}
-
-	.work-process-timeline {
-		margin: 0;
-		overflow: hidden;
-		border: 1px solid rgba(255, 255, 255, 0.78);
-		border-radius: 24px;
-		background: var(--ds-card);
-		box-shadow: var(--ds-shadow);
-		list-style: none;
-		backdrop-filter: blur(40px);
-	}
-
-	.work-process-timeline-item {
-		display: grid;
-		grid-template-columns: 52px 1fr;
-		min-height: 132px;
-		transition: background 180ms ease;
-	}
-
-	.work-process-timeline-item:hover {
-		background: rgba(35, 43, 255, 0.05);
-	}
-
-	.work-process-timeline-date {
-		grid-column: 2;
-		grid-row: 1;
-		padding: 22px 22px 0 0;
-		color: var(--ds-muted);
-	}
-
-	.work-process-timeline-date span {
-		display: block;
-		font-size: 12px;
-		font-weight: 700;
-		line-height: 16px;
+	.implementation-kicker {
+		font-family: 'JetBrains Mono', var(--ds-font-mono, monospace);
 		text-transform: uppercase;
 	}
 
-	.work-process-timeline-date time {
-		display: block;
-		margin-top: 2px;
-		color: var(--ds-primary);
-		font-size: 18px;
-		font-weight: 700;
-		line-height: 24px;
-	}
-
-	.work-process-timeline-track {
-		position: relative;
-		grid-column: 1;
-		grid-row: 1 / span 2;
-		min-height: 132px;
-	}
-
-	.work-process-timeline-line {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 50%;
-		border-left: 1px solid var(--ds-border);
-		transform: translateX(-50%);
-	}
-
-	.work-process-timeline-item:first-child .work-process-timeline-line {
-		top: 34px;
-	}
-
-	.work-process-timeline-item:last-child .work-process-timeline-line {
-		bottom: calc(100% - 34px);
-	}
-
-	.work-process-timeline-dot {
-		position: absolute;
-		top: 22px;
-		left: 50%;
-		z-index: 1;
-		display: grid;
-		width: 30px;
-		height: 30px;
-		place-items: center;
-		border: 1px solid rgba(35, 43, 255, 0.22);
-		border-radius: 9999px;
-		background: var(--ds-primary);
-		box-shadow: 0 0 0 7px rgba(35, 43, 255, 0.1);
-		color: #ffffff;
-		transform: translateX(-50%);
-		transition: box-shadow 180ms ease, transform 180ms ease;
-	}
-
-	.work-process-timeline-item:hover .work-process-timeline-dot {
-		box-shadow: 0 0 0 10px rgba(35, 43, 255, 0.14);
-		transform: translateX(-50%) scale(1.04);
-	}
-
-	.work-process-timeline-content {
-		grid-column: 2;
-		grid-row: 2;
-		padding: 6px 22px 24px 0;
-	}
-
-	.work-process-timeline-content h3 {
-		margin: 0;
-		color: var(--ds-ink);
-		font-size: 24px;
+	.implementation-kicker {
+		margin: 0 0 16px;
+		color: #232bff;
+		font-size: 13px;
 		font-weight: 500;
-		line-height: 1.18;
+		line-height: 1.4;
+		letter-spacing: 0.14em;
 	}
 
-	.work-process-timeline-content p {
-		margin: 8px 0 0;
-		color: var(--ds-muted);
+	.implementation-header {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 64px;
+		align-items: start;
+		margin-bottom: 80px;
+	}
+
+	.implementation-header h2 {
+		margin: 0;
+		color: #111111;
+		font-size: clamp(34px, 5vw, 52px);
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: 0;
+	}
+
+	.implementation-header p {
+		margin: 0 0 28px;
+		color: #626977;
+		font-size: 18px;
+		line-height: 1.55;
+	}
+
+	.implementation-track {
+		display: flex;
+		align-items: flex-start;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.implementation-card {
+		display: flex;
+		flex: 1 1 0;
+		min-width: 0;
+		flex-direction: column;
+		padding: 0 12px;
+	}
+
+	.implementation-circle {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+
+	.implementation-circle-inner {
+		position: relative;
+		width: 104px;
+		height: 104px;
+		flex: none;
+	}
+
+	.implementation-circle-inner > img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.implementation-circle-inner > div {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 2px;
+	}
+
+	.implementation-circle-inner span {
+		color: #626977;
+		font-family: 'JetBrains Mono', var(--ds-font-mono, monospace);
+		font-size: 9px;
+		font-weight: 500;
+		line-height: 1;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.implementation-circle-inner div img {
+		width: auto;
+		height: 40px;
+		object-fit: contain;
+	}
+
+	.implementation-card h3 {
+		margin: 0 0 10px;
+		color: #111111;
+		font-size: 17px;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.implementation-card p {
+		margin: 0;
+		color: #626977;
 		font-size: 14px;
-		line-height: 1.65;
+		line-height: 1.6;
 	}
 
-	:global(.dark) .work-process-card,
-	:global(.dark) .work-process-timeline {
-		border-color: rgba(255, 255, 255, 0.1);
+	.implementation-connector {
+		display: flex;
+		height: 104px;
+		flex: none;
+		align-items: center;
 	}
 
-	@media (min-width: 1024px) {
-		.work-process-grid {
-			grid-template-columns: 0.72fr 1fr;
-		}
+	.implementation-connector img {
+		width: 56px;
+		height: auto;
+		opacity: 0.45;
 	}
 
-	@media (min-width: 768px) {
-		.work-process-card {
-			padding: 32px;
+	:global(.dark) .implementation-section {
+		background: #10131d;
+	}
+
+	:global(.dark) .implementation-header h2,
+	:global(.dark) .implementation-card h3 {
+		color: #ffffff;
+	}
+
+	:global(.dark) .implementation-header p,
+	:global(.dark) .implementation-card p,
+	:global(.dark) .implementation-circle-inner span {
+		color: #aeb6c8;
+	}
+
+	@media (max-width: 767px) {
+		.implementation-container {
+			padding: 72px 24px;
 		}
 
-		.work-process-timeline {
-			padding-block: 8px;
+		.implementation-header {
+			grid-template-columns: 1fr;
+			gap: 24px;
+			margin-bottom: 48px;
 		}
 
-		.work-process-timeline-item {
-			grid-template-columns: 128px 60px 1fr;
-			min-height: 116px;
-			align-items: start;
+		.implementation-header h2 {
+			font-size: clamp(34px, 10vw, 44px);
 		}
 
-		.work-process-timeline-date {
-			grid-column: 1;
-			grid-row: 1;
-			padding: 28px 0 0 24px;
+		.implementation-header p {
+			font-size: 16px;
 		}
 
-		.work-process-timeline-track {
-			grid-column: 2;
-			grid-row: 1;
-			min-height: 116px;
+		.implementation-scroll {
+			margin: 0 -24px;
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			scroll-snap-type: x mandatory;
+			scrollbar-width: none;
 		}
 
-		.work-process-timeline-content {
-			grid-column: 3;
-			grid-row: 1;
-			padding: 24px 28px 24px 0;
+		.implementation-scroll::-webkit-scrollbar {
+			display: none;
+		}
+
+		.implementation-track {
+			padding: 0 24px 24px;
+		}
+
+		.implementation-card {
+			flex: 0 0 185px;
+			scroll-snap-align: start;
+		}
+
+		.implementation-connector img {
+			width: 36px;
 		}
 	}
 </style>

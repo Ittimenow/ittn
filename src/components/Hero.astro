@@ -11,24 +11,40 @@ const metrics = [
 const segments = ['B2B', 'Производство', 'Опт', 'Сервис', 'Строительство'];
 ---
 
-<section class="ds relative isolate overflow-hidden border-b border-neutral-200 dark:border-neutral-800">
-	<img
-		src="/main-b24-v2.webp"
-		alt="Рабочее место с CRM-воронкой Битрикс24 на экране"
-		class="absolute inset-0 -z-20 h-full w-full object-cover object-[62%_50%]"
-		loading="eager"
-		decoding="async"
-	/>
-	<div
-		aria-hidden="true"
-		class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(255,255,255,0.97)_0%,rgba(255,255,255,0.9)_48%,rgba(255,255,255,0.2)_100%)] dark:bg-[linear-gradient(90deg,rgba(9,9,11,0.97)_0%,rgba(9,9,11,0.9)_52%,rgba(9,9,11,0.28)_100%)]"
-	></div>
-
+<section class="ds relative isolate overflow-hidden border-b border-neutral-200 bg-white dark:border-neutral-800">
 	<div class="mx-auto max-w-[1440px] px-6 py-14 sm:py-20 lg:py-24">
-		<h1
-			class="max-w-4xl text-4xl font-semibold leading-[1.06] text-neutral-950 sm:text-5xl lg:text-6xl dark:text-white"
-		>
-			Сайты, CRM/ERP и автоматизация процессов для бизнеса, которому нужен порядок
+		<h1 class="hero-lockup" aria-label="Делаем сложное ИТ — простым, а скучное — крутым!">
+			<span class="hero-lockup__row hero-lockup__row--top" aria-hidden="true">
+				<span class="hero-lockup__text">Делаем сложное</span>
+				<img
+					src="/ds-v2/assets/hero-word-it.png"
+					alt=""
+					class="hero-lockup__image hero-lockup__image--it"
+					loading="eager"
+					decoding="async"
+				/>
+			</span>
+			<span class="hero-lockup__row hero-lockup__row--middle" aria-hidden="true">
+				<span class="hero-lockup__text">—</span>
+				<img
+					src="/ds-v2/assets/hero-word-simple.png"
+					alt=""
+					class="hero-lockup__image hero-lockup__image--simple"
+					loading="eager"
+					decoding="async"
+				/>
+				<span class="hero-lockup__text">, а</span>
+			</span>
+			<span class="hero-lockup__row hero-lockup__row--bottom" aria-hidden="true">
+				<span class="hero-lockup__text">скучное —</span>
+				<img
+					src="/ds-v2/assets/hero-word-cool.png"
+					alt=""
+					class="hero-lockup__image hero-lockup__image--cool"
+					loading="eager"
+					decoding="async"
+				/>
+			</span>
 		</h1>
 
 		<p class="mt-6 max-w-2xl text-lg leading-8 text-neutral-700 sm:text-xl dark:text-neutral-300">
@@ -56,3 +72,85 @@ const segments = ['B2B', 'Производство', 'Опт', 'Сервис', '
 		</dl>
 	</div>
 </section>
+
+<style>
+	.hero-lockup {
+		display: grid;
+		width: min(100%, 820px);
+		margin: 0;
+		color: #111111;
+		font-size: 34px;
+		font-weight: 400;
+		line-height: 0.92;
+	}
+
+	.hero-lockup__row {
+		display: flex;
+		min-width: 0;
+		align-items: center;
+	}
+
+	.hero-lockup__row--top {
+		gap: 0.35em;
+	}
+
+	.hero-lockup__row--middle {
+		margin-top: -0.04em;
+		gap: 0.22em;
+	}
+
+	.hero-lockup__row--bottom {
+		margin-top: -0.08em;
+		gap: 0.3em;
+	}
+
+	.hero-lockup__text {
+		display: block;
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.hero-lockup__image {
+		display: block;
+		flex: none;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.hero-lockup__image--it {
+		width: 1.75em;
+	}
+
+	.hero-lockup__image--simple {
+		width: min(5.35em, 100%);
+	}
+
+	.hero-lockup__image--cool {
+		width: min(4.8em, 52%);
+	}
+
+	@media (min-width: 640px) {
+		.hero-lockup {
+			font-size: 52px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.hero-lockup {
+			font-size: 68px;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.hero-lockup__row--top,
+		.hero-lockup__row--middle,
+		.hero-lockup__row--bottom {
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+
+		.hero-lockup__image--cool {
+			width: min(4.8em, 100%);
+		}
+	}
+</style>

@@ -13,7 +13,7 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 			Решения, которые уже работают в проде у наших клиентов.
 		</p>
 
-		<div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+		<div class="mt-12 grid gap-4 md:grid-cols-2">
 			{cases.map((c) => (
 				<a
 					href={`/cases/${c.id}/`}
@@ -49,7 +49,7 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 						{c.data.industry && (
 							<div class="mb-3 text-xs text-neutral-500">{c.data.industry}</div>
 						)}
-						<h2 class="text-xl font-semibold leading-tight">{c.data.title}</h2>
+						<h2 class="case-card-title">{c.data.title}</h2>
 					</div>
 				</a>
 			))}
@@ -91,5 +91,11 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 		transform: translateY(-2px);
 		border-color: var(--ds-border);
 		box-shadow: var(--ds-glow);
+	}
+
+	.case-card-title {
+		font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+		font-weight: 600;
+		line-height: 1.15;
 	}
 </style>

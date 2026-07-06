@@ -3,6 +3,8 @@ import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Bitrix24FormPopup from '../components/Bitrix24FormPopup.astro';
+import Bitrix24FloatingCta from '../components/Bitrix24FloatingCta.astro';
 
 interface Props {
 	title?: string;
@@ -59,6 +61,12 @@ const schema = [organizationSchema, websiteSchema, ...pageSchema.filter(Boolean)
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="canonical" href={canonicalURL} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Onest:wght@400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 
 		<title>{title}</title>
@@ -80,16 +88,6 @@ const schema = [organizationSchema, websiteSchema, ...pageSchema.filter(Boolean)
 		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 		<ClientRouter />
-
-		<script is:inline>
-			(() => {
-				const stored = localStorage.getItem('theme');
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				if (stored === 'dark' || (!stored && prefersDark)) {
-					document.documentElement.classList.add('dark');
-				}
-			})();
-		</script>
 	</head>
 	<body class="min-h-full antialiased">
 		{bare ? <slot /> : (
@@ -97,6 +95,8 @@ const schema = [organizationSchema, websiteSchema, ...pageSchema.filter(Boolean)
 				<Header variant={headerVariant} transition:persist />
 				<main><slot /></main>
 				<Footer transition:persist />
+				<Bitrix24FloatingCta />
+				<Bitrix24FormPopup />
 			</>
 		)}
 	</body>

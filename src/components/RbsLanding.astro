@@ -212,10 +212,10 @@ const schema = [
 					весь путь клиента: от&nbsp;первого обращения и&nbsp;сделки до&nbsp;счета, отгрузки, сервиса и&nbsp;повторной продажи.
 				</p>
 				<div class="rbs-actions">
-					<a class="ds-btn ds-btn-primary" href="#rbs-request">
+					<button class="ds-btn ds-btn-primary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 						<span>Получить консультацию</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
-					</a>
+					</button>
 					<p class="rbs-free-label">Бесплатно!</p>
 				</div>
 				<div class="ds-testimonial rbs-hero-benefit">
@@ -354,9 +354,9 @@ const schema = [
 								</li>
 							))}
 						</ul>
-						<a class="ds-btn ds-btn-secondary" href="#rbs-request">
+						<button class="ds-btn ds-btn-secondary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 							<span>{pack.name === 'Предпроектное обследование' ? 'Заказать аудит' : 'Заказать внедрение'}</span>
-						</a>
+						</button>
 					</article>
 				))}
 			</div>
@@ -405,10 +405,10 @@ const schema = [
 					Фиксируем границы каждого этапа: что&nbsp;настраиваем, какие данные переносим, кто&nbsp;проверяет
 					результат и&nbsp;как&nbsp;команда начинает работать в&nbsp;системе.
 				</p>
-				<a class="ds-btn ds-btn-dark" href="#rbs-request">
+				<button class="ds-btn ds-btn-dark b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 					<span>Собрать план внедрения</span>
 					<UiIcon name="arrow" class="h-4 w-4" />
-				</a>
+				</button>
 			</div>
 			<ol class="rbs-timeline" aria-label="Этапы внедрения РосБизнесСофт">
 				{steps.map(([icon, title, text], index) => (
@@ -536,7 +536,7 @@ const schema = [
 						))}
 					</div>
 				</div>
-				<form class="ds-form" method="post" action="#">
+				<form class="ds-form" method="post" action="#" data-b24-form-wrapper>
 					<div class="rbs-form-grid">
 						<label>
 							<span>Имя</span>
@@ -569,7 +569,7 @@ const schema = [
 						<label class="ds-check"><input type="checkbox" name="needs" value="1c" /> 1С</label>
 						<label class="ds-check"><input type="checkbox" name="needs" value="site" /> Сайт</label>
 					</div>
-					<button class="ds-btn ds-btn-primary" type="submit">
+					<button class="ds-btn ds-btn-primary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 						<span>Получить план внедрения</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</button>
@@ -580,10 +580,10 @@ const schema = [
 	</section>
 
 	<div class="rbs-mobile-cta">
-		<a class="ds-btn ds-btn-primary" href="#rbs-request">
+		<button class="ds-btn ds-btn-primary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 			<span>Расчет</span>
 			<UiIcon name="file" class="h-4 w-4" />
-		</a>
+		</button>
 		<a class="ds-btn ds-btn-secondary" href="tel:+74951335888">
 			<span>Позвонить</span>
 			<UiIcon name="phone" class="h-4 w-4" />

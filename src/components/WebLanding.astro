@@ -8,6 +8,26 @@ const trustMarkers = [
 	'Проектирование, дизайн, разработка и запуск',
 ] as const;
 const b24ButtonClass = 'b24-web-form-popup-btn-21';
+const formatHelpImage = '/ds-v2/assets/contact-me.png';
+const heroUnderline = '/ds-v2/assets/decorations-split/deco-underline-01.png';
+const heroCircle = '/ds-v2/assets/decorations-split/deco-circle-03.png';
+const heroArrow = '/ds-v2/assets/decorations-split/deco-arrow-04.png';
+const checkMark = '/ds-v2/assets/decorations-split/deco-check-03.png';
+const processCircles = [
+	'/ds-v2/assets/decorations-split/deco-circle-01.png',
+	'/ds-v2/assets/decorations-split/deco-circle-02.png',
+	'/ds-v2/assets/decorations-split/deco-circle-03.png',
+	'/ds-v2/assets/decorations-split/deco-circle-04.png',
+] as const;
+const processConnectors = [
+	['/ds-v2/assets/decorations-split/deco-underline-02.png', 'rotate(86deg)'],
+	['/ds-v2/assets/decorations-split/deco-underline-01.png', 'rotate(93deg)'],
+	['/ds-v2/assets/decorations-split/deco-underline-03.png', 'rotate(87deg)'],
+	['/ds-v2/assets/decorations-split/deco-underline-02.png', 'rotate(95deg) scaleX(-1)'],
+	['/ds-v2/assets/decorations-split/deco-underline-01.png', 'rotate(86deg)'],
+	['/ds-v2/assets/decorations-split/deco-underline-03.png', 'rotate(93deg)'],
+	['/ds-v2/assets/decorations-split/deco-underline-02.png', 'rotate(87deg)'],
+] as const;
 
 const problems = [
 	{
@@ -123,7 +143,7 @@ const cases = [
 		image: '/cases/berkut/main-image-skberkut.webp',
 		task: 'Создать имиджевый сайт строительной компании с запоминающейся визуальной механикой.',
 		done: ['разработали концепцию бесконечно льющегося бетона', 'реализовали реакцию графики на движение курсора', 'добавили динамический счетчик объема бетона', 'создали карту реализованных объектов'],
-		result: ['Интерактивный сайт', 'Стоимость проекта 250 000 ₽'],
+		result: ['Интерактивный сайт'],
 	},
 	{
 		title: 'MVP агрегатора строительных отходов',
@@ -131,7 +151,7 @@ const cases = [
 		image: '/cases/ecocaravan/main-image-ecocaravan.webp',
 		task: 'За один месяц разработать первый релиз платформы для заказчиков, перевозчиков и переработчиков.',
 		done: ['описали бизнес-процессы', 'сформировали техническое задание', 'разработали сайт и личные кабинеты', 'интегрировали решение с CRM-ERP'],
-		result: ['MVP запущен в срок', 'Стоимость проекта 1 200 000 ₽'],
+		result: ['MVP запущен в срок'],
 	},
 ] as const;
 
@@ -210,46 +230,23 @@ const faqSchema = {
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-<script is:inline data-b24-form="click/21/8r4fh6" data-skip-moving="true">
-	(function(w,d,u){
-	var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/180000|0);
-	var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
-	})(window,document,'https://cdn-ru.bitrix24.ru/b27699562/crm/form/loader_21.js');
-</script>
-<script>
-	function bindWebB24Buttons() {
-		document.querySelectorAll('[data-web-b24-form]').forEach((button) => {
-			if (button instanceof HTMLElement) {
-				button.addEventListener('click', (event) => event.preventDefault());
-			}
-		});
-	}
-
-	bindWebB24Buttons();
-	document.addEventListener('astro:page-load', bindWebB24Buttons);
-</script>
-
 <div class="ds web-landing">
-	<a class:list={['web-sticky-cta', b24ButtonClass]} href="#" data-web-b24-form>
-		<span>Обсудить проект</span>
-		<UiIcon name="arrow" class="h-4 w-4" />
-	</a>
-
-	<section class="relative isolate overflow-hidden border-b border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
-		<div class="absolute inset-0 -z-10 bg-[linear-gradient(115deg,rgba(255,255,255,0.98)_0%,rgba(246,247,251,0.94)_45%,rgba(95,102,255,0.14)_100%)] dark:bg-[linear-gradient(115deg,rgba(9,9,11,1)_0%,rgba(17,17,22,0.96)_52%,rgba(95,102,255,0.2)_100%)]"></div>
-		<div class="mx-auto grid min-h-[calc(100vh-96px)] max-w-[1440px] items-center gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(420px,560px)] lg:py-24">
+	<section class="web-hero relative isolate overflow-hidden border-b border-neutral-200 bg-white">
+		<img class="web-hero-circle" src={heroCircle} alt="" aria-hidden="true" loading="eager" />
+		<div class="web-container grid min-h-[calc(100vh-96px)] items-center gap-12 py-16 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(360px,500px)] lg:py-24">
 			<div>
 				<nav class="mb-8 flex flex-wrap items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400" aria-label="Хлебные крошки">
 					<a href="/services/" class="hover:text-indigo-600 dark:hover:text-indigo-300">Все услуги</a>
 					<UiIcon name="chevron" class="h-3.5 w-3.5" />
 					<span>Разработка сайтов и веб-сервисов</span>
 				</nav>
-				<p class="ds-kicker border border-indigo-200 bg-white/72 text-indigo-700 backdrop-blur dark:border-indigo-500/30 dark:bg-neutral-950/60 dark:text-indigo-300">
-					Разработка сайтов и веб-сервисов для бизнеса
+				<p class="ds-kicker">
+					01 — Разработка сайтов и веб-сервисов
 				</p>
-				<h1 transition:name="service-web" class="mt-4 max-w-5xl text-4xl font-semibold leading-[1.04] text-neutral-950 sm:text-5xl lg:text-6xl dark:text-white">
-					Создаем сайты и цифровые сервисы, которые помогают продавать, автоматизировать и масштабировать бизнес
+				<h1 transition:name="service-web" class="web-hero-title mt-5 max-w-5xl text-neutral-950">
+					Создаем сайты и цифровые сервисы, которые помогают <span>продавать</span> и масштабировать бизнес
 				</h1>
+				<img class="web-hero-underline" src={heroUnderline} alt="" aria-hidden="true" loading="eager" />
 				<p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700 sm:text-xl dark:text-neutral-300">
 					Проектируем интерфейсы, разрабатываем дизайн, программируем и интегрируем решение с CRM, ERP, платежными системами и другими сервисами вашей компании.
 				</p>
@@ -257,20 +254,17 @@ const faqSchema = {
 					От продающего лендинга до интернет-магазина, личного кабинета, корпоративного портала или сложной цифровой платформы.
 				</p>
 				<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-					<a class:list={['ds-btn ds-btn-primary w-full sm:w-auto', b24ButtonClass]} href="#" data-web-b24-form>
-						<span>Рассчитать стоимость проекта</span>
+					<button class:list={['ds-btn ds-btn-primary w-full sm:w-auto', b24ButtonClass]} type="button" data-b24-form-trigger>
+						<span>Получить консультацию бесплатно</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
-					</a>
-					<a class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-neutral-300 bg-white/74 px-7 text-sm font-bold text-neutral-900 backdrop-blur transition hover:border-indigo-500 hover:text-indigo-600 sm:w-auto dark:border-neutral-700 dark:bg-neutral-950/54 dark:text-white dark:hover:border-indigo-400 dark:hover:text-indigo-300" href="#web-cases">
-						Посмотреть кейсы
-					</a>
+					</button>
 				</div>
 				<p class="mt-4 max-w-2xl text-sm leading-6 text-neutral-500 dark:text-neutral-400">
 					Расскажите о задаче - предложим подходящий формат разработки и подготовим предварительную оценку.
 				</p>
-				<div class="mt-8 grid gap-3 sm:grid-cols-3">
+				<div class="web-mobile-carousel web-trust-markers mt-8 grid gap-3 sm:grid-cols-3">
 					{trustMarkers.map((marker) => (
-						<div class="rounded-xl border border-neutral-200 bg-white/70 p-4 text-sm font-medium leading-6 text-neutral-800 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/54 dark:text-neutral-200">
+						<div class="web-card web-trust-marker p-4 text-sm font-bold leading-6 text-neutral-800">
 							{marker}
 						</div>
 					))}
@@ -278,6 +272,7 @@ const faqSchema = {
 			</div>
 
 			<div class="web-product-map" aria-label="Схема сайта, личного кабинета, CRM и интеграций">
+				<img class="web-map-arrow" src={heroArrow} alt="" aria-hidden="true" loading="eager" />
 				<div class="web-map-card web-map-site">
 					<p>Макет сайта</p>
 					<div></div>
@@ -307,18 +302,16 @@ const faqSchema = {
 		</div>
 	</section>
 
-	<ClientLogos />
-
-	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+	<section class="border-y border-neutral-200 bg-neutral-50">
 		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 			<div class="max-w-4xl">
-				<p class="ds-kicker bg-white text-indigo-700 dark:bg-neutral-900 dark:text-indigo-300">Задачи клиента</p>
+				<p class="ds-kicker">02 — Задачи клиента</p>
 				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Когда бизнесу нужна не просто красивая страница</h2>
 				<p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700 dark:text-neutral-300">
 					Хороший сайт должен не только рассказывать о компании. Он должен помогать пользователю принять решение, передавать заявки в нужные системы и становиться частью бизнес-процессов.
 				</p>
 			</div>
-			<div class="mt-10 grid gap-4 md:grid-cols-2">
+			<div class="web-mobile-carousel mt-10 grid gap-4 md:grid-cols-2">
 				{problems.map((problem) => (
 					<article class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-[0_20px_50px_-32px_rgba(24,24,27,0.34)] dark:border-neutral-800 dark:bg-neutral-900/46">
 						<div class="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-indigo-600 text-white">
@@ -338,21 +331,21 @@ const faqSchema = {
 	<section id="web-formats" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 		<div class="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:items-end">
 			<div>
-				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Форматы</p>
+				<p class="ds-kicker">03 — Форматы</p>
 				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Разрабатываем решения под задачи и масштаб бизнеса</h2>
 			</div>
 			<p class="text-lg leading-8 text-neutral-700 dark:text-neutral-300">
 				Не предлагаем сложный продукт там, где достаточно компактного лендинга. И не пытаемся собрать серьезную цифровую платформу на шаблоне.
 			</p>
 		</div>
-		<div class="mt-10 grid gap-5 lg:grid-cols-2">
+			<div class="web-mobile-carousel web-format-cards mt-10 grid gap-5 lg:grid-cols-2">
 			{productTypes.map((item) => (
-				<article class:list={['rounded-2xl border p-6 transition hover:-translate-y-1 hover:shadow-[0_30px_70px_-36px_rgba(35,43,255,0.45)] dark:hover:shadow-[0_30px_70px_-36px_rgba(0,0,0,0.8)]', item.name === 'Индивидуальный веб-сервис' ? 'border-indigo-500 bg-indigo-600 text-white' : 'border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/42']}>
+					<article class:list={['web-format-card flex flex-col rounded-2xl border p-6 transition hover:-translate-y-1 hover:shadow-[0_30px_70px_-36px_rgba(35,43,255,0.45)] dark:hover:shadow-[0_30px_70px_-36px_rgba(0,0,0,0.8)]', item.name === 'Индивидуальный веб-сервис' ? 'border-indigo-500 bg-indigo-600 text-white' : 'border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/42']}>
 					<div class="flex flex-wrap items-start justify-between gap-4">
 						<div class:list={['grid h-11 w-11 place-items-center rounded-xl', item.name === 'Индивидуальный веб-сервис' ? 'bg-white/16 text-white' : 'bg-indigo-600 text-white']}>
 							<UiIcon name={item.icon} class="h-5 w-5" />
 						</div>
-						<p class:list={['rounded-full px-3 py-1 text-sm font-medium', item.name === 'Индивидуальный веб-сервис' ? 'bg-white/14 text-white' : 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300']}>
+						<p class="web-format-tag">
 							{item.tag}
 						</p>
 					</div>
@@ -365,7 +358,7 @@ const faqSchema = {
 							<ul class="mt-3 space-y-2 text-sm leading-6">
 								{item.fit.map((fit) => (
 									<li class="flex gap-2">
-										<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0" />
+										<img class="web-check-mark" src={checkMark} alt="" loading="lazy" decoding="async" />
 										<span>{fit}</span>
 									</li>
 								))}
@@ -376,16 +369,19 @@ const faqSchema = {
 							<ul class="mt-3 space-y-2 text-sm leading-6">
 								{item.includes.map((include) => (
 									<li class="flex gap-2">
-										<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0" />
+										<img class="web-check-mark" src={checkMark} alt="" loading="lazy" decoding="async" />
 										<span>{include}</span>
 									</li>
 								))}
 							</ul>
 						</div>
 					</div>
-					<a class:list={['mt-6 inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-bold transition', b24ButtonClass, item.name === 'Индивидуальный веб-сервис' ? 'bg-white text-indigo-700 hover:bg-neutral-100' : 'bg-neutral-950 text-white hover:bg-indigo-600 dark:bg-white dark:text-neutral-950 dark:hover:bg-indigo-200']} href="#" data-web-b24-form>
-						{item.cta}
-					</a>
+					<div class="web-format-cta-row">
+						<button class:list={['ds-btn ds-btn-dark web-format-cta', b24ButtonClass]} type="button" data-b24-form-trigger>
+							<span>{item.cta}</span>
+							<UiIcon name="arrow" class="h-4 w-4" />
+						</button>
+					</div>
 				</article>
 			))}
 		</div>
@@ -395,34 +391,35 @@ const faqSchema = {
 	</section>
 
 	<section class="mx-auto max-w-[1440px] px-6 pb-16 sm:pb-24">
-		<div class="grid gap-8 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center dark:border-indigo-500/24 dark:bg-indigo-950/24">
-			<div>
+		<div class="web-format-helper relative grid gap-8 overflow-hidden rounded-2xl bg-indigo-50 p-6 sm:p-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:items-center">
+			<div class="relative z-10">
 				<h2 class="text-3xl font-semibold leading-tight text-neutral-950 dark:text-white">Не знаете, какой формат вам подходит?</h2>
 				<p class="mt-4 max-w-3xl text-neutral-700 dark:text-neutral-300">
 					Необязательно заранее составлять техническое задание и выбирать технологию. Опишите задачу своими словами - мы поможем определить тип продукта, состав первого релиза, интеграции, порядок бюджета и лучший старт разработки.
 				</p>
 			</div>
-			<a class:list={['ds-btn ds-btn-primary', b24ButtonClass]} href="#" data-web-b24-form>
+			<div class="web-format-help-image" style={`background-image: url('${formatHelpImage}');`} aria-hidden="true"></div>
+			<button class:list={['relative z-10 ds-btn ds-btn-primary', b24ButtonClass]} type="button" data-b24-form-trigger>
 				<span>Получить консультацию</span>
 				<UiIcon name="arrow" class="h-4 w-4" />
-			</a>
+			</button>
 		</div>
 	</section>
 
-	<section class="border-y border-neutral-200 bg-neutral-950 text-white dark:border-neutral-800">
+	<section class="border-y border-neutral-200 bg-neutral-50">
 		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 			<div class="max-w-4xl">
-				<p class="ds-kicker bg-white/10 text-indigo-200">Бизнес-результат</p>
-				<h2 class="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">Создаем не набор страниц, а рабочий инструмент</h2>
+				<p class="ds-kicker">04 — Бизнес-результат</p>
+				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl">Создаем не набор страниц, а рабочий инструмент</h2>
 			</div>
-			<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+			<div class="web-mobile-carousel mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 				{outcomes.map(([icon, title, text]) => (
-					<article class="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-						<div class="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-white text-indigo-700">
+						<article class="web-card p-6">
+						<div class="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-indigo-600 text-white">
 							<UiIcon name={icon} class="h-5 w-5" />
 						</div>
 						<h3 class="text-xl font-semibold">{title}</h3>
-						<p class="mt-3 text-sm leading-6 text-white/68">{text}</p>
+						<p class="mt-3 text-sm leading-6 text-neutral-600">{text}</p>
 					</article>
 				))}
 			</div>
@@ -432,14 +429,14 @@ const faqSchema = {
 	<section id="web-cases" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 		<div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
 			<div>
-				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Кейсы</p>
+				<p class="ds-kicker">05 — Кейсы</p>
 				<h2 class="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Показываем результат на реальных проектах</h2>
 			</div>
 			<a href="/cases/" class="text-sm font-bold text-indigo-600 hover:text-indigo-800 dark:text-indigo-300 dark:hover:text-indigo-200">Все кейсы</a>
 		</div>
-		<div class="mt-10 grid gap-6 lg:grid-cols-3">
+		<div class="web-mobile-carousel mt-10 grid gap-6 lg:grid-cols-3">
 			{cases.map((item) => (
-				<article class="overflow-hidden rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/44">
+					<article class="web-case-card overflow-hidden rounded-2xl border border-neutral-200 bg-white transition hover:-translate-y-1 hover:shadow-[0_30px_70px_-36px_rgba(35,43,255,0.45)] dark:border-neutral-800 dark:bg-neutral-900/44 dark:hover:shadow-[0_30px_70px_-36px_rgba(0,0,0,0.8)]">
 					<a href={item.href} class="block overflow-hidden">
 						<img class="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-105" src={item.image} alt={item.title} loading="lazy" decoding="async" />
 					</a>
@@ -451,46 +448,53 @@ const faqSchema = {
 						<ul class="mt-2 space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
 							{item.done.map((done) => (
 								<li class="flex gap-2">
-									<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-300" />
+									<img class="web-check-mark" src={checkMark} alt="" loading="lazy" decoding="async" />
 									<span>{done}</span>
 								</li>
 							))}
 						</ul>
-						<div class="mt-5 grid gap-2">
-							{item.result.map((result) => (
-								<p class="rounded-xl bg-neutral-50 px-4 py-3 text-sm font-semibold text-neutral-950 dark:bg-neutral-950 dark:text-white">{result}</p>
-							))}
-						</div>
+							<div class="mt-5 grid gap-2">
+								{item.result.map((result) => (
+									<p class="rounded-xl bg-neutral-50 px-4 py-3 text-sm font-semibold text-neutral-950 dark:bg-neutral-950 dark:text-white">{result}</p>
+								))}
+							</div>
 						<a class="mt-5 inline-flex text-sm font-bold text-indigo-600 hover:text-indigo-800 dark:text-indigo-300 dark:hover:text-indigo-200" href={item.href}>Смотреть кейс</a>
 					</div>
 				</article>
 			))}
 		</div>
-		<div class="mt-8 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 sm:p-8 dark:border-neutral-800 dark:bg-neutral-900/40">
-			<h3 class="text-2xl font-semibold text-neutral-950 dark:text-white">Есть похожая задача?</h3>
-			<p class="mt-3 max-w-3xl text-neutral-700 dark:text-neutral-300">Покажем релевантные проекты и расскажем, как можно реализовать ваше решение.</p>
-			<a class:list={['mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-indigo-600 px-6 text-sm font-bold text-white transition hover:bg-indigo-700', b24ButtonClass]} href="#" data-web-b24-form>Обсудить проект</a>
-		</div>
-	</section>
+		</section>
 
-	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+	<section class="border-y border-neutral-200 bg-neutral-50">
 		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
-			<div class="max-w-4xl">
-				<p class="ds-kicker bg-white text-indigo-700 dark:bg-neutral-900 dark:text-indigo-300">Процесс</p>
-				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Понятный процесс от идеи до запуска</h2>
-			</div>
-			<div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-				{steps.map(([num, icon, title, text, result]) => (
-					<article class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900/44">
-						<div class="flex items-center justify-between gap-4">
-							<span class="text-sm font-bold text-indigo-600 dark:text-indigo-300">{num}</span>
-							<UiIcon name={icon} class="h-5 w-5 text-neutral-400" />
-						</div>
-						<h3 class="mt-5 text-xl font-semibold text-neutral-950 dark:text-white">{title}</h3>
-						<p class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{text}</p>
-						<p class="mt-4 text-sm leading-6 text-neutral-900 dark:text-neutral-100"><span class="font-semibold">Результат:</span> {result}</p>
-					</article>
-				))}
+			<div class="web-process-layout">
+				<div class="web-process-heading">
+					<p class="ds-kicker">05 — Как мы работаем</p>
+					<h2>Восемь этапов<br />от брифинга до развития</h2>
+				</div>
+
+				<ol class="web-process-v2" aria-label="Этапы разработки сайта или веб-сервиса">
+					{steps.map(([num, , title, text, result], index) => (
+						<li class="web-process-v2-item">
+							<div class="web-process-v2-marker">
+								<div class="web-process-v2-circle">
+									<img src={processCircles[index % processCircles.length]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+									<div class="web-process-v2-number"><span>Этап</span><b>{Number(num)}</b></div>
+								</div>
+								{index < processConnectors.length && (
+									<div class="web-process-v2-line" aria-hidden="true">
+										<img src={processConnectors[index][0]} alt="" loading="lazy" decoding="async" style={`--connector-transform: ${processConnectors[index][1]};`} />
+									</div>
+								)}
+							</div>
+							<div class="web-process-v2-content">
+								<h3>{title}</h3>
+								<p>{text}</p>
+								<p class="web-process-v2-result"><em>Результат:</em> {result}</p>
+							</div>
+						</li>
+					))}
+				</ol>
 			</div>
 		</div>
 	</section>
@@ -498,17 +502,17 @@ const faqSchema = {
 	<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 		<div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
 			<div>
-				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Состав проекта</p>
+				<p class="ds-kicker">07 — Состав проекта</p>
 				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Берем на себя весь цикл разработки</h2>
 			</div>
-			<div class="grid gap-4 sm:grid-cols-2">
+			<div class="web-mobile-carousel grid gap-4 sm:grid-cols-2">
 				{projectScope.map(([title, ...items]) => (
 					<article class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900/44">
 						<h3 class="text-xl font-semibold text-neutral-950 dark:text-white">{title}</h3>
 						<ul class="mt-4 space-y-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
 							{items.map((item) => (
 								<li class="flex gap-2">
-									<UiIcon name="check" class="mt-1 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-300" />
+									<img class="web-check-mark" src={checkMark} alt="" loading="lazy" decoding="async" />
 									<span>{item}</span>
 								</li>
 							))}
@@ -519,16 +523,16 @@ const faqSchema = {
 		</div>
 	</section>
 
-	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+	<section class="border-y border-neutral-200 bg-neutral-50">
 		<div class="mx-auto grid max-w-[1440px] gap-10 px-6 py-16 sm:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
 			<div>
-				<p class="ds-kicker bg-white text-indigo-700 dark:bg-neutral-900 dark:text-indigo-300">Интеграции</p>
+				<p class="ds-kicker">08 — Интеграции</p>
 				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Связываем сайт с цифровой инфраструктурой компании</h2>
 				<p class="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
 					Заявка не должна заканчиваться уведомлением на электронной почте. Мы можем передать данные в нужную систему, запустить бизнес-процесс и уведомить ответственного сотрудника.
 				</p>
 			</div>
-			<div class="grid gap-3">
+			<div class="web-mobile-carousel grid gap-3">
 				{integrations.map(([title, text]) => (
 					<article class="rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900/44">
 						<h3 class="font-semibold text-neutral-950 dark:text-white">{title}</h3>
@@ -541,13 +545,13 @@ const faqSchema = {
 
 	<section class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 		<div class="max-w-4xl">
-			<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Технологии</p>
+			<p class="ds-kicker">09 — Технологии</p>
 			<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Подбираем технологии под задачу</h2>
 			<p class="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
 				Не привязываем каждый проект к одной платформе. Выбираем стек с учетом функциональности, бюджета, планов развития и требований к поддержке.
 			</p>
 		</div>
-		<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+		<div class="web-mobile-carousel mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
 			{technologies.map(([group, ...items]) => (
 				<article class="rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900/44">
 					<h3 class="font-semibold text-neutral-950 dark:text-white">{group}</h3>
@@ -561,14 +565,14 @@ const faqSchema = {
 		</div>
 	</section>
 
-	<section class="border-y border-neutral-200 bg-neutral-950 text-white dark:border-neutral-800">
+	<section class="web-dark-section border-y border-neutral-200 bg-neutral-950 text-white">
 		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 			<div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
 				<div>
-					<p class="ds-kicker bg-white/10 text-indigo-200">Почему IT TIME NOW</p>
+					<p class="ds-kicker">10 — Почему IT TIME NOW</p>
 					<h2 class="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">Одна команда для сайта, автоматизации и интеграций</h2>
 				</div>
-				<div class="grid gap-4">
+				<div class="web-mobile-carousel grid gap-4">
 					{reasons.map(([title, text], index) => (
 						<article class="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:grid-cols-[48px_minmax(0,1fr)]">
 							<span class="grid h-12 w-12 place-items-center rounded-xl bg-white text-sm font-bold text-indigo-700">{index + 1}</span>
@@ -584,9 +588,9 @@ const faqSchema = {
 	</section>
 
 	<section id="web-estimate" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
-		<div class="grid gap-10 rounded-2xl border border-neutral-200 bg-white p-6 sm:p-10 lg:grid-cols-[0.85fr_1.15fr] dark:border-neutral-800 dark:bg-neutral-900/44">
+		<div class="web-card grid gap-10 p-6 sm:p-10 lg:grid-cols-[0.85fr_1.15fr]">
 			<div>
-				<p class="ds-kicker bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">Предварительный расчет</p>
+				<p class="ds-kicker">11 — Предварительный расчет</p>
 				<h2 class="mt-4 text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">Узнайте ориентировочную стоимость проекта</h2>
 				<p class="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
 					Ответьте на несколько вопросов. Это поможет нам понять масштаб задачи и подготовиться к первой встрече.
@@ -598,7 +602,7 @@ const faqSchema = {
 						<legend class="mb-3 text-sm font-semibold text-neutral-950 dark:text-white">{question}</legend>
 						<div class="flex flex-wrap gap-2">
 							{answers.map((answer) => (
-								<label class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300">
+								<label class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm font-semibold text-neutral-700">
 									<input class="h-4 w-4 rounded border-neutral-300 text-indigo-600" type="checkbox" name={question} value={answer} />
 									<span>{answer}</span>
 								</label>
@@ -609,42 +613,50 @@ const faqSchema = {
 				<div class="grid gap-3 sm:grid-cols-2">
 					<label class="grid gap-1.5 text-sm">
 						<span class="text-neutral-700 dark:text-neutral-300">Имя</span>
-						<input required type="text" name="name" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950" />
+						<input required type="text" name="name" class="web-input" />
 					</label>
 					<label class="grid gap-1.5 text-sm">
 						<span class="text-neutral-700 dark:text-neutral-300">Телефон</span>
-						<input required type="tel" name="phone" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950" />
+						<input required type="tel" name="phone" class="web-input" />
 					</label>
 					<label class="grid gap-1.5 text-sm">
 						<span class="text-neutral-700 dark:text-neutral-300">Email или Telegram</span>
-						<input type="text" name="contact" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950" />
+						<input type="text" name="contact" class="web-input" />
 					</label>
 					<label class="grid gap-1.5 text-sm">
 						<span class="text-neutral-700 dark:text-neutral-300">Прикрепить файл</span>
-						<input type="file" name="file" class="rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm dark:border-neutral-800 dark:bg-neutral-950" />
+						<input type="file" name="file" class="web-input text-sm" />
 					</label>
 					<label class="grid gap-1.5 text-sm sm:col-span-2">
 						<span class="text-neutral-700 dark:text-neutral-300">Комментарий</span>
-						<textarea name="message" rows="4" class="rounded-md border border-neutral-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950"></textarea>
+						<textarea name="message" rows="4" class="web-input"></textarea>
 					</label>
 				</div>
-				<button class:list={['min-h-11 rounded-full bg-indigo-600 px-6 text-sm font-bold text-white transition hover:bg-indigo-700', b24ButtonClass]} type="button" data-web-b24-form>Получить предварительную оценку</button>
+				<button class:list={['ds-btn ds-btn-primary', b24ButtonClass]} type="button" data-b24-form-trigger><span>Получить предварительную оценку</span></button>
 				<p class="text-xs leading-5 text-neutral-500 dark:text-neutral-400">Изучим задачу, свяжемся с вами и предложим следующий шаг. Отправка формы не обязывает заключать договор.</p>
 			</form>
 		</div>
 	</section>
 
-	<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
-		<div class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
-			<h2 class="text-3xl font-semibold leading-tight text-neutral-950 sm:text-5xl dark:text-white">FAQ</h2>
-			<div class="mt-10 grid gap-4 lg:grid-cols-2">
+	<section class="ds-section border-y border-neutral-200 bg-neutral-50">
+		<div class="mx-auto grid max-w-[1440px] gap-8 px-6 py-16 sm:py-24 lg:grid-cols-[0.72fr_1fr] lg:items-start">
+			<div>
+				<p class="ds-kicker web-faq-kicker">12 — FAQ</p>
+				<h2>Частые вопросы о разработке сайтов и веб-сервисов</h2>
+				<p>
+					Собрали ответы на вопросы, которые чаще всего появляются перед стартом проекта.
+				</p>
+			</div>
+			<div class="web-faq-list">
 				{faqs.map(([question, answer]) => (
-					<details class="group rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900/44">
-						<summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-lg font-semibold text-neutral-950 dark:text-white">
+					<details class="ds-faq">
+						<summary>
 							<span>{question}</span>
-							<span class="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-neutral-100 text-sm text-neutral-500 transition group-open:rotate-45 dark:bg-neutral-800">+</span>
+							<UiIcon name="chevron" class="h-4 w-4" />
 						</summary>
-						<p class="mt-4 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{answer}</p>
+						<div class="ds-faq-content">
+							<p>{answer}</p>
+						</div>
 					</details>
 				))}
 			</div>
@@ -652,79 +664,362 @@ const faqSchema = {
 	</section>
 
 	<section id="web-request" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
-		<div class="grid gap-10 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-950 p-6 text-white sm:p-10 lg:grid-cols-[0.9fr_1.1fr] dark:border-neutral-800">
+		<div class="web-final-cta grid gap-10 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 p-6 text-neutral-950 sm:p-10 lg:grid-cols-[0.9fr_1.1fr]">
 			<div>
-				<p class="ds-kicker bg-white/10 text-indigo-200">Финальный шаг</p>
+				<p class="ds-kicker">13 — Финальный шаг</p>
 				<h2 class="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">Обсудим ваш сайт или цифровой сервис?</h2>
-				<p class="mt-5 max-w-2xl text-lg leading-8 text-white/72">
+				<p class="mt-5 max-w-2xl text-lg leading-8 text-neutral-600">
 					Расскажите, что необходимо запустить или изменить. Мы поможем сформулировать задачу, определим подходящий формат решения и подготовим предварительную оценку.
 				</p>
 				<dl class="mt-8 grid gap-3 text-sm">
 					<div>
-						<dt class="text-white/44">Телефон</dt>
-						<dd class="mt-1"><a class="font-semibold hover:text-indigo-200" href="tel:+74951335888">+7 (495) 133-58-88</a></dd>
+						<dt class="text-neutral-500">Телефон</dt>
+						<dd class="mt-1"><a class="font-semibold hover:text-indigo-600" href="tel:+74951335888">+7 (495) 133-58-88</a></dd>
 					</div>
 					<div>
-						<dt class="text-white/44">Email</dt>
-						<dd class="mt-1"><a class="font-semibold hover:text-indigo-200" href="mailto:hello@ittimenow.com">hello@ittimenow.com</a></dd>
+						<dt class="text-neutral-500">Email</dt>
+						<dd class="mt-1"><a class="font-semibold hover:text-indigo-600" href="mailto:hello@ittimenow.com">hello@ittimenow.com</a></dd>
 					</div>
 				</dl>
 			</div>
-			<form class="grid gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-5 sm:p-6" method="post" action="#">
+			<form class="web-card grid gap-3 p-5 sm:p-6" method="post" action="#">
 				<label class="grid gap-1.5 text-sm">
-					<span class="text-white/78">Имя</span>
-					<input required type="text" name="name" class="rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 outline-none focus:border-indigo-300" />
+					<span class="text-neutral-700">Имя</span>
+					<input required type="text" name="name" class="web-input" />
 				</label>
 				<label class="grid gap-1.5 text-sm">
-					<span class="text-white/78">Телефон</span>
-					<input required type="tel" name="phone" class="rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 outline-none focus:border-indigo-300" />
+					<span class="text-neutral-700">Телефон</span>
+					<input required type="tel" name="phone" class="web-input" />
 				</label>
 				<label class="grid gap-1.5 text-sm">
-					<span class="text-white/78">Краткое описание задачи</span>
-					<textarea name="message" rows="5" class="rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 outline-none focus:border-indigo-300"></textarea>
+					<span class="text-neutral-700">Краткое описание задачи</span>
+					<textarea name="message" rows="5" class="web-input"></textarea>
 				</label>
 				<label class="grid gap-1.5 text-sm">
-					<span class="text-white/78">Прикрепить файл</span>
-					<input type="file" name="file" class="rounded-md border border-white/10 bg-white px-3 py-2 text-sm text-neutral-950" />
+					<span class="text-neutral-700">Прикрепить файл</span>
+					<input type="file" name="file" class="web-input text-sm" />
 				</label>
-				<button class:list={['mt-2 min-h-11 rounded-full bg-white px-6 text-sm font-bold text-indigo-700 transition hover:bg-indigo-100', b24ButtonClass]} type="button" data-web-b24-form>Отправить задачу</button>
-				<p class="text-xs leading-5 text-white/48">Нажимая кнопку, пользователь соглашается с политикой обработки персональных данных.</p>
+				<button class:list={['ds-btn ds-btn-primary mt-2', b24ButtonClass]} type="button" data-b24-form-trigger><span>Отправить задачу</span></button>
+				<p class="text-xs leading-5 text-neutral-500">Нажимая кнопку, пользователь соглашается с политикой обработки персональных данных.</p>
 			</form>
 		</div>
 	</section>
+
+	<ClientLogos />
 </div>
 
+<script>
+	function bindWebFaq() {
+		document.querySelectorAll<HTMLDetailsElement>('.web-landing .ds-faq').forEach((details) => {
+			if (details.dataset.faqBound) return;
+			details.dataset.faqBound = '1';
+
+			const summary = details.querySelector('summary');
+			const content = details.querySelector<HTMLElement>('.ds-faq-content');
+			if (!summary || !content) return;
+
+			summary.addEventListener('click', (event) => {
+				event.preventDefault();
+				if (details.dataset.animating === '1') return;
+				details.dataset.animating = '1';
+
+				const duration = 220;
+				const easing = 'ease-out';
+
+				if (details.open) {
+					const startHeight = `${content.offsetHeight}px`;
+					details.classList.add('is-closing');
+					content.style.height = startHeight;
+					content.style.overflow = 'hidden';
+
+					const animation = content.animate(
+						[
+							{ height: startHeight, opacity: 1, transform: 'translateY(0)' },
+							{ height: '0px', opacity: 0, transform: 'translateY(-4px)' },
+						],
+						{ duration, easing: 'ease-in' },
+					);
+
+					animation.onfinish = () => {
+						details.open = false;
+						details.classList.remove('is-closing');
+						content.style.height = '';
+						content.style.overflow = '';
+						delete details.dataset.animating;
+					};
+					animation.oncancel = () => {
+						details.classList.remove('is-closing');
+						content.style.height = '';
+						content.style.overflow = '';
+						delete details.dataset.animating;
+					};
+					return;
+				}
+
+				details.open = true;
+				content.style.height = '0px';
+				content.style.overflow = 'hidden';
+				const targetHeight = `${content.scrollHeight}px`;
+
+				const animation = content.animate(
+					[
+						{ height: '0px', opacity: 0, transform: 'translateY(-4px)' },
+						{ height: targetHeight, opacity: 1, transform: 'translateY(0)' },
+					],
+					{ duration, easing },
+				);
+
+				animation.onfinish = () => {
+					content.style.height = '';
+					content.style.overflow = '';
+					delete details.dataset.animating;
+				};
+				animation.oncancel = () => {
+					content.style.height = '';
+					content.style.overflow = '';
+					delete details.dataset.animating;
+				};
+			});
+		});
+	}
+
+	bindWebFaq();
+	document.addEventListener('astro:page-load', bindWebFaq);
+</script>
+
 <style>
-	.web-sticky-cta {
-		position: fixed;
-		right: 18px;
-		bottom: 18px;
-		z-index: 30;
-		display: inline-flex;
-		min-height: 46px;
-		align-items: center;
-		gap: 8px;
-		border-radius: 9999px;
-		background: #232bff;
-		color: #fff;
-		padding: 0 18px;
-		font-size: 14px;
-		font-weight: 700;
-		box-shadow: 0 18px 44px -18px rgba(35, 43, 255, 0.9);
+	:global(html),
+	:global(body) {
+		overflow-x: hidden;
+	}
+
+	.web-landing {
+		--web-container: 1180px;
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
+	.web-landing,
+	.web-landing *,
+	.web-landing *::before,
+	.web-landing *::after {
+		box-sizing: border-box;
+	}
+
+	.web-landing :where(section, section > div, .web-mobile-carousel) {
+		min-width: 0;
+	}
+
+	.web-landing :where(.grid > *) {
+		min-width: 0;
+	}
+
+	.web-landing :where(form, fieldset, label, input, textarea, select, button, article) {
+		min-width: 0;
+		max-width: 100%;
+	}
+
+	.web-landing :where(h1, h2, h3, p, li, span, a, button, summary) {
+		overflow-wrap: break-word;
+	}
+
+	.web-container,
+	.web-landing :where(section > .mx-auto, section.mx-auto) {
+		max-width: var(--web-container) !important;
+		margin-inline: auto;
+		padding-inline: 48px !important;
+	}
+
+	.web-landing :where(section > .mx-auto, section.mx-auto) {
+		padding-block: 88px !important;
+	}
+
+	.web-landing :where(section.mx-auto:has(.web-final-cta)) {
+		padding-block: 88px !important;
+	}
+
+	.web-landing :where(.ds-kicker) {
+		min-height: auto !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		background: transparent !important;
+		padding: 0 !important;
+		color: var(--ittn-blue) !important;
+		font-family: var(--ittn-font-mono) !important;
+		font-size: 13px !important;
+		font-weight: 500 !important;
+		line-height: 1.4 !important;
+		text-transform: uppercase;
+		letter-spacing: 0.14em !important;
+	}
+
+	.web-landing :where(h1) {
+		font-weight: 800 !important;
+		letter-spacing: -0.03em;
+	}
+
+	.web-landing :where(h2) {
+		font-size: clamp(34px, 5vw, 52px) !important;
+		font-weight: 700 !important;
+		line-height: 1.05 !important;
+		letter-spacing: -0.02em;
+	}
+
+	.web-landing :where(h3) {
+		font-size: 24px;
+		font-weight: 700 !important;
+		line-height: 1.18;
+		letter-spacing: -0.01em;
+	}
+
+	.web-card,
+	.web-landing :where(article:not(.web-case-card):not(.web-process-timeline-item), .ds-faq) {
+		border: 1px solid var(--ittn-border) !important;
+		border-radius: 18px !important;
+		background: #ffffff !important;
+		box-shadow: none !important;
+		backdrop-filter: none !important;
+		color: var(--ittn-ink);
+	}
+
+	.web-card {
+		transition:
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			transform 180ms ease;
+	}
+
+	.web-card:hover,
+	.web-landing :where(article:not(.web-case-card):not(.web-process-timeline-item)):hover {
+		border-color: rgba(35, 43, 255, 0.34) !important;
+		box-shadow: 0 24px 58px -40px rgba(35, 43, 255, 0.42) !important;
+		transform: translateY(-2px);
+	}
+
+	.web-format-card {
+		background: #ffffff !important;
+		color: var(--ittn-ink) !important;
+		min-height: 100%;
+	}
+
+	.web-format-card :where(h3, p, li, span) {
+		color: inherit !important;
+	}
+
+	.web-format-card > p:nth-of-type(1) {
+		color: var(--ittn-blue) !important;
+	}
+
+	.web-format-tag {
+		margin: 0;
+		max-width: 220px;
+		color: var(--ittn-blue) !important;
+		font-family: var(--ittn-font-mono);
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 1.35;
+		text-align: right;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	.web-format-cta-row {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: auto;
+		padding-top: 24px;
+	}
+
+	.web-format-card .web-format-cta {
+		margin-top: auto !important;
+		background: var(--ittn-ink) !important;
+		color: #ffffff !important;
+	}
+
+	.web-format-card .web-format-cta:hover {
+		background: var(--ittn-blue) !important;
+	}
+
+	.web-check-mark {
+		flex: 0 0 auto;
+		width: 22px;
+		height: 22px;
+		margin-top: 1px;
+		object-fit: contain;
+	}
+
+	.web-format-helper {
+		border-radius: 24px !important;
+		background: rgba(35, 43, 255, 0.08) !important;
+		column-gap: min(200px, 10vw);
+	}
+
+	.web-final-cta .web-card:hover {
+		box-shadow: none !important;
+		transform: none;
+	}
+
+	.web-hero {
+		background:
+			linear-gradient(180deg, #ffffff 0%, #ffffff 62%, var(--ittn-cloud) 100%),
+			#ffffff;
+	}
+
+	.web-hero-circle {
+		position: absolute;
+		top: 132px;
+		left: max(24px, calc((100vw - var(--web-container)) / 2 + 190px));
+		z-index: -1;
+		width: clamp(170px, 18vw, 260px);
+		opacity: 0.74;
+		pointer-events: none;
+	}
+
+	.web-hero-title {
+		font-size: clamp(48px, 7vw, 86px) !important;
+		line-height: 0.94 !important;
+	}
+
+	.web-hero-title span {
+		position: relative;
+		color: var(--ittn-blue);
+	}
+
+	.web-hero-underline {
+		width: min(390px, 62vw);
+		margin-top: 10px;
+		margin-left: min(22vw, 260px);
+		pointer-events: none;
+	}
+
+	.web-trust-marker {
+		min-height: 92px;
+		display: flex;
+		align-items: flex-end;
 	}
 
 	.web-product-map {
 		position: relative;
+		width: 100%;
+		max-width: 100%;
 		min-height: 540px;
-		border: 1px solid rgba(228, 228, 231, 0.72);
+		border: 1px solid var(--ittn-border);
 		border-radius: 24px;
 		background:
 			linear-gradient(90deg, rgba(35, 43, 255, 0.08) 1px, transparent 1px),
 			linear-gradient(rgba(35, 43, 255, 0.08) 1px, transparent 1px),
-			rgba(255, 255, 255, 0.68);
+			var(--ittn-cloud);
 		background-size: 42px 42px;
-		box-shadow: 0 30px 80px -42px rgba(24, 24, 27, 0.5);
-		backdrop-filter: blur(28px);
+		box-shadow: none;
+	}
+
+	.web-map-arrow {
+		position: absolute;
+		top: 24px;
+		right: 24px;
+		z-index: 3;
+		width: 116px;
+		pointer-events: none;
 	}
 
 	.web-product-map::before,
@@ -744,11 +1039,10 @@ const faqSchema = {
 	.web-map-core {
 		position: absolute;
 		z-index: 2;
-		border: 1px solid rgba(228, 228, 231, 0.88);
+		border: 1px solid var(--ittn-border);
 		border-radius: 18px;
-		background: rgba(255, 255, 255, 0.88);
-		box-shadow: 0 22px 48px -32px rgba(24, 24, 27, 0.5);
-		backdrop-filter: blur(18px);
+		background: rgba(255, 255, 255, 0.92);
+		box-shadow: 0 18px 46px -34px rgba(17, 17, 17, 0.24);
 	}
 
 	.web-map-card {
@@ -781,7 +1075,7 @@ const faqSchema = {
 		height: 36px;
 		margin-top: 8px;
 		border-radius: 10px;
-		background: linear-gradient(90deg, #232bff, #8b5cff);
+		background: #232bff;
 		opacity: 0.9;
 	}
 
@@ -830,7 +1124,7 @@ const faqSchema = {
 		border-radius: 18px;
 		background:
 			linear-gradient(#fff, #fff) padding-box,
-			linear-gradient(135deg, #232bff, #8b5cff) border-box;
+			linear-gradient(135deg, #232bff, #7e84ff) border-box;
 		border: 6px solid transparent;
 	}
 
@@ -852,71 +1146,655 @@ const faqSchema = {
 		font-weight: 700;
 	}
 
-	:global(.dark) .web-product-map {
-		border-color: rgba(255, 255, 255, 0.12);
-		background:
-			linear-gradient(90deg, rgba(95, 102, 255, 0.12) 1px, transparent 1px),
-			linear-gradient(rgba(95, 102, 255, 0.12) 1px, transparent 1px),
-			rgba(24, 24, 27, 0.58);
+	.web-dark-section :where(.ds-kicker) {
+		color: var(--ittn-blue-soft, #7e84ff) !important;
 	}
 
-	:global(.dark) .web-map-card {
-		border-color: rgba(255, 255, 255, 0.12);
-		background: rgba(24, 24, 27, 0.84);
+	.web-dark-section :where(h2, h3) {
+		color: #ffffff !important;
 	}
 
-	:global(.dark) .web-map-card p {
-		color: white;
+	.web-dark-section article {
+		border-color: rgba(255, 255, 255, 0.14) !important;
+		background: rgba(255, 255, 255, 0.06) !important;
+		color: #ffffff;
 	}
 
-	:global(.dark) .web-map-card span {
-		color: #a1a1aa;
+	.web-dark-section p {
+		color: rgba(255, 255, 255, 0.68);
 	}
 
-	:global(.dark) .web-map-account span {
-		background: rgba(255, 255, 255, 0.08);
+	.web-process-layout {
+		display: grid;
+		grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.18fr);
+		gap: 64px;
+		align-items: start;
+	}
+
+	.web-process-heading {
+		position: sticky;
+		top: 24px;
+	}
+
+	.web-process-heading h2 {
+		margin: 0;
+		color: #111111;
+	}
+
+	.web-process-v2 {
+		display: flex;
+		flex-direction: column;
+		padding-top: 31px;
+	}
+
+	.web-process-v2-item {
+		display: flex;
+		gap: 20px;
+	}
+
+	.web-process-v2-marker {
+		display: flex;
+		flex: none;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.web-process-v2-circle {
+		position: relative;
+		width: 72px;
+		height: 72px;
+		flex: none;
+	}
+
+	.web-process-v2-circle > img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.web-process-v2-number {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 2px;
+	}
+
+	.web-process-v2-number span {
+		color: #626977;
+		font-family: var(--ittn-font-mono);
+		font-size: 8px;
+		font-weight: 500;
+		line-height: 1;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.web-process-v2-number b {
+		color: #111111;
+		font-size: 24px;
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
+
+	.web-process-v2-line {
+		display: flex;
+		min-height: 14px;
+		flex: 1;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.web-process-v2-line img {
+		width: 32px;
+		height: auto;
+		opacity: 0.45;
+		transform: var(--connector-transform);
+	}
+
+	.web-process-v2-content {
+		max-width: 640px;
+		padding-top: 7px;
+		padding-bottom: 24px;
+	}
+
+	.web-process-v2-item:last-child .web-process-v2-content {
+		padding-bottom: 0;
+	}
+
+	.web-process-v2-content h3 {
+		margin: 0 0 6px;
+		color: #111111;
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 1.18;
+		letter-spacing: -0.01em;
+	}
+
+	.web-process-v2-content p {
+		margin: 0 0 6px;
+		color: #626977;
+		font-size: 15px;
+		line-height: 1.45;
+	}
+
+	.web-process-v2-result {
+		margin: 0;
+		color: #111111 !important;
+		font-size: 15px;
+		line-height: 1.45;
+	}
+
+	.web-process-v2-result em {
+		color: #232bff;
+		font-style: normal;
+		font-weight: 600;
+	}
+
+	@media (max-width: 767px) {
+		.web-mobile-carousel {
+			box-sizing: border-box;
+			display: flex;
+			min-width: 0;
+			width: 100%;
+			max-width: 100%;
+			overflow-x: auto;
+			overscroll-behavior-x: contain;
+			padding-top: 0.25rem;
+			padding-right: 0.125rem;
+			padding-bottom: 1rem;
+			padding-left: 0.125rem;
+			scroll-padding-inline: 0.125rem;
+			scroll-snap-type: x mandatory;
+			-webkit-overflow-scrolling: touch;
+		}
+
+		.web-mobile-carousel::-webkit-scrollbar {
+			display: none;
+		}
+
+		.web-mobile-carousel {
+			scrollbar-width: none;
+		}
+
+		.web-mobile-carousel > * {
+			flex: 0 0 min(84vw, 360px);
+			scroll-snap-align: start;
+			scroll-snap-stop: always;
+		}
+
+		.web-format-card {
+			box-shadow: 0 30px 70px -36px rgba(35, 43, 255, 0.45);
+		}
+
+		:global(.dark) .web-format-card {
+			box-shadow: 0 30px 70px -36px rgba(0, 0, 0, 0.8);
+		}
+
+		.web-process-layout {
+			grid-template-columns: 1fr;
+			gap: 28px;
+		}
+
+		.web-process-heading {
+			position: static;
+		}
+
+		.web-process-v2 {
+			flex-direction: row;
+			align-items: flex-start;
+			overflow-x: auto;
+			margin: 0 -48px;
+			padding: 0 48px 24px;
+			scroll-snap-type: x mandatory;
+			-webkit-overflow-scrolling: touch;
+		}
+
+		.web-process-v2::-webkit-scrollbar {
+			display: none;
+		}
+
+		.web-process-v2 {
+			scrollbar-width: none;
+		}
+
+		.web-process-v2-item {
+			flex: 0 0 220px;
+			flex-direction: column;
+			gap: 0;
+			padding: 0 12px;
+			scroll-snap-align: start;
+		}
+
+		.web-process-v2-marker {
+			position: relative;
+			align-items: flex-start;
+			margin-bottom: 20px;
+		}
+
+		.web-process-v2-circle {
+			width: 104px;
+			height: 104px;
+		}
+
+		.web-process-v2-number span {
+			font-size: 9px;
+		}
+
+		.web-process-v2-number b {
+			font-size: 28px;
+		}
+
+		.web-process-v2-line {
+			position: absolute;
+			top: 0;
+			left: 116px;
+			width: 56px;
+			height: 104px;
+			min-height: 0;
+		}
+
+		.web-process-v2-line img {
+			width: 36px !important;
+			transform: rotate(-4deg) !important;
+		}
+
+		.web-process-v2-content {
+			max-width: none;
+			padding: 0;
+		}
+
+		.web-process-v2-content h3 {
+			margin-bottom: 10px;
+			font-size: 17px;
+			line-height: 1.2;
+		}
+
+		.web-process-v2-content p,
+		.web-process-v2-result {
+			font-size: 14px;
+			line-height: 1.6;
+		}
+	}
+
+	.web-format-help-image {
+		position: absolute;
+		right: clamp(170px, calc(20vw - 20px), 300px);
+		bottom: 0;
+		z-index: 0;
+		width: min(560px, 40%);
+		height: 100%;
+		min-height: 288px;
+		background-position: center bottom;
+		background-repeat: no-repeat;
+		background-size: contain;
+		pointer-events: none;
+	}
+
+	.web-process-timeline {
+		overflow: hidden;
+		border-radius: 24px;
+		border: 1px solid var(--ittn-border);
+		background: var(--ds-card);
+		box-shadow: none;
+	}
+
+	.web-process-timeline-item {
+		display: grid;
+		grid-template-columns: 52px 1fr;
+		min-height: 132px;
+		transition: background 180ms ease;
+	}
+
+	.web-process-timeline-item:hover {
+		background: rgba(35, 43, 255, 0.05);
+	}
+
+	.web-process-timeline-date {
+		grid-column: 2;
+		grid-row: 1;
+		padding: 22px 22px 0 0;
+		color: var(--ds-muted);
+	}
+
+	.web-process-timeline-date span {
+		display: block;
+		font-family: var(--ittn-font-mono);
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 16px;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.web-process-timeline-date time {
+		display: block;
+		margin-top: 2px;
+		color: var(--ds-primary);
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 24px;
+	}
+
+	.web-process-timeline-date img {
+		display: block;
+		width: 48px;
+		height: 48px;
+		margin-top: 6px;
+		object-fit: contain;
+	}
+
+	.web-process-timeline-track {
+		position: relative;
+		grid-column: 1;
+		grid-row: 1 / span 2;
+		min-height: 132px;
+	}
+
+	.web-process-timeline-line {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		border-left: 1px solid var(--ds-border);
+		transform: translateX(-50%);
+	}
+
+	.web-process-timeline-item:first-child .web-process-timeline-line {
+		top: 34px;
+	}
+
+	.web-process-timeline-item:last-child .web-process-timeline-line {
+		bottom: calc(100% - 34px);
+	}
+
+	.web-process-timeline-dot {
+		position: absolute;
+		top: 22px;
+		left: 50%;
+		z-index: 1;
+		display: grid;
+		width: 30px;
+		height: 30px;
+		place-items: center;
+		border-radius: 9999px;
+		border: 1px solid rgba(35, 43, 255, 0.22);
+		background: var(--ds-primary);
+		color: #ffffff;
+		box-shadow: 0 0 0 7px rgba(35, 43, 255, 0.1);
+		transform: translateX(-50%);
+		transition: box-shadow 180ms ease, transform 180ms ease;
+	}
+
+	.web-process-timeline-item:hover .web-process-timeline-dot {
+		box-shadow: 0 0 0 10px rgba(35, 43, 255, 0.14);
+		transform: translateX(-50%) scale(1.04);
+	}
+
+	.web-process-timeline-content {
+		grid-column: 2;
+		grid-row: 2;
+		padding: 6px 22px 24px 0;
+	}
+
+	.web-process-timeline-content h3 {
+		color: var(--ittn-ink);
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 1.18;
+	}
+
+	.web-process-timeline-content p {
+		margin-top: 8px;
+		color: var(--ds-muted);
+		font-size: 14px;
+		line-height: 1.65;
+	}
+
+	.web-process-timeline-content span {
+		color: var(--ittn-ink);
+		font-weight: 700;
+	}
+
+	.web-faq-kicker + h2 {
+		margin-top: 16px;
+		max-width: 720px;
+		color: var(--ittn-ink);
+		font-size: clamp(2rem, 4vw, 3.5rem);
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.web-faq-kicker + h2 + p {
+		margin-top: 20px;
+		max-width: 640px;
+		color: var(--ds-muted);
+		font-size: 18px;
+		line-height: 1.7;
+	}
+
+	.web-faq-list {
+		display: grid;
+		gap: 12px;
+	}
+
+	.ds-faq {
+		overflow: hidden;
+		border: 1px solid var(--ds-border);
+		border-radius: 18px;
+		background: var(--ds-card);
+		padding: 20px;
+		transition:
+			background 200ms ease,
+			border-color 200ms ease,
+			box-shadow 200ms ease;
+	}
+
+	.ds-faq summary {
+		display: flex;
+		cursor: pointer;
+		list-style: none;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		margin: -20px;
+		padding: 20px;
+		color: var(--ittn-ink);
+		font-weight: 700;
+		transition: color 200ms ease;
+	}
+
+	.ds-faq[open] summary {
+		margin-bottom: 0;
+	}
+
+	.ds-faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	:global(.ds-faq summary svg) {
+		flex: 0 0 auto;
+		opacity: 0.6;
+		transition:
+			opacity 200ms ease,
+			transform 200ms ease;
+	}
+
+	.ds-faq:hover {
+		box-shadow: 0 18px 44px -32px rgba(35, 43, 255, 0.34);
+	}
+
+	.ds-faq[open] {
+		background: var(--ds-card);
+	}
+
+	:global(.ds-faq[open] summary svg) {
+		opacity: 1;
+		transform: rotate(180deg);
+	}
+
+	.ds-faq-content {
+		display: grid;
+		grid-template-rows: 0fr;
+		opacity: 0;
+		transition:
+			grid-template-rows 220ms ease,
+			opacity 200ms ease;
+	}
+
+	.ds-faq[open] .ds-faq-content {
+		grid-template-rows: 1fr;
+		opacity: 1;
+		animation: ds-accordion-down 220ms ease-out;
+	}
+
+	.ds-faq.is-closing .ds-faq-content {
+		animation: ds-accordion-up 220ms ease-in;
+	}
+
+	.ds-faq-content p {
+		min-height: 0;
+		overflow: hidden;
+		margin-top: 12px;
+		color: var(--ds-muted);
+		font-size: 14px;
+		line-height: 1.7;
+	}
+
+	.web-input {
+		width: 100%;
+		border: 1.5px solid var(--ittn-border);
+		border-radius: 12px;
+		background: #ffffff;
+		padding: 14px 16px;
+		color: var(--ittn-ink);
+		font-size: 16px;
+		line-height: 1.35;
+		outline: none;
+		transition:
+			border-color 160ms ease,
+			box-shadow 160ms ease;
+	}
+
+	.web-input:focus {
+		border-color: var(--ittn-blue);
+		box-shadow: 0 0 0 4px rgba(35, 43, 255, 0.12);
+	}
+
+	.web-final-cta {
+		position: relative;
+		border-radius: 24px !important;
+		background: rgba(35, 43, 255, 0.08) !important;
+	}
+
+	@media (min-width: 768px) {
+		.web-process-timeline {
+			padding-block: 8px;
+		}
+
+		.web-process-timeline-item {
+			grid-template-columns: 128px 60px 1fr;
+			min-height: 116px;
+			align-items: start;
+		}
+
+		.web-process-timeline-date {
+			grid-column: 1;
+			grid-row: 1;
+			padding: 28px 0 0 24px;
+		}
+
+		.web-process-timeline-track {
+			grid-column: 2;
+			grid-row: 1;
+			min-height: 116px;
+		}
+
+		.web-process-timeline-content {
+			grid-column: 3;
+			grid-row: 1;
+			padding: 24px 28px 24px 0;
+		}
 	}
 
 	@media (max-width: 1023px) {
 		.web-product-map {
 			min-height: 520px;
 		}
+
+		.web-format-help-image {
+			right: -18px;
+			width: min(360px, 78vw);
+			min-height: 220px;
+			opacity: 0.72;
+		}
 	}
 
 	@media (max-width: 640px) {
-		.web-sticky-cta {
-			right: 12px;
-			bottom: 12px;
-			left: 12px;
-			justify-content: center;
+		.web-container,
+		.web-landing :where(section > .mx-auto, section.mx-auto) {
+			padding-inline: 24px !important;
+		}
+
+		.web-landing :where(section > .mx-auto, section.mx-auto) {
+			padding-block: 64px !important;
+		}
+
+		.web-hero-title {
+			font-size: clamp(42px, 13vw, 58px) !important;
+		}
+
+		.web-hero-circle {
+			top: 124px;
+			left: 18px;
+			width: 170px;
+			opacity: 0.46;
+		}
+
+		.web-hero-underline {
+			width: 250px;
+			margin-left: 38px;
+		}
+
+		.web-format-help-image {
+			right: -56px;
+			width: 310px;
+			min-height: 190px;
+			opacity: 0.56;
 		}
 
 		.web-product-map {
 			min-height: 460px;
+			overflow: hidden;
 		}
 
 		.web-map-site {
 			top: 24px;
 			left: 18px;
-			width: 210px;
+			width: min(210px, calc(100% - 36px));
 		}
 
 		.web-map-account {
 			top: 148px;
 			right: 16px;
-			width: 168px;
+			width: min(168px, calc(100% - 34px));
 		}
 
 		.web-map-crm {
 			right: 18px;
 			bottom: 38px;
-			width: 196px;
+			width: min(196px, calc(100% - 36px));
 		}
 
 		.web-map-mobile {
 			left: 18px;
 			bottom: 28px;
-			width: 118px;
+			width: min(118px, calc(100% - 36px));
 		}
 
 		.web-phone-screen {

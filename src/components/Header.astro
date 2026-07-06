@@ -1,6 +1,4 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
-
 interface Props {
 	variant?: 'default' | 'glass';
 }
@@ -26,21 +24,21 @@ const services = {
 	class:list={[
 		isGlass
 			? 'sticky top-3 z-40 px-3 pt-3 sm:top-4 sm:px-6 sm:pt-4'
-			: 'sticky top-0 z-40 border-b border-neutral-200 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80',
+			: 'sticky top-0 z-40 border-b border-[color:var(--ds-border)] bg-white/88 backdrop-blur',
 	]}
 >
 	<div
 		class:list={[
 			'relative mx-auto grid w-full max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 overflow-visible md:grid-cols-[auto_minmax(0,1fr)_auto] md:gap-6',
 			isGlass
-				? 'rounded-2xl border border-white/45 px-4 py-3 shadow-[0_18px_60px_rgba(15,23,42,0.16),inset_0_1px_0_rgba(255,255,255,0.75)] ring-1 ring-black/[0.03] sm:px-5 dark:border-white/10 dark:shadow-[0_18px_60px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.12)] dark:ring-white/[0.04]'
+				? 'rounded-[24px] border border-white/75 px-4 py-3 shadow-[0_18px_52px_rgba(17,17,17,0.13),inset_0_1px_0_rgba(255,255,255,0.95)] ring-1 ring-black/[0.04] sm:px-5'
 				: 'px-6 py-4',
 		]}
 	>
 		{isGlass && (
 			<div
 				aria-hidden="true"
-				class="pointer-events-none absolute inset-0 rounded-2xl bg-white/58 backdrop-blur-2xl backdrop-saturate-150 dark:bg-neutral-950/46"
+				class="pointer-events-none absolute inset-0 rounded-[24px] bg-white/78 backdrop-blur-2xl backdrop-saturate-150"
 			></div>
 		)}
 
@@ -48,13 +46,13 @@ const services = {
 			<img
 				src="/brand/ittn-logo.webp"
 				alt="IT TIME NOW"
-				class="h-[26px] w-auto shrink-0 dark:brightness-0 dark:invert"
+				class="h-[30px] w-auto shrink-0"
 				loading="eager"
 				decoding="async"
 			/>
-			<span class="hidden translate-y-px leading-tight text-neutral-900 sm:block dark:text-neutral-100">
-				<span class="block text-[11px] font-normal">Цифровые системы</span>
-				<span class="block text-[11px] font-normal">эффективного бизнеса</span>
+			<span class="hidden translate-y-px leading-tight text-[color:var(--ds-muted)] sm:block">
+				<span class="block text-[11px] font-medium">Цифровые системы</span>
+				<span class="block text-[11px] font-medium">эффективного бизнеса</span>
 			</span>
 		</a>
 
@@ -62,7 +60,7 @@ const services = {
 			<div class="group relative">
 				<a
 					href="/services/"
-					class="flex items-center gap-1 px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] group-hover:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF] dark:group-hover:text-[#6C7CFF]"
+					class="flex items-center gap-1 rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)] group-hover:text-[color:var(--ds-primary)]"
 					aria-haspopup="true"
 				>
 					Услуги
@@ -77,14 +75,14 @@ const services = {
 						class:list={[
 							'relative overflow-hidden',
 							isGlass
-								? 'rounded-2xl border border-white/45 bg-white/42 shadow-[0_18px_60px_rgba(15,23,42,0.16),inset_0_1px_0_rgba(255,255,255,0.75)] ring-1 ring-black/[0.03] backdrop-blur-[64px] backdrop-saturate-200 dark:border-white/10 dark:bg-neutral-950/36 dark:shadow-[0_18px_60px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.12)] dark:ring-white/[0.04]'
-								: 'rounded-xl border border-neutral-200 bg-white shadow-xl dark:border-neutral-800 dark:bg-neutral-900',
+								? 'rounded-[24px] border border-white/75 bg-white/86 shadow-[0_24px_60px_rgba(17,17,17,0.16),inset_0_1px_0_rgba(255,255,255,0.95)] ring-1 ring-black/[0.04] backdrop-blur-[64px] backdrop-saturate-200'
+								: 'rounded-[20px] border border-[color:var(--ds-border)] bg-white shadow-xl',
 						]}
 					>
 						<div class="relative z-10 grid grid-cols-3 gap-6 p-6">
 							{Object.entries(services).map(([group, items]) => (
 								<div>
-									<p class="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+									<p class="mb-3 text-xs font-bold uppercase text-[color:var(--ds-muted)]">
 										{group}
 									</p>
 									<ul class="space-y-2">
@@ -92,7 +90,7 @@ const services = {
 											<li>
 												<a
 													href={item.href}
-													class="block text-sm text-neutral-700 transition hover:text-indigo-600 dark:text-neutral-300 dark:hover:text-indigo-400"
+													class="block rounded-lg px-2 py-1 text-sm font-medium text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)]"
 												>
 													{item.title}
 												</a>
@@ -106,13 +104,13 @@ const services = {
 				</div>
 			</div>
 
-			<a href="/cases/" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
+			<a href="/cases/" class="rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)]">
 				Кейсы
 			</a>
-			<a href="/posts/" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
+			<a href="/posts/" class="rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)]">
 				Блог
 			</a>
-			<a href="/about/" class="px-3 py-2 text-neutral-700 transition hover:text-[#232BFF] focus-visible:text-[#232BFF] dark:text-neutral-300 dark:hover:text-[#6C7CFF] dark:focus-visible:text-[#6C7CFF]">
+			<a href="/about/" class="rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)]">
 				О&nbsp;нас
 			</a>
 		</nav>
@@ -120,20 +118,19 @@ const services = {
 		<div class="relative z-10 col-start-2 flex items-center gap-3 justify-self-end md:col-start-3">
 			<a
 				href="tel:+74951335888"
-				class="hidden text-sm font-medium text-neutral-700 transition hover:text-neutral-900 lg:inline dark:text-neutral-300 dark:hover:text-neutral-100"
+				class="hidden text-sm font-bold text-[color:var(--ds-ink)] transition hover:text-[color:var(--ds-primary)] lg:inline"
 			>
 				+7&nbsp;(495)&nbsp;133-58-88
 			</a>
-			<ThemeToggle />
 			<button
 				id="mobile-menu-toggle"
 				type="button"
 				aria-label="Меню"
 				class:list={[
-					'inline-flex h-9 w-9 items-center justify-center text-neutral-700 md:hidden dark:text-neutral-300',
+					'inline-flex h-10 w-10 items-center justify-center text-[color:var(--ds-ink)] md:hidden',
 					isGlass
-						? 'rounded-xl border border-white/50 bg-white/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5'
-						: 'rounded-md border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900',
+						? 'rounded-2xl border border-white/70 bg-white/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-xl'
+						: 'rounded-xl border border-[color:var(--ds-border)] bg-white',
 				]}
 			>
 				<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -148,18 +145,18 @@ const services = {
 		class:list={[
 			'hidden md:hidden',
 			isGlass
-				? 'mx-auto mt-2 w-full max-w-[1440px] rounded-2xl border border-white/45 bg-white/68 px-4 py-4 shadow-[0_18px_50px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-neutral-950/72'
-				: 'border-t border-neutral-200 bg-white px-6 py-4 dark:border-neutral-800 dark:bg-neutral-950',
+				? 'mx-auto mt-2 w-full max-w-[1440px] rounded-[24px] border border-white/75 bg-white/90 px-4 py-4 shadow-[0_18px_50px_rgba(17,17,17,0.12),inset_0_1px_0_rgba(255,255,255,0.92)] backdrop-blur-2xl backdrop-saturate-150'
+				: 'border-t border-[color:var(--ds-border)] bg-white px-6 py-4',
 		]}
 	>
-		<nav class="flex flex-col gap-3 text-sm">
+		<nav class="flex flex-col gap-3 text-sm font-semibold text-[color:var(--ds-ink)]">
 			<a href="/services/" class="font-medium">Услуги</a>
 			{Object.entries(services).map(([group, items]) => (
-				<div class="ml-3 border-l border-neutral-200 pl-3 dark:border-neutral-800">
-					<p class="text-xs font-semibold uppercase tracking-wider text-neutral-500">{group}</p>
+				<div class="ml-3 border-l border-[color:var(--ds-border)] pl-3">
+					<p class="text-xs font-bold uppercase text-[color:var(--ds-muted)]">{group}</p>
 					<ul class="mt-1 space-y-1">
 						{items.map((item) => (
-							<li><a href={item.href} class="text-neutral-600 dark:text-neutral-400">{item.title}</a></li>
+							<li><a href={item.href} class="text-[color:var(--ds-muted)]">{item.title}</a></li>
 						))}
 					</ul>
 				</div>

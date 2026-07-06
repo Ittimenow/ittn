@@ -197,10 +197,10 @@ const checklist = [
 					данные и обучим команду работать без хаоса и Excel.
 				</p>
 				<div class="bitrix-actions">
-					<a class="ds-btn ds-btn-primary" href="#bitrix-request">
+					<button class="ds-btn ds-btn-primary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 						<span>Получить консультацию</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
-					</a>
+					</button>
 					<p class="bitrix-free-label">Бесплатно!</p>
 				</div>
 				<div class="ds-testimonial bitrix-hero-benefit">
@@ -298,9 +298,9 @@ const checklist = [
 							</li>
 						))}
 					</ul>
-					<a class="ds-btn ds-btn-secondary" href="#bitrix-request">
+					<button class="ds-btn ds-btn-secondary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 						<span>Заказать аудит</span>
-					</a>
+					</button>
 				</article>
 				{implementationPackages.map((pack) => (
 					<article class:list={['ds-price-card', pack.featured && 'is-featured']}>
@@ -321,9 +321,9 @@ const checklist = [
 								</li>
 							))}
 						</ul>
-						<a class="ds-btn ds-btn-secondary" href="#bitrix-request">
+						<button class="ds-btn ds-btn-secondary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 							<span>Заказать внедрение</span>
-						</a>
+						</button>
 					</article>
 				))}
 			</div>
@@ -339,10 +339,10 @@ const checklist = [
 					Вместо длинной абстрактной схемы показываем управляемый проект: что делаем, что
 					проверяем и где фиксируем результат.
 				</p>
-				<a class="ds-btn ds-btn-dark" href="#bitrix-request">
+				<button class="ds-btn ds-btn-dark b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 					<span>Собрать состав работ</span>
 					<UiIcon name="arrow" class="h-4 w-4" />
-				</a>
+				</button>
 			</div>
 			<ol class="bitrix-timeline" aria-label="Этапы внедрения Bitrix24">
 				{steps.map(([icon, title, text], index) => (
@@ -528,7 +528,7 @@ const checklist = [
 					</div>
 				</div>
 
-				<form class="ds-form" method="post" action="#">
+				<form class="ds-form" method="post" action="#" data-b24-form-wrapper>
 					<label>
 						<span>Имя</span>
 						<input class="ds-input" required type="text" name="name" placeholder="Анна" />
@@ -547,7 +547,7 @@ const checklist = [
 						<label class="ds-check"><input type="checkbox" name="needs" value="automation" /> Автоматизация</label>
 						<label class="ds-check"><input type="checkbox" name="needs" value="audit" /> Аудит</label>
 					</div>
-					<button class="ds-btn ds-btn-primary" type="submit">
+					<button class="ds-btn ds-btn-primary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 						<span>Получить расчет</span>
 						<UiIcon name="arrow" class="h-4 w-4" />
 					</button>
@@ -558,10 +558,10 @@ const checklist = [
 	</section>
 
 	<div class="bitrix-mobile-cta">
-		<a class="ds-btn ds-btn-primary" href="#bitrix-request">
+		<button class="ds-btn ds-btn-primary b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
 			<span>Расчет</span>
 			<UiIcon name="file" class="h-4 w-4" />
-		</a>
+		</button>
 		<a class="ds-btn ds-btn-secondary" href="tel:+74951335888">
 			<span>Позвонить</span>
 			<UiIcon name="phone" class="h-4 w-4" />

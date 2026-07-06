@@ -1,0 +1,30 @@
+<script is:inline data-b24-form="click/21/8r4fh6" data-skip-moving="true">
+	(function(w,d,u){
+	var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/180000|0);
+	var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+	})(window,document,'https://cdn-ru.bitrix24.ru/b27699562/crm/form/loader_21.js');
+</script>
+<button id="b24-form-popup-trigger-21" class="b24-web-form-popup-btn-21" type="button" hidden aria-hidden="true"></button>
+
+<script>
+	if (!document.documentElement.dataset.b24PopupTriggerBound) {
+		document.documentElement.dataset.b24PopupTriggerBound = '1';
+		document.addEventListener('click', (event) => {
+			const trigger = event.target instanceof Element
+				? event.target.closest('[data-b24-form-trigger]')
+				: null;
+			if (!trigger) return;
+
+			event.preventDefault();
+			if (trigger.hasAttribute('data-b24-validate-form')) {
+				const form = trigger.closest('form');
+				if (form instanceof HTMLFormElement) {
+					const validationEvent = new CustomEvent('consultation:validate', { cancelable: true });
+					if (!form.dispatchEvent(validationEvent)) return;
+				}
+			}
+
+			document.getElementById('b24-form-popup-trigger-21')?.click();
+		});
+	}
+</script>

@@ -28,24 +28,27 @@ const sections = [
 ];
 ---
 
-<footer class="mt-32 border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
-	<div class="mx-auto max-w-6xl px-6 py-16">
+<footer class="mt-32 border-t border-[color:var(--ds-border)] bg-[color:var(--ds-soft)]">
+	<div class="mx-auto max-w-[1440px] px-6 py-16">
 		<div class="grid gap-10 md:grid-cols-4">
 			<div>
-				<a href="/" class="flex items-center gap-2 text-lg font-semibold">
-					<span
-						class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-sm font-black text-white"
-					>IT</span>
-					ittimenow
+				<a href="/" class="inline-flex items-center" aria-label="IT TIME NOW">
+					<img
+						src="/brand/ittn-logo.webp"
+						alt="IT TIME NOW"
+						class="h-[32px] w-auto"
+						loading="lazy"
+						decoding="async"
+					/>
 				</a>
-				<p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+				<p class="mt-4 max-w-xs text-sm leading-6 text-[color:var(--ds-muted)]">
 					Цифровые системы эффективного бизнеса. С&nbsp;2013&nbsp;года.
 				</p>
 			</div>
 
 			{sections.map((s) => (
 				<div>
-					<p class="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+					<p class="mb-3 text-xs font-bold uppercase text-[color:var(--ds-muted)]">
 						{s.title}
 					</p>
 					<ul class="space-y-2 text-sm">
@@ -53,7 +56,7 @@ const sections = [
 							<li>
 								<a
 									href={l.href}
-									class="text-neutral-700 transition hover:text-indigo-600 dark:text-neutral-300 dark:hover:text-indigo-400"
+									class="font-medium text-[color:var(--ds-ink)] transition hover:text-[color:var(--ds-primary)]"
 								>
 									{l.title}
 								</a>
@@ -65,14 +68,14 @@ const sections = [
 		</div>
 
 		<div
-			class="mt-12 flex flex-col gap-4 border-t border-neutral-200 pt-6 text-sm text-neutral-600 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800 dark:text-neutral-400"
+			class="mt-12 flex flex-col gap-4 border-t border-[color:var(--ds-border)] pt-6 text-sm text-[color:var(--ds-muted)] sm:flex-row sm:items-center sm:justify-between"
 		>
 			<p>© 2013–{year} ittimenow.com</p>
 			<div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-				<a href="tel:+74951335888" class="hover:text-neutral-900 dark:hover:text-neutral-100">
+				<a href="tel:+74951335888" class="hover:text-[color:var(--ds-primary)]">
 					+7&nbsp;(495)&nbsp;133-58-88
 				</a>
-				<a href="mailto:hello@ittimenow.com" class="hover:text-neutral-900 dark:hover:text-neutral-100">
+				<a href="mailto:hello@ittimenow.com" class="hover:text-[color:var(--ds-primary)]">
 					hello@ittimenow.com
 				</a>
 				<span>Москва, Варшавское шоссе, 28А</span>
