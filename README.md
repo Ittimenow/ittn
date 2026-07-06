@@ -23,7 +23,6 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 | `npm run dev` | Запустить локальный dev-сервер Astro |
 | `npm run build` | Собрать production-версию в `dist/` |
 | `npm run preview` | Локально проверить production-сборку |
-| `npm run start` | Запустить собранный Astro server из `dist/server/entry.mjs` |
 | `npm run astro ...` | Запустить Astro CLI |
 
 ## Технологический стек
@@ -50,7 +49,7 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 
 ## Деплой
 
-Сайт собирается как Astro server (`output: 'server'`) с `@astrojs/node`, поэтому на хостинге нужно запускать `npm run build` и затем `npm run start`, либо использовать `Dockerfile` из репозитория. Не публикуйте `public/ds-v2` как корневой статический каталог: в этой папке лежат только ассеты, которые использует сайт.
+Сайт собирается как статический Astro-сайт, поэтому на хостинге нужно публиковать содержимое `dist/` после `npm run build`. Не публикуйте `public/ds-v2` как корневой каталог: в этой папке лежат только ассеты, которые использует сайт.
 
 ## Архитектура
 
@@ -98,7 +97,6 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 | `/posts` | `src/pages/posts/index.astro` | Список постов из `src/content/posts` |
 | `/posts/:slug` | `src/pages/posts/[...slug].astro` | Динамическая страница поста |
 | `/icons` | `src/pages/icons.astro` | Список и описания иконок сайта |
-| `/ds` | `src/pages/ds.astro` | Локальная dev-only витрина дизайн-системы, в production возвращает 404 |
 | `/b24new` | `src/pages/b24new.astro` | Альтернативный лендинг Bitrix24 |
 | `/codebg` | `src/pages/codebg.astro` | Экспериментальная shader-страница |
 | `/codegame` | `src/pages/codegame.astro` | Экспериментальная shader/game-страница |
@@ -124,7 +122,7 @@ Astro-сайт IT Time Now: корпоративные страницы, усл�
 ### Служебные и экспериментальные
 
 - `src/pages/icons.astro` документирует иконки сайта.
-- `src/pages/ds.astro` показывает дизайн-систему только локально при `npm run dev`; HTML исходник хранится в `temp/design_system-ittn-v2/`, а в production маршрут возвращает 404.
+- Исходник дизайн-системы хранится в `temp/design_system-ittn-v2/` и не публикуется как маршрут сайта.
 - `src/pages/b24new.astro` хранит альтернативную версию лендинга Bitrix24.
 - `src/pages/codebg.astro`, `src/pages/codegame.astro`, `src/pages/earth-test.astro` используются для визуальных экспериментов.
 

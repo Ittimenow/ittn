@@ -31,7 +31,7 @@ import UiIcon from './UiIcon.astro';
 			</dl>
 		</div>
 
-		<form class="grid gap-4" method="post" action="/api/bitrix24/lead/" novalidate data-consultation-form>
+		<form class="grid gap-4" method="post" action="#" novalidate data-consultation-form>
 			<label class="grid gap-1.5 text-sm" data-field>
 				<span class="text-neutral-700 dark:text-neutral-300">Имя</span>
 				<input
@@ -326,29 +326,10 @@ import UiIcon from './UiIcon.astro';
 				if (button instanceof HTMLButtonElement) button.disabled = true;
 				if (buttonLabel instanceof HTMLElement) buttonLabel.textContent = 'Отправляем...';
 
-				try {
-					const response = await fetch(form.action, {
-						method: 'POST',
-						headers: { 'Accept': 'application/json' },
-						body: new FormData(form),
-					});
-					const result = await response.json().catch(() => ({}));
-
-					if (!response.ok || !result?.ok) {
-						throw new Error(result?.message || 'Не удалось отправить заявку');
-					}
-
-					form.reset();
-					form.querySelectorAll('input, textarea').forEach((input) => {
-						if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) setFieldError(input);
-					});
-					setFormStatus(form, 'success', 'Заявка отправлена. Мы свяжемся с вами в рабочее время.');
-				} catch (error) {
-					setFormStatus(form, 'error', error instanceof Error ? error.message : 'Не удалось отправить заявку. Попробуйте позже.');
-				} finally {
-					if (buttonLabel instanceof HTMLElement) buttonLabel.textContent = originalLabel;
-					updateSubmitState(form);
-				}
+				document.getElementById('b24-form-popup-trigger-21')?.click();
+				setFormStatus(form, 'success', 'Откроется форма Битрикс24. Заполните ее, чтобы отправить заявку.');
+				if (buttonLabel instanceof HTMLElement) buttonLabel.textContent = originalLabel;
+				updateSubmitState(form);
 			});
 
 			updateSubmitState(form);
