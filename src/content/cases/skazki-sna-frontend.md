@@ -74,7 +74,7 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 	</div>
 </section>
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/ba1c6096c4afabaf.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/skazki-sna-frontend/sc-pc-skazkisna-effect.mp4" type="video/mp4" />
 </video>
 
@@ -110,7 +110,7 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 </section>
 
 <section class="case-mobile-showcase">
-	<video class="case-mobile-showcase-video" autoplay loop muted playsinline>
+	<video poster="/video-posters/379e27f514c4af6b.jpg" preload="none" class="case-mobile-showcase-video" controls loop muted playsinline>
 		<source src="/cases/skazki-sna-frontend/sc-mob-skazkisna-effect-2.mp4" type="video/mp4" />
 	</video>
 	<div class="case-mobile-showcase-copy">
@@ -121,7 +121,7 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 </section>
 
 <section class="case-video-copy-row">
-	<video autoplay loop muted playsinline poster="/cases/skazki-sna-frontend/img-skazkisna-main-4x3-1.webp">
+	<video preload="none" controls loop muted playsinline poster="/cases/skazki-sna-frontend/img-skazkisna-main-4x3-1.webp">
 		<source src="/cases/skazki-sna-frontend/sc-pc-skazkisna-creators.mp4" type="video/mp4" />
 	</video>
 	<p>Из-за большого объёма информации об организаторах мы вынесли этот раздел в отдельное всплывающее окно — так структура страницы осталась чистой, а всё нужное осталось под рукой.</p>
@@ -129,7 +129,7 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 
 А потом случилось главное: руководитель проекта попал на само мероприятие. Феерия образов, света и атмосферы оказалась настолько мощной, что мы собрали небольшой промо-ролик о том, как это было.
 
-<video class="case-video" controls playsinline preload="metadata" poster="/cases/skazki-sna-frontend/main-skazki-sna-promo-poster.webp">
+<video preload="none" class="case-video" controls playsinline poster="/cases/skazki-sna-frontend/main-skazki-sna-promo-poster.webp">
 	<source src="/cases/skazki-sna-frontend/main-skazki-sna-promo.mp4" type="video/mp4" />
 </video>
 

@@ -15,7 +15,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 Частный инвестор.
 
-<video class="case-video" autoplay loop muted playsinline poster="/cases/wakeupmoney/main-image-wum.webp">
+<video preload="none" class="case-video" controls loop muted playsinline poster="/cases/wakeupmoney/main-image-wum.webp">
 	<source src="/cases/wakeupmoney/wum-stocks-buy.mp4" type="video/mp4" />
 </video>
 
@@ -84,7 +84,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 Первоначально стояла задача создать интерфейс ручного ввода информации, чтобы начинающие инвесторы могли прочувствовать суть инвестирования. Вторым этапом развития проекта запланирована автоматизация получения данных из разных сервисов и банков.
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/c3e7609ac4778233.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/wakeupmoney/wum-stocks-buy.mp4" type="video/mp4" />
 </video>
 
@@ -92,15 +92,15 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 Сервис позволяет вести акции и облигации, создавать любое количество счетов и смотреть результат по каждому счету отдельно или по всему портфелю в одной валюте. Основные валюты привязаны к курсу ЦБ.
 
-<video class="case-video" autoplay loop muted playsinline aria-label="Редактирование инвестиционной сделки">
+<video poster="/video-posters/cb2ac6cdf39da708.jpg" preload="none" class="case-video" controls loop muted playsinline aria-label="Редактирование инвестиционной сделки">
 	<source src="/cases/wakeupmoney/wum-stocks-edit.mp4" type="video/mp4" />
 </video>
 
-<video class="case-video" autoplay loop muted playsinline aria-label="Продажа актива">
+<video poster="/video-posters/1968d62b62437c0a.jpg" preload="none" class="case-video" controls loop muted playsinline aria-label="Продажа актива">
 	<source src="/cases/wakeupmoney/wum-stocks-sell.mp4" type="video/mp4" />
 </video>
 
-<video class="case-video" autoplay loop muted playsinline aria-label="Заметки к инвестиционной сделке">
+<video poster="/video-posters/b2fc8d0e97e6ddc0.jpg" preload="none" class="case-video" controls loop muted playsinline aria-label="Заметки к инвестиционной сделке">
 	<source src="/cases/wakeupmoney/wum-comments.mp4" type="video/mp4" />
 </video>
 
@@ -110,7 +110,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 Для проектов, которые приносят доход, но не относятся к ценным бумагам, сделали отдельный раздел. В нем можно учитывать доходы и расходы по категориям.
 
-<video class="case-video wum-feature-video" autoplay loop muted playsinline>
+<video poster="/video-posters/273fd27307a25a2b.jpg" preload="none" class="case-video wum-feature-video" controls loop muted playsinline>
 	<source src="/cases/wakeupmoney/wum-project.mp4" type="video/mp4" />
 </video>
 
@@ -118,7 +118,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 Раздел помогает фиксировать мысли в привычном визуальном редакторе. Заметки также можно создавать непосредственно внутри сделки.
 
-<video class="case-video wum-feature-video" autoplay loop muted playsinline>
+<video poster="/video-posters/7f7412ca2b62697b.jpg" preload="none" class="case-video wum-feature-video" controls loop muted playsinline>
 	<source src="/cases/wakeupmoney/wum-notes.mp4" type="video/mp4" />
 </video>
 
@@ -126,7 +126,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 Пользователь может ставить финансовые цели и отслеживать прогресс до нужного результата.
 
-<video class="case-video wum-feature-video" autoplay loop muted playsinline>
+<video poster="/video-posters/32e4dd5c952172de.jpg" preload="none" class="case-video wum-feature-video" controls loop muted playsinline>
 	<source src="/cases/wakeupmoney/wum-goals.mp4" type="video/mp4" />
 </video>
 
@@ -135,16 +135,16 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 Сервис работает в браузере на компьютере и смартфоне, а также доступен как мобильное приложение для Android и iOS.
 
 <section class="wum-video-grid wum-video-grid-mobile" aria-label="Мобильная версия WakeUpMoney">
-	<video autoplay loop muted playsinline aria-label="Вход в мобильное приложение">
+	<video poster="/video-posters/8e3e780113a44f6d.jpg" preload="none" controls loop muted playsinline aria-label="Вход в мобильное приложение">
 		<source src="/cases/wakeupmoney/wum-mob-enter.mp4" type="video/mp4" />
 	</video>
-	<video autoplay loop muted playsinline aria-label="Инвестиции в мобильном приложении">
+	<video poster="/video-posters/72bbc67029c8a602.jpg" preload="none" controls loop muted playsinline aria-label="Инвестиции в мобильном приложении">
 		<source src="/cases/wakeupmoney/wum-mob-stocks.mp4" type="video/mp4" />
 	</video>
-	<video autoplay loop muted playsinline aria-label="Цели в мобильном приложении">
+	<video poster="/video-posters/301de93cce21705f.jpg" preload="none" controls loop muted playsinline aria-label="Цели в мобильном приложении">
 		<source src="/cases/wakeupmoney/wum-mob-goals.mp4" type="video/mp4" />
 	</video>
-	<video autoplay loop muted playsinline aria-label="Заметки в мобильном приложении">
+	<video poster="/video-posters/dd63cc71257eff52.jpg" preload="none" controls loop muted playsinline aria-label="Заметки в мобильном приложении">
 		<source src="/cases/wakeupmoney/wum-mob-notes.mp4" type="video/mp4" />
 	</video>
 </section>

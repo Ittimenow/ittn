@@ -1,0 +1,46 @@
+---
+import UiIcon from './UiIcon.astro';
+interface Props {
+  title: string;
+  text: string;
+  id?: string;
+  label?: string;
+  source?: string;
+}
+const { title, text, id, label = 'Получить консультацию', source } = Astro.props;
+---
+<section class="service-cta-section" id={id}>
+  <div class="ittn-service-cta" data-service-final-cta>
+    <div class="ittn-service-cta-copy">
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="ittn-service-cta-image" aria-hidden="true"></div>
+    <button class="ds-btn ittn-btn" type="button" data-b24-form-trigger data-service-cta data-service-source={source}>
+      <span>{label}</span><UiIcon name="arrow-alt-24" class="h-[28px] w-[28px]" />
+    </button>
+  </div>
+</section>
+<style>
+  .service-cta-section { width: 100%; max-width: 1440px; margin-inline: auto; padding: 88px 24px; }
+  .ittn-service-cta { --service-cta-padding-bottom:24px; position:relative; display:grid; min-height:265px; overflow:hidden; gap:24px; align-items:stretch; border-radius:32px; background:#232BFF; padding:24px; color:#fff; }
+  .ittn-service-cta-copy { position:relative; z-index:1; min-width:0; }
+  .ittn-service-cta-copy h2 { max-width:880px; margin:0; color:#fff; font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1.05; letter-spacing:-.02em; }
+  .ittn-service-cta-copy p { max-width:760px; margin:20px 0 0; color:rgba(255,255,255,.8); font-size:18px; line-height:1.75; }
+  .ittn-service-cta-image { z-index:0; min-width:0; min-height:185px; background:url('/ds-v2/assets/contact-me.png') left bottom / contain no-repeat; filter:brightness(0) invert(1); pointer-events:none; transform:translateY(var(--service-cta-padding-bottom)); }
+  .ittn-service-cta .ittn-btn, .ittn-service-cta .ittn-btn:hover, .ittn-service-cta .ittn-btn:focus-visible { --ui-icon-filter:brightness(0) invert(1); --btn-fill:#fff; --btn-hover-color:#232BFF; --btn-hover-border:transparent; position:relative; z-index:1; justify-self:end; align-self:end; border-color:transparent; background:#111; color:#fff; box-shadow:none; }
+  .ittn-service-cta .ittn-btn:hover { --ui-icon-filter:none; background:#fff; color:#232BFF; }
+  @media (min-width:900px) {
+    .ittn-service-cta { --service-cta-padding-bottom:32px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:1fr auto; column-gap:32px; padding:32px 40px; }
+    .ittn-service-cta-copy { grid-column:1; grid-row:1/-1; align-self:start; }
+    .ittn-service-cta-image { grid-column:2; grid-row:1/-1; }
+    .ittn-service-cta .ittn-btn { grid-column:2; grid-row:2; }
+  }
+  @media (max-width:899px) {
+    .ittn-service-cta { grid-template-columns:1fr; grid-template-rows:auto minmax(180px,1fr) auto; gap:16px; align-items:start; }
+    .ittn-service-cta-copy { grid-row:1; width:100%; }
+    .ittn-service-cta-image { grid-row:2/-1; width:100%; min-height:180px; }
+    .ittn-service-cta .ittn-btn { grid-row:3; }
+  }
+  @media (max-width:767px) { .service-cta-section { padding-block:64px; } }
+</style>

@@ -1,0 +1,47 @@
+Create ONE standalone icon for the IT TIME NOW website.
+
+TARGET SUBJECT: {{SUBJECT}}
+BLOCK CONTEXT: {{BLOCK_CONTEXT}}
+WHAT THE ICON MUST COMMUNICATE: {{MEANING}}
+
+The attached approved bar-chart image is a STYLE AND PEN-WEIGHT reference only.
+Do not copy its chart subject. Match its chunky pencil weight at the same overall
+drawing size. Do not make each new icon progressively thicker than this reference.
+
+Draw a simple, immediately recognizable silhouette with only essential details.
+It must remain readable at 16–24 px for interface controls and at 48–64 px in cards.
+Leave clear gaps between neighboring strokes and keep hollow shapes open.
+
+Use rough, expressive, hand-drawn electric ultramarine blue wax-pencil line art.
+ONE pigment only: #323BFF. Genuine transparent alpha background and hollow areas.
+Preserve natural proportions on a square canvas. Tight framing: the longest side
+of the drawing should occupy about 92% of the canvas, with about 4% transparent
+margin at each end. The final project asset is 512×512 px, with the longest drawing
+dimension about 472 px and minimum margins about 20 px.
+
+CRUCIAL: use the SAME average chunky pencil weight as the approved reference and
+the existing icon family, while varying pressure conspicuously WITHIN each stroke.
+Dense broad bulges alternate naturally with substantially narrower dry portions,
+roughly 2-to-3-fold local width variation. Heavy pressure deposits dense blue;
+relaxed pressure creates scruffy broken grain and narrow stretches. Inner and
+outer details should look as though they were drawn with the same pencil.
+
+The trajectories themselves visibly bow, wobble, lean and bend. Corners, joins and
+endings are clumsy and irregular. Vary the rhythm of each stroke; do not use a
+repetitive sine-wave effect. Preserve uneven spacing, asymmetry, slight overshoots,
+rough edges and visible pressure fluctuations. The result should look genuinely
+hand-drawn, naive, spontaneous, friendly, scruffy and a little punk/DIY.
+
+Do not merely add speckles to smooth geometric paths. Do not straighten, smooth,
+regularize or turn the artwork into clean vector outlines. Grain and pressure must
+be represented by alpha coverage and irregular edges, not a second color, glow,
+gradient or shading.
+
+Only the icon. No text, numbers, labels, decorative debris, frame, tile, paper,
+background scene or extra elements. No white background or drawn checkerboard.
+
+Negative prompt: photorealistic, realistic shading, 3D, gradients, glossy effects,
+clean corporate vector art, geometric perfection, smooth bezier curves, perfectly
+uniform stroke width, typography font, polished logo design, multiple colors,
+shadows, detailed background, white background, black outlines, neat symmetric
+composition, thin formal line art.

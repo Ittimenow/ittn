@@ -1,4 +1,7 @@
 ---
+import ServiceCta from '../components/ServiceCta.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import UiIcon from '../components/UiIcon.astro';
 import Layout from '../layouts/Layout.astro';
 
 Astro.response.status = 404;
@@ -42,10 +45,9 @@ const quickLinks = [
 
 		<div class="mx-auto grid min-h-[72vh] max-w-[1440px] items-center gap-12 px-6 py-20 sm:py-24 lg:grid-cols-[minmax(0,1fr)_420px] lg:py-28">
 			<div class="max-w-4xl">
-				<p class="ds-kicker border border-indigo-200 bg-white/70 text-indigo-700 backdrop-blur dark:border-indigo-500/30 dark:bg-neutral-950/60 dark:text-indigo-300">
-					Ошибка 404
-				</p>
-				<h1 class="mt-4 max-w-4xl text-4xl font-semibold leading-[1.06] text-neutral-950 sm:text-5xl lg:text-6xl dark:text-white">
+
+				<Breadcrumbs current="Страница не найдена" />
+<h1 class="mt-4 max-w-4xl text-4xl font-semibold leading-[1.06] text-neutral-950 sm:text-5xl lg:text-6xl dark:text-white">
 					Такой страницы в системе нет
 				</h1>
 				<p class="mt-6 max-w-2xl text-lg leading-8 text-neutral-700 sm:text-xl dark:text-neutral-300">
@@ -56,22 +58,21 @@ const quickLinks = [
 				<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 					<a href="/" class="ds-btn ds-btn-primary w-full sm:w-auto">
 						<span>На главную</span>
-						<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
-						</svg>
+						<UiIcon name="arrow-alt-24" class="h-[28px] w-[28px]" />
 					</a>
-					<a
-						href="tel:+74951335888"
-						class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-neutral-300 bg-white/70 px-7 text-sm font-bold text-neutral-900 backdrop-blur transition hover:border-indigo-500 hover:text-indigo-600 sm:w-auto dark:border-neutral-700 dark:bg-neutral-950/54 dark:text-white dark:hover:border-indigo-400 dark:hover:text-indigo-300"
+					<button
+						class="consultation-trigger inline-flex min-h-11 w-full items-center justify-center rounded-full border border-neutral-300 bg-white/70 px-7 text-sm font-bold text-neutral-900 backdrop-blur transition hover:border-indigo-500 hover:text-indigo-600 sm:w-auto dark:border-neutral-700 dark:bg-neutral-950/54 dark:text-white dark:hover:border-indigo-400 dark:hover:text-indigo-300"
+						type="button"
+						data-b24-form-trigger
 					>
-						Позвонить
-					</a>
+						Бесплатная консультация
+					</button>
 				</div>
 			</div>
 
 			<div class="rounded-2xl border border-white/55 bg-white/72 p-5 shadow-[0_24px_70px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.78)] backdrop-blur-2xl dark:border-white/10 dark:bg-neutral-950/62 dark:shadow-[0_24px_70px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.1)]">
 				<p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">Быстрый переход</p>
-				<div class="mt-4 space-y-3">
+				<div class="service-card-row mt-4 grid gap-3">
 					{quickLinks.map((link) => (
 						<a
 							href={link.href}
@@ -79,10 +80,8 @@ const quickLinks = [
 						>
 							<span class="flex items-center justify-between gap-4">
 								<span class="text-base font-semibold text-neutral-950 dark:text-white">{link.title}</span>
-								<span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-neutral-200 text-neutral-500 transition group-hover:border-indigo-500 group-hover:text-indigo-600 dark:border-neutral-700 dark:text-neutral-400 dark:group-hover:border-indigo-400 dark:group-hover:text-indigo-300">
-									<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-										<path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"></path>
-									</svg>
+								<span class="inline-flex shrink-0">
+									<UiIcon name="arrow-up-right-24" class="h-[28px] w-[28px]" />
 								</span>
 							</span>
 							<span class="mt-2 block text-sm leading-6 text-neutral-600 dark:text-neutral-400">
@@ -94,4 +93,5 @@ const quickLinks = [
 			</div>
 		</div>
 	</section>
+<ServiceCta title="Поможем найти решение вашей задачи" text="Если нужной страницы не оказалось, расскажите о своём проекте. Подскажем, с какой услуги начать." />
 </Layout>

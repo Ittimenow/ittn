@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">rocket</title>
+  <!-- Source: src/components/UiIcon.astro:43. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 16.5c-1.5 1.3-2 3.3-2 5 1.7 0 3.7-.5 5-2"></path><path d="M9 15 5 19"></path><path d="M15 3c3 0 5 0 6 1-1 5-3.5 9.5-7.5 13.5L6.5 10.5C10.5 6.5 10 3 15 3Z"></path><path d="M14 7h3v3"></path>
+  </svg>
+</svg>

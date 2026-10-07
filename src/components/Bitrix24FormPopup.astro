@@ -1,30 +1,21 @@
-<script is:inline data-b24-form="click/21/8r4fh6" data-skip-moving="true">
-	(function(w,d,u){
-	var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/180000|0);
-	var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
-	})(window,document,'https://cdn-ru.bitrix24.ru/b27699562/crm/form/loader_21.js');
-</script>
-<button id="b24-form-popup-trigger-21" class="b24-web-form-popup-btn-21" type="button" hidden aria-hidden="true"></button>
-
+<div id="b24-integration">
+  <button id="b24-native-trigger" type="button" hidden aria-hidden="true"></button>
+  <dialog id="consultation-status" aria-labelledby="consultation-status-title" aria-describedby="consultation-status-message">
+    <h2 id="consultation-status-title">Консультация</h2>
+    <p id="consultation-status-message" role="status">Открываем форму консультации…</p>
+    <p>Можно написать напрямую: <a href="mailto:hello@ittimenow.com">hello@ittimenow.com</a>.</p>
+    <button id="consultation-status-close" class="ds-btn ds-btn-primary" type="button" autofocus>Закрыть</button>
+  </dialog>
+  <noscript><p>Чтобы обсудить проект, напишите на <a href="mailto:hello@ittimenow.com">hello@ittimenow.com</a>.</p></noscript>
+</div>
+<style>
+  dialog { margin: auto; max-width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; border: 1px solid var(--ds-border); border-radius: 24px; padding: 28px; background: white; color: var(--ds-ink); }
+  dialog::backdrop { background: rgb(17 17 17 / .45); }
+  dialog h2 { font-size: 28px; }
+  dialog p { margin-block: 20px; line-height: 1.6; overflow-wrap: anywhere; }
+  dialog a { color: var(--ds-primary); text-decoration: underline; }
+</style>
 <script>
-	if (!document.documentElement.dataset.b24PopupTriggerBound) {
-		document.documentElement.dataset.b24PopupTriggerBound = '1';
-		document.addEventListener('click', (event) => {
-			const trigger = event.target instanceof Element
-				? event.target.closest('[data-b24-form-trigger]')
-				: null;
-			if (!trigger) return;
-
-			event.preventDefault();
-			if (trigger.hasAttribute('data-b24-validate-form')) {
-				const form = trigger.closest('form');
-				if (form instanceof HTMLFormElement) {
-					const validationEvent = new CustomEvent('consultation:validate', { cancelable: true });
-					if (!form.dispatchEvent(validationEvent)) return;
-				}
-			}
-
-			document.getElementById('b24-form-popup-trigger-21')?.click();
-		});
-	}
+  import { bindConsultation } from '../scripts/consultation.js';
+  bindConsultation();
 </script>

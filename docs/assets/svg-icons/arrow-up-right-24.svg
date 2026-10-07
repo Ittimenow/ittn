@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">arrow-up-right-24</title>
+  <!-- Source: src/pages/404.astro:84. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+										<path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  </svg>
+</svg>

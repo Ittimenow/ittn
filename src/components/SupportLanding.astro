@@ -1,0 +1,828 @@
+---
+import ServiceTimeline from './ServiceTimeline.astro';
+import ServiceCta from './ServiceCta.astro';
+import UiIcon from './UiIcon.astro';
+
+const b24ButtonClass = 'consultation-trigger';
+
+const painPoints = [
+	{
+		icon: 'briefcase',
+		title: 'Нет своего IT-отдела',
+		text: 'Сотрудникам некому передать правки по сайту, CRM и интеграциям, поэтому задачи копятся или решаются случайными исполнителями.',
+	},
+	{
+		icon: 'shield',
+		title: 'Сбой уже мешает бизнесу',
+		text: 'Не отправляется форма, истёк сертификат, сайт работает медленно или данные перестали попадать в CRM.',
+	},
+	{
+		icon: 'layers',
+		title: 'Проект нужно развивать',
+		text: 'Нужны новые страницы, сценарии, отчёты и автоматизация, но для отдельного проекта задача пока слишком небольшая.',
+	},
+] as const;
+
+const serviceGroups = [
+	{
+		icon: 'cloud',
+		title: 'Сайт и CMS',
+		text: 'Поддерживаем корпоративные сайты, интернет-магазины, лендинги и веб-сервисы.',
+		items: ['исправление ошибок', 'обновление CMS и модулей', 'формы, разделы и страницы', 'адаптивность и скорость'],
+	},
+	{
+		icon: 'file',
+		title: 'Контент и дизайн',
+		text: 'Помогаем быстро обновлять информацию и сохранять единый визуальный стиль.',
+		items: ['тексты, новости и товары', 'баннеры и изображения', 'верстка материалов', 'точечные UX/UI-правки'],
+	},
+	{
+		icon: 'workflow',
+		title: 'CRM, ERP и интеграции',
+		text: 'Не ограничиваемся сайтом: находим проблему во всей цепочке движения заявки.',
+		items: ['Bitrix24 и РосБизнесСофт', 'ELMA365', 'обмен с 1С', 'API, телефония и внешние сервисы'],
+	},
+	{
+		icon: 'settings',
+		title: 'Доработка функционала',
+		text: 'Добавляем полезные функции без запуска большого проекта с нуля.',
+		items: ['калькуляторы и квизы', 'личные кабинеты', 'поиск и фильтры', 'автоматические документы'],
+	},
+	{
+		icon: 'lock',
+		title: 'Инфраструктура',
+		text: 'Помогаем держать техническую основу проекта в порядке.',
+		items: ['SSL, домены и хостинг', 'резервные копии', 'восстановление после сбоя', 'настройка серверного окружения'],
+	},
+	{
+		icon: 'bar-chart',
+		title: 'Аудит и развитие',
+		text: 'Ищем причины проблем и предлагаем улучшения в порядке бизнес-приоритета.',
+		items: ['технический аудит', 'аналитика и цели', 'базовая SEO-проверка', 'план следующих доработок'],
+	},
+] as const;
+
+const taskExamples = [
+	{
+		label: 'Контент',
+		title: 'Обновить телефон, новость или изображение',
+		text: 'Быстрая правка без поиска отдельного контент-менеджера и разработчика.',
+		time: 'от 15 минут',
+	},
+	{
+		label: 'Инцидент',
+		title: 'Восстановить сайт после сбоя',
+		text: 'Проверим причину, резервные копии и безопасный сценарий восстановления.',
+		time: 'после диагностики',
+	},
+	{
+		label: 'Развитие',
+		title: 'Добавить услугу или новый раздел',
+		text: 'Подготовим структуру, дизайн, верстку и подключение к административной панели.',
+		time: 'оценим до старта',
+	},
+	{
+		label: 'Скорость',
+		title: 'Найти причину медленной загрузки',
+		text: 'Проверим изображения, код, сервер, внешние скрипты и узкие места.',
+		time: 'от 1 часа',
+	},
+	{
+		label: 'Интеграция',
+		title: 'Починить передачу заявки в CRM',
+		text: 'Проследим путь данных от формы до сделки и устраним разрыв.',
+		time: 'после диагностики',
+	},
+	{
+		label: 'Безопасность',
+		title: 'Установить или обновить SSL-сертификат',
+		text: 'Настроим сертификат и проверим корректность переадресации.',
+		time: 'от 30 минут',
+	},
+] as const;
+
+const packages = [
+	{
+		name: 'Разово',
+		tag: 'Начать с одной задачи',
+		price: '3 500 ₽',
+		unit: 'за час',
+		rate: 'Без абонентской платы',
+		text: 'Для срочной правки, диагностики или задачи, которую не хочется откладывать.',
+		items: ['единая ставка любого специалиста', 'оценка до выполнения', 'ответ в течение 4 рабочих часов', 'типовые задачи — до 3 рабочих дней'],
+		cta: 'Оценить задачу',
+		featured: false,
+	},
+	{
+		name: 'Минимум',
+		tag: 'Редкие задачи',
+		price: '26 000 ₽',
+		unit: 'в месяц',
+		rate: '10 часов · 2 600 ₽/час',
+		text: 'Когда нужно регулярно обновлять информацию и решать небольшие технические вопросы.',
+		items: ['до 10 обращений', 'техническая поддержка', 'информационная поддержка', 'консультация руководителя проекта'],
+		cta: 'Выбрать минимум',
+		featured: false,
+	},
+	{
+		name: 'Норма',
+		tag: 'Популярный',
+		price: '50 000 ₽',
+		unit: 'в месяц',
+		rate: '20 часов · 2 500 ₽/час',
+		text: 'Для бизнеса с постоянным потоком правок и задач по развитию сайта.',
+		items: ['до 20 обращений', 'техническая поддержка', 'информационная поддержка', 'модернизация сайта'],
+		cta: 'Выбрать норму',
+		featured: true,
+	},
+	{
+		name: 'Максимум',
+		tag: 'Активное развитие',
+		price: '72 000 ₽',
+		unit: 'в месяц',
+		rate: '30 часов · 2 400 ₽/час',
+		text: 'Когда цифровые системы регулярно меняются вместе с продажами и процессами.',
+		items: ['до 30 обращений', 'техническая поддержка', 'информационная поддержка', 'модернизация сайта'],
+		cta: 'Выбрать максимум',
+		featured: false,
+	},
+] as const;
+
+const processSteps = [
+	{
+		title: 'Получаем задачу',
+		text: 'Вы описываете проблему или желаемый результат. Если материалов не хватает, менеджер задаёт уточняющие вопросы.',
+	},
+	{
+		title: 'Оцениваем до старта',
+		text: 'Определяем состав работ, исполнителя, риски и трудоёмкость. Ничего не начинаем без согласования.',
+	},
+	{
+		title: 'Выполняем и проверяем',
+		text: 'Специалист решает задачу, а результат проходит проверку перед публикацией или передачей вам.',
+	},
+	{
+		title: 'Фиксируем результат',
+		text: 'Показываем, что сделано, сколько времени потрачено и что стоит сделать дальше.',
+	},
+] as const;
+
+const roles = [
+	['filter', 'Аналитик', 'Разбирается в задаче и переводит её с языка бизнеса на язык системы.'],
+	['spark', 'UX/UI-дизайнер', 'Проектирует интерфейсы и готовит точечные визуальные изменения.'],
+	['layers', 'Frontend-разработчик', 'Отвечает за интерфейс, адаптивность и работу страниц в браузере.'],
+	['database', 'Backend-разработчик', 'Работает с логикой, данными, CMS, API и интеграциями.'],
+	['bar-chart', 'SEO-специалист', 'Проверяет технические факторы, индексацию и аналитику.'],
+	['file', 'Контент-менеджер', 'Размещает материалы, товары, новости и изображения.'],
+] as const;
+
+const principles = [
+	['Один вход для всех задач', 'Не нужно самостоятельно искать разработчика, дизайнера или аналитика — состав команды подбираем мы.'],
+	['Оценка до выполнения', 'Сначала согласуем трудоёмкость и ожидаемый результат, затем приступаем к работе.'],
+	['Проверка перед публикацией', 'По возможности тестируем изменения отдельно и переносим их после проверки.'],
+	['Понятный учёт времени', 'Фиксируем выполненные работы и потраченное время по каждой задаче.'],
+] as const;
+
+const faqs = [
+	['Можно начать с одной задачи?', 'Да. Разовый формат стоит 3 500 ₽ за час и не требует абонентского договора. Опишите задачу — мы уточним детали и согласуем оценку до начала работ.'],
+	['Вы поддерживаете проекты, которые делала другая команда?', 'Да. Сначала изучаем доступы, код, CMS, инфраструктуру и критичные интеграции. Если проект можно безопасно принять, формируем план первых работ.'],
+	['Какие системы можно передать на поддержку?', 'Работаем с сайтами и веб-сервисами, CMS, Bitrix24, РосБизнесСофт, ELMA365, интеграциями с 1С, телефонией, почтой, платёжными и другими внешними сервисами. Возможность поддержки конкретного стека подтверждаем после знакомства с проектом.'],
+	['Как учитывается время?', 'До старта согласуем оценку, после выполнения фиксируем фактические трудозатраты и результат. Условия минимального шага учёта и использования пакетных часов закрепляются в договоре.'],
+	['Что делать, если задача оказалась больше оценки?', 'Останавливаемся на согласованной границе, объясняем причину и предлагаем обновлённую оценку. Продолжаем только после вашего подтверждения.'],
+	['Работаете круглосуточно?', 'Базовые тарифы не включают круглосуточное дежурство. Для систем, где простой напрямую влияет на продажи или операции, отдельно оцениваем возможность регламента и SLA.'],
+	['Чем поддержка отличается от отдельного проекта?', 'Поддержка подходит для небольших, повторяющихся и срочных задач. Если изменение требует большой аналитики, проектирования или нескольких недель разработки, предложим оформить его отдельным этапом с собственной сметой.'],
+] as const;
+
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map(([question, answer]) => ({
+		'@type': 'Question',
+		name: question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: answer,
+		},
+	})),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<div class="ds support-landing">
+	<section class="support-hero">
+		<div class="support-container support-hero-grid">
+			<div class="support-hero-copy">
+				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
+					<a href="/services/">Все услуги</a>
+					<UiIcon name="chevron" class="h-[24.5px] w-[24.5px]" />
+					<strong aria-current="page">Техническая поддержка</strong>
+				</nav>
+				<h1 transition:name="service-support">
+					Решаем IT-задачи, пока вы занимаетесь <span>бизнесом</span>
+				</h1>
+				<p class="support-hero-lead">
+					Поддерживаем сайты, CRM, ERP и интеграции: исправляем ошибки, обновляем
+					контент и развиваем функционал без найма собственного IT-отдела.
+				</p>
+				<div class="support-hero-offer">
+					<div>
+						<strong>3 500 ₽</strong>
+						<span>за час разовой работы</span>
+					</div>
+					<div>
+						<strong>от 26 000 ₽</strong>
+						<span>пакет на месяц</span>
+					</div>
+				</div>
+				<div class="support-actions">
+					<button class:list={['ds-btn ds-btn-primary', b24ButtonClass]} type="button" data-b24-form-trigger>
+						<span>Оценить одну задачу</span>
+						<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+					</button>
+					<a class="support-text-link" href="#support-prices">Посмотреть тарифы</a>
+				</div>
+				<p class="support-hero-note">Уточним задачу и согласуем оценку до начала работ.</p>
+			</div>
+
+			<div class="support-console" aria-label="Как устроена работа технической поддержки">
+				<div class="support-console-head">
+					<div>
+						<span class="support-status-dot"></span>
+						<p>Поддержка проекта</p>
+					</div>
+					<span>единое окно</span>
+				</div>
+				<div class="support-ticket">
+					<div class="support-ticket-top">
+						<span>Новая задача</span>
+						<span>01</span>
+					</div>
+					<h2>Форма на сайте не создаёт сделку в CRM</h2>
+					<p>Проверяем всю цепочку: сайт → API → CRM</p>
+				</div>
+				<ol class="support-console-steps">
+					<li class="is-done"><span>01</span><div><strong>Заявка принята</strong><small>Менеджер уточнил контекст</small></div><UiIcon name="check" class="h-[28px] w-[28px]" /></li>
+					<li class="is-active"><span>02</span><div><strong>Оценка согласована</strong><small>Назначен нужный специалист</small></div><UiIcon name="settings" class="h-[28px] w-[28px]" /></li>
+					<li><span>03</span><div><strong>Работа и проверка</strong><small>Результат фиксируем в отчёте</small></div><UiIcon name="shield" class="h-[28px] w-[28px]" /></li>
+				</ol>
+				<div class="support-console-foot">
+					<span><UiIcon name="users" class="h-[28px] w-[28px]" /> Одна команда</span>
+					<span><UiIcon name="bar-chart" class="h-[28px] w-[28px]" /> Прозрачный учёт</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="support-section support-section-soft">
+		<div class="support-container">
+			<div class="support-section-head">
+				<div>
+					<h2>IT-вопросы не должны отвлекать команду от клиентов</h2>
+				</div>
+				<p>Подключаемся, когда накопились небольшие задачи, произошёл сбой или текущий подрядчик перестал справляться.</p>
+			</div>
+			<div class="support-pain-grid support-mobile-row service-card-row">
+				{painPoints.map((item) => (
+					<article class="support-card support-pain-card">
+						<div class="support-icon"><UiIcon name={item.icon} class="h-[35px] w-[35px]" /></div>
+						<h3>{item.title}</h3>
+						<p>{item.text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="support-section">
+		<div class="support-container">
+			<div class="support-section-head">
+				<div>
+					<h2>Одна команда вместо нескольких подрядчиков</h2>
+				</div>
+				<p>Берём на себя и простую контентную правку, и техническую задачу на стыке сайта, данных и внутренних систем.</p>
+			</div>
+			<div class="support-services-grid service-card-row">
+				{serviceGroups.map((group) => (
+					<article class="support-card support-service-card">
+						<div class="support-icon"><UiIcon name={group.icon} class="h-[35px] w-[35px]" /></div>
+						<h3>{group.title}</h3>
+						<p>{group.text}</p>
+						<ul class="ittn-marker-list">
+							{group.items.map((item) => <li>{item}</li>)}
+						</ul>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="support-section support-section-ink">
+		<div class="support-container">
+			<div class="support-section-head support-section-head-light">
+				<div>
+					<h2>Можно прийти с небольшой задачей</h2>
+				</div>
+				<p>Время ниже — ориентир для понятных типовых работ. Точную оценку даём после проверки проекта и доступов.</p>
+			</div>
+			<div class="support-tasks-grid support-mobile-row service-card-row">
+				{taskExamples.map((task) => (
+					<article class="support-task-card">
+						<div class="support-task-top"><span>{task.label}</span><span>{task.time}</span></div>
+						<h3>{task.title}</h3>
+						<p>{task.text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="support-prices" class="support-section support-section-soft">
+		<div class="support-container">
+			<div class="support-section-head">
+				<div>
+					<h2>Начните разово или зарезервируйте команду</h2>
+				</div>
+				<p>Во всех форматах доступна рабочая группа специалистов. Чем больше пакет, тем ниже стоимость часа.</p>
+			</div>
+			<div class="support-prices-grid support-mobile-row service-card-row">
+				{packages.map((pack) => (
+					<article class:list={['support-price-card', pack.featured && 'is-featured']}>
+						<div class="support-price-head">
+							<h3>{pack.name}</h3>
+							<span>{pack.tag}</span>
+						</div>
+						<div class="support-price-value"><strong>{pack.price}</strong><span>{pack.unit}</span></div>
+						<p class="support-price-rate">{pack.rate}</p>
+						<p class="support-price-text">{pack.text}</p>
+						<ul class="ittn-marker-list">
+							{pack.items.map((item) => <li>{item}</li>)}
+						</ul>
+						<button class:list={['ds-btn', pack.featured ? 'ds-btn-primary' : 'ds-btn-secondary', b24ButtonClass]} type="button" data-b24-form-trigger>
+							<span>{pack.cta}</span>
+							<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+						</button>
+					</article>
+				))}
+			</div>
+			<div class="support-price-note">
+				<UiIcon name="message" class="h-[35px] w-[35px]" />
+				<p><strong>Не знаете, сколько часов потребуется?</strong> Пришлите список задач — разложим их по приоритету и предложим подходящий формат.</p>
+			</div>
+		</div>
+	</section>
+
+	<ServiceTimeline title="Без чёрного ящика и внезапного счёта" text="У каждой задачи есть понятный путь: запрос, оценка, выполнение, проверка и зафиксированный результат." steps={processSteps} />
+
+	<section class="support-section support-section-soft">
+		<div class="support-container">
+			<div class="support-section-head">
+				<div>
+					<h2>Под задачу подключается нужный специалист</h2>
+				</div>
+				<p>Вам не приходится координировать исполнителей: менеджер собирает рабочую группу и остаётся единым контактом.</p>
+			</div>
+			<div class="support-roles-grid support-mobile-row service-card-row">
+				{roles.map(([icon, title, text]) => (
+					<article class="support-role-card">
+						<div class="support-icon"><UiIcon name={icon} class="h-[35px] w-[35px]" /></div>
+						<h3>{title}</h3>
+						<p>{text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="support-section">
+		<div class="support-container">
+			<div class="support-principles">
+				<div class="support-principles-copy">
+					<h2>Не просто часы, а управляемый сервис</h2>
+					<p>Понятные правила снижают риск переделок, потерянных задач и зависимости от одного исполнителя.</p>
+				</div>
+				<div class="support-principles-list">
+					{principles.map(([title, text], index) => (
+						<article><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{text}</p></div></article>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="support-section support-section-soft">
+		<div class="support-container support-faq-grid">
+			<div>
+				<h2>Частые вопросы о технической поддержке</h2>
+				<p>Если вашего вопроса здесь нет, опишите ситуацию — на первой консультации подскажем возможный формат.</p>
+			</div>
+			<div class="support-faq-list">
+				{faqs.map(([question, answer]) => (
+					<details class="support-faq">
+						<summary><span>{question}</span><UiIcon name="chevron" class="h-[28px] w-[28px]" /></summary>
+						<div><p>{answer}</p></div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<ServiceCta id="support-request" title="Есть задача, до которой всё время не доходят руки?" text="Опишите, что нужно исправить или улучшить. Подключим нужного специалиста и согласуем оценку. Можно начать с одной задачи — 3 500 ₽ за час разовой работы. Консультация бесплатная." />
+</div>
+
+<style>
+	.support-landing {
+		--support-ink: #111111;
+		--support-blue: #232bff;
+		--support-soft: #f5f7ff;
+		--support-line: #dfe4f2;
+		background: #fff;
+		color: var(--support-ink);
+	}
+
+	.support-container {
+		width: min(100% - 48px, 1440px);
+		margin-inline: auto;
+	}
+
+	.support-hero {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		border-bottom: 1px solid var(--support-line);
+		background:
+			radial-gradient(circle at 86% 18%, rgba(35, 43, 255, 0.17), transparent 30%),
+			linear-gradient(180deg, #f5f7ff 0%, #fff 82%);
+	}
+
+	.support-hero::before {
+		position: absolute;
+		top: 7%;
+		right: -7%;
+		z-index: -1;
+		width: 520px;
+		height: 520px;
+		border: 1px solid rgba(35, 43, 255, 0.14);
+		border-radius: 50%;
+		content: '';
+	}
+
+	.support-hero-grid {
+		display: grid;
+		min-height: calc(100vh - 94px);
+		grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.72fr);
+		align-items: center;
+		gap: clamp(48px, 7vw, 112px);
+		padding-block: 80px 96px;
+	}
+
+	.support-breadcrumbs {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 34px;
+		color: var(--ds-muted);
+		font-size: 14px;
+	}
+
+	.support-breadcrumbs a:hover { color: var(--support-blue); }
+
+	.support-hero h1 {
+		max-width: 900px;
+		margin-top: 20px;
+		font-size: clamp(50px, 6.8vw, 96px);
+		line-height: 0.94;
+	}
+
+	.support-hero h1 span {
+		position: relative;
+		color: var(--support-blue);
+		white-space: nowrap;
+	}
+
+	.support-hero h1 span::after {
+		position: absolute;
+		right: 0;
+		bottom: -13px;
+		left: 4%;
+		height: 14px;
+		background: url('/ds-v2/assets/decorations-split/deco-underline-01.png') center / 100% 100% no-repeat;
+		content: '';
+	}
+
+	.support-hero-lead {
+		max-width: 760px;
+		margin-top: 30px;
+		color: #363b46;
+		font-size: clamp(18px, 1.7vw, 23px);
+		line-height: 1.55;
+	}
+
+	.support-hero-offer {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 30px;
+	}
+
+	.support-hero-offer > div {
+		display: flex;
+		min-width: 220px;
+		flex-direction: column;
+		border: 1px solid rgba(35, 43, 255, 0.17);
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.78);
+		padding: 15px 18px;
+		backdrop-filter: blur(16px);
+	}
+
+	.support-hero-offer strong { color: var(--support-blue); font-size: 22px; line-height: 1.1; }
+	.support-hero-offer span { margin-top: 5px; color: var(--ds-muted); font-size: 13px; }
+
+	.support-actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 24px;
+		margin-top: 30px;
+	}
+
+	.support-text-link {
+		border-bottom: 1px solid currentColor;
+		color: var(--support-blue);
+		font-size: 14px;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.support-hero-note { margin-top: 15px; color: var(--ds-muted); font-size: 14px; }
+
+	.support-console {
+		position: relative;
+		border: 1px solid rgba(255, 255, 255, 0.8);
+		border-radius: 32px;
+		background: rgba(255, 255, 255, 0.84);
+		padding: 18px;
+		box-shadow: 0 40px 90px -44px rgba(17, 17, 17, 0.4), 0 0 0 1px rgba(35, 43, 255, 0.05);
+		backdrop-filter: blur(28px);
+		transform: rotate(1.2deg);
+	}
+
+	.support-console::after {
+		position: absolute;
+		top: -35px;
+		right: -28px;
+		width: 94px;
+		height: 94px;
+		background: url('/ds-v2/assets/decorations-split/deco-check-02.png') center / contain no-repeat;
+		content: '';
+		transform: rotate(-10deg);
+	}
+
+	.support-console-head,
+	.support-console-head > div,
+	.support-console-foot,
+	.support-console-foot span,
+	.support-ticket-top {
+		display: flex;
+		align-items: center;
+	}
+
+	.support-console-head { justify-content: space-between; padding: 8px 8px 18px; }
+	.support-console-head > div { gap: 9px; }
+	.support-console-head p { font-size: 14px; font-weight: 800; }
+	.support-console-head > span { color: var(--ds-muted); font-family: var(--ittn-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+	.support-status-dot {
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background: #19a765;
+		box-shadow: 0 0 0 5px rgba(25, 167, 101, 0.13);
+	}
+
+	.support-ticket {
+		border-radius: 22px;
+		background: var(--support-blue);
+		color: #fff;
+		padding: 24px;
+	}
+
+	.support-ticket-top { justify-content: space-between; color: rgba(255, 255, 255, 0.68); font-family: var(--ittn-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+	.support-ticket h2 { margin-top: 28px; color: #fff; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.05; }
+	.support-ticket p { margin-top: 15px; color: rgba(255, 255, 255, 0.74); font-size: 14px; }
+
+	.support-console-steps { display: grid; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+	.support-console-steps li { display: grid; grid-template-columns: 38px 1fr auto; align-items: center; gap: 12px; border: 1px solid var(--support-line); border-radius: 16px; padding: 13px; }
+	.support-console-steps li > span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 12px; background: var(--support-soft); color: var(--ds-muted); font-family: var(--ittn-font-mono); font-size: 11px; font-weight: 700; }
+	.support-console-steps strong,
+	.support-console-steps small { display: block; }
+	.support-console-steps strong { font-size: 13px; }
+	.support-console-steps small { margin-top: 2px; color: var(--ds-muted); font-size: 11px; }
+	.support-console-steps li > :global(.ui-icon) { color: #9aa0b0; }
+	.support-console-steps .is-done > span { background: rgba(25, 167, 101, 0.11); color: #168552; }
+	.support-console-steps .is-done > :global(.ui-icon) { color: #19a765; }
+	.support-console-steps .is-active { border-color: rgba(35, 43, 255, 0.36); background: rgba(35, 43, 255, 0.035); }
+	.support-console-steps .is-active > span { background: rgba(35, 43, 255, 0.1); color: var(--support-blue); }
+	.support-console-steps .is-active > :global(.ui-icon) { color: var(--support-blue); }
+
+	.support-console-foot { justify-content: space-between; gap: 12px; padding: 17px 8px 4px; color: var(--ds-muted); font-size: 11px; font-weight: 700; }
+	.support-console-foot span { gap: 6px; }
+
+	.support-section { padding-block: 96px; }
+	.support-section-soft { border-block: 1px solid var(--support-line); background: var(--support-soft); }
+
+	.support-section-head {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.62fr);
+		align-items: end;
+		gap: 48px;
+		margin-bottom: 44px;
+	}
+
+	.support-section-head h2 { max-width: 920px; margin-top: 14px; }
+	.support-section-head > p { max-width: 620px; color: var(--ds-muted); font-size: 18px; line-height: 1.65; }
+
+	.support-pain-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+	.support-card { border: 1px solid var(--support-line); border-radius: 24px; background: #fff; box-shadow: 0 22px 56px -42px rgba(17, 17, 17, 0.35); }
+	.support-pain-card { padding: 28px; }
+	.support-pain-card h3 { margin-top: 28px; font-size: 25px; }
+	.support-pain-card p { margin-top: 12px; color: var(--ds-muted); font-size: 15px; line-height: 1.65; }
+
+	.support-icon { display: grid; width: 46px; height: 46px; place-items: center; color: #fff; }
+
+	.support-services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+	.support-service-card { display: flex; min-height: 390px; flex-direction: column; padding: 28px; transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease; }
+	.support-service-card:hover { border-color: rgba(35, 43, 255, 0.34); box-shadow: 0 30px 68px -42px rgba(35, 43, 255, 0.42); transform: translateY(-5px); }
+	.support-service-card h3 { margin-top: 26px; }
+	.support-service-card > p { margin-top: 11px; color: var(--ds-muted); font-size: 14px; line-height: 1.65; }
+	.support-service-card ul { display: grid; gap: 9px; margin: auto 0 0; padding: 25px 0 0; list-style: none; }
+	.support-service-card li,
+	.support-price-card li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; line-height: 1.45; }
+
+	.support-section-ink { background: var(--support-ink); color: #fff; }
+	.support-section-head-light h2 { color: #fff; }
+	.support-section-head-light > p { color: rgba(255, 255, 255, 0.62); }
+	.support-section-ink .ds-kicker { color: #9da1ff; }
+
+	.support-tasks-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+	.support-task-card { min-height: 240px; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 22px; background: rgba(255, 255, 255, 0.055); padding: 23px; }
+	.support-task-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: #9da1ff; font-family: var(--ittn-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+	.support-task-top span:last-child { color: rgba(255, 255, 255, 0.48); text-align: right; }
+	.support-task-card h3 { margin-top: 42px; color: #fff; font-size: 22px; line-height: 1.16; }
+	.support-task-card p { margin-top: 13px; color: rgba(255, 255, 255, 0.6); font-size: 14px; line-height: 1.6; }
+
+	.support-prices-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+	.support-price-card { display: flex; min-width: 0; flex-direction: column; border: 1px solid var(--support-line); border-radius: 24px; background: #fff; padding: 24px; box-shadow: 0 22px 50px -42px rgba(17, 17, 17, 0.35); }
+	.support-price-card.is-featured { border-color: var(--support-blue); background: var(--support-blue); color: #fff; box-shadow: 0 30px 68px -36px rgba(35, 43, 255, 0.65); transform: translateY(-8px); }
+	.support-price-head { display: flex; min-height: 58px; align-items: flex-start; justify-content: space-between; gap: 10px; }
+	.support-price-head h3 { font-size: 25px; }
+	.support-price-head > span { border-radius: 999px; background: var(--support-soft); padding: 7px 9px; color: var(--support-blue); font-family: var(--ittn-font-mono); font-size: 9px; font-weight: 700; line-height: 1.2; letter-spacing: 0.05em; text-align: center; text-transform: uppercase; }
+	.support-price-card.is-featured h3 { color: #fff; }
+	.support-price-card.is-featured .support-price-head > span { background: #d7ff38; color: var(--support-ink); }
+	.support-price-value { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-top: 18px; }
+	.support-price-value strong { font-size: clamp(30px, 2.6vw, 42px); line-height: 1; letter-spacing: -0.04em; }
+	.support-price-value span { color: var(--ds-muted); font-size: 12px; }
+	.support-price-card.is-featured .support-price-value span { color: rgba(255, 255, 255, 0.65); }
+	.support-price-rate { margin-top: 10px; color: var(--support-blue); font-size: 13px; font-weight: 800; }
+	.support-price-card.is-featured .support-price-rate { color: #d7ff38; }
+	.support-price-text { min-height: 92px; margin-top: 24px; color: var(--ds-muted); font-size: 14px; line-height: 1.55; }
+	.support-price-card.is-featured .support-price-text { color: rgba(255, 255, 255, 0.72); }
+	.support-price-card ul { display: grid; gap: 11px; margin: 0 0 28px; padding: 0; list-style: none; }
+	.support-price-card.is-featured .ittn-marker-list > li::before { filter: brightness(0) invert(1); }
+	.support-price-card .ds-btn { width: 100%; margin-top: auto; padding-inline: 16px; }
+	.support-price-card.is-featured .ds-btn-primary { --ui-icon-filter: none; --ds-btn-fill: #fff; background: #fff; color: var(--support-blue); box-shadow: none; }
+	.support-price-card.is-featured .ds-btn-primary:hover { background: #fff; }
+
+	.support-price-note { display: flex; align-items: center; gap: 14px; margin-top: 28px; border: 1px solid rgba(35, 43, 255, 0.17); border-radius: 18px; background: #fff; padding: 18px 22px; }
+	.support-price-note > :global(.ui-icon) { flex: 0 0 auto; color: var(--support-blue); }
+	.support-price-note p { color: var(--ds-muted); font-size: 14px; }
+	.support-price-note strong { color: var(--support-ink); }
+
+	.support-process-grid { display: grid; grid-template-columns: minmax(300px, 0.64fr) minmax(0, 1fr); gap: clamp(48px, 8vw, 120px); align-items: start; }
+	.support-process-copy { position: sticky; top: 130px; }
+	.support-process-copy h2 { margin-top: 14px; }
+	.support-process-copy > p:not(.ds-kicker) { max-width: 520px; margin-top: 20px; color: var(--ds-muted); font-size: 17px; line-height: 1.65; }
+	.support-process-copy .ds-btn { margin-top: 30px; }
+	.support-process-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+	.support-process-list li { display: grid; min-height: 180px; grid-template-columns: 76px 1fr; gap: 24px; border-top: 1px solid var(--support-line); padding: 30px 0; }
+	.support-process-list li:last-child { border-bottom: 1px solid var(--support-line); }
+	.support-process-list li::before { display: none !important; }
+	.support-process-number { display: grid; width: 62px; height: 62px; place-items: center; border-radius: 20px; background: var(--support-soft); color: var(--support-blue); font-family: var(--ittn-font-mono); font-size: 14px; font-weight: 700; }
+	.support-process-list h3 { font-size: 25px; }
+	.support-process-list p { max-width: 720px; margin-top: 11px; color: var(--ds-muted); font-size: 15px; line-height: 1.65; }
+
+	.support-roles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+	.support-role-card { border: 1px solid var(--support-line); border-radius: 22px; background: #fff; padding: 24px; }
+	.support-role-card h3 { margin-top: 30px; font-size: 22px; }
+	.support-role-card p { margin-top: 10px; color: var(--ds-muted); font-size: 14px; line-height: 1.6; }
+
+	.support-principles { overflow: hidden; display: grid; grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1fr); border-radius: 30px; background: var(--support-blue); color: #fff; }
+	.support-principles-copy { padding: clamp(34px, 5vw, 72px); }
+	.support-principles-copy .ds-kicker { color: #d7ff38; }
+	.support-principles-copy h2 { margin-top: 14px; color: #fff; }
+	.support-principles-copy > p:last-child { margin-top: 20px; color: rgba(255, 255, 255, 0.68); font-size: 17px; line-height: 1.65; }
+	.support-principles-list { display: grid; border-left: 1px solid rgba(255, 255, 255, 0.16); }
+	.support-principles-list article { display: grid; grid-template-columns: 46px 1fr; gap: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.16); padding: 27px 34px; }
+	.support-principles-list article:last-child { border-bottom: 0; }
+	.support-principles-list article > span { color: #d7ff38; font-family: var(--ittn-font-mono); font-size: 12px; }
+	.support-principles-list h3 { color: #fff; font-size: 21px; }
+	.support-principles-list p { margin-top: 8px; color: rgba(255, 255, 255, 0.64); font-size: 14px; line-height: 1.55; }
+
+	.support-faq-grid { display: grid; grid-template-columns: minmax(300px, 0.7fr) minmax(0, 1fr); gap: clamp(48px, 8vw, 120px); }
+	.support-faq-grid h2 { margin-top: 14px; }
+	.support-faq-grid > div:first-child > p:last-child { max-width: 520px; margin-top: 20px; color: var(--ds-muted); font-size: 16px; line-height: 1.65; }
+	.support-faq-list { border-top: 1px solid var(--support-line); }
+	.support-faq { border-bottom: 1px solid var(--support-line); }
+	.support-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 23px 0; font-size: 18px; font-weight: 700; cursor: pointer; list-style: none; }
+	.support-faq summary::-webkit-details-marker { display: none; }
+	.support-faq summary :global(.ui-icon) { flex: 0 0 auto; color: var(--support-blue); transition: transform 180ms ease; }
+	.support-faq[open] summary :global(.ui-icon) { transform: rotate(90deg); }
+	.support-faq > div { padding: 0 50px 24px 0; }
+	.support-faq > div p { color: var(--ds-muted); font-size: 15px; line-height: 1.7; }
+
+	.support-final-section { padding-bottom: 0; }
+	.support-final { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 0.48fr); gap: 64px; align-items: center; border-radius: 32px; background: var(--support-ink); padding: clamp(34px, 6vw, 80px); color: #fff; }
+	.support-final .ds-kicker { color: #9da1ff; }
+	.support-final h2 { max-width: 850px; margin-top: 14px; color: #fff; }
+	.support-final > div:first-child > p:last-child { max-width: 720px; margin-top: 20px; color: rgba(255, 255, 255, 0.64); font-size: 17px; line-height: 1.65; }
+	.support-final-action { border-radius: 24px; background: #fff; padding: 28px; color: var(--support-ink); }
+	.support-final-action p strong,
+	.support-final-action p span { display: block; }
+	.support-final-action p strong { font-size: 20px; }
+	.support-final-action p span { margin-top: 7px; color: var(--support-blue); font-size: 14px; font-weight: 700; }
+	.support-final-action .ds-btn { width: 100%; margin-top: 24px; }
+	.support-final-action small { display: block; margin-top: 14px; color: var(--ds-muted); font-size: 11px; line-height: 1.45; text-align: center; }
+
+	@media (max-width: 1100px) {
+		.support-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(340px, 0.68fr); gap: 42px; }
+		.support-hero h1 { font-size: clamp(48px, 7vw, 74px); }
+		.support-prices-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.support-price-card.is-featured { transform: none; }
+	}
+
+	@media (max-width: 900px) {
+		.support-hero-grid,
+		.support-section-head,
+		.support-process-grid,
+		.support-principles,
+		.support-faq-grid,
+		.support-final { grid-template-columns: 1fr; }
+		.support-hero-grid { min-height: auto; padding-top: 64px; }
+		.support-console { width: min(100%, 600px); margin-inline: auto; transform: none; }
+		.support-section-head { align-items: start; gap: 20px; }
+		.support-section-head > p { max-width: 760px; }
+		.support-services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.support-process-copy { position: static; }
+		.support-principles-list { border-top: 1px solid rgba(255, 255, 255, 0.16); border-left: 0; }
+		.support-final { gap: 36px; }
+		.support-final-action { max-width: 520px; }
+	}
+
+	@media (max-width: 720px) {
+		.support-container { width: min(100% - 32px, 1440px); }
+		.support-section { padding-block: 68px; }
+		.support-hero-grid { padding-block: 50px 68px; }
+		.support-breadcrumbs { margin-bottom: 26px; }
+		.support-hero h1 { font-size: clamp(44px, 14vw, 62px); }
+		.support-hero-lead { margin-top: 24px; font-size: 17px; }
+		.support-hero-offer { display: grid; grid-template-columns: 1fr 1fr; }
+		.support-hero-offer > div { min-width: 0; padding: 14px; }
+		.support-hero-offer strong { font-size: 18px; }
+		.support-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
+		.support-actions .ds-btn { width: 100%; }
+		.support-console { border-radius: 24px; padding: 12px; }
+		.support-console::after { right: -10px; width: 68px; height: 68px; }
+		.support-ticket { border-radius: 18px; padding: 20px; }
+		.support-ticket h2 { margin-top: 22px; font-size: 25px; }
+		.support-console-foot { flex-wrap: wrap; }
+		.support-section-head { margin-bottom: 30px; }
+		.support-section-head > p { font-size: 16px; }
+		.support-pain-grid,
+		.support-tasks-grid,
+		.support-prices-grid,
+		.support-roles-grid { grid-template-columns: none; }
+		.support-mobile-row { display: flex; width: calc(100% + 16px); gap: 12px; overflow-x: auto; padding: 0 16px 14px 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
+		.support-mobile-row::-webkit-scrollbar { display: none; }
+		.support-mobile-row > * { width: min(84vw, 360px); min-width: min(84vw, 360px); scroll-snap-align: start; }
+		.support-services-grid { grid-template-columns: 1fr; }
+		.support-service-card { min-height: 350px; }
+		.support-price-card { min-height: 600px; }
+		.support-price-card.is-featured { order: -1; }
+		.support-price-text { min-height: 0; }
+		.support-price-note { align-items: flex-start; }
+		.support-process-list li { min-height: 0; grid-template-columns: 56px 1fr; gap: 16px; }
+		.support-process-number { width: 50px; height: 50px; border-radius: 15px; }
+		.support-principles { border-radius: 24px; }
+		.support-principles-list article { grid-template-columns: 36px 1fr; padding: 24px; }
+		.support-faq summary { font-size: 16px; }
+		.support-final-section { padding-bottom: 0; }
+		.support-final { border-radius: 24px; padding: 30px 22px; }
+		.support-final-action { padding: 22px; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.support-service-card,
+		.support-faq summary :global(.ui-icon) { transition: none; }
+	}
+</style>

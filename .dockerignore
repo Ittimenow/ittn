@@ -4,4 +4,8 @@
 dist
 node_modules
 npm-debug.log*
-temp
+temp/*
+!temp/design_system-ittn-v2/
+temp/design_system-ittn-v2/*
+!temp/design_system-ittn-v2/design-system.html
+.env*

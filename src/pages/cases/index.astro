@@ -1,4 +1,6 @@
 ---
+import ServiceCta from '../../components/ServiceCta.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
@@ -7,13 +9,14 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 
 <Layout title="Кейсы — ittimenow" description="Реализованные проекты ittimenow: разработка, CRM, ИИ.">
 	<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-		<p class="text-sm font-medium text-fuchsia-600 dark:text-fuchsia-400">Портфолио</p>
-		<h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Кейсы</h1>
+
+		<Breadcrumbs current="Кейсы" />
+<h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Кейсы</h1>
 		<p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
 			Решения, которые уже работают в проде у наших клиентов.
 		</p>
 
-		<div class="mt-12 grid gap-4 md:grid-cols-2">
+		<div class="service-card-row mt-12 grid gap-4 md:grid-cols-2">
 			{cases.map((c) => (
 				<a
 					href={`/cases/${c.id}/`}
@@ -21,29 +24,36 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 					transition:name={`case-${c.id}`}
 				>
 					{c.data.listingCover ? (
-						<img
-							src={c.data.listingCover}
-							alt={c.data.title}
-							class="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-							loading="lazy"
-						/>
+						<div class="case-card-media is-loading">
+							<img
+								src={c.data.listingCover}
+								alt={c.data.title}
+								class="case-card-cover transition duration-300 group-hover:scale-[1.02]"
+								loading="lazy"
+							/>
+						</div>
 					) : c.data.coverVideo ? (
-						<video
-							src={c.data.coverVideo}
-							class="aspect-video w-full object-cover"
-							preload="auto"
-							muted
-							loop
-							playsinline
-							aria-hidden="true"
-						></video>
+						<div class="case-card-media is-loading">
+							<video
+								data-src={c.data.coverVideo}
+								poster={c.data.cover}
+								class="case-card-cover"
+								preload="none"
+								muted
+								loop
+								playsinline
+								aria-hidden="true"
+							></video>
+						</div>
 					) : c.data.cover && (
-						<img
-							src={c.data.cover}
-							alt={c.data.title}
-							class="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-							loading="lazy"
-						/>
+						<div class="case-card-media is-loading">
+							<img
+								src={c.data.cover}
+								alt={c.data.title}
+								class="case-card-cover transition duration-300 group-hover:scale-[1.02]"
+								loading="lazy"
+							/>
+						</div>
 					)}
 					<div class="flex flex-1 flex-col p-6">
 						{c.data.industry && (
@@ -55,28 +65,71 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 			))}
 		</div>
 	</section>
+<ServiceCta title="Обсудим решение для вашего бизнеса?" text="Расскажите о задаче. Покажем подходящие примеры и предложим следующий шаг." />
 </Layout>
 
 <script>
 	const resetVideo = (video: HTMLVideoElement) => {
 		video.pause();
-		video.currentTime = 0;
+		if (video.readyState > 0) video.currentTime = 0;
 	};
 
-	const initializeCaseVideos = () => {
+	const initializeCaseMedia = () => {
 		document.querySelectorAll<HTMLAnchorElement>('.case-card').forEach((card) => {
-			const video = card.querySelector<HTMLVideoElement>('video');
-			if (!video || card.dataset.videoInitialized) return;
+			const mediaContainer = card.querySelector<HTMLElement>('.case-card-media');
+			const media = mediaContainer?.querySelector<HTMLImageElement | HTMLVideoElement>('.case-card-cover');
+			if (!mediaContainer || !media || mediaContainer.dataset.mediaInitialized) return;
 
-			card.dataset.videoInitialized = 'true';
-			video.addEventListener('loadeddata', () => resetVideo(video), { once: true });
-			card.addEventListener('mouseenter', () => void video.play().catch(() => {}));
+			mediaContainer.dataset.mediaInitialized = 'true';
+
+			const showMedia = () => {
+				mediaContainer.classList.remove('is-loading');
+				mediaContainer.classList.add('is-ready');
+			};
+
+			const showFallback = () => {
+				mediaContainer.classList.remove('is-loading');
+				mediaContainer.classList.add('is-error');
+			};
+
+			if (media instanceof HTMLImageElement) {
+				if (media.complete) {
+					media.naturalWidth > 0 ? showMedia() : showFallback();
+				} else {
+					media.addEventListener('load', showMedia, { once: true });
+					media.addEventListener('error', showFallback, { once: true });
+				}
+				return;
+			}
+
+			const video = card.querySelector<HTMLVideoElement>('video');
+			if (!video) return;
+
+			showMedia();
+			const prepareVideo = () => {
+				resetVideo(video);
+				showMedia();
+				if (card.matches(':hover')) void video.play().catch(() => {});
+			};
+
+			if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+				prepareVideo();
+			} else {
+				video.addEventListener('loadeddata', prepareVideo, { once: true });
+				video.addEventListener('error', showFallback, { once: true });
+			}
+
+			card.addEventListener('mouseenter', () => {
+				if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+				if (!video.src && video.dataset.src) video.src = video.dataset.src;
+				void video.play().catch(() => {});
+			});
 			card.addEventListener('mouseleave', () => resetVideo(video));
 		});
 	};
 
-	initializeCaseVideos();
-	document.addEventListener('astro:page-load', initializeCaseVideos);
+	initializeCaseMedia();
+	document.addEventListener('astro:page-load', initializeCaseMedia);
 </script>
 
 <style>
@@ -93,9 +146,67 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 		box-shadow: var(--ds-glow);
 	}
 
+	.case-card-media {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: #f2f4ff;
+	}
+
+	.case-card-media::after {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			105deg,
+			transparent 35%,
+			rgba(255, 255, 255, 0.82) 50%,
+			transparent 65%
+		);
+		content: '';
+		transform: translateX(-100%);
+	}
+
+	.case-card-media.is-loading::after {
+		animation: case-media-loading 1.35s ease-in-out infinite;
+	}
+
+	.case-card-cover {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0;
+		transition: opacity 300ms ease;
+	}
+
+	.case-card-media.is-ready .case-card-cover {
+		opacity: 1;
+	}
+
+	.case-card-media.is-ready::after,
+	.case-card-media.is-error::after {
+		display: none;
+	}
+
+	@keyframes case-media-loading {
+		to {
+			transform: translateX(100%);
+		}
+	}
+
 	.case-card-title {
 		font-size: clamp(1.125rem, 1.4vw, 1.375rem);
 		font-weight: 600;
 		line-height: 1.15;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.case-card-media.is-loading::after {
+			animation: none;
+		}
+
+		.case-card-cover {
+			transition: none;
+		}
 	}
 </style>

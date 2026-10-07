@@ -1,0 +1,59 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import AiServiceLanding from '../../../components/AiServiceLanding.astro';
+import { aiServices, type AiService } from '../../../data/ai-services';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+	return aiServices.map((service) => ({
+		params: { slug: service.slug },
+		props: { service },
+	}));
+}
+
+interface Props {
+	service: AiService;
+}
+
+const { service } = Astro.props;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const siteUrl = new URL('/', Astro.site ?? Astro.url);
+const serviceSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Service',
+	name: service.title,
+	description: service.description,
+	url: pageUrl,
+	provider: { '@type': 'Organization', name: 'IT TIME NOW', url: siteUrl.href },
+	areaServed: { '@type': 'Country', name: 'Россия' },
+};
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{ '@type': 'ListItem', position: 1, name: 'Главная', item: siteUrl.href },
+		{ '@type': 'ListItem', position: 2, name: 'Услуги', item: new URL('/services/', siteUrl).href },
+		{ '@type': 'ListItem', position: 3, name: 'ИИ для бизнеса', item: new URL('/services/ai/', siteUrl).href },
+		{ '@type': 'ListItem', position: 4, name: service.navTitle, item: pageUrl },
+	],
+};
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: service.faqs.map(([question, answer]) => ({
+		'@type': 'Question',
+		name: question,
+		acceptedAnswer: { '@type': 'Answer', text: answer },
+	})),
+};
+---
+
+<Layout
+	title={service.seoTitle}
+	description={service.description}
+	bodyClass="ai-page"
+	structuredData={[serviceSchema, breadcrumbSchema, faqSchema]}
+>
+	<AiServiceLanding service={service} />
+</Layout>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">cube-48</title>
+  <!-- Source: temp/design_system-ittn-v2/design-system.html:537. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 48 48" fill="none">
+    <path d="M10 34V14l14-6 14 6v20l-14 6-14-6Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><path d="M10 14l14 7 14-7M24 21v19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+</svg>

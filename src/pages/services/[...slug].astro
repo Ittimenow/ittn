@@ -1,9 +1,15 @@
 ---
+import ServiceCta from '../../components/ServiceCta.astro';
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Bitrix24Landing from '../../components/Bitrix24Landing.astro';
 import RbsLanding from '../../components/RbsLanding.astro';
-import WebLanding from '../../components/WebLanding.astro';
+import SitesLanding from '../../components/SitesLanding.astro';
+import WebServicesLanding from '../../components/WebServicesLanding.astro';
+import IntegrationsLanding from '../../components/IntegrationsLanding.astro';
+import ElmaLanding from '../../components/ElmaLanding.astro';
+import SupportLanding from '../../components/SupportLanding.astro';
+import AiLanding from '../../components/AiLanding.astro';
 import UiIcon from '../../components/UiIcon.astro';
 
 export const prerender = true;
@@ -20,21 +26,46 @@ const { service } = Astro.props;
 const { Content } = await render(service);
 const isBitrix24 = service.id === 'bitrix24';
 const isRbs = service.id === 'rbs';
-const isWeb = service.id === 'web';
+const isSites = service.id === 'sites';
+const isWebServices = service.id === 'web-services';
+const isIntegrations = service.id === 'integrations';
+const isElma = service.id === 'elma';
+const isSupport = service.id === 'support';
+const isAi = service.id === 'ai';
 const pageTitle = isBitrix24
 	? 'Внедрение и настройка Bitrix24 под ключ — цена от 39 000 ₽ | IT Time Now'
 	: isRbs
 		? 'Внедрение CRM/ERP\u00A0РосБизнесСофт под\u00A0ключ — настройка RBS360 от\u00A080\u00A0000\u00A0₽ | IT\u00A0TIME\u00A0NOW'
-		: isWeb
-			? 'Разработка сайтов и веб-сервисов под ключ — IT TIME NOW'
-			: `${service.data.title} — ittimenow`;
+		: isSites
+			? 'Разработка сайтов под ключ — от 150 000 ₽ | IT TIME NOW'
+			: isWebServices
+				? 'Разработка веб-сервисов, порталов и личных кабинетов | IT TIME NOW'
+				: isIntegrations
+					? 'Интеграция сайта, CRM, ERP и 1С через API | IT TIME NOW'
+			: isElma
+				? 'Внедрение ELMA365 под ключ — автоматизация бизнес-процессов | IT TIME NOW'
+				: isSupport
+					? 'Техническая поддержка сайтов и IT-систем для бизнеса — от 3 500 ₽/час | IT TIME NOW'
+					: isAi
+						? 'ИИ для бизнеса — консультанты, ассистенты и автоматизация | IT TIME NOW'
+						: `${service.data.title} — ittimenow`;
 const pageDescription = isBitrix24
 	? 'Внедрение и настройка Bitrix24 для бизнеса: CRM, воронки, роботы, телефония, 1С, интеграции, обучение и сопровождение. Запуск от 39 000 ₽.'
 	: isRbs
 		? 'Внедрим и\u00A0настроим CRM/ERP\u00A0систему РосБизнесСофт для\u00A0продаж, склада, производства, сервиса и\u00A0B2B. Интеграция с\u00A01С, сайтом, телефонией, почтой и\u00A0мессенджерами. Быстрый старт от\u00A080\u00A0000\u00A0₽, проектное внедрение от\u00A0300\u00A0000\u00A0₽.'
-		: isWeb
-			? 'Разрабатываем лендинги, корпоративные сайты, интернет-магазины, личные кабинеты, порталы и индивидуальные веб-сервисы. Проектирование, UX/UI-дизайн, программирование и интеграция с CRM и ERP.'
-			: service.data.summary;
+		: isSites
+			? 'Разрабатываем лендинги, корпоративные, интерактивные сайты и интернет-магазины. Структура, тексты, UX/UI, CMS, интеграции и запуск.'
+			: isWebServices
+				? 'Проектируем и разрабатываем MVP, личные кабинеты, B2B-порталы, агрегаторы и внутренние веб-системы с индивидуальной бизнес-логикой.'
+				: isIntegrations
+					? 'Связываем сайт, CRM, ERP, 1С, оплату, телефонию, склад, маркетплейсы и внутренние системы. Проектирование, разработка и поддержка обмена данными.'
+			: isElma
+				? 'Внедрение и настройка ELMA365: автоматизация бизнес-процессов в BPMN, электронный документооборот, low-code приложения, интеграция с 1С и корпоративными системами.'
+				: isSupport
+					? 'Техническая поддержка сайтов, CRM, ERP и интеграций для малого бизнеса. Разовые задачи от 3 500 ₽/час и пакеты от 26 000 ₽ в месяц.'
+					: isAi
+						? 'ИИ для бизнеса: консультанты для сайта, ассистенты продаж, базы знаний и автоматизация рутинных процессов с интеграцией в CRM, ERP, 1С и мессенджеры.'
+						: service.data.summary;
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 const serviceSchema = {
 	'@context': 'https://schema.org',
@@ -78,23 +109,34 @@ const breadcrumbSchema = {
 };
 ---
 
-<Layout title={pageTitle} description={pageDescription} structuredData={[serviceSchema, breadcrumbSchema]}>
+<Layout title={pageTitle} description={pageDescription} bodyClass={isAi ? 'ai-page' : undefined} structuredData={[serviceSchema, breadcrumbSchema]}>
 	{isBitrix24 ? (
 		<Bitrix24Landing />
 	) : isRbs ? (
 		<RbsLanding />
-	) : isWeb ? (
-		<WebLanding />
+	) : isSites ? (
+		<SitesLanding />
+	) : isWebServices ? (
+		<WebServicesLanding />
+	) : isIntegrations ? (
+		<IntegrationsLanding />
+	) : isElma ? (
+		<ElmaLanding />
+	) : isSupport ? (
+		<SupportLanding />
+	) : isAi ? (
+		<AiLanding />
 	) : (
 		<article class="mx-auto max-w-3xl px-6 py-16">
-			<a href="/services/" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
-				← все услуги
-			</a>
+			<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
+				<a href="/services/">Все услуги</a>
+				<UiIcon name="chevron" class="h-[24.5px] w-[24.5px]" />
+				<strong aria-current="page">{service.data.title}</strong>
+			</nav>
 
 			<header class="mt-6 border-b border-neutral-200 pb-8 dark:border-neutral-800">
-				<p class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{service.data.group}</p>
 				<h1
-					class="mt-2 text-4xl font-bold tracking-tight"
+					class="text-4xl font-bold tracking-tight"
 					transition:name={`service-${service.id}`}
 				>
 					{service.data.title}
@@ -106,19 +148,7 @@ const breadcrumbSchema = {
 				<Content />
 			</div>
 
-			<div class="mt-12 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40">
-				<p class="text-sm text-neutral-700 dark:text-neutral-300">
-					Расскажите о задаче — обсудим, как лучше подойти.
-				</p>
-				<button
-					type="button"
-					class="ds-btn ds-btn-primary b24-web-form-popup-btn-21 mt-3"
-					data-b24-form-trigger
-				>
-					<span>Получить консультацию</span>
-					<UiIcon name="arrow" class="h-4 w-4" />
-				</button>
-			</div>
+			<ServiceCta title={`Обсудим: ${service.data.title}`} text="Расскажите о задаче — разберём контекст и предложим следующий шаг." />
 		</article>
 	)}
 </Layout>
@@ -126,7 +156,7 @@ const breadcrumbSchema = {
 <style>
 	.prose-content :global(h2) { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600; }
 	.prose-content :global(p) { margin: 0.75rem 0; line-height: 1.75; color: var(--prose-text); }
-	.prose-content :global(ul) { margin: 0.75rem 0; padding-left: 1.5rem; list-style: disc; color: var(--prose-text); }
+	.prose-content :global(ul) { margin: 0.75rem 0; padding-left: 0; list-style: none; color: var(--prose-text); }
 	.prose-content :global(li + li) { margin-top: 0.25rem; }
 	.prose-content { --prose-text: oklch(0.371 0 0); }
 	:global(.dark) .prose-content { --prose-text: oklch(0.872 0 0); }

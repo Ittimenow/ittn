@@ -2,11 +2,11 @@
 const solutions = [
 	{
 		label: 'Цифровой канал',
-		title: 'Разработка сайтов и сервисов',
-		description: 'Корпоративные сайты, B2B-порталы, личные кабинеты, маркетплейсы и внутренние сервисы.',
-		when: 'Нужен новый канал продаж, клиентский интерфейс или внутренний инструмент.',
-		work: 'UX/UI, frontend, backend, интеграции, развитие продукта.',
-		href: '/services/web',
+		title: 'Разработка сайтов',
+		description: 'Лендинги, корпоративные и интерактивные сайты, интернет-магазины.',
+		when: 'Нужен новый канал продаж, маркетинговая площадка или сильное представление бренда.',
+		work: 'Структура, тексты, UX/UI, frontend, CMS, интеграции и запуск.',
+		href: '/services/sites/',
 	},
 	{
 		label: 'Продажи и сервис',
@@ -30,7 +30,7 @@ const solutions = [
 		description: 'Связываем сайт, CRM, ERP, телефонию, мессенджеры, рассылки, 1С и внутренние сервисы.',
 		when: 'У компании уже есть набор систем, но между ними нет единой логики.',
 		work: 'API, обмены, события, отчётность и контроль качества данных.',
-		href: '/services/support',
+		href: '/services/integrations/',
 	},
 	{
 		label: 'После запуска',
@@ -45,7 +45,7 @@ const solutions = [
 
 <section id="solutions" class="mx-auto max-w-[1440px] px-6 py-16 sm:py-24">
 	<div class="mb-10 max-w-3xl">
-		<p class="home-section-kicker">Наши решения</p>
+
 		<h2 class="home-section-title">
 			От отдельного сайта до единой цифровой системы компании
 		</h2>
@@ -64,7 +64,7 @@ const solutions = [
 					index === 0 && 'lg:col-span-2',
 				]}
 			>
-				<p class="home-section-kicker">{item.label}</p>
+
 				<h3 class="home-card-title mt-3 pr-8">{item.title}</h3>
 				<p class="home-card-copy mt-3 pr-4">{item.description}</p>
 				<div class="mt-6 grid gap-4 text-sm sm:grid-cols-2">

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">menu-24</title>
+  <!-- Source: src/components/Header.astro:189. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+
+					<path d="M3 6h18M3 12h18M3 18h18"></path>
+
+  </svg>
+</svg>

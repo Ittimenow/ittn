@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Bitrix24FormPopup from '../components/Bitrix24FormPopup.astro';
@@ -12,18 +11,21 @@ interface Props {
 	image?: string;
 	bare?: boolean;
 	headerVariant?: 'default' | 'glass';
+	bodyClass?: string;
 	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title = 'ittimenow',
-	description = 'ittimenow — сайт на Astro и Tailwind.',
-	image = '/og.png',
+	description = 'IT TIME NOW — разработка сайтов, внедрение CRM и автоматизация бизнеса.',
+	image = '/about/og.webp',
 	bare = false,
 	headerVariant = 'glass',
+	bodyClass = '',
 	structuredData = [],
 } = Astro.props;
 
+const indexable = import.meta.env.PUBLIC_INDEXABLE && !['/404', '/404/', '/404.html', '/global-styles/', '/design-system/'].includes(Astro.url.pathname);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImage = new URL(image, Astro.site ?? Astro.url);
 const siteURL = new URL('/', Astro.site ?? Astro.url);
@@ -34,7 +36,6 @@ const organizationSchema = {
 	url: siteURL.href,
 	logo: new URL('/brand/ittn-logo.webp', siteURL).href,
 	email: 'hello@ittimenow.com',
-	telephone: '+7-495-133-58-88',
 	address: {
 		'@type': 'PostalAddress',
 		addressLocality: 'Москва',
@@ -60,7 +61,7 @@ const schema = [organizationSchema, websiteSchema, ...pageSchema.filter(Boolean)
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<link rel="canonical" href={canonicalURL} />
+		{indexable && <link rel="canonical" href={canonicalURL} />}
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -71,9 +72,9 @@ const schema = [organizationSchema, websiteSchema, ...pageSchema.filter(Boolean)
 
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
-		<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
-		<meta name="yandex" content="noindex, nofollow, noarchive, nosnippet" />
+		<meta name="robots" content={indexable ? "index, follow" : "noindex, nofollow"} />
+		<meta name="googlebot" content={indexable ? "index, follow" : "noindex, nofollow"} />
+		<meta name="yandex" content={indexable ? "index, follow" : "noindex, nofollow"} />
 
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalURL} />
@@ -87,14 +88,13 @@ const schema = [organizationSchema, websiteSchema, ...pageSchema.filter(Boolean)
 		<meta name="twitter:image" content={ogImage} />
 		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-		<ClientRouter />
 	</head>
-	<body class="min-h-full antialiased">
+	<body class:list={['min-h-full antialiased', bodyClass]}>
 		{bare ? <slot /> : (
 			<>
-				<Header variant={headerVariant} transition:persist />
-				<main><slot /></main>
-				<Footer transition:persist />
+				<Header variant={headerVariant} />
+				<main class="pt-[84px] sm:pt-[96px]"><slot /></main>
+				<Footer />
 				<Bitrix24FloatingCta />
 				<Bitrix24FormPopup />
 			</>

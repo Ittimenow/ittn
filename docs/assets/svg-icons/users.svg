@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">users</title>
+  <!-- Source: src/components/UiIcon.astro:48. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.9"></path><path d="M16 3.1a4 4 0 0 1 0 7.8"></path>
+  </svg>
+</svg>

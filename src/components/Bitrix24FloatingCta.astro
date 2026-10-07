@@ -2,10 +2,10 @@
 import UiIcon from './UiIcon.astro';
 ---
 
-<button class="web-sticky-cta b24-web-form-popup-btn-21" type="button" data-b24-form-trigger>
+<button class="web-sticky-cta consultation-trigger" type="button" data-b24-form-trigger>
 	<span class="web-sticky-label">Бесплатная консультация</span>
 	<span class="web-sticky-icon">
-		<UiIcon name="phone" class="h-5 w-5" />
+		<UiIcon name="phone" class="h-[35px] w-[35px]" />
 	</span>
 </button>
 
@@ -26,7 +26,7 @@ import UiIcon from './UiIcon.astro';
 		border-radius: 9999px;
 		background: #232bff;
 		color: #fff;
-		padding: 0 18px;
+		padding: 0 10.5px;
 		font-size: 14px;
 		font-weight: 700;
 		line-height: 1;
@@ -38,7 +38,7 @@ import UiIcon from './UiIcon.astro';
 
 	.web-sticky-cta:hover,
 	.web-sticky-cta:focus-visible {
-		width: 264px;
+		width: 280px;
 		background: #181ee6;
 		padding-left: 34px;
 		box-shadow: 0 22px 54px -20px rgba(35, 43, 255, 0.95);
@@ -47,9 +47,9 @@ import UiIcon from './UiIcon.astro';
 
 	.web-sticky-icon {
 		display: inline-grid;
-		width: 20px;
-		height: 20px;
-		flex: 0 0 20px;
+		width: 35px;
+		height: 35px;
+		flex: 0 0 35px;
 		place-items: center;
 		animation: web-phone-ring 4.8s ease-in-out infinite;
 		transform-origin: 50% 50%;
@@ -107,7 +107,7 @@ import UiIcon from './UiIcon.astro';
 
 		.web-sticky-cta:hover,
 		.web-sticky-cta:focus-visible {
-			width: min(264px, calc(100vw - 24px));
+			width: min(280px, calc(100vw - 24px));
 		}
 	}
 </style>

@@ -92,25 +92,25 @@ listingCover: '/cases/perola-crm/main-image-perolasky.webp'
 <section class="case-media-grid case-media-grid-four">
 	<figure class="case-media-card">
 		<figcaption>Создание заявки и оффера с 2 ВС</figcaption>
-		<video autoplay loop muted playsinline preload="metadata">
+		<video poster="/video-posters/657d97026a1390bd.jpg" preload="none" controls loop muted playsinline>
 			<source src="/cases/perola-crm/request-manager.webm" type="video/webm" />
 		</video>
 	</figure>
 	<figure class="case-media-card">
 		<figcaption>Оффера для клиенат по уникальной ссылке</figcaption>
-		<video autoplay loop muted playsinline preload="metadata">
+		<video poster="/video-posters/b3875f60462efc0e.jpg" preload="none" controls loop muted playsinline>
 			<source src="/cases/perola-crm/client-choice.webm" type="video/webm" />
 		</video>
 	</figure>
 	<figure class="case-media-card">
 		<figcaption>Внесение информации о перелете в бриф</figcaption>
-		<video autoplay loop muted playsinline preload="metadata">
+		<video poster="/video-posters/02b679f4075779df.jpg" preload="none" controls loop muted playsinline>
 			<source src="/cases/perola-crm/manager-brief.webm" type="video/webm" />
 		</video>
 	</figure>
 	<figure class="case-media-card">
 		<figcaption>Бриф с информацией о перелете</figcaption>
-		<video autoplay loop muted playsinline preload="metadata">
+		<video poster="/video-posters/8217a4ecfcdc9c38.jpg" preload="none" controls loop muted playsinline>
 			<source src="/cases/perola-crm/client-brief.webm" type="video/webm" />
 		</video>
 	</figure>

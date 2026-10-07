@@ -84,7 +84,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 
 Далее мы разместили каталог услуг. Мы хотели, чтобы клиент мог быстро найти услуги по его автомобилю и не терялся в огромных списках. Для этого разработали сетку с карточками серий и кузовов, а при клике на кузов пользователь уже попадал в раздел с услугами конкретного автомобиля. Такой подход превратил каталог в лёгкий и понятный навигатор, который делает путь клиента к информации максимально коротким.
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/38e8a0ed2f8a6977.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/el-rey-digitalization/elrey-vybor-serii-i-kuzova.mp4" type="video/mp4" />
 </video>
 
@@ -92,7 +92,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 
 А если пользователь хотел посмотреть, какие услуги оказывает техцентр, мы сделали стилизованный под аналоговый счетчик список услуг на черном фоне.
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/a7f617258e8190bb.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/el-rey-digitalization/elrey-animashka-uslug.mp4" type="video/mp4" />
 </video>
 
@@ -100,7 +100,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 
 Когда мы добрались до блока с отзывами и причинами выбрать сервис, мы понимали: этот раздел должен работать как “момент истины” для потенциального клиента. Он уже увидел услуги, узнал о возможностях техцентра, но именно здесь решает — доверять или нет. А как можно доказать доверие? Только реальными отзывами и ссылкой на Яндекс.Карты. Мы не стали добавлять в отзывы фотографии, чтобы было меньше визуального шума, а пользователь сфокусировался на эмоции от самого отзыва.
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/cf04a47f8a6ca177.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/el-rey-digitalization/elrey-skrol-otzyvov.mp4" type="video/mp4" />
 </video>
 
@@ -112,7 +112,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 
 Чтобы усилить эффект, мы добавили интерактив. При скролле страницы текст раскрывал маленький сюрприз — появлялось изображение технического специалиста, который внимательно осматривает автомобиль. В итоге блок стал не просто элементом интерфейса, а маленьким акцентом, который добавляет энергии всей странице и мотивирует к действию.
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/791f318351c9d8ff.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/el-rey-digitalization/elrey-zapisatsya-na-osmotr.mp4" type="video/mp4" />
 </video>
 
@@ -120,7 +120,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 
 В разделе услуг мы сделали двухуровневый выбор — сначала серия, потом кузов — чтобы повторить привычную логику владельцев и быстро вести их к нужным услугам. При выборе этих опций на странице обновлялась информация по услугам. Далее пользователь выбирает конкретную услугу.
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/ffbe096bfb3b8b25.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/el-rey-digitalization/elrey-vybor-uslugi.mp4" type="video/mp4" />
 </video>
 
@@ -128,7 +128,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 
 На основании данных SEO-аудита мы разработали раздел “Неисправности”. В нём размещены популярные статьи по неисправностям брендов BMW, MINI и Rolls-Royce. Для удобства пользования мы реализовали удобный поиск по ключевым словам.
 
-<video class="case-video" autoplay loop muted playsinline>
+<video poster="/video-posters/a08dec68fd5ccb79.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/el-rey-digitalization/elrey-poisk-neispravnosti.mp4" type="video/mp4" />
 </video>
 

@@ -1,0 +1,100 @@
+name: Checks and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        environment: [staging, production]
+    env:
+      DEPLOY_ENV: ${{ matrix.environment }}
+      SITE_URL: ${{ matrix.environment == 'production' && 'https://ittimenow.com' || 'https://ittimenow-ittn-020d.twc1.net' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: python3 -m unittest discover -s deploy -p 'test_*.py'
+      - run: npm run build
+      - run: npm run test:build
+      - run: npm audit --audit-level=low
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+        if: matrix.environment == 'production'
+      - name: Build and smoke-test the exact production image
+        if: matrix.environment == 'production'
+        run: |
+          set -euo pipefail
+          image="ittn:sha-$GITHUB_SHA"
+          docker buildx build --load --platform linux/amd64 --provenance=false \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            -f deploy/Dockerfile -t "$image" .
+          docker run -d --name ittn-release --user 1000:1000 --read-only \
+            --cap-drop ALL --security-opt no-new-privileges --memory 256m \
+            -p 127.0.0.1:4321:4321 "$image"
+          trap 'docker logs ittn-release; docker rm -f ittn-release' EXIT
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4321/ -o /dev/null && break
+            sleep 1
+          done
+          node scripts/check-http.mjs http://127.0.0.1:4321 --production
+          mkdir -p release
+          docker image save "$image" | gzip -1 > release/image.tar.gz
+          (cd release && sha256sum image.tar.gz > image.tar.gz.sha256)
+          node --input-type=module <<'NODE'
+          import { readdir, writeFile } from 'node:fs/promises';
+          const routes = (await readdir('dist', { recursive: true })).filter(p => p.endsWith('.html')).map(p => '/' + p.replace(/(^|\/)index\.html$/, '$1'));
+          await writeFile('release/routes.json', JSON.stringify(routes));
+          NODE
+      - name: Upload the verified production artifact
+        if: matrix.environment == 'production' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: production-${{ github.sha }}-${{ github.run_attempt }}
+          path: release/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+
+  deploy:
+    needs: validate
+    if: github.repository == 'Ittimenow/ittn' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: ittn-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: https://ittimenow.com
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: production-${{ github.sha }}-${{ github.run_attempt }}
+          path: release
+      - name: Publish ITTN and verify the public site
+        env:
+          ITTN_SSH_KEY: ${{ secrets.ITTN_SSH_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash deploy/publish.sh

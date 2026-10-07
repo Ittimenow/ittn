@@ -1,0 +1,335 @@
+---
+import ServiceCta from '../components/ServiceCta.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import UiIcon from '../components/UiIcon.astro';
+import Layout from '../layouts/Layout.astro';
+
+const colorTokens = [
+	{ token: '--ittn-blue', value: '#232BFF', note: 'Основной CTA и активные состояния' },
+	{ token: '--ittn-blue-dark', value: '#1118CF', note: 'Hover плотных синих поверхностей' },
+	{ token: '--ittn-ink', value: '#111111', note: 'Основной текст и контрастные элементы' },
+	{ token: '--ittn-muted', value: '#626977', note: 'Вторичный текст' },
+	{ token: '--ittn-line', value: '#DFE4F2', note: 'Границы и разделители' },
+	{ token: '--ittn-cloud', value: '#F5F7FF', note: 'Мягкий фон секций' },
+	{ token: '--ittn-acid', value: '#D7FF38', note: 'Редкий дополнительный акцент' },
+	{ token: '--ittn-coral', value: '#FF5C39', note: 'Ошибки и тёплый контраст' },
+	{ token: '--ittn-blue-soft', value: '#7E84FF', note: 'Подписи на тёмных поверхностях' },
+	{ token: '--ittn-blue-pale', value: '#C9CCFF', note: 'Вспомогательный текст на синем фоне' },
+	{ token: '--ittn-disabled-bg', value: '#EDEFF7', note: 'Фон disabled-состояний' },
+	{ token: '--ittn-disabled-text', value: '#9AA0B0', note: 'Текст недоступных элементов' },
+];
+
+const typographyRows = [
+	{ selector: 'h1', parameters: '56–108 px / 800 / 0.92' },
+	{ selector: 'h2', parameters: '34–52 px / 700 / 1.05' },
+	{ selector: 'h3', parameters: '26 px / 700 / 1.12' },
+	{ selector: 'h4', parameters: '22 px / 700 / 1.2' },
+	{ selector: 'h5', parameters: '18 px / 700 / 1.3' },
+	{ selector: 'h6', parameters: '16 px / 700 / uppercase' },
+	{ selector: 'body', parameters: '18 px / 400 / 1.5' },
+	{ selector: 'code, kbd, pre, samp', parameters: 'JetBrains Mono' },
+];
+---
+
+<Layout
+	title="Глобальные стили — IT TIME NOW"
+	description="Живая витрина глобальных стилей дизайн-системы IT TIME NOW."
+>
+	<div class="demo-page">
+		<header class="demo-hero">
+			<div class="demo-shell">
+				<div class="demo-eyebrow">Global styles · design system</div>
+				<Breadcrumbs current="Глобальные стили" />
+<h1 class="demo-title">Глобальные стили<br />в живом виде</h1>
+				<p class="demo-lead">
+					Живая витрина цветов, типографики, элементов контента и интерфейса из
+					<code>src/styles/global.css</code>.
+				</p>
+				<nav class="demo-actions" aria-label="Навигация по документации">
+					<a class="ds-btn ds-btn-primary" href="/design-system/">
+						<span>Открыть дизайн-систему</span>
+						<UiIcon name="arrow-16" class="h-[28px] w-[28px]" />
+					</a>
+					<a class="ds-btn ds-btn-secondary" href="#tokens"><span>Смотреть примеры</span></a>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<section class="demo-section" id="tokens">
+				<div class="demo-shell">
+
+					<h2 class="demo-section-title">Цветовая система</h2>
+					<p class="demo-section-copy">Основные цветовые переменные из <code>:root</code> и их роль в интерфейсе.</p>
+
+					<div class="token-grid">
+						{colorTokens.map((item) => (
+							<article class="token-card">
+								<div class="token-swatch" style={`background:${item.value}`}>
+									<span class:list={['token-value', { 'is-light': ['#F5F7FF', '#EDEFF7', '#DFE4F2', '#D7FF38', '#C9CCFF'].includes(item.value) }]}>{item.value}</span>
+								</div>
+								<div class="token-body">
+									<div class="token-heading">
+										<code>{item.token}</code>
+									</div>
+									<p>{item.note}</p>
+								</div>
+							</article>
+						))}
+					</div>
+
+					<div class="token-meta-grid">
+						<article class="demo-panel">
+							<div class="demo-label">Радиусы</div>
+							<div class="radius-row">
+								<div class="radius-sample radius-sm">12</div>
+								<div class="radius-sample radius-md">16</div>
+								<div class="radius-sample radius-lg">24</div>
+							</div>
+							<p><code>--ittn-radius-sm/md/lg</code> · радиусы для полей, карточек и крупных блоков.</p>
+						</article>
+						<article class="demo-panel">
+							<div class="demo-label">Тени</div>
+							<div class="shadow-row">
+								<div class="shadow-sample shadow-main">shadow</div>
+								<div class="shadow-sample shadow-soft">soft</div>
+							</div>
+							<p><code>--ittn-shadow</code> и <code>--ittn-shadow-soft</code> · два уровня глубины для карточек и панелей.</p>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<section class="demo-section demo-section-soft" id="typography">
+				<div class="demo-shell">
+
+					<h2 class="demo-section-title">Семантические элементы без классов</h2>
+					<p class="demo-section-copy">Примеры ниже не получают типографических локальных стилей — это фактический результат глобальных селекторов.</p>
+
+					<div class="type-stack demo-panel">
+						<div class="type-sample"><span class="demo-label">H1</span><h1>Главный экран</h1></div>
+						<div class="type-sample"><span class="demo-label">H2</span><h2>Заголовок секции</h2></div>
+						<div class="type-sample"><span class="demo-label">H3</span><h3>Карточка услуги</h3></div>
+						<div class="type-sample"><span class="demo-label">H4</span><h4>Подзаголовок блока</h4></div>
+						<div class="type-sample"><span class="demo-label">H5</span><h5>Малый заголовок</h5></div>
+						<div class="type-sample"><span class="demo-label">H6</span><h6>Метка группы</h6></div>
+					</div>
+
+					<div class="content-grid">
+						<article class="demo-panel content-sample">
+							<div class="demo-label">Body / link / selection</div>
+							<p>Основной абзац объясняет задачу простым языком. Выделите этот текст мышью, чтобы увидеть глобальный <code>::selection</code>.</p>
+							<p><a href="#typography">Обычная текстовая ссылка</a> наследует цвет и использует глобальное подчёркивание.</p>
+						</article>
+						<article class="demo-panel content-sample">
+							<div class="demo-label">Unordered / ordered</div>
+							<ul><li>Короткий пункт списка</li><li>Маркер окрашен в primary</li></ul>
+							<ol><li>Фиксируем задачу</li><li>Проектируем решение</li></ol>
+							<p class="demo-note">Маркер UL — check 02 через <code>li::before</code>. Отдельную иконку-check внутрь пункта не добавляем.</p>
+						</article>
+						<article class="demo-panel content-sample">
+							<div class="demo-label">Blockquote / HR</div>
+							<blockquote>Делаем сложное — простым, скучное — крутым.</blockquote>
+							<hr />
+							<p>У цитаты глобально заданы семейство, вес и цвет; рамка — оформление демо.</p>
+						</article>
+						<article class="demo-panel content-sample">
+							<div class="demo-label">Code / keyboard / pre</div>
+							<p><code>npm run build</code> · нажмите <kbd>Tab</kbd></p>
+							<pre><code>{`:root {
+  --ittn-blue: #232bff;
+}`}</code></pre>
+						</article>
+					</div>
+
+					<div class="ds-table-wrap" tabindex="0" role="region" aria-label="Типографическая шкала">
+						<table class="ds-table">
+							<caption>Типографическая шкала</caption>
+							<thead><tr><th>Селектор</th><th>Размер / вес / интерлиньяж</th></tr></thead>
+							<tbody>
+								{typographyRows.map((row) => (
+									<tr><td><code>{row.selector}</code></td><td>{row.parameters}</td></tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+
+					<div class="ds-table-wrap demo-table-example" tabindex="0" role="region" aria-label="Пример таблицы проектов">
+						<table class="ds-table">
+							<caption>Пример · проекты в работе</caption>
+							<thead>
+								<tr><th>Проект</th><th>Формат</th><th>Этап</th><th data-align="number">Бюджет</th></tr>
+							</thead>
+							<tbody>
+								<tr><td><strong>Корпоративный портал</strong></td><td>Проектирование, разработка и интеграция с внутренними системами</td><td>В работе</td><td data-align="number">1 240 000 ₽</td></tr>
+								<tr><td><strong>CRM для отдела продаж</strong></td><td>Аудит процессов и внедрение автоматизации</td><td>Аудит</td><td data-align="number">480 000 ₽</td></tr>
+								<tr><td><strong>Сервис аналитики</strong></td><td>Интерфейс, API и отчётность для руководителей</td><td>Оценка</td><td data-align="number">760 000 ₽</td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<section class="demo-section" id="controls">
+				<div class="demo-shell">
+
+					<h2 class="demo-section-title">Кнопки и состояния</h2>
+					<p class="demo-section-copy">Основные варианты кнопок, полей ввода и элементов выбора с их интерактивными состояниями.</p>
+
+					<div class="demo-panel">
+						<div class="demo-label">.ds-btn · hover / active / focus-visible</div>
+						<div class="button-row">
+							<button class="ds-btn ds-btn-primary" type="button"><span>Primary</span><UiIcon name="arrow-16" class="h-[28px] w-[28px]" /></button>
+							<button class="ds-btn ds-btn-secondary" type="button"><span>Secondary</span><UiIcon name="arrow-16" class="h-[28px] w-[28px]" /></button>
+							<button class="ds-btn ds-btn-dark" type="button"><span>Dark</span><UiIcon name="arrow-16" class="h-[28px] w-[28px]" /></button>
+							<button class="ds-btn ds-btn-ghost" type="button"><span>Ghost</span><UiIcon name="arrow-16" class="h-[28px] w-[28px]" /></button>
+						</div>
+					</div>
+
+					<div class="control-grid">
+						<article class="demo-panel">
+							<div class="demo-label">Input / textarea / select</div>
+							<div class="field-stack">
+								<label>Имя<input class="demo-control" type="text" placeholder="Как вас зовут" /></label>
+								<label>Задача<textarea class="demo-control" rows="3" placeholder="Коротко опишите задачу"></textarea></label>
+								<label>Формат<select class="demo-control"><option>Новый проект</option><option>Развитие системы</option></select></label>
+							</div>
+							<p class="demo-note">Размеры и внутренние отступы задаёт оболочка демо; цвет границы, радиус, caret и focus-ring приходят из global.css.</p>
+						</article>
+
+						<article class="demo-panel">
+							<div class="demo-label">Checkbox / radio</div>
+							<div class="choice-stack">
+								<label class="ittn-choice ittn-checkbox"><input type="checkbox" checked /><span class="ittn-choice-mark" aria-hidden="true"></span><span class="ittn-choice-label">Выбранный checkbox</span></label>
+								<label class="ittn-choice ittn-checkbox"><input type="checkbox" /><span class="ittn-choice-mark" aria-hidden="true"></span><span class="ittn-choice-label">Обычный checkbox</span></label>
+								<label class="ittn-choice ittn-checkbox"><input type="checkbox" disabled /><span class="ittn-choice-mark" aria-hidden="true"></span><span class="ittn-choice-label">Disabled checkbox</span></label>
+								<label class="ittn-choice ittn-radio"><input type="radio" name="demo-budget" checked /><span class="ittn-choice-mark" aria-hidden="true"></span><span class="ittn-choice-label">Выбранный radio</span></label>
+								<label class="ittn-choice ittn-radio"><input type="radio" name="demo-budget" /><span class="ittn-choice-mark" aria-hidden="true"></span><span class="ittn-choice-label">Обычный radio</span></label>
+							</div>
+							<p class="demo-note">Рукописные маркеры показывают выбранное, обычное и недоступное состояния.</p>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<section class="demo-section demo-section-soft" id="home-components">
+				<div class="demo-shell">
+
+
+					<h2 class="home-section-title">Секционные и карточные стили</h2>
+					<p class="home-section-copy">Эти классы развивают дизайн-систему для реальных продающих страниц: сохраняют палитру и шрифты, но добавляют поведение карточек и мобильную ленту.</p>
+
+					<div class="home-mobile-carousel home-card-grid demo-card-grid">
+						<article class="home-swipe-card demo-simple-card">
+							<div class="demo-label">.home-card-title</div>
+							<h3 class="home-card-title">Карточка результата</h3>
+							<p class="home-card-copy">Короткое объяснение пользы с глобальным вторичным цветом и межстрочным интервалом.</p>
+						</article>
+						<article class="home-swipe-card demo-simple-card">
+							<div class="demo-label">.home-trust-card-title</div>
+							<h3 class="home-trust-card-title">Причина доверять команде</h3>
+							<p class="home-card-copy">На мобильном эта карточка становится элементом горизонтальной ленты.</p>
+						</article>
+						<a class="home-link-card home-service-card demo-simple-card" href="#controls">
+							<div class="demo-label">.home-link-card</div>
+							<h3 class="home-card-title">Интерактивная услуга</h3>
+							<p class="home-card-copy">Hover поднимает карточку и проявляет фирменный синий градиент.</p>
+							<span class="home-link-card-cta">Подробнее <span aria-hidden="true">→</span></span>
+						</a>
+					</div>
+
+					<div class="dark-preview dark">
+						<div>
+							<div class="demo-label">:where(.dark)</div>
+							<h3 class="dark-preview-title">Тёмный контекст</h3>
+							<p class="home-section-copy">В global.css тёмная схема объявлена как light, но для home-copy и link-card существуют отдельные тёмные варианты.</p>
+						</div>
+						<a class="home-link-card demo-simple-card" href="#typography">
+							<h3 class="home-card-title">Карточка в .dark</h3>
+							<p class="home-card-copy">Фон, граница и hover-тень меняются глобальными dark-селекторами.</p>
+							<span class="home-link-card-cta">Открыть <span aria-hidden="true">→</span></span>
+						</a>
+					</div>
+					<div class="demo-footer-actions">
+						<a class="ds-btn ds-btn-primary" href="/design-system/"><span>Открыть дизайн-систему</span></a>
+						<a class="ds-btn ds-btn-ghost" href="#tokens"><span>Наверх</span></a>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+<ServiceCta title="Обсудим интерфейс вашего продукта?" text="Поможем выстроить понятный интерфейс и единую систему компонентов." />
+</Layout>
+
+<style>
+	.demo-page { min-height: 100vh; }
+	.demo-shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+	.demo-hero { padding: 88px 0 72px; background: linear-gradient(135deg, rgba(35,43,255,.1), transparent 42%), var(--ittn-cloud); border-bottom: 1px solid var(--ds-border); }
+	.demo-eyebrow { color: var(--ds-primary); font-family: var(--ittn-font-mono); font-size: 13px; font-weight: 500; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; }
+	.demo-label { color: var(--ds-primary); font-family: var(--ittn-font-mono); font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: .11em; text-transform: uppercase; }
+	.demo-title { max-width: 920px; margin: 22px 0 0; font-size: var(--ds-display-size); font-weight: var(--ds-display-weight); line-height: var(--ds-display-line); letter-spacing: -.03em; }
+	.demo-lead { max-width: 760px; margin: 28px 0 0; color: var(--ds-muted); font-size: 19px; line-height: 1.55; }
+	.demo-actions, .button-row, .demo-footer-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+	.demo-section { padding: 88px 0; }
+	.demo-section-soft { background: var(--ittn-cloud); border-block: 1px solid var(--ds-border); }
+	.demo-section-title { max-width: 900px; margin: 18px 0 0; font-size: clamp(34px, 5vw, 52px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
+	.demo-section-copy { max-width: 780px; margin: 18px 0 40px; color: var(--ds-muted); }
+	.token-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 40px; }
+	.token-card, .demo-panel { border: 1px solid var(--ds-border); border-radius: 18px; background: var(--ds-card-strong); box-shadow: var(--ittn-shadow-soft); }
+	.token-card { overflow: hidden; }
+	.token-swatch { display: flex; min-height: 112px; align-items: flex-end; padding: 14px; border-bottom: 1px solid var(--ds-border); }
+	.token-value { color: white; font-family: var(--ittn-font-mono); font-size: 12px; font-weight: 700; }
+	.token-value.is-light { color: var(--ds-ink); }
+	.token-body { padding: 18px; }
+	.token-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+	.token-body p { margin: 12px 0 0; color: var(--ds-muted); font-size: 14px; line-height: 1.5; }
+	.token-meta-grid, .content-grid, .control-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
+	.demo-panel { padding: 28px; }
+	.demo-panel > p:last-child { margin-bottom: 0; }
+	.radius-row, .shadow-row { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 24px; }
+	.radius-sample, .shadow-sample { display: grid; width: 88px; height: 72px; place-items: center; border: 1px solid var(--ds-border); background: var(--ittn-cloud); color: var(--ds-primary); font-family: var(--ittn-font-mono); font-size: 12px; }
+	.radius-sm { border-radius: var(--ittn-radius-sm); }
+	.radius-md { border-radius: var(--ittn-radius-md); }
+	.radius-lg { border-radius: var(--ittn-radius-lg); }
+	.shadow-main { box-shadow: var(--ittn-shadow); }
+	.shadow-soft { box-shadow: var(--ittn-shadow-soft); }
+	.type-stack { padding: 0; overflow: hidden; }
+	.type-sample { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 22px 28px; border-bottom: 1px solid var(--ds-border); }
+	.type-sample:last-child { border-bottom: 0; }
+	.type-sample :where(h1,h2,h3,h4,h5,h6) { margin: 0; }
+	.content-sample blockquote { margin: 20px 0; border-left: 4px solid var(--ds-primary); padding-left: 18px; }
+	.content-sample pre { overflow-x: auto; border-radius: var(--ittn-radius-sm); background: var(--ittn-black); color: white; padding: 18px; font-size: 13px; }
+	.content-sample kbd { border: 1px solid var(--ds-border); border-radius: 6px; background: var(--ittn-cloud); padding: 2px 7px; box-shadow: 0 2px 0 var(--ds-border); }
+	.content-sample hr { margin: 24px 0; }
+	.ds-table-wrap { margin-top: 20px; }
+	.demo-table-example { margin-top: 28px; }
+	.field-stack, .choice-stack { display: grid; gap: 18px; margin-top: 22px; }
+	.field-stack label { display: grid; gap: 7px; color: var(--ds-muted); font-size: 13px; font-weight: 700; }
+	.demo-control { width: 100%; border-width: 1.5px; border-style: solid; background: white; padding: 13px 15px; color: var(--ds-ink); font-size: 16px; }
+	.demo-note { color: var(--ds-muted); font-size: 13px; line-height: 1.5; }
+	.demo-card-grid { margin-top: 38px; }
+	.demo-simple-card { display: block; min-height: 280px; padding: 28px; color: inherit; text-decoration: none; }
+	.demo-simple-card .home-card-copy { margin-top: 14px; }
+	.demo-simple-card .home-link-card-cta { margin-top: 30px; }
+	.dark-preview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .7fr); gap: 32px; align-items: center; margin-top: 32px; border-radius: var(--ittn-radius-lg); background: #171a22; padding: 32px; color: white; }
+	.dark-preview-title { margin: 14px 0 0; color: white; }
+	.dark-preview .demo-label { color: var(--ittn-blue-soft); }
+	.dark-preview .home-section-copy { margin-bottom: 0; }
+	.dark-preview .home-link-card { color: white; }
+	.dark-preview .home-card-title { color: white; }
+
+	@media (min-width: 641px) {
+		.demo-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+	}
+
+	@media (max-width: 760px) {
+		.demo-shell { width: min(100% - 32px, 1180px); }
+		.demo-hero, .demo-section { padding-block: 64px; }
+		.token-meta-grid, .content-grid, .control-grid, .dark-preview { grid-template-columns: 1fr; }
+		.type-sample { grid-template-columns: 1fr; gap: 10px; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.demo-page *, .demo-page *::before, .demo-page *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+	}
+</style>

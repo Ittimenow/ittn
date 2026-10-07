@@ -1,130 +1,178 @@
 # IT Time Now site
 
-Astro-сайт IT Time Now: корпоративные страницы, услуги, кейсы, блог, лендинги Bitrix24 и РосБизнесСофт, дизайн-система и служебные страницы.
+Статический сайт IT TIME NOW на Astro 7 и Tailwind CSS 4: услуги, кейсы, блог, команда и юридические документы. Node.js >=22.12.0; в CI и Docker используется Node 22. Зависимости зафиксированы в `package-lock.json`.
 
 ## Правило для ИИ-агентов
 
-Если появляется новая страница, маршрут или новый content-файл, который создает публичную страницу, обязательно обновляйте этот README в этом же изменении.
-
-Обновлять нужно:
-
-- карту маршрутов в разделе `Маршруты`;
-- список страниц в разделе `Страницы`;
-- связанные компоненты или content-коллекции, если страница добавляет новую архитектурную зону;
-- примечания для ИИ, если у страницы есть особая логика, отдельный лендинг или нестандартные ассеты.
-
-Новая страница считается появившейся, если добавлен файл в `src/pages/**` или добавлен markdown-файл в `src/content/{services,cases,posts}/`, который рендерится динамическим маршрутом.
+При добавлении публичной страницы, маршрута или content-файла обновляйте карту маршрутов и описание связанных компонентов в этом README. Учитывайте незакоммиченные изменения пользователя и правила `AGENTS.md`.
 
 ## Команды
 
 | Команда | Действие |
 | :-- | :-- |
-| `npm install` | Установить зависимости |
-| `npm run dev` | Запустить локальный dev-сервер Astro |
-| `npm run build` | Собрать production-версию в `dist/` |
-| `npm run preview` | Локально проверить production-сборку |
-| `npm run astro ...` | Запустить Astro CLI |
+| `npm ci` | Воспроизводимая установка из lock-файла |
+| `npm run dev` | Локальная разработка |
+| `npm run check` | Проверка Astro и TypeScript |
+| `npm test` | Сценарии меню, CRM, конфигурации окружений и HTTP-сервера |
+| `npm run build` | Статическая сборка в `dist/` |
+| `npm run test:build` | Проверка всех HTML, ссылок, ресурсов, SEO и sitemap |
+| `npm start` | Раздача готовой сборки, по умолчанию `0.0.0.0:4321` |
+| `npm run preview` | Встроенный preview Astro для разработки |
+| `npm audit --audit-level=low` | Проверка зависимостей |
 
-## Технологический стек
+`HOST` и `PORT` управляют адресом сервера. `npm start` требует предварительной сборки; после замены `dist/` сервер нужно перезапустить. В Docker используется тот же сервер `scripts/serve.mjs`, без Astro в runtime.
 
-- Astro 6: файловый роутинг, статическая сборка, layouts, content collections и `astro:transitions`.
-- TypeScript: конфигурация content collections и типизация Astro props.
-- Tailwind CSS 4: подключен через Vite-плагин `@tailwindcss/vite`.
-- Three.js: используется в экспериментальных WebGL/3D-страницах.
-- Markdown: контент услуг, кейсов и блога хранится в `src/content`.
-- npm и Node.js `>=22.12.0`: пакетный менеджер и минимальная версия runtime указаны в `package.json`.
+## Окружения и индексация
 
-## Тестовый домен и индексация
+Настройки передаются **на этапе сборки** через переменные окружения shell/CI или Docker build args. `.env.example` служит справочником; конфигурация релиза не загружает его автоматически.
 
-Текущий тестовый домен: `https://ittimenow-ittn-020d.twc1.net/`.
+По умолчанию `DEPLOY_ENV=staging`, canonical-домен для метаданных — `https://ittimenow-ittn-020d.twc1.net`. Все страницы получают `noindex`, `robots.txt` запрещает обход, sitemap не создаётся. Другой тестовый адрес передавайте в `SITE_URL`.
 
-Пока сайт размещен на тестовом домене, индексация закрыта:
+Production требует одновременно `DEPLOY_ENV=production` и явный `SITE_URL` с публичным HTTPS-доменом без пути. Без домена, с localhost или тестовым доменом Timeweb сборка останавливается. Production-домен — `https://ittimenow.com`; CI использует этот же адрес, чтобы находить в том числе абсолютные ссылки на отсутствующие страницы своего сайта.
 
-- `astro.config.mjs` использует тестовый домен в `site`, чтобы canonical и OG URL не указывали на production;
-- `public/robots.txt` запрещает обход всего сайта для всех user-agent;
-- `src/layouts/Layout.astro` добавляет `noindex,nofollow` в HTML всех страниц;
-- `public/_headers` добавляет `X-Robots-Tag` для хостингов, которые поддерживают этот файл.
+```sh
+DEPLOY_ENV=staging npm run build
+npm run test:build
 
-Перед переводом на production-домен нужно заменить `site` на production URL и снять временные запреты индексации.
-
-## Деплой
-
-Сайт собирается как статический Astro-сайт, поэтому на хостинге нужно публиковать содержимое `dist/` после `npm run build`. Не публикуйте `public/ds-v2` как корневой каталог: в этой папке лежат только ассеты, которые использует сайт.
-
-## Архитектура
-
-```text
-/
-├── public/
-│   ├── clients/                 # Логотипы клиентов
-│   ├── fonts/                   # Локальные шрифты
-│   ├── textures/earth/          # Текстуры для 3D Earth
-│   ├── favicon.svg
-│   ├── favicon.ico
-│   ├── main-b24.png
-│   ├── main-b24-v2.png
-│   └── main-rbs.png
-├── src/
-│   ├── components/              # Повторно используемые Astro-компоненты и секции
-│   ├── content/                 # Markdown-контент коллекций
-│   │   ├── cases/
-│   │   ├── posts/
-│   │   └── services/
-│   ├── layouts/
-│   │   └── Layout.astro         # Общий HTML layout, header/footer/theme init
-│   ├── pages/                   # Файловые маршруты Astro
-│   ├── styles/
-│   │   └── global.css           # Tailwind CSS 4, DS-токены, темы и глобальные стили
-│   └── content.config.ts        # Схемы content collections
-├── astro.config.mjs
-├── Dockerfile
-├── package.json
-└── tsconfig.json
+DEPLOY_ENV=production SITE_URL=https://ittimenow.com npm run build
+npm run test:build
 ```
+
+Production-сборка генерирует canonical/OG URL, `sitemap-index.xml`, `sitemap-0.xml`, `robots.txt`, `_headers`, `_redirects` и закрытый от HTTP файл `.release.json`. Страницы `/design-system/`, `/global-styles/` и 404 остаются `noindex` и исключены из sitemap. OG-изображение по умолчанию — `/about/og.webp`.
+
+## Деплой и откат
+
+Для статического хостинга публикуйте **весь `dist/`**, а не `public/`. Хостинг должен применять `_headers`, `_redirects` и отдавать `404.html` со статусом 404; если формат файлов не поддерживается, перенесите правила из `config/release.mjs` в настройки хостинга. Не используйте SPA fallback на главную.
+
+Для Docker:
+
+```sh
+# SITE_URL должен быть задан заранее реальным production-доменом.
+docker build --build-arg DEPLOY_ENV=production --build-arg SITE_URL="$SITE_URL" -t ittn:release .
+docker run --rm -p 127.0.0.1:4321:4321 ittn:release
+```
+
+Контейнер работает от пользователя `node`, слушает 4321 и имеет healthcheck. TLS и привязку домена выполняет reverse proxy/хостинг. Переменные индексации при `docker run` не меняют уже собранные HTML. Для staging собирайте отдельный образ с `DEPLOY_ENV=staging`.
+
+Перед выкладкой:
+
+1. `npm ci`, `npm run check`, `npm test`, сборка нужного окружения, `npm run test:build`, `npm audit`.
+2. Проверка контейнера и staging в браузере: desktop, 320–393 px, открытие/прокрутка/закрытие меню, консультация, переходы, видео.
+3. Использовать production-домен `https://ittimenow.com`. В Bitrix24 проверить подписи полей, согласие на обработку данных и адресатов заявки. Отправить одну согласованную тестовую заявку и подтвердить её получение в CRM — локальные проверки не подтверждают доставку.
+4. Сохранить текущий образ/архив и настройки хостинга. Выкладывать артефакт атомарно; при ошибке вернуть предыдущий образ/архив и перезапустить сервер.
+5. После выкладки проверить `/`, страницу услуги, `/services/web/` (301), неизвестный URL (404), robots, sitemap, canonical, HTTPS и реальную заявку. Зафиксировать время релиза и версию артефакта.
+
+Workflow `.github/workflows/release-checks.yml` проверяет staging и production, зависимости и Docker. После успешных проверок push в `main` репозитория `Ittimenow/ittn` автоматически публикует проверенный образ на VPS. Pull request запускает только проверки. Повторный запуск доступен в GitHub → Actions → Checks and deploy → Run workflow (ветка `main`).
+
+### Как публиковать доработки
+
+После локальной проверки изменений:
+
+```sh
+git add <изменённые-файлы>
+git commit -m "Описание изменений"
+git push origin main
+```
+
+Результат публикации отображается в [GitHub Actions](https://github.com/Ittimenow/ittn/actions). GitHub собирает обе версии сайта, проверяет HTML/ссылки, тесты и зависимости, создаёт production-образ для `linux/amd64` и проверяет его HTTP-ответы. На VPS передаётся этот же образ с меткой `ittn:sha-<commit>` и SHA-256 архива; сборка на сервере не выполняется. Артефакт Actions хранится один день, на сервере сохраняются три успешных CI-релиза и образы, необходимые для текущего состояния и отката.
+
+`deploy/autodeploy.py` принимает образ через отдельный SSH-ключ. Ключ разрешает только `status` и строго определённую команду `deploy`; произвольная shell-команда, SSH-туннели и изменение других проектов недоступны. Обработчик проверяет контрольную сумму, архитектуру, непривилегированного пользователя и commit SHA; загрузка тегов чужих Docker-образов запрещена. Ключ сервера закреплён в `deploy/known_hosts`.
+
+Новая версия сначала запускается на `127.0.0.1:4322`, проверяются healthcheck, страницы, редирект, 404 и production-индексация. Затем заменяется только сервис `web` проекта `ittn` на порту 4321. В момент замены контейнера возможен короткий перерыв. Если запуск или проверка после замены неуспешны, предыдущий образ автоматически возвращается. Workflow не прерывает уже начатую публикацию, сервер дополнительно использует `flock`; устаревшие задания пропускаются. Общий Caddy, DNS и почта при автопубликации не изменяются.
+
+Первичная настройка (один раз):
+
+1. На сервере установить `autodeploy.py` и `compose.yml` в `/home/deploy/ittn/`.
+2. Добавить отдельный публичный ключ в `authorized_keys` пользователя `deploy` с `restrict,command="/usr/bin/python3 /home/deploy/ittn/autodeploy.py"`.
+3. Добавить приватную часть **только** в GitHub → Settings → Secrets and variables → Actions → `ITTN_SSH_KEY`. В репозитории приватного ключа нет. При замене ключа сначала добавить новый, проверить доставку, затем удалить старую строку по его комментарию, сохранив остальные ключи.
+4. Включить GitHub Actions для репозитория и использовать окружение `production` без ручного подтверждения каждого релиза. Проверить первый push до успешного завершения задания `deploy`.
+
+`deployment.json` на VPS содержит SHA и время текущего автоматического релиза. `previous.env` содержит предыдущий образ. Для ручного отката на VPS, с блокировкой параллельной публикации:
+
+```sh
+cd /home/deploy/ittn
+flock .deploy.lock sh -c 'cp previous.env .env && docker compose --project-directory /home/deploy/ittn -f /home/deploy/ittn/compose.yml up -d --no-deps --wait web'
+```
+
+После отката проверить публичный сайт; следующий успешный push в `main` опубликует новый коммит. Обновление серверного `autodeploy.py` или общей инфраструктуры выполняется отдельно через обычный административный SSH-доступ. CI-ключ доставляет только образы приложения.
+
+### VPS: fj-vps / 201.51.11.138
+
+Релиз `20261007-production` опубликован 7 октября 2026 года. Проверены 45 маршрутов по публичному HTTPS, сертификаты обоих доменов, открытие Bitrix24 и меню на 320/393 px. Контрольные суммы и результаты находятся на VPS в `releases/20261007-production/manifest.json`. Получение заявки в CRM не проверялось; подпись `TelegramUsername_WZ` меняется в настройках Bitrix24.
+
+Каталог сайта на сервере — `/home/deploy/ittn`, отдельный Compose-проект — `ittn`, контейнер — `ittn-web-1`. `deploy/compose.yml` публикует только `127.0.0.1:4321`, ограничивает память 256 MiB и CPU 0.5, запускает процесс без root, с файловой системой только для чтения и ротацией логов. Веб-порты 80/443 обслуживает уже существующий Caddy.
+
+Для ручной выкладки сайт собирается локально, для автоматической — в GitHub Actions, чтобы не нагружать другие проекты VPS:
+
+```sh
+npm ci
+npm run check
+npm test
+DEPLOY_ENV=production SITE_URL=https://ittimenow.com npm run build
+npm run test:build
+npm audit --audit-level=low
+python3 -m unittest discover -s deploy -p 'test_*.py'
+# RELEASE_TAG — новая уникальная метка каждой выкладки.
+docker buildx build --load --platform linux/amd64 -f deploy/Dockerfile -t "ittn:$RELEASE_TAG" .
+```
+
+`deploy/Dockerfile` упаковывает уже проверенный `dist/`; собственный `.dockerignore` включает только готовый сайт, сервер и lock-файл. Сборка образа отклоняет staging и чужой canonical-домен. Проверить образ локально через `scripts/check-http.mjs`, затем передать `docker save`-архив по SSH, сравнить SHA-256 и выполнить `docker load` на VPS. Не отправлять `.env`, исходные секреты или настройки чужих проектов.
+
+В `/home/deploy/ittn/.env` хранится только `ITTN_IMAGE=ittn:<release-tag>`. После сохранения предыдущего значения запустить **только** этот проект:
+
+```sh
+docker compose --project-directory /home/deploy/ittn -f /home/deploy/ittn/compose.yml up -d --no-deps --wait web
+```
+
+Записывать метку, image ID, SHA-256 архива и результаты проверок в `/home/deploy/ittn/releases/<release-tag>/`. Хранить предыдущий образ для отката. Для отката вернуть прежний `ITTN_IMAGE` и повторить эту же команду; другие Compose-проекты не затрагиваются. При первом переносе возврат DNS на старый IP `92.53.96.41` возвращает прежний сайт, пока старый хостинг активен.
+
+Первичное подключение домена выполняет `deploy/caddy-site.py` (скопировать его и `Caddyfile.ittn` в `/home/deploy/ittn/`). Без аргументов он только валидирует конфигурацию; `--apply` сохраняет резервные копии, добавляет два маршрута через локальный API Caddy с защитой от конкурентных изменений и дописывает только блок ITTN в файл запуска. После изменения сравнивается вся конфигурация: остальные параметры должны остаться прежними. `--remove` удаляет только эти маршруты и блок ITTN, сохраняя другие изменения.
+
+**Обнаруженное состояние общего Caddy:** на момент переноса активная конфигурация содержит больше сайтов, чем `/opt/fj/deploy/caddy/Caddyfile`. Это существующее расхождение не исправляется в рамках ITTN. Не выполнять `caddy reload` из этого файла и не перезапускать общий контейнер при выкладке ITTN: это может отключить другие сайты. Скрипт работает с текущей активной конфигурацией, не перечитывая устаревший файл. Резервные копии находятся в `/home/deploy/ittn/backups/`.
+
+DNS редактируется в старом аккаунте Timeweb. A основного домена и `www` должны указывать на `201.51.11.138`; старые AAAA обоих имён (`2a03:6f00:1::5c35:6029`) должны отсутствовать, поскольку у VPS нет публичного IPv6. NS, MX (`mx1.timeweb.ru`, `mx2.timeweb.ru`), SPF, DKIM и DMARC не менять; домен, почтовые ящики и почтовую услугу в старом аккаунте сохранить. Caddy автоматически получает и продлевает HTTPS-сертификаты после обновления DNS.
+
+После выкладки проверить все маршруты через `node scripts/check-http.mjs https://ittimenow.com --production`, HTTPS для обоих имён, 301 с `www`, robots/sitemap/canonical и открытие CRM. Доступность других сайтов и ID/время запуска их контейнеров должны совпадать с состоянием до выкладки. Старый эксперимент `/demo/horoscope/` в новый статический сайт не перенесён; в историческом кейсе оставлено его описание без ссылки на отсутствующий маршрут.
+
+## Формы и медиа
+
+Кнопки с `data-b24-form-trigger` открывают форму Bitrix24 №21. `Bitrix24FormPopup.astro` и `src/scripts/consultation.js` загружают официальный виджет по первому нажатию, ждут его готовности и открывают один экземпляр на странице. Между страницами используется обычная браузерная навигация: это сохраняет штатный жизненный цикл DOM и CSS внешнего виджета. При ошибке или таймауте посетитель видит email для связи. Поля, валидация, согласие и отправка принадлежат CRM; локальной имитации отправки нет.
+
+`ServiceCta.astro` — финальный блок по эталону дизайн-системы, `Breadcrumbs.astro` — общие хлебные крошки, `ServiceTimeline.astro` — этапы работы. `ConsultationForm.astro` оставлен как совместимая обёртка финального CTA главной.
+
+Видео в кейсах используют `controls`, `preload="none"` и обложку; загрузка начинается при воспроизведении. В каталоге видео загружается при наведении мыши, на мобильном остаётся обложка. Обложки роликов лежат в `public/video-posters/`. Изображение AI-героя отдаётся в WebP; исходный PNG сохранён.
 
 ## Маршруты
 
-| URL | Источник | Назначение |
-| :-- | :-- | :-- |
-| `/` | `src/pages/index.astro` | Главная страница |
-| `/about` | `src/pages/about.astro` | О компании |
-| `/services` | `src/pages/services/index.astro` | Каталог услуг из `src/content/services` |
-| `/services/:slug` | `src/pages/services/[...slug].astro` | Динамические страницы услуг |
-| `/services/bitrix24` | `Bitrix24Landing.astro` через `services/[...slug].astro` | Отдельный лендинг Bitrix24 |
-| `/services/rbs` | `RbsLanding.astro` через `services/[...slug].astro` | Отдельный лендинг РосБизнесСофт |
-| `/cases` | `src/pages/cases/index.astro` | Каталог кейсов из `src/content/cases` |
-| `/cases/:slug` | `src/pages/cases/[...slug].astro` | Динамическая страница кейса |
-| `/posts` | `src/pages/posts/index.astro` | Список постов из `src/content/posts` |
-| `/posts/:slug` | `src/pages/posts/[...slug].astro` | Динамическая страница поста |
-| `/icons` | `src/pages/icons.astro` | Список и описания иконок сайта |
-| `/b24new` | `src/pages/b24new.astro` | Альтернативный лендинг Bitrix24 |
-| `/codebg` | `src/pages/codebg.astro` | Экспериментальная shader-страница |
-| `/codegame` | `src/pages/codegame.astro` | Экспериментальная shader/game-страница |
-| `/earth-test` | `src/pages/earth-test.astro` | Тестовая 3D Earth-страница |
+| URL | Источник / назначение |
+| :-- | :-- |
+| `/` | `src/pages/index.astro`, главная |
+| `/about/` | `src/pages/about.astro`, направления и команда |
+| `/services/` | Каталог услуг |
+| `/services/bitrix24/`, `/services/rbs/`, `/services/elma/` | Специализированные лендинги CRM/ERP/BPM |
+| `/services/sites/`, `/services/web-services/`, `/services/integrations/` | Разработка и интеграции через `DevelopmentServicePage.astro` |
+| `/services/support/` | `SupportLanding.astro`, техническая поддержка |
+| `/services/ai/` | `AiLanding.astro`, каталог решений ИИ |
+| `/services/ai/consultants/`, `/services/ai/sales-assistants/`, `/services/ai/knowledge-bases/`, `/services/ai/routine-automation/` | `services/ai/[slug].astro`, данные `src/data/ai-services.ts` |
+| `/services/:slug/` | `src/pages/services/[...slug].astro`, коллекция услуг |
+| `/services/web/` | 301 на `/services/sites/` |
+| `/soprovozhdenie-vashih-it-proektov/` | 301 на `/services/support/` |
+| `/cases/`, `/cases/:slug/` | Каталог и страницы коллекции кейсов |
+| `/posts/`, `/posts/:slug/` | Блог; черновики не публикуются |
+| `/oferta-ooo-vok-torg-na-sertifikat-1s-bit/` | Оферта на сертификат Битрикс24.Маркет Плюс |
+| `/oferta-ip-podobnyi-jurii-semenovich-na-zakljuchenie-sublicenzionnogo-dogovora/` | Сублицензионная оферта |
+| `/design-system/` | Эталон из `temp/design_system-ittn-v2/design-system.html`, noindex |
+| `/global-styles/` | Демонстрация глобальных стилей, noindex |
+| `/404.html` | Страница для неизвестных URL, noindex |
+| `/robots.txt`, `/sitemap-index.xml`, `/sitemap-0.xml` | Генерируются при сборке; sitemap только в production |
 
-## Страницы
+## Страницы и архитектура
 
-### Основные
+`src/layouts/Layout.astro` объединяет метаданные, навигацию, контент, футер и консультацию. Публичные страницы находятся в `src/pages/`; услуги, кейсы и посты — в `src/content/`. Компоненты — в `src/components/`, клиентские контроллеры — в `src/scripts/`, стили — в `src/styles/global.css`, статические файлы — в `public/`.
 
-- `src/pages/index.astro` собирает главную из `Hero`, `AudienceSegments`, `BusinessTasks`, `DirectionsGrid`, `PlatformChooser`, `BusinessOutcomes`, `CasesPreview`, `TrustReasons`, `ClientLogos`, `WorkProcess`, `TechStack`, `ConsultationForm`.
-- `src/pages/about.astro` содержит статический контент о компании.
-- `src/pages/services/index.astro` группирует услуги по `group` из content collection.
-- `src/pages/cases/index.astro` и `src/pages/posts/index.astro` строят списки из content collections.
+Динамический маршрут услуг выбирает специализированный лендинг по slug; прочие услуги рендерят Markdown. Главная собирает существующие секции аудитории, задач, направлений, результатов, кейсов, доверия, клиентов, процесса, технологий и финальный CTA. Юридические страницы используют `LegalDocument.astro` и сохраняют исторические URL.
 
-### Динамические
-
-- `src/pages/services/[...slug].astro` рендерит markdown услуг, кроме специальных slug:
-  - `bitrix24` рендерит `src/components/Bitrix24Landing.astro`;
-  - `rbs` рендерит `src/components/RbsLanding.astro`.
-- `src/pages/cases/[...slug].astro` рендерит кейсы из `src/content/cases`.
-- `src/pages/posts/[...slug].astro` рендерит недрафтовые посты из `src/content/posts`.
-
-### Служебные и экспериментальные
-
-- `src/pages/icons.astro` документирует иконки сайта.
-- Исходник дизайн-системы хранится в `temp/design_system-ittn-v2/` и не публикуется как маршрут сайта.
-- `src/pages/b24new.astro` хранит альтернативную версию лендинга Bitrix24.
-- `src/pages/codebg.astro`, `src/pages/codegame.astro`, `src/pages/earth-test.astro` используются для визуальных экспериментов.
+Внутренние примеры в `src/internal-pages/` не создают публичных маршрутов. Удалённые экспериментальные WebGL-страницы и `WebLanding.astro` не публикуются.
 
 ## Контент
 
@@ -192,18 +240,7 @@ cover: '/cases/new-client-crm/cover.jpg'
 4. Чтобы кейс появился на главной странице, поставьте `featured: true`.
    Компонент `src/components/CasesPreview.astro` показывает только featured-кейсы, сортирует их по `order` и выводит максимум 5 карточек.
 
-5. Если featured-кейс должен показывать на главной блоки `Задача` и `Результат`, добавьте его slug в объект `details` внутри `src/components/CasesPreview.astro`.
-
-```ts
-const details = {
-	'new-client-crm': {
-		task: 'краткая формулировка задачи',
-		result: 'краткая формулировка результата',
-	},
-};
-```
-
-6. Если у кейса есть изображения, положите их в `public/cases/<slug>/`.
+5. Если у кейса есть изображения, положите их в `public/cases/<slug>/`.
    В markdown и frontmatter используйте публичные пути от корня сайта:
 
 ```md
@@ -212,7 +249,7 @@ cover: '/cases/new-client-crm/cover.jpg'
 ![Описание изображения](/cases/new-client-crm/screen-1.jpg)
 ```
 
-7. После добавления кейса проверьте:
+6. После добавления кейса проверьте:
 
 - `npm run build` — схема frontmatter валидна и страницы собираются;
 - `/cases` — кейс есть в общем списке;
@@ -227,10 +264,12 @@ cover: '/cases/new-client-crm/cover.jpg'
 | `Header.astro` | Навигация, меню услуг, mobile menu |
 | `Footer.astro` | Футер и ссылки |
 | `ThemeToggle.astro` | Переключатель светлой/темной темы |
-| `UiIcon.astro` | Inline SVG-набор иконок |
+| `UiIcon.astro` | Утверждённые ручные PNG-иконки |
 | `Bitrix24Landing.astro` | Основной лендинг `/services/bitrix24` |
 | `RbsLanding.astro` | Основной лендинг `/services/rbs` |
-| `ConsultationForm.astro` | Форма консультации |
+| `DevelopmentServicePage.astro` | Страницы сайтов, веб-сервисов и интеграций |
+| `ElmaLanding.astro` | Основной лендинг `/services/elma` |
+| `ServiceCta.astro` | Финальный блок консультации |
 | `AudienceSegments.astro` | Сегменты аудитории на главной |
 | `BusinessTasks.astro` | Блок бизнес-задач на главной |
 | `DirectionsGrid.astro` | Направления услуг на главной |
@@ -256,4 +295,23 @@ cover: '/cases/new-client-crm/cover.jpg'
 - Не откатывайте чужие изменения без явной просьбы.
 - Для новых публичных страниц сразу добавляйте маршрут в `Маршруты` и описание в `Страницы`.
 - Для новых content-файлов в `services`, `cases` или `posts` обновляйте соответствующие разделы, если меняется публичная карта сайта или архитектурная логика.
-- Для новых иконок обновляйте `src/components/UiIcon.astro` и страницу `/icons`, если она используется как документация иконок.
+- Иконки подключайте через `src/components/UiIcon.astro`; реестр — `src/data/icons.ts`, PNG — `public/icons/`.
+- Для новых иконок следуйте [правилам серии](docs/icon-style-guide.md) и [итоговому промпту](docs/prompts/sketch-icon.txt): сначала переиспользуйте готовый набор, недостающие смыслы генерируйте по утверждённому образцу и добавляйте в [каталог](docs/svg-icons-inventory.md).
+
+# Порядок выполнения задач
+
+Для каждой новой задачи обязательно соблюдай следующий процесс:
+
+1. Разрешено провести только безопасное исследование: прочитать необходимые
+   файлы, найти связанный код и проверить текущее состояние проекта.
+2. Не изменяй файлы, не устанавливай зависимости и не запускай команды,
+   изменяющие состояние проекта.
+3. Сначала представь пользователю краткий, конкретный план действий.
+4. Укажи, какие файлы предположительно потребуется изменить и как будет
+   проверен результат.
+5. Заверши ответ словами: «Жду подтверждения плана».
+6. Не приступай к реализации, пока пользователь явно не подтвердит план
+   словами вроде «утверждаю», «приступай» или «выполняй».
+7. Если пользователь изменил требования, обнови план и снова запроси
+   подтверждение.
+8. После подтверждения выполни утверждённый план и проверь результат.

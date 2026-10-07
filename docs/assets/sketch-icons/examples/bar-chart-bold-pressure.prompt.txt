@@ -1,0 +1,11 @@
+Инструмент: встроенный image_gen.
+Референс: bar-chart-bold.png
+Обработка после генерации: PNG 512×512, прозрачный фон, #323BFF, рисунок вписан в 472×472. Форма и толщина штрихов программно не менялись.
+
+Промпт:
+Edit this exact bold blue bar-chart doodle. Keep its overall boldness, the same L-shaped axes and THREE bars (medium, tall, short), simple silhouette and immediate readability.
+The requested change is MUCH MORE obvious human irregularity and uneven pencil pressure WITHIN each stroke. Right now its strokes are too consistently thick. Make every long stroke visibly swell, narrow, relax, thicken again, and finish with a casual irregular tip. Aim for organic local width changes of roughly 2 to 3 times from the thinnest light-pressure portions to the thickest heavy-pressure portions, while retaining the current average bold visual weight.
+Vary both the trajectory and pressure: slightly crooked wavering uprights, off-kilter joins, a casually bowed baseline with a few bends, broad clumsy pressure bulges and distinctly narrower stretches. Do not apply a mechanical repeating wavy pattern or make all strokes taper the same way. Each stroke should have its own imperfect hand movement.
+Light-pressure portions have dry broken pigment and ragged grain; heavy-pressure portions are dense opaque blue. Express this through rough alpha coverage and edge texture, NOT lighter colors, glow, gradients or shading. Preserve the lively wax-pencil/rough graphite sketch character. This must feel spontaneous, messy and human, not like uniform marker tubing or a cleaned vector icon.
+Only ONE blue pigment #323BFF. Genuine transparent alpha background. No added text, numerals, labels, extra marks, paper, white background, checkerboard, border, tile, shadow, gradient, 3D or polished geometry.
+Square canvas, preserve the drawing's overall proportions, tight framing with about 4% margins along the longest dimension. The result is ONE icon.

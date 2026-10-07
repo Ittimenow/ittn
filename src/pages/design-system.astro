@@ -1,0 +1,50 @@
+---
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import '../styles/global.css';
+import Bitrix24FormPopup from '../components/Bitrix24FormPopup.astro';
+import ServiceCta from '../components/ServiceCta.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+const rawDesignSystem = readFileSync(
+	resolve(process.cwd(), 'temp/design_system-ittn-v2/design-system.html'),
+	'utf8'
+);
+
+const rewriteAssetPaths = (html: string) =>
+	html
+		.replaceAll('src="assets/', 'src="/ds-v2/assets/')
+		.replaceAll("src='assets/", "src='/ds-v2/assets/")
+		.replaceAll('href="assets/', 'href="/ds-v2/assets/')
+		.replaceAll("href='assets/", "href='/ds-v2/assets/")
+		.replaceAll("url('assets/", "url('/ds-v2/assets/")
+		.replaceAll('url("assets/', 'url("/ds-v2/assets/');
+
+const headHtml = rewriteAssetPaths(rawDesignSystem.match(/<helmet>([\s\S]*?)<\/helmet>/)?.[1] ?? '');
+const pageHtml = rewriteAssetPaths(rawDesignSystem.match(/<\/helmet>\s*([\s\S]*?)<\/x-dc>/)?.[1] ?? '').replaceAll('b24-web-form-popup-btn-21', 'consultation-trigger').replaceAll('href="#forms"', 'href="#consultation"').replaceAll('href="#cases"', 'href="/cases/"').replaceAll('href="#project"', 'href="#consultation"').replaceAll('href="#more"', 'href="/services/"');
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>IT TIME NOW — Design System</title>
+		<meta
+			name="description"
+			content="Дизайн-система IT TIME NOW: бренд, цвета, типографика, графика и UI-компоненты."
+		/>
+		<Fragment set:html={headHtml} />
+	</head>
+	<body>
+		<Header />
+		<main class="pt-[84px] sm:pt-[96px]">
+			<Fragment set:html={pageHtml} />
+		<ServiceCta id="consultation" title="Обсудим интерфейс вашего продукта?" text="Поможем спроектировать понятный интерфейс и подготовить его к разработке." />
+		</main>
+		<Footer />
+		<Bitrix24FormPopup />
+	</body>
+</html>

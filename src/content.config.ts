@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const posts = defineCollection({
@@ -38,7 +39,7 @@ const services = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		summary: z.string(),
-		group: z.enum(['Разработка', 'Автоматизация', 'Дополнительно']),
+		group: z.enum(['Разработка', 'Автоматизация', 'ИИ для бизнеса', 'Техническая поддержка']),
 		icon: z.string().optional(),
 		order: z.number().int().default(0),
 	}),

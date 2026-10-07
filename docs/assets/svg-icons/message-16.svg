@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">message-16</title>
+  <!-- Source: temp/design_system-ittn-v2/design-system.html:448. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 16 16" fill="none">
+    <path d="M3 4.5A2.5 2.5 0 0 1 5.5 2h5A2.5 2.5 0 0 1 13 4.5v3A2.5 2.5 0 0 1 10.5 10H8l-3.5 3v-3A2.5 2.5 0 0 1 3 7.5v-3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+  </svg>
+</svg>

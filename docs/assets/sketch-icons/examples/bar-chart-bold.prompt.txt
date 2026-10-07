@@ -1,0 +1,11 @@
+Инструмент: встроенный image_gen.
+Референс: ../bar-chart.png
+Обработка после генерации: прозрачный PNG 512×512, рисунок вписан в 472×472, цвет #323BFF. Контуры и толщина программно не менялись.
+
+Промпт:
+Edit this exact hand-drawn bar-chart icon to make EVERY stroke visibly heavier, approximately 1.7 TIMES its current thickness when compared at the same overall icon size.
+Keep its existing identity and composition: one crooked L-shaped axis, three uneven upright strokes inside it (medium height, tall, short), sagging baseline, slightly bowed/leaning uprights, scruffy irregular caps.
+Increase the thickness of BOTH axes and all three bars by the same approximate factor, keeping the bars visually separate and the chart immediately readable at 48 pixels.
+Preserve the naive hand-drawn wax-pencil character: obvious pressure fluctuations, crooked trajectories, lumpy edges, dry breaks and ragged endings. Do not straighten, smooth, regularize or geometrically clean anything. No new decorative elements.
+One electric blue pigment #323BFF only. Genuine transparent alpha background. Only the icon, no labels, letters, numbers, tile, border, white or checkerboard background, shadow, gradient, glow, 3D or paper.
+Square image. Same overall proportions and tight framing, roughly 4% margin on the longest dimension.

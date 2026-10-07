@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">briefcase-16</title>
+  <!-- Source: temp/design_system-ittn-v2/design-system.html:447. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 16 16" fill="none">
+    <rect x="3" y="5" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"></rect><path d="M6 5V3.8h4V5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+  </svg>
+</svg>

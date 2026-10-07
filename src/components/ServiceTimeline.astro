@@ -1,0 +1,28 @@
+---
+import UiIcon from './UiIcon.astro';
+interface Props { title: string; text?: string; steps: readonly { title: string; text: string; result?: string }[]; }
+const { title, text, steps } = Astro.props;
+---
+<section class="ai-service-timeline">
+  <div class="ittn-timeline-section">
+    <div class="ittn-timeline-head">
+      <h2>{title}</h2>
+      {text && <p class="ittn-timeline-description">{text}</p>}
+      <button class="ds-btn ds-btn-dark" type="button" data-b24-form-trigger><span>Обсудить задачу</span><UiIcon name="arrow" class="h-[28px] w-[28px]" /></button>
+    </div>
+    <ol class="ittn-timeline-list" aria-label="Этапы работы" style={`--step-count: ${steps.length}`}>
+      {steps.map((step, index) => <li class="ittn-timeline-card">
+        <div class="ittn-timeline-number" aria-hidden="true">
+          <img class="ittn-timeline-circle" src={`/ds-v2/assets/decorations-split/deco-circle-0${index % 4 + 1}.png`} alt="" loading="lazy" />
+          <span>Этап</span>
+          <img class="ittn-timeline-digit" src={`/ds-v2/assets/decorations-split/deco-digit-${index + 1}.png`} alt="" loading="lazy" />
+        </div>
+        <h3>{step.title}</h3><p>{step.text}</p>
+        {step.result && <p><strong>Результат:</strong> {step.result}</p>}
+      </li>)}
+    </ol>
+  </div>
+</section>
+<style>
+  @media (min-width: 1024px) { .ittn-timeline-list { grid-template-columns: repeat(var(--step-count), minmax(0, 1fr)); } }
+</style>

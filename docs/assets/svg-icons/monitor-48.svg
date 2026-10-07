@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">monitor-48</title>
+  <!-- Source: temp/design_system-ittn-v2/design-system.html:521. Original drawing and stroke attributes preserved. -->
+  <rect width="48" height="48" rx="10" fill="#f5f7ff"/>
+  <svg x="8" y="8" width="32" height="32" overflow="visible" color="#232bff" viewBox="0 0 48 48" fill="none">
+    <rect x="8" y="11" width="32" height="24" rx="4" stroke="currentColor" stroke-width="3"></rect><path d="M8 19h32M18 39h12M24 35v4" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+  </svg>
+</svg>

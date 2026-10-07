@@ -1,0 +1,10 @@
+---
+import UiIcon from './UiIcon.astro';
+interface Props { current: string; parents?: { href: string; label: string }[]; }
+const { current, parents = [] } = Astro.props;
+---
+<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
+  <a href="/">Главная</a>
+  {parents.map(item => <><UiIcon name="chevron" class="h-[28px] w-[28px]" /><a href={item.href}>{item.label}</a></>)}
+  <UiIcon name="chevron" class="h-[28px] w-[28px]" /><strong aria-current="page">{current}</strong>
+</nav>

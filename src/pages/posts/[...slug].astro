@@ -1,4 +1,6 @@
 ---
+import ServiceCta from '../../components/ServiceCta.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
@@ -73,9 +75,7 @@ const breadcrumbSchema = {
 >
 	<article class="mx-auto max-w-3xl px-6 py-16">
 		<div class="flex items-center justify-between gap-4 text-sm text-neutral-500">
-			<a href="/posts/" class="transition hover:text-[#323bff] dark:hover:text-[#323bff]">
-				← к списку постов
-			</a>
+			<Breadcrumbs current={post.data.title} parents={[{ href: "/posts/", label: "Блог" }]} />
 			<time
 				datetime={post.data.pubDate.toISOString()}
 				class="shrink-0"
@@ -110,6 +110,7 @@ const breadcrumbSchema = {
 			<Content />
 		</div>
 	</article>
+<ServiceCta title="Обсудим вашу задачу по автоматизации?" text="Поможем перейти от идеи к рабочему решению. На первой встрече разберём процесс и определим следующий шаг." />
 </Layout>
 
 <style>
@@ -138,14 +139,14 @@ const breadcrumbSchema = {
 	}
 	.prose-content :global(ul) {
 		margin: 1rem 0;
-		padding-left: 1.5rem;
-		list-style: disc;
+		padding-left: 0;
+		list-style: none;
 		color: var(--prose-text);
 	}
 	.prose-content :global(ol) {
 		margin: 1rem 0;
-		padding-left: 1.5rem;
-		list-style: decimal;
+		padding-left: 0;
+		list-style: none;
 		color: var(--prose-text);
 	}
 	.prose-content :global(li + li) {

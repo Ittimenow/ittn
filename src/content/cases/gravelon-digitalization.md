@@ -147,7 +147,7 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 			<img src="/cases/gravelon-digitalization/gravelon-ts.webp" alt="gravelon-TS" />
 		</div>
 	</div>
-	<video class="case-waybill-video" autoplay loop muted playsinline>
+	<video poster="/video-posters/f92aa509633ae27a.jpg" preload="none" class="case-waybill-video" controls loop muted playsinline>
 		<source src="/cases/gravelon-digitalization/main-gravelon-2-low-720.mp4" type="video/mp4" />
 	</video>
 	<div class="case-waybill-row is-reversed">

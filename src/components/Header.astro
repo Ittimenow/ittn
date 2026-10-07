@@ -1,30 +1,31 @@
 ---
+import UiIcon from './UiIcon.astro';
+import { aiServiceGroup, serviceGroups, supportService } from '../data/service-navigation';
+
 interface Props {
 	variant?: 'default' | 'glass';
 }
 
 const { variant = 'glass' } = Astro.props;
 const isGlass = variant === 'glass';
+const normalizePath = (path: string) => path === '/' ? path : path.replace(/\/+$/, '');
+const currentPath = normalizePath(Astro.url.pathname);
+const isCurrent = (href: string) => normalizePath(href) === currentPath;
 
-const services = {
-	'Разработка': [{ title: 'Сайты и\u00A0сервисы', href: '/services/web/' }],
-	'Автоматизация': [
-		{ title: 'Битрикс24', href: '/services/bitrix24/' },
-		{ title: 'РосБизнесСофт', href: '/services/rbs/' },
-		{ title: 'ЭЛМА', href: '/services/elma/' },
-	],
-	'Дополнительно': [
-		{ title: 'Искусственный интеллект', href: '/services/ai/' },
-		{ title: 'Сопровождение IT-проектов', href: '/services/support/' },
-	],
-};
+const desktopNavClass = 'rounded-full px-3 py-2 font-semibold';
+const desktopNavLinkClass = `${desktopNavClass} text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)]`;
+const desktopCurrentClass = `${desktopNavClass} cursor-default text-[color:var(--ds-primary)]`;
+const dropdownLinkClass = 'block rounded-lg px-2 py-1 text-sm font-medium text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)]';
+const dropdownCurrentClass = 'block cursor-default rounded-lg px-2 py-1 text-sm font-semibold text-[color:var(--ds-primary)]';
+const mobileCurrentClass = 'cursor-default text-[color:var(--ds-primary)]';
+
 ---
 
 <header
 	class:list={[
 		isGlass
-			? 'sticky top-3 z-40 px-3 pt-3 sm:top-4 sm:px-6 sm:pt-4'
-			: 'sticky top-0 z-40 border-b border-[color:var(--ds-border)] bg-white/88 backdrop-blur',
+			? 'fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4'
+			: 'fixed inset-x-0 top-0 z-40 border-b border-[color:var(--ds-border)] bg-white/88 backdrop-blur-md',
 	]}
 >
 	<div
@@ -38,7 +39,7 @@ const services = {
 		{isGlass && (
 			<div
 				aria-hidden="true"
-				class="pointer-events-none absolute inset-0 rounded-[24px] bg-white/78 backdrop-blur-2xl backdrop-saturate-150"
+				class="pointer-events-none absolute inset-0 rounded-[24px] bg-white/78 backdrop-blur-md backdrop-saturate-125"
 			></div>
 		)}
 
@@ -58,124 +59,207 @@ const services = {
 
 		<nav class="relative z-10 hidden items-center justify-self-center text-sm md:flex">
 			<div class="group relative">
-				<a
-					href="/services/"
-					class="flex items-center gap-1 rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)] group-hover:text-[color:var(--ds-primary)]"
-					aria-haspopup="true"
-				>
-					Услуги
-					<svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
-						<path d="M2 4l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"></path>
-					</svg>
-				</a>
+				{isCurrent('/services/') ? (
+					<span
+						class="flex cursor-default items-center gap-1 rounded-full px-3 py-2 font-semibold text-[color:var(--ds-primary)]"
+						aria-current="page"
+						aria-haspopup="true"
+						tabindex="0"
+					>
+						Услуги
+						<UiIcon name="nav-down-12" class="h-[21px] w-[21px]" />
+					</span>
+				) : (
+					<a
+						href="/services/"
+						class="flex items-center gap-1 rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)] group-hover:text-[color:var(--ds-primary)]"
+						aria-haspopup="true"
+					>
+						Услуги
+						<UiIcon name="nav-down-12" class="h-[21px] w-[21px]" />
+					</a>
+				)}
 				<div
-					class="invisible pointer-events-none absolute top-full left-1/2 z-50 w-[640px] max-w-[calc(100vw-2rem)] -translate-x-1/2 pt-3 group-hover:pointer-events-auto group-hover:visible group-focus-within:pointer-events-auto group-focus-within:visible"
+					class="invisible pointer-events-none absolute top-full left-1/2 z-50 w-[700px] max-w-[calc(100vw-2rem)] -translate-x-1/2 pt-1 group-hover:pointer-events-auto group-hover:visible group-focus-within:pointer-events-auto group-focus-within:visible lg:-left-5 lg:translate-x-0"
 				>
 					<div
 						class:list={[
 							'relative overflow-hidden',
 							isGlass
-								? 'rounded-[24px] border border-white/75 bg-white/86 shadow-[0_24px_60px_rgba(17,17,17,0.16),inset_0_1px_0_rgba(255,255,255,0.95)] ring-1 ring-black/[0.04] backdrop-blur-[64px] backdrop-saturate-200'
+								? 'rounded-[24px] border border-white/75 bg-white/86 shadow-[0_24px_60px_rgba(17,17,17,0.16),inset_0_1px_0_rgba(255,255,255,0.95)] ring-1 ring-black/[0.04] backdrop-blur-md backdrop-saturate-125'
 								: 'rounded-[20px] border border-[color:var(--ds-border)] bg-white shadow-xl',
 						]}
 					>
-						<div class="relative z-10 grid grid-cols-3 gap-6 p-6">
-							{Object.entries(services).map(([group, items]) => (
+						<div class="relative z-10 grid grid-cols-3 gap-4 p-5">
+							{serviceGroups.map((group) => (
 								<div>
 									<p class="mb-3 text-xs font-bold uppercase text-[color:var(--ds-muted)]">
-										{group}
+										{group.title}
 									</p>
 									<ul class="space-y-2">
-										{items.map((item) => (
+										{group.items.map((item) => (
 											<li>
-												<a
-													href={item.href}
-													class="block rounded-lg px-2 py-1 text-sm font-medium text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)]"
-												>
-													{item.title}
-												</a>
+											{isCurrent(item.href) ? (
+												<span class={dropdownCurrentClass} aria-current="page">{item.shortTitle}</span>
+											) : (
+												<a href={item.href} class={dropdownLinkClass}>{item.shortTitle}</a>
+											)}
 											</li>
 										))}
 									</ul>
 								</div>
 							))}
+							<div>
+								{isCurrent(aiServiceGroup.href) ? (
+									<span class="mb-3 block cursor-default text-xs font-bold uppercase text-[color:var(--ds-primary)]" aria-current="page">
+										{aiServiceGroup.title}
+									</span>
+								) : (
+									<a href={aiServiceGroup.href} class="mb-3 block text-xs font-bold uppercase text-[color:var(--ds-primary)] hover:text-[color:var(--ds-ink)]">
+										{aiServiceGroup.title}
+									</a>
+								)}
+								<ul class="space-y-2">
+									{aiServiceGroup.items.map((item) => (
+										<li>
+										{isCurrent(item.href) ? (
+											<span class={dropdownCurrentClass} aria-current="page">{item.title}</span>
+										) : (
+											<a href={item.href} class={dropdownLinkClass}>{item.title}</a>
+										)}
+										</li>
+									))}
+								</ul>
+							</div>
 						</div>
+						{isCurrent(supportService.href) ? (
+							<div class="relative z-10 flex cursor-default items-center justify-between gap-4 border-t border-[color:var(--ds-border)] px-5 py-3 text-sm font-semibold text-[color:var(--ds-primary)]" aria-current="page">
+								<span>{supportService.title}</span>
+								<span class="font-normal text-[color:var(--ds-muted)]">{supportService.description}</span>
+							</div>
+						) : (
+							<a
+								href={supportService.href}
+								class="relative z-10 flex items-center justify-between gap-4 border-t border-[color:var(--ds-border)] px-5 py-3 text-sm font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.05)] hover:text-[color:var(--ds-primary)]"
+							>
+								<span>{supportService.title}</span>
+								<span class="font-normal text-[color:var(--ds-muted)]">{supportService.description}</span>
+								<UiIcon name="arrow" class="h-[28px] w-[28px] shrink-0" />
+							</a>
+						)}
 					</div>
 				</div>
 			</div>
 
-			<a href="/cases/" class="rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)]">
-				Кейсы
-			</a>
-			<a href="/posts/" class="rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)]">
-				Блог
-			</a>
-			<a href="/about/" class="rounded-full px-3 py-2 font-semibold text-[color:var(--ds-ink)] transition hover:bg-[rgba(35,43,255,0.06)] hover:text-[color:var(--ds-primary)] focus-visible:text-[color:var(--ds-primary)]">
-				О&nbsp;нас
-			</a>
+			{[
+				{ href: '/cases/', label: 'Кейсы' },
+				{ href: '/posts/', label: 'Блог' },
+				{ href: '/about/', label: 'О\u00a0нас' },
+			].map((item) => isCurrent(item.href) ? (
+				<span class={desktopCurrentClass} aria-current="page">{item.label}</span>
+			) : (
+				<a href={item.href} class={desktopNavLinkClass}>{item.label}</a>
+			))}
 		</nav>
 
 		<div class="relative z-10 col-start-2 flex items-center gap-3 justify-self-end md:col-start-3">
-			<a
-				href="tel:+74951335888"
-				class="hidden text-sm font-bold text-[color:var(--ds-ink)] transition hover:text-[color:var(--ds-primary)] lg:inline"
+			<button
+				type="button"
+				class="consultation-trigger hidden h-10 w-10 cursor-pointer items-center justify-center text-[color:var(--ds-primary)] transition hover:text-[color:var(--ds-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--ds-primary)] lg:inline-flex"
+				data-b24-form-trigger
+				aria-label="Бесплатная консультация"
 			>
-				+7&nbsp;(495)&nbsp;133-58-88
-			</a>
+				<UiIcon name="phone" class="h-[35px] w-[35px]" />
+			</button>
 			<button
 				id="mobile-menu-toggle"
 				type="button"
-				aria-label="Меню"
+				aria-label="Открыть меню"
+				aria-expanded="false"
+				aria-controls="mobile-menu"
 				class:list={[
 					'inline-flex h-10 w-10 items-center justify-center text-[color:var(--ds-ink)] md:hidden',
 					isGlass
-						? 'rounded-2xl border border-white/70 bg-white/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-xl'
+						? 'rounded-2xl border border-white/70 bg-white/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md'
 						: 'rounded-xl border border-[color:var(--ds-border)] bg-white',
 				]}
 			>
-				<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-					<path d="M3 6h18M3 12h18M3 18h18"></path>
-				</svg>
+				<UiIcon name="menu-24" class="h-[28px] w-[28px]" />
 			</button>
 		</div>
 	</div>
 
 	<div
 		id="mobile-menu"
+		hidden
 		class:list={[
-			'hidden md:hidden',
+			'md:hidden',
 			isGlass
-				? 'mx-auto mt-2 w-full max-w-[1440px] rounded-[24px] border border-white/75 bg-white/90 px-4 py-4 shadow-[0_18px_50px_rgba(17,17,17,0.12),inset_0_1px_0_rgba(255,255,255,0.92)] backdrop-blur-2xl backdrop-saturate-150'
+				? 'mx-auto mt-2 w-full max-w-[1440px] rounded-[24px] border border-white/75 bg-white/90 px-4 py-4 shadow-[0_18px_50px_rgba(17,17,17,0.12),inset_0_1px_0_rgba(255,255,255,0.92)] backdrop-blur-md backdrop-saturate-125'
 				: 'border-t border-[color:var(--ds-border)] bg-white px-6 py-4',
 		]}
 	>
 		<nav class="flex flex-col gap-3 text-sm font-semibold text-[color:var(--ds-ink)]">
-			<a href="/services/" class="font-medium">Услуги</a>
-			{Object.entries(services).map(([group, items]) => (
+			{isCurrent('/services/') ? (
+				<span class={`font-medium ${mobileCurrentClass}`} aria-current="page">Услуги</span>
+			) : (
+				<a href="/services/" class="font-medium">Услуги</a>
+			)}
+			{serviceGroups.map((group) => (
 				<div class="ml-3 border-l border-[color:var(--ds-border)] pl-3">
-					<p class="text-xs font-bold uppercase text-[color:var(--ds-muted)]">{group}</p>
+					<p class="text-xs font-bold uppercase text-[color:var(--ds-muted)]">{group.title}</p>
 					<ul class="mt-1 space-y-1">
-						{items.map((item) => (
-							<li><a href={item.href} class="text-[color:var(--ds-muted)]">{item.title}</a></li>
+						{group.items.map((item) => (
+							<li>
+								{isCurrent(item.href) ? (
+									<span class={mobileCurrentClass} aria-current="page">{item.shortTitle}</span>
+								) : (
+									<a href={item.href} class="text-[color:var(--ds-muted)]">{item.shortTitle}</a>
+								)}
+							</li>
 						))}
 					</ul>
 				</div>
 			))}
-			<a href="/cases/">Кейсы</a>
-			<a href="/posts/">Блог</a>
-			<a href="/about/">О&nbsp;нас</a>
+			<div class="ml-3 border-l border-[color:var(--ds-border)] pl-3">
+				{isCurrent(aiServiceGroup.href) ? (
+					<span class="cursor-default text-xs font-bold uppercase text-[color:var(--ds-primary)]" aria-current="page">{aiServiceGroup.title}</span>
+				) : (
+					<a href={aiServiceGroup.href} class="text-xs font-bold uppercase text-[color:var(--ds-primary)]">{aiServiceGroup.title}</a>
+				)}
+				<ul class="mt-1 space-y-1">
+					{aiServiceGroup.items.map((item) => (
+						<li>
+							{isCurrent(item.href) ? (
+								<span class={mobileCurrentClass} aria-current="page">{item.title}</span>
+							) : (
+								<a href={item.href} class="text-[color:var(--ds-muted)]">{item.title}</a>
+							)}
+						</li>
+					))}
+				</ul>
+			</div>
+			{[
+				{ href: supportService.href, label: supportService.title },
+				{ href: '/cases/', label: 'Кейсы' },
+				{ href: '/posts/', label: 'Блог' },
+				{ href: '/about/', label: 'О\u00a0нас' },
+			].map((item) => isCurrent(item.href) ? (
+				<span class={mobileCurrentClass} aria-current="page">{item.label}</span>
+			) : (
+				<a href={item.href}>{item.label}</a>
+			))}
 		</nav>
 	</div>
 </header>
 
+<style>
+  #mobile-menu { max-height: calc(100dvh - 104px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+  #mobile-menu[hidden] { display: none; }
+  #mobile-menu a { display: block; padding-block: 8px; }
+</style>
 <script>
-	function bindMobileMenu() {
-		const btn = document.getElementById('mobile-menu-toggle');
-		const menu = document.getElementById('mobile-menu');
-		if (!btn || !menu || btn.dataset.bound) return;
-		btn.dataset.bound = '1';
-		btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-	}
-	bindMobileMenu();
-	document.addEventListener('astro:page-load', bindMobileMenu);
+  import { bindMobileMenu } from '../scripts/mobile-menu.js';
+  bindMobileMenu();
+  document.addEventListener('astro:page-load', () => bindMobileMenu());
 </script>

@@ -1,0 +1,328 @@
+---
+import ServiceCta from './ServiceCta.astro';
+import UiIcon from './UiIcon.astro';
+import { aiServices, type AiService } from '../data/ai-services';
+
+interface Props {
+	service: AiService;
+}
+
+const { service } = Astro.props;
+const relatedServices = aiServices.filter((item) => item.slug !== service.slug);
+const processSteps = [
+	{ title: 'Диагностика', text: 'Фиксируем процесс, ограничения, исходные данные и показатель результата.' },
+	{ title: 'Прототип', text: 'Проверяем ключевую гипотезу на ограниченном наборе реальных примеров.' },
+	{ title: 'Пилот', text: 'Подключаем один рабочий сценарий и измеряем качество в контролируемых условиях.' },
+	{ title: 'Внедрение', text: 'Интегрируем решение, настраиваем контроль и передаём его в работу команде.' },
+] as const;
+const safeguards = [
+	{ icon: 'database', title: 'Согласованные данные', text: 'Определяем источники, актуальность и владельцев информации.' },
+	{ icon: 'lock', title: 'Права доступа', text: 'Ограничиваем доступ к данным и действиям в зависимости от роли.' },
+	{ icon: 'shield', title: 'Контроль человека', text: 'Задаём ситуации, когда ИИ обязан остановиться или запросить подтверждение.' },
+	{ icon: 'check', title: 'Проверка качества', text: 'Тестируем типовые случаи, исключения и сохраняем журнал работы.' },
+] as const;
+---
+
+<div class="ais-page">
+	<section class="ais-hero">
+		<div class="ais-container ais-hero-grid">
+			<div class="ais-hero-copy">
+				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
+					<a href="/services/">Услуги</a><UiIcon name="chevron" class="h-[24.5px] w-[24.5px]" />
+					<a href="/services/ai/">ИИ для бизнеса</a><UiIcon name="chevron" class="h-[24.5px] w-[24.5px]" />
+					<strong aria-current="page">{service.navTitle}</strong>
+				</nav>
+				<h1>{service.title}</h1>
+				<p class="ais-hero-lead">{service.heroLead}</p>
+				<div class="ais-actions">
+					<button class="ds-btn ds-btn-primary consultation-trigger" type="button" data-b24-form-trigger>
+						<span>Обсудить пилот</span><UiIcon name="arrow" class="h-[28px] w-[28px]" />
+					</button>
+					<a href="#how-it-works">Как это работает</a>
+				</div>
+			</div>
+			<div class="ais-hero-visual" aria-label={`Ключевые возможности: ${service.heroPoints.join(', ')}`}>
+				<div class="ais-hero-core"><UiIcon name={service.icon} class="h-[98px] w-[98px]" /><span>ИИ</span></div>
+				{service.heroPoints.map((point, index) => (
+					<div class={`ais-hero-point is-${index + 1}`}><span>{String(index + 1).padStart(2, '0')}</span><strong>{point}</strong></div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ais-section">
+		<div class="ais-container">
+			<div class="ais-section-head">
+				<div><h2>{service.painTitle}</h2></div>
+				<p>{service.painIntro}</p>
+			</div>
+			<div class="ais-pain-grid ais-mobile-row service-card-row">
+				{service.pains.map((pain) => (
+					<article class="ais-card ais-pain-card">
+						<div class="ais-icon"><UiIcon name={pain.icon} class="h-[35px] w-[35px]" /></div>
+						<h3>{pain.title}</h3><p>{pain.text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="how-it-works" class="ais-section ais-scenario-section">
+		<div class="ais-container">
+			<div class="ais-section-head ais-section-head-light">
+				<div><h2>ИИ берёт повторяющуюся работу, сотрудник сохраняет контроль</h2></div>
+				<p>На старте фиксируем границы автоматизации и показатель, по которому можно оценить пользу пилота.</p>
+			</div>
+			<div class="ais-scenario">
+				<div><span>Сейчас</span><p>{service.before}</p></div>
+				<div class="ais-scenario-arrow"><UiIcon name="arrow" class="h-[56px] w-[56px]" /></div>
+				<div><span>После внедрения</span><p>{service.after}</p></div>
+				<div class="ais-scenario-metric"><span>Что измеряем</span><strong>{service.metric}</strong></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ais-section">
+		<div class="ais-container">
+			<div class="ais-section-head">
+				<div><h2>{service.capabilitiesTitle}</h2></div>
+				<p>{service.capabilitiesIntro}</p>
+			</div>
+			<div class="ais-capabilities ais-mobile-row service-card-row">
+				{service.capabilities.map((capability, index) => (
+					<article class="ais-card ais-capability-card">
+						<div class="ais-card-top"><div class="ais-icon"><UiIcon name={capability.icon} class="h-[35px] w-[35px]" /></div><span>{String(index + 1).padStart(2, '0')}</span></div>
+						<h3>{capability.title}</h3><p>{capability.text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ais-section ais-soft-section">
+		<div class="ais-container ais-results-layout">
+			<div class="ais-integrations">
+				<h2>Интегрируем в системы, которыми команда уже пользуется</h2>
+				<p>Конкретный состав подключений определяем после проверки API, данных и требований к безопасности.</p>
+				<ul class="ais-integration-list">{service.integrations.map((integration) => <li>{integration}</li>)}</ul>
+			</div>
+			<div class="ais-metrics">
+				<h3>Сравниваем процесс до и после</h3>
+				{service.metrics.map((metric) => (
+					<div><UiIcon name="bar-chart" class="h-[35px] w-[35px]" /><span><strong>{metric.title}</strong><small>{metric.text}</small></span></div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ais-timeline-section ai-service-timeline">
+		<div class="ittn-timeline-section">
+			<div class="ittn-timeline-head">
+				<h2>Сначала ограниченный пилот, затем масштабирование</h2>
+				<p class="ittn-timeline-description">Не перестраиваем весь IT-контур ради проверки гипотезы. Начинаем с одного процесса, канала или команды.</p>
+				<button class="ds-btn ds-btn-dark consultation-trigger" type="button" data-b24-form-trigger>
+					<span>Обсудить пилот</span>
+					<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+				</button>
+			</div>
+
+			<ol class="ittn-timeline-list" aria-label="Этапы запуска ИИ-решения">
+				{processSteps.map((step, index) => (
+					<li class="ittn-timeline-card">
+						<div class="ittn-timeline-number" aria-hidden="true">
+							<img
+								class="ittn-timeline-circle"
+								src={`/ds-v2/assets/decorations-split/deco-circle-0${index + 1}.png`}
+								alt=""
+							/>
+							<span>Этап</span>
+							<img
+								class="ittn-timeline-digit"
+								src={`/ds-v2/assets/decorations-split/deco-digit-${index + 1}.png`}
+								alt=""
+							/>
+						</div>
+						<h3>{step.title}</h3>
+						<p>{step.text}</p>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<section class="ais-section ais-delivery-section">
+		<div class="ais-container ais-delivery-grid">
+			<div class="ais-deliverables">
+				<h2>Что получает ваша команда</h2>
+				<ul class="ittn-marker-list">{service.deliverables.map((item) => <li>{item}</li>)}</ul>
+			</div>
+			<div class="ais-safety">
+				<h2>Контроль проектируется заранее</h2>
+				<div>
+					{safeguards.map((item) => (
+						<article><UiIcon name={item.icon} class="h-[35px] w-[35px]" /><span><strong>{item.title}</strong><small>{item.text}</small></span></article>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ais-section">
+		<div class="ais-container">
+			<div class="ais-section-head">
+				<div><h2>Можно начать с одной задачи и связать решения позже</h2></div>
+				<p>Все услуги направления используют общий подход к данным, интеграциям, тестированию и контролю человека.</p>
+			</div>
+			<div class="ais-related ais-mobile-row service-card-row">
+				{relatedServices.map((item) => (
+					<a href={`/services/ai/${item.slug}/`}><UiIcon name={item.icon} class="h-[42px] w-[42px]" /><span><strong>{item.cardTitle}</strong><small>{item.heroLead}</small></span><UiIcon name="arrow" class="h-[35px] w-[35px]" /></a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="ais-section">
+		<div class="ais-container ais-faq-grid">
+			<div><h2>Частые вопросы</h2><p>На первой встрече уточним данные, ограничения и текущий процесс — без заранее выбранной модели или платформы.</p></div>
+			<div class="ais-faq-list">
+				{service.faqs.map(([question, answer]) => (
+					<details><summary><span>{question}</span><UiIcon name="chevron" class="h-[28px] w-[28px]" /></summary><p>{answer}</p></details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<ServiceCta title={service.ctaTitle} text={service.ctaText} />
+</div>
+
+<style>
+	:global(body.ai-page) { background: #fff; }
+	.ais-page { --ais-blue: var(--ds-primary); --ais-line: var(--ds-border); background: #fff; color: var(--ds-ink); }
+	.ais-container { width: min(100% - 48px, 1320px); margin-inline: auto; }
+	.ais-section { padding-block: 72px; }
+	.ais-hero { overflow: hidden; border-bottom: 1px solid var(--ais-line); background: linear-gradient(180deg, #fff 0%, #f5f7ff 100%); }
+	.ais-hero-grid { display: grid; min-height: 680px; grid-template-columns: minmax(0, 1.08fr) minmax(400px, .92fr); align-items: center; gap: clamp(48px, 7vw, 110px); padding-block: 42px 70px; }
+	.ais-breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-bottom: 30px; color: var(--ds-muted); font-size: 13px; }
+	.ais-breadcrumbs a { text-decoration: none; transition: color 160ms ease; }
+	.ais-breadcrumbs a:hover { color: var(--ais-blue); }
+	.ais-hero-copy h1 { max-width: 880px; margin: 20px 0 0; font-size: clamp(48px, 5.9vw, 84px); font-weight: 700; line-height: .94; letter-spacing: -.055em; }
+	.ais-hero-lead { max-width: 760px; margin: 28px 0 0; color: #505664; font-size: clamp(18px, 1.65vw, 23px); line-height: 1.55; }
+	.ais-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 34px; }
+	.ais-actions > a { color: var(--ais-blue); font-size: 14px; font-weight: 800; text-decoration: none; }
+	.ais-hero-visual { position: relative; width: min(100%, 530px); aspect-ratio: 1; justify-self: end; }
+	.ais-hero-visual::before, .ais-hero-visual::after { position: absolute; border: 1px solid var(--ds-tertiary); border-radius: 50%; content: ''; }
+	.ais-hero-visual::before { inset: 10%; }
+	.ais-hero-visual::after { inset: 24%; border-style: dashed; }
+	.ais-hero-core { position: absolute; top: 50%; left: 50%; z-index: 2; display: flex; width: 172px; height: 172px; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--ais-blue); transform: translate(-50%, -50%); }
+	.ais-hero-core span { font-family: var(--ittn-font-mono); font-size: 11px; font-weight: 700; }
+	.ais-hero-point { position: absolute; z-index: 3; display: flex; width: min(230px, 44%); align-items: center; gap: 10px; border: 1px solid var(--ais-line); border-radius: 16px; background: rgba(255,255,255,.94); padding: 14px; box-shadow: var(--ittn-shadow-soft); }
+	.ais-hero-point > span { color: var(--ais-blue); font-family: var(--ittn-font-mono); font-size: 10px; }
+	.ais-hero-point strong { font-size: 13px; line-height: 1.3; }
+	.ais-hero-point.is-1 { top: 5%; left: 28%; }
+	.ais-hero-point.is-2 { top: calc(50% + 72px); right: 0; }
+	.ais-hero-point.is-3 { bottom: 6%; left: 2%; }
+	.ais-section-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); align-items: end; gap: clamp(38px, 8vw, 120px); margin-bottom: 46px; }
+	.ais-section-head h2, .ais-integrations h2, .ais-deliverables h2, .ais-safety h2, .ais-faq-grid h2 { margin: 15px 0 0; font-size: clamp(36px, 4.5vw, 64px); line-height: 1; letter-spacing: -.04em; }
+	.ais-section-head > p, .ais-integrations > p, .ais-faq-grid > div > p { margin: 0; color: var(--ds-muted); font-size: 17px; line-height: 1.65; }
+	.ais-card { border: 1px solid var(--ais-line); border-radius: 24px; background: #fff; }
+	.ais-icon { display: grid; width: 44px; height: 44px; place-items: center; color: var(--ais-blue); }
+	.ais-pain-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+	.ais-pain-card { min-height: 260px; padding: 28px; }
+	.ais-pain-card h3, .ais-capability-card h3 { margin: 24px 0 0; font-size: 23px; }
+	.ais-pain-card p, .ais-capability-card p { margin: 13px 0 0; color: var(--ds-muted); font-size: 15px; line-height: 1.65; }
+	.ais-scenario-section { background: var(--ds-ink); color: #fff; }
+	.ais-section-head-light h2 { color: #fff; }
+	.ais-section-head-light .ds-kicker, .ais-section-head-light > p { color: var(--ds-tertiary); }
+	.ais-scenario { display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); align-items: center; gap: 28px; border: 1px solid rgba(255,255,255,.14); border-radius: 28px; background: rgba(255,255,255,.055); padding: clamp(26px, 4vw, 48px); }
+	.ais-scenario > div > span { color: var(--ds-secondary); font-family: var(--ittn-font-mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+	.ais-scenario p { margin: 12px 0 0; font-size: 17px; line-height: 1.65; }
+	.ais-scenario-arrow { display: grid; place-items: center; color: var(--ds-secondary); }
+	.ais-scenario-metric { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: 25px; }
+	.ais-scenario-metric strong { display: block; margin-top: 8px; font-size: 15px; }
+	.ais-capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+	.ais-capability-card { min-height: 290px; padding: 26px; }
+	.ais-card-top { display: flex; align-items: flex-start; justify-content: space-between; }
+	.ais-card-top > span { color: var(--ittn-subtle); font-family: var(--ittn-font-mono); font-size: 11px; }
+	.ais-soft-section { background: var(--ittn-cloud); }
+	.ais-results-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr); align-items: center; gap: clamp(48px, 8vw, 120px); }
+	.ais-integrations > p { margin-top: 22px; }
+	.ais-integrations ul { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 0; padding: 0; list-style: none; }
+	.ais-integrations li { border: 1px solid var(--ais-line); border-radius: 999px; background: #fff; padding: 10px 15px; font-size: 13px; font-weight: 700; }
+	.ais-metrics { border-radius: 28px; background: #fff; padding: 32px; box-shadow: var(--ittn-shadow-soft); }
+	.ais-metrics h3 { margin: 14px 0 28px; font-size: 29px; }
+	.ais-metrics > div { display: flex; gap: 14px; border-top: 1px solid var(--ais-line); padding: 20px 0; color: var(--ais-blue); }
+	.ais-metrics > div:last-child { padding-bottom: 0; }
+	.ais-metrics span, .ais-metrics strong, .ais-metrics small { display: block; }
+	.ais-metrics strong { color: var(--ds-ink); font-size: 15px; }
+	.ais-metrics small { margin-top: 5px; color: var(--ds-muted); font-size: 13px; line-height: 1.45; }
+	.ais-delivery-section { padding-top: 40px; }
+	.ais-delivery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+	.ais-deliverables, .ais-safety { border: 1px solid var(--ais-line); border-radius: 30px; padding: clamp(28px, 4vw, 48px); }
+	.ais-deliverables ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px; margin-top: 34px; }
+	.ais-deliverables li { font-size: 14px; }
+	.ais-safety { background: var(--ds-ink); color: #fff; }
+	.ais-safety .ds-kicker { color: var(--ds-secondary); }
+	.ais-safety h2 { color: #fff; }
+	.ais-safety > div { display: grid; gap: 0; margin-top: 30px; }
+	.ais-safety article { display: flex; gap: 14px; border-top: 1px solid rgba(255,255,255,.14); padding: 18px 0; color: var(--ds-secondary); }
+	.ais-safety article span, .ais-safety article strong, .ais-safety article small { display: block; }
+	.ais-safety article strong { color: #fff; font-size: 15px; }
+	.ais-safety article small { margin-top: 5px; color: rgba(255,255,255,.62); font-size: 13px; line-height: 1.45; }
+	.ais-related { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+	.ais-related a { display: grid; min-height: 210px; grid-template-columns: auto 1fr auto; align-items: start; gap: 15px; border: 1px solid var(--ais-line); border-radius: 22px; padding: 24px; color: var(--ais-blue); text-decoration: none; transition: transform 180ms ease, border-color 180ms ease; }
+	.ais-related a:hover { border-color: rgba(35,43,255,.36); transform: translateY(-3px); }
+	.ais-related span, .ais-related strong, .ais-related small { display: block; }
+	.ais-related strong { color: var(--ds-ink); font-size: 19px; }
+	.ais-related small { margin-top: 9px; color: var(--ds-muted); font-size: 13px; line-height: 1.5; }
+	.ais-faq-grid { display: grid; grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr); gap: clamp(52px, 9vw, 130px); }
+	.ais-faq-grid > div:first-child > p:last-child { margin-top: 22px; }
+	.ais-faq-list { border-top: 1px solid var(--ais-line); }
+	.ais-faq-list details { border-bottom: 1px solid var(--ais-line); }
+	.ais-faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 23px 0; font-size: 17px; font-weight: 700; cursor: pointer; list-style: none; }
+	.ais-faq-list summary::-webkit-details-marker { display: none; }
+	.ais-faq-list summary :global(.ui-icon) { flex: 0 0 auto; color: var(--ais-blue); transition: transform 180ms ease; }
+	.ais-faq-list details[open] summary :global(.ui-icon) { transform: rotate(90deg); }
+	.ais-faq-list details > p { margin: 0; padding: 0 50px 24px 0; color: var(--ds-muted); font-size: 15px; line-height: 1.7; }
+	.ais-cta-section { padding: 50px 0 96px; }
+	.ais-cta { display: grid; min-height: 330px; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 48px; overflow: hidden; border-radius: 32px; background: var(--ais-blue); padding: clamp(32px, 5vw, 60px); color: #fff; }
+	.ais-cta .ds-kicker, .ais-cta h2 { color: #fff; }
+	.ais-cta h2 { max-width: 800px; margin: 15px 0 0; }
+	.ais-cta p:last-child { max-width: 760px; margin: 20px 0 0; color: rgba(255,255,255,.72); font-size: 17px; line-height: 1.6; }
+	.ais-cta .ds-btn { background: var(--ds-ink); }
+	@media (max-width: 980px) {
+		.ais-hero-grid, .ais-results-layout, .ais-delivery-grid, .ais-faq-grid { grid-template-columns: 1fr; }
+		.ais-hero-visual { width: min(100%, 480px); justify-self: center; }
+		.ais-capabilities { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.ais-cta { grid-template-columns: 1fr; align-items: start; }
+	}
+	@media (max-width: 760px) {
+		.ais-container { width: 100%; padding-inline: 24px; }
+		.ais-section { padding-block: 48px; }
+		.ais-hero-grid { min-height: auto; padding-block: 30px 56px; }
+		.ais-hero-copy h1 { font-size: clamp(43px, 13vw, 62px); }
+		.ais-section-head { grid-template-columns: 1fr; align-items: start; gap: 24px; margin-bottom: 34px; }
+		.ais-section-head h2, .ais-integrations h2, .ais-deliverables h2, .ais-safety h2, .ais-faq-grid h2 { font-size: 36px; }
+		.ais-pain-grid, .ais-capabilities, .ais-related { display: flex; width: calc(100% + 48px); margin-inline: -24px; overflow-x: auto; padding: 5px 24px 28px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+		.ais-mobile-row::-webkit-scrollbar { display: none; }
+		.ais-mobile-row > * { flex: 0 0 min(82vw, 340px); scroll-snap-align: start; }
+		.ais-scenario { grid-template-columns: 1fr; }
+		.ais-scenario-arrow { justify-content: start; transform: rotate(90deg); }
+		.ais-scenario-metric { grid-column: auto; }
+		.ais-deliverables ul { grid-template-columns: 1fr; }
+		.ais-cta-section { padding-bottom: 72px; }
+		.ais-cta { border-radius: 24px; }
+		.ais-cta .ds-btn { width: 100%; }
+	}
+	@media (max-width: 520px) {
+		.ais-container { padding-inline: 16px; }
+		.ais-actions, .ais-actions .ds-btn { width: 100%; }
+		.ais-hero-visual { transform: scale(.94); }
+		.ais-hero-point { padding: 11px; }
+		.ais-hero-point strong { font-size: 11px; }
+		.ais-pain-grid, .ais-capabilities, .ais-related { width: calc(100% + 32px); margin-inline: -16px; padding-inline: 16px; }
+		.ais-metrics, .ais-deliverables, .ais-safety { border-radius: 22px; padding: 24px; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.ais-related a, .ais-faq-list summary :global(.ui-icon) { transition: none; }
+	}
+</style>
