@@ -93,6 +93,37 @@ class DeploymentSafetyTest(unittest.TestCase):
                 deploy.remove_candidate()
             command.assert_not_called()
 
+    def test_missing_candidate_is_safe_for_both_docker_error_formats(self):
+        import subprocess
+        for message in ['Error: No such object', 'error: no such object']:
+            with self.subTest(message=message):
+                result = subprocess.CompletedProcess([], 1, stdout='[]\n',
+                    stderr=f'{message}: {deploy.CANDIDATE}\n')
+                with patch.object(deploy.subprocess, 'run', return_value=result), \
+                        patch.object(deploy, 'run') as command:
+                    deploy.remove_candidate()
+                    command.assert_not_called()
+
+    def test_candidate_inspection_errors_are_not_ignored(self):
+        import subprocess
+        for message in ['Cannot connect to the Docker daemon', 'error: no such object: other-container']:
+            with self.subTest(message=message):
+                result = subprocess.CompletedProcess([], 1, stdout='', stderr=message)
+                with patch.object(deploy.subprocess, 'run', return_value=result), \
+                        patch.object(deploy, 'run') as command:
+                    with self.assertRaisesRegex(RuntimeError, 'Cannot inspect'):
+                        deploy.remove_candidate()
+                    command.assert_not_called()
+
+    def test_removes_only_the_labelled_candidate(self):
+        import subprocess
+        result = subprocess.CompletedProcess([], 0, stdout=json.dumps([{'Config': {
+            'Labels': {'com.ittn.autodeploy.candidate': 'true'}}}]), stderr='')
+        with patch.object(deploy.subprocess, 'run', return_value=result), \
+                patch.object(deploy, 'run') as command:
+            deploy.remove_candidate()
+            command.assert_called_once_with('docker', 'rm', '-f', deploy.CANDIDATE)
+
 
 if __name__ == '__main__':
     unittest.main()

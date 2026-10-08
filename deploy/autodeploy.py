@@ -169,7 +169,7 @@ def compose_up():
 def remove_candidate():
     result = subprocess.run(['docker', 'inspect', CANDIDATE], capture_output=True, text=True, timeout=30)
     if result.returncode:
-        if 'No such object' in result.stderr:
+        if f'no such object: {CANDIDATE}' in result.stderr.lower():
             return
         raise RuntimeError('Cannot inspect the temporary ITTN container')
     data = json.loads(result.stdout)[0]
