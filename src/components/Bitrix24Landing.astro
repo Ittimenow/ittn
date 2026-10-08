@@ -1,4 +1,5 @@
 ---
+import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceCta from './ServiceCta.astro';
 import UiIcon from './UiIcon.astro';
 
@@ -175,8 +176,8 @@ const comparison = [
 ---
 
 <div class="ds bitrix-ds">
-	<section class="ds-hero bitrix-hero">
-		<div class="ds-container bitrix-hero-grid">
+	<section class="ds-hero bitrix-hero service-particle-hero">
+		<div class="ds-container bitrix-hero-grid service-particle-grid">
 			<div class="bitrix-hero-copy">
 				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services/">Все услуги</a>
@@ -198,33 +199,24 @@ const comparison = [
 					</button>
 					<p class="bitrix-free-label">Бесплатно!</p>
 				</div>
-				<div class="ds-testimonial bitrix-hero-benefit">
-					<div class="bitrix-hero-benefit-head">
-						<UiIcon name="thumbs-up" class="bitrix-hero-benefit-icon h-[91px] w-[91px] shrink-0" />
-					</div>
-					<blockquote>
-						После внедрения Bitrix24 бизнес получает не еще один сервис, а управляемый процесс.
-					</blockquote>
-					<ul class="ittn-marker-list">
-						{heroBenefits.map((item) => (
-							<li>
-								<span>{item}</span>
-							</li>
-						))}
-					</ul>
-				</div>
 			</div>
 
-			<picture class="bitrix-hero-media">
-				<img
-					src="/main-b24-v2.webp"
-					alt="Интерфейс Bitrix24 с CRM, задачами и аналитикой"
-					width="1086"
-					height="1448"
-					loading="eager"
-					decoding="async"
-				/>
-			</picture>
+			<ServiceHeroVisual scene="bitrix24" />
+			<div class="ds-testimonial bitrix-hero-benefit service-hero-details">
+				<div class="bitrix-hero-benefit-head">
+					<UiIcon name="thumbs-up" class="bitrix-hero-benefit-icon h-[91px] w-[91px] shrink-0" />
+				</div>
+				<blockquote>
+					После внедрения Bitrix24 бизнес получает не еще один сервис, а управляемый процесс.
+				</blockquote>
+				<ul class="ittn-marker-list">
+					{heroBenefits.map((item) => (
+						<li>
+							<span>{item}</span>
+						</li>
+					))}
+				</ul>
+			</div>
 		</div>
 	</section>
 

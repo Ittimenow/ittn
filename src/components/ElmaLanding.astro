@@ -1,4 +1,5 @@
 ---
+import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceCta from './ServiceCta.astro';
 import UiIcon from './UiIcon.astro';
 
@@ -160,8 +161,8 @@ const schema = {
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <div class="elma-landing">
-	<section class="elma-hero">
-		<div class="elma-container elma-hero-grid">
+	<section class="elma-hero service-particle-hero">
+		<div class="elma-container elma-hero-grid service-particle-grid">
 			<div class="elma-hero-copy">
 				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services/">Все услуги</a>
@@ -189,16 +190,7 @@ const schema = {
 				</ul>
 			</div>
 
-			<picture class="elma-hero-media">
-				<img
-					src="/main-elma.webp"
-					alt="Бизнес-аналитик работает с цифровой схемой согласования в ELMA365"
-					width="1086"
-					height="1448"
-					loading="eager"
-					decoding="async"
-				/>
-			</picture>
+			<ServiceHeroVisual scene="elma" />
 		</div>
 	</section>
 

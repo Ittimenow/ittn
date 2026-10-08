@@ -1,0 +1,171 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ServiceCta from '../components/ServiceCta.astro';
+import Bitrix24FormPopup from '../components/Bitrix24FormPopup.astro';
+import UiIcon from '../components/UiIcon.astro';
+import HeroParticles from '../components/HeroParticles.astro';
+import { serviceHeroScenes } from '../data/service-hero-scenes';
+const first = serviceHeroScenes[0];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Живые пиксели — интерактивная графика IT TIME NOW</title>
+    <meta name="description" content="Восемь тематических образов из квадратных частиц: интерактивная графика для услуг IT TIME NOW." />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <Header variant="default" />
+    <main class="hero-lab" data-hero-lab>
+      <div class="lab-container lab-intro">
+        <Breadcrumbs current="Живые пиксели" />
+        <div class="lab-heading">
+          <h1>Живые пиксели<span>.</span></h1>
+          <p>Восемь образов. Одна система.<br /> Проведите по форме — почувствуйте отклик.</p>
+        </div>
+      </div>
+
+      <section class="lab-preview" aria-label="Предпросмотр первого экрана услуги">
+        <div class="lab-container">
+          <div class="lab-selector" role="group" aria-label="Выберите услугу" hidden>
+            {serviceHeroScenes.map((scene, index) => (
+              <button type="button" class="lab-tab" data-select-scene={scene.id} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="lab-copy lab-visual">{scene.label}</button>
+            ))}
+          </div>
+
+          <div class="lab-hero">
+            <div class="lab-copy" id="lab-copy">
+              <h2><span data-scene-title>{first.title}</span> <span class="lab-accent" data-scene-accent>{first.accent}</span></h2>
+              <p class="lab-description" data-scene-description>{first.description}</p>
+              <a class="ds-btn ds-btn-primary lab-service-link" data-scene-link href={first.href}>
+                <span>Об услуге</span><UiIcon name="arrow" class="h-[28px] w-[28px]" />
+              </a>
+            </div>
+            <div class="lab-visual" id="lab-visual"><HeroParticles scene="sites" /></div>
+          </div>
+
+          <div class="lab-caption">
+            <h3 data-scene-concept>{first.concept}</h3>
+            <p data-scene-detail>{first.detail}</p>
+          </div>
+          <p class="sr-only" data-scene-announcement aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </section>
+
+      <noscript>
+        <div class="lab-container lab-static-scenes">
+          {serviceHeroScenes.slice(1).map((scene) => (
+            <section><h2>{scene.label}</h2><img src={`/services/particles/${scene.id}.webp`} width="1000" height="1000" alt={scene.alt} loading="lazy" /><p>{scene.detail}</p></section>
+          ))}
+        </div>
+      </noscript>
+
+      <div class="lab-container lab-principle">
+        <h2>Один язык.<br />Разные смыслы.</h2>
+        <div><p>Курсор, облако, сеть систем, воронка, блоки, маршрут, кристалл и сфера с ядром. Простые образы помогают узнать услугу с первого взгляда.</p><p>Объёмные формы живут и откликаются на движение курсора. Пиксели плавно смещаются в пространстве, сохраняя узнаваемый образ. Настройте глубину, движение и цвета прямо в предпросмотре. Выберите другую услугу — пиксели соберутся в новый образ.</p></div>
+      </div>
+      <ServiceCta title="Добавим характер вашему сайту?" text="Обсудим задачу и подберём интерактивное решение, которое поддержит идею вашего продукта." source="hero-lab" />
+    </main>
+    <Footer />
+    <Bitrix24FormPopup />
+  </body>
+</html>
+
+<script>
+  import { serviceHeroScenes, isServiceHeroSceneId } from '../data/service-hero-scenes';
+  const lab = document.querySelector<HTMLElement>('[data-hero-lab]');
+  if (lab) {
+    const selector = lab.querySelector<HTMLElement>('.lab-selector')!;
+    const visual = lab.querySelector('hero-particles')!;
+    const update = (id: string, announce = true) => {
+      const scene = serviceHeroScenes.find((item) => item.id === id);
+      if (!scene) return;
+      visual.setAttribute('scene', scene.id);
+      const values = { title: scene.title, accent: scene.accent, description: scene.description, concept: scene.concept, detail: scene.detail };
+      for (const [name, value] of Object.entries(values)) lab.querySelector(`[data-scene-${name}]`)!.textContent = value;
+      lab.querySelector<HTMLAnchorElement>('[data-scene-link]')!.href = scene.href;
+      for (const button of selector.querySelectorAll<HTMLButtonElement>('[data-select-scene]')) button.setAttribute('aria-pressed', String(button.dataset.selectScene === id));
+      if (announce) lab.querySelector('[data-scene-announcement]')!.textContent = `Выбрана услуга: ${scene.label}`;
+    };
+    selector.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-select-scene]');
+      if (!button?.dataset.selectScene) return;
+      update(button.dataset.selectScene);
+      const url = new URL(location.href);
+      url.searchParams.set('scene', button.dataset.selectScene);
+      history.replaceState(null, '', url);
+    });
+    const initial = new URL(location.href).searchParams.get('scene');
+    if (isServiceHeroSceneId(initial)) update(initial, false);
+    selector.hidden = false;
+  }
+</script>
+
+<style>
+  .hero-lab { padding-top: 96px; background: var(--ds-bg); }
+  .lab-container { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: clamp(24px, 4.5vw, 72px); }
+  .lab-intro { padding-top: 25px; padding-bottom: 32px; }
+  .lab-heading { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-top: 32px; }
+  .lab-heading h1 { margin: 0; font-size: clamp(30px, 3.15vw, 46px); line-height: 1.08; letter-spacing: -.035em; font-weight: 700; }
+  .lab-heading h1 > span { color: var(--ds-primary); }
+  .lab-heading > p { margin: 0; color: var(--ds-muted); font-size: 14px; line-height: 1.6; }
+  .lab-preview { border-block: 1px solid var(--ds-border); }
+  .lab-selector { display: flex; gap: clamp(20px, 2.3vw, 34px); overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; border-bottom: 1px solid var(--ds-border); }
+  .lab-selector[hidden] { display: none; }
+  .lab-selector::-webkit-scrollbar { display: none; }
+  .lab-tab { flex: 0 0 auto; position: relative; min-height: 65px; padding: 16px 0; border: 0; background: transparent; color: var(--ds-muted); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; }
+  .lab-tab::after { position: absolute; inset: auto 0 -1px; height: 3px; background: var(--ds-primary); content: ''; transform: scaleX(0); transition: transform .2s; }
+  .lab-tab[aria-pressed="true"] { color: var(--ds-primary); font-weight: 700; }
+  .lab-tab[aria-pressed="true"]::after { transform: scaleX(1); }
+  .lab-tab:hover { color: var(--ds-ink); }
+  .lab-tab:focus-visible { outline: 2px solid var(--ds-primary); outline-offset: 4px; }
+  .lab-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 20px; min-height: 580px; padding-block: 16px 30px; }
+  .lab-copy { padding-block: 40px; }
+  .lab-copy h2 { max-width: 660px; margin: 0; font-size: clamp(40px, 4.5vw, 66px); font-weight: 700; letter-spacing: -.04em; line-height: 1.04; text-wrap: balance; }
+  .lab-accent { color: var(--ds-primary); }
+  .lab-description { max-width: 490px; margin: 26px 0 0; color: var(--ds-muted); font-size: 18px; line-height: 1.65; }
+  .lab-service-link { margin-top: 32px; }
+  .lab-visual { min-width: 0; width: 100%; align-self: center; }
+  .lab-caption { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; padding-block: 26px 30px; border-top: 1px solid var(--ds-border); }
+  .lab-caption h3 { margin: 0; color: var(--ds-ink); font-size: 18px; font-weight: 600; line-height: 1.5; }
+  .lab-caption p { max-width: 510px; margin: 0; color: var(--ds-muted); font-size: 14px; line-height: 1.7; }
+  .lab-principle { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding-block: 88px 8px; }
+  .lab-principle h2 { margin: 0; font-size: clamp(27px, 3vw, 40px); line-height: 1.13; letter-spacing: -.03em; font-weight: 600; }
+  .lab-principle p { max-width: 510px; margin: 0 0 16px; font-size: 17px; line-height: 1.7; color: var(--ds-muted); }
+  .lab-static-scenes section { padding-block: 32px; }
+  .lab-static-scenes img { width: min(100%, 500px); height: auto; }
+  @media (max-width: 1050px) {
+    .lab-hero { gap: 20px; min-height: 530px; }
+    .lab-copy h2 { font-size: clamp(38px, 4.6vw, 50px); }
+    .lab-description { font-size: 16px; }
+  }
+  @media (max-width: 767px) {
+    .hero-lab { padding-top: 84px; }
+    .lab-intro { padding-top: 20px; padding-bottom: 24px; }
+    .lab-heading { display: block; margin-top: 25px; }
+    .lab-heading > p { margin-top: 12px; font-size: 13px; }
+    .lab-heading > p br { display: none; }
+    .lab-selector { justify-content: flex-start; gap: 24px; margin-inline: -24px; padding-inline: 24px; scroll-snap-type: x proximity; }
+    .lab-tab { min-height: 58px; font-size: 13px; scroll-snap-align: start; }
+    .lab-hero { grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; padding-block: 30px 28px; }
+    .lab-copy { padding-block: 0; }
+    .lab-copy h2 { max-width: 560px; font-size: clamp(32px, 8.4vw, 52px); overflow-wrap: break-word; }
+    .lab-description { margin-top: 20px; font-size: 16px; line-height: 1.6; }
+    .lab-service-link { margin-top: 24px; }
+    .lab-visual { grid-row: 1; max-width: 490px; justify-self: center; margin: -20px 0 22px; }
+    .lab-caption { grid-template-columns: 1fr; gap: 10px; padding-block: 22px; }
+    .lab-principle { grid-template-columns: 1fr; gap: 22px; padding-top: 52px; }
+    .lab-principle p { font-size: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .lab-tab::after { transition: none; } }
+</style>

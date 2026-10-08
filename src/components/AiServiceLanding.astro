@@ -1,4 +1,5 @@
 ---
+import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceCta from './ServiceCta.astro';
 import UiIcon from './UiIcon.astro';
 import { aiServices, type AiService } from '../data/ai-services';
@@ -24,8 +25,8 @@ const safeguards = [
 ---
 
 <div class="ais-page">
-	<section class="ais-hero">
-		<div class="ais-container ais-hero-grid">
+	<section class="ais-hero service-particle-hero">
+		<div class="ais-container ais-hero-grid service-particle-grid">
 			<div class="ais-hero-copy">
 				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services/">Услуги</a><UiIcon name="chevron" class="h-[24.5px] w-[24.5px]" />
@@ -40,13 +41,9 @@ const safeguards = [
 					</button>
 					<a href="#how-it-works">Как это работает</a>
 				</div>
+				<ul class="ais-hero-capabilities ittn-marker-list">{service.heroPoints.map(point => <li><span>{point}</span></li>)}</ul>
 			</div>
-			<div class="ais-hero-visual" aria-label={`Ключевые возможности: ${service.heroPoints.join(', ')}`}>
-				<div class="ais-hero-core"><UiIcon name={service.icon} class="h-[98px] w-[98px]" /><span>ИИ</span></div>
-				{service.heroPoints.map((point, index) => (
-					<div class={`ais-hero-point is-${index + 1}`}><span>{String(index + 1).padStart(2, '0')}</span><strong>{point}</strong></div>
-				))}
-			</div>
+			<ServiceHeroVisual scene="ai" />
 		</div>
 	</section>
 
@@ -196,6 +193,7 @@ const safeguards = [
 </div>
 
 <style>
+	.ais-hero-capabilities { margin-top:24px; display:grid; gap:8px; color:var(--ds-muted); font-size:15px; }
 	:global(body.ai-page) { background: #fff; }
 	.ais-page { --ais-blue: var(--ds-primary); --ais-line: var(--ds-border); background: #fff; color: var(--ds-ink); }
 	.ais-container { width: min(100% - 48px, 1320px); margin-inline: auto; }

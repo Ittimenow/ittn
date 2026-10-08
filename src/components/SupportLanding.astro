@@ -1,4 +1,5 @@
 ---
+import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceTimeline from './ServiceTimeline.astro';
 import ServiceCta from './ServiceCta.astro';
 import UiIcon from './UiIcon.astro';
@@ -210,8 +211,8 @@ const faqSchema = {
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <div class="ds support-landing">
-	<section class="support-hero">
-		<div class="support-container support-hero-grid">
+	<section class="support-hero service-particle-hero">
+		<div class="support-container support-hero-grid service-particle-grid">
 			<div class="support-hero-copy">
 				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services/">Все услуги</a>
@@ -245,32 +246,7 @@ const faqSchema = {
 				<p class="support-hero-note">Уточним задачу и согласуем оценку до начала работ.</p>
 			</div>
 
-			<div class="support-console" aria-label="Как устроена работа технической поддержки">
-				<div class="support-console-head">
-					<div>
-						<span class="support-status-dot"></span>
-						<p>Поддержка проекта</p>
-					</div>
-					<span>единое окно</span>
-				</div>
-				<div class="support-ticket">
-					<div class="support-ticket-top">
-						<span>Новая задача</span>
-						<span>01</span>
-					</div>
-					<h2>Форма на сайте не создаёт сделку в CRM</h2>
-					<p>Проверяем всю цепочку: сайт → API → CRM</p>
-				</div>
-				<ol class="support-console-steps">
-					<li class="is-done"><span>01</span><div><strong>Заявка принята</strong><small>Менеджер уточнил контекст</small></div><UiIcon name="check" class="h-[28px] w-[28px]" /></li>
-					<li class="is-active"><span>02</span><div><strong>Оценка согласована</strong><small>Назначен нужный специалист</small></div><UiIcon name="settings" class="h-[28px] w-[28px]" /></li>
-					<li><span>03</span><div><strong>Работа и проверка</strong><small>Результат фиксируем в отчёте</small></div><UiIcon name="shield" class="h-[28px] w-[28px]" /></li>
-				</ol>
-				<div class="support-console-foot">
-					<span><UiIcon name="users" class="h-[28px] w-[28px]" /> Одна команда</span>
-					<span><UiIcon name="bar-chart" class="h-[28px] w-[28px]" /> Прозрачный учёт</span>
-				</div>
-			</div>
+			<ServiceHeroVisual scene="support" />
 		</div>
 	</section>
 

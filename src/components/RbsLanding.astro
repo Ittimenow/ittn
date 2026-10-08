@@ -1,4 +1,5 @@
 ---
+import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceCta from './ServiceCta.astro';
 import UiIcon from './UiIcon.astro';
 
@@ -214,8 +215,8 @@ const schema = [
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <div class="ds rbs-ds">
-	<section class="ds-hero rbs-hero">
-		<div class="ds-container rbs-hero-grid">
+	<section class="ds-hero rbs-hero service-particle-hero">
+		<div class="ds-container rbs-hero-grid service-particle-grid">
 			<div>
 				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services/">Все услуги</a>
@@ -235,34 +236,25 @@ const schema = [
 					</button>
 					<p class="rbs-free-label">Бесплатно!</p>
 				</div>
-				<div class="ds-testimonial rbs-hero-benefit">
-					<div class="rbs-hero-benefit-head">
-						<UiIcon name="thumbs-up" class="rbs-hero-benefit-icon h-[91px] w-[91px] shrink-0 text-white/90" />
-					</div>
-					<blockquote>
-						После внедрения РосБизнесСофт компания получает единую систему для&nbsp;продаж,
-						операций и&nbsp;управленческого контроля.
-					</blockquote>
-					<ul class="ittn-marker-list">
-						{heroBenefits.map((item) => (
-							<li>
-								<span>{item}</span>
-							</li>
-						))}
-					</ul>
-				</div>
 			</div>
 
-			<picture class="rbs-hero-media">
-				<img
-					src="/main-rbs.webp"
-					alt="Интерфейс РосБизнесСофт с&nbsp;CRM, ERP-модулями и&nbsp;операционными данными"
-					width="1086"
-					height="1448"
-					loading="eager"
-					decoding="async"
-				/>
-			</picture>
+			<ServiceHeroVisual scene="rbs" />
+			<div class="ds-testimonial rbs-hero-benefit service-hero-details">
+				<div class="rbs-hero-benefit-head">
+					<UiIcon name="thumbs-up" class="rbs-hero-benefit-icon h-[91px] w-[91px] shrink-0 text-white/90" />
+				</div>
+				<blockquote>
+					После внедрения РосБизнесСофт компания получает единую систему для&nbsp;продаж,
+					операций и&nbsp;управленческого контроля.
+				</blockquote>
+				<ul class="ittn-marker-list">
+					{heroBenefits.map((item) => (
+						<li>
+							<span>{item}</span>
+						</li>
+					))}
+				</ul>
+			</div>
 		</div>
 	</section>
 

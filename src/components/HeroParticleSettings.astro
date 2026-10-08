@@ -1,0 +1,95 @@
+---
+import UiIcon from './UiIcon.astro';
+import { DEFAULT_PARTICLE_SETTINGS as defaults } from '../scripts/hero-particle-settings';
+const sliders = [
+  {name:'pixelSize',label:'Размер пикселей',min:3,max:12,step:.5,unit:'px'},
+  {name:'density',label:'Плотность',min:35,max:100,step:5,unit:'%'},
+  {name:'speed',label:'Скорость',min:.25,max:1.5,step:.05,unit:'×'},
+  {name:'distance',label:'Длина перемещения',min:0,max:30,step:1,unit:'px'},
+  {name:'reaction',label:'Реакция на курсор',min:0,max:100,step:5,unit:'%'},
+  {name:'depth',label:'Глубина',min:15,max:160,step:5,unit:'%'},
+  {name:'chaos',label:'Хаотичность',min:0,max:100,step:5,unit:'%'},
+  {name:'rocking',label:'Покачивание',min:0,max:100,step:5,unit:'%'},
+  {name:'accentAmount',label:'Доля акцента',min:0,max:15,step:1,unit:'%'},
+  {name:'shellOpacity',label:'Непрозрачность сферы',min:5,max:80,step:5,unit:'%'},
+  {name:'funnelOpacity',label:'Непрозрачность воронки',min:5,max:80,step:5,unit:'%'},
+  {name:'funnelFlow',label:'Поток в воронке',min:0,max:100,step:5,unit:'%'},
+  {name:'funnelLoss',label:'Потери в воронке',min:0,max:60,step:5,unit:'%'},
+] as const;
+const colors=[{name:'primary',label:'Тени'},{name:'secondary',label:'Свет'},{name:'accent',label:'Акцент'},{name:'coreColor',label:'Ядро сферы'},{name:'background',label:'Фон объекта'}] as const;
+---
+<hero-particle-settings data-project-save={import.meta.env.DEV || undefined}>
+  <button class="settings-trigger" data-settings-open type="button" aria-haspopup="dialog" aria-expanded="false" hidden>
+    <UiIcon name="settings" class="h-[28px] w-[28px]" /><span>Настройки</span>
+  </button>
+  <dialog aria-label="Настройки пикселей" class="particle-settings" data-settings-dialog>
+    <div class="settings-heading"><h3>Настройки пикселей</h3><button type="button" data-settings-close>Закрыть</button></div>
+    <p class="settings-intro">Изменения видны сразу. Сфера — для поддержки, воронка — для Битрикс24.</p>
+    <div class="settings-fields">
+      {sliders.map(item=>(
+        <label class="settings-range" for={`particle-setting-${item.name}`}>
+          <span>{item.label}<output data-output={item.name}>{defaults[item.name]} {item.unit}</output></span>
+          <input id={`particle-setting-${item.name}`} type="range" name={item.name} min={item.min} max={item.max} step={item.step} value={defaults[item.name]} data-setting data-unit={item.unit} />
+        </label>
+      ))}
+      <fieldset class="settings-colors"><legend>Цвета</legend>
+        {colors.map(item=>(
+          <div class="settings-color">
+            <label for={`particle-color-${item.name}`}>{item.label}</label>
+            <input id={`particle-color-${item.name}`} type="color" name={item.name} value={defaults[item.name]} data-setting aria-label={`${item.label}: палитра`} />
+            <input type="text" name={item.name} value={defaults[item.name]} data-color-text maxlength="7" pattern="#[0-9a-fA-F]{6}" spellcheck="false" aria-label={`${item.label}: HEX`} />
+          </div>
+        ))}
+      </fieldset>
+    </div>
+    <div class="settings-actions">
+      <button type="button" data-settings-pause aria-pressed="false">Пауза</button>
+      <button type="button" data-settings-reset>Сбросить</button>
+      <button type="button" data-settings-save>Сохранить</button>
+    </div>
+    <p class="settings-note" data-settings-status role="status">{import.meta.env.DEV ? '«Сохранить» задаёт настройки проекта по умолчанию.' : '«Сохранить» запоминает настройки в этом браузере.'}</p>
+  </dialog>
+</hero-particle-settings>
+<script>
+  import '../scripts/hero-particle-settings-panel';
+</script>
+<style>
+  hero-particle-settings { display:block; }
+  .settings-trigger { display:flex; align-items:center; gap:8px; min-height:44px; margin:12px auto 0; padding:6px 12px; border:0; background:transparent; color:var(--ds-ink); font:inherit; font-size:13px; font-weight:600; cursor:pointer; }
+  .settings-trigger[hidden] { display:none; }
+  .settings-trigger:hover, .settings-trigger[aria-expanded="true"] { color:var(--ds-primary); }
+  .particle-settings { position:fixed; z-index:100; inset: max(112px, 12vh) auto auto max(24px, calc((100vw - 1320px) / 2)); width:340px; max-width:calc(100vw - 32px); max-height:calc(100dvh - 140px); margin:0; padding:24px; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:var(--ds-border) transparent; border:0; border-radius:16px; background:#fff; color:var(--ds-ink); box-shadow:0 14px 60px rgb(17 17 17 / .18); font-family:inherit; }
+  .particle-settings:not([open]) { display:none; }
+  .settings-heading { position:sticky; top:-24px; z-index:1; padding-block:8px; background:#fff; display:flex; gap:12px; align-items:center; justify-content:space-between; }
+  .settings-heading h3 { margin:0; font-size:18px; line-height:1.3; font-weight:650; letter-spacing:-.02em; }
+  .settings-heading button { padding:8px 0 8px 8px; background:none; border:0; color:var(--ds-muted); font:inherit; font-size:12px; cursor:pointer; }
+  .settings-intro { margin:8px 0 24px; color:var(--ds-muted); font-size:12px; line-height:1.5; }
+  .settings-fields { display:grid; gap:17px; }
+  .settings-range { display:grid; gap:9px; font-size:13px; }
+  .settings-range > span { display:flex; justify-content:space-between; gap:16px; }
+  output { color:var(--ds-primary); font-size:12px; font-variant-numeric:tabular-nums; }
+  input[type="range"] { width:100%; height:20px; margin:0; accent-color:var(--ds-primary); cursor:pointer; }
+  .settings-colors { min-width:0; margin:2px 0 0; padding:0; border:0; }
+  .settings-colors legend { margin-bottom:12px; font-size:13px; font-weight:600; }
+  .settings-color { display:grid; grid-template-columns:minmax(0,1fr) 30px 83px; gap:9px; align-items:center; margin-top:8px; }
+  .settings-color label { font-size:12px; }
+  input[type="color"] { width:30px; height:30px; padding:0; border:0; background:none; cursor:pointer; }
+  input[type="color"]::-webkit-color-swatch-wrapper { padding:2px; }
+  input[type="color"]::-webkit-color-swatch { border:1px solid rgb(17 17 17 / .15); border-radius:4px; }
+  input[type="text"] { min-width:0; width:100%; height:32px; padding:6px; border:1px solid var(--ds-border); border-radius:5px; background:#fff; color:var(--ds-ink); font:inherit; font-size:11px; font-variant-numeric:tabular-nums; caret-color:var(--ds-primary); }
+  input[aria-invalid="true"] { border-color:#ab2430; }
+  .settings-actions { display:flex; justify-content:space-between; gap:12px; margin-top:22px; padding-top:18px; border-top:1px solid var(--ds-border); }
+  .settings-actions button { min-height:40px; padding:8px 14px; border:1px solid var(--ds-border); border-radius:8px; background:#fff; color:var(--ds-ink); font:inherit; font-size:12px; cursor:pointer; }
+  .settings-actions button[data-settings-save] { background:var(--ds-primary); color:#fff; }
+  .settings-actions button:disabled { opacity:.65; cursor:wait; }
+  .settings-actions button:first-child { border-color:var(--ds-primary); color:var(--ds-primary); }
+  .settings-actions button:hover { background:#f4f5ff; }
+  .settings-actions button[data-settings-save]:hover { background:#252bd6; }
+  .settings-note { margin:14px 0 0; color:var(--ds-muted); font-size:11px; line-height:1.5; }
+  button:focus-visible,input:focus-visible { outline:2px solid var(--ds-primary); outline-offset:3px; }
+  @media (max-width:767px) {
+    .particle-settings { inset:auto 12px 12px; width:auto; max-width:none; max-height:44dvh; padding:18px 20px; scroll-padding:16px; }
+    .settings-heading { position:sticky; top:-18px; z-index:1; margin-top:-2px; padding-block:4px 6px; background:#fff; }
+    .settings-intro { margin-bottom:18px; }
+  }
+</style>

@@ -1,0 +1,21 @@
+{
+  "pixelSize": 6,
+  "density": 80,
+  "speed": 0.85,
+  "distance": 14,
+  "reaction": 65,
+  "depth": 100,
+  "chaos": 65,
+  "rocking": 75,
+  "primary": "#A9B1BD",
+  "secondary": "#F2F4F7",
+  "background": "#FFFFFF",
+  "paused": false,
+  "accent": "#8494CF",
+  "coreColor": "#A5CADF",
+  "accentAmount": 5,
+  "shellOpacity": 40,
+  "funnelOpacity": 20,
+  "funnelFlow": 65,
+  "funnelLoss": 45
+}

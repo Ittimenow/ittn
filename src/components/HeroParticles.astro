@@ -1,0 +1,40 @@
+---
+import HeroParticleSettings from './HeroParticleSettings.astro';
+import { serviceHeroScenes, type ServiceHeroSceneId } from '../data/service-hero-scenes';
+interface Props { scene?: ServiceHeroSceneId; showSettings?: boolean; }
+const { scene = 'sites', showSettings = true } = Astro.props;
+const definition = serviceHeroScenes.find(item => item.id === scene)!;
+---
+<hero-particles scene={scene} data-settings-available={showSettings || undefined}>
+  <button class="particle-surface" type="button" data-particle-surface aria-label={`${definition.alt}. Нажмите, чтобы запустить волну.`} disabled>
+    <img src={`/services/particles/${scene}.webp`} width="1000" height="1000" alt="" fetchpriority="high" decoding="async" />
+    <canvas data-particle-canvas aria-hidden="true"></canvas>
+    <canvas data-particle-static aria-hidden="true"></canvas>
+  </button>
+  <p class="particle-hint" data-particle-hint>Проведите по пикселям. Нажмите, чтобы запустить волну.</p>
+  <button class="particle-retry" data-particle-retry type="button" hidden>Повторить загрузку</button>
+  {showSettings && <HeroParticleSettings />}
+  <noscript><p class="particle-hint">Для взаимодействия с частицами включите JavaScript.</p></noscript>
+</hero-particles>
+<script>
+  import '../scripts/hero-particles';
+</script>
+<style>
+  hero-particles { display:block; width:100%; min-width:0; }
+  .particle-surface { position:relative; display:block; width:100%; aspect-ratio:1; margin:0; padding:0; border:0; background:var(--particle-background, #fff); scroll-margin-top:100px; touch-action:pan-y; cursor:crosshair; -webkit-tap-highlight-color:transparent; }
+  .particle-surface:disabled { cursor:default; }
+  .particle-surface:focus-visible { outline:2px solid var(--ds-primary); outline-offset:-8px; }
+  .particle-surface img, .particle-surface canvas { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; pointer-events:none; }
+  .particle-surface canvas { opacity:0; }
+  hero-particles[data-rendered] [data-particle-canvas] { opacity:1; }
+  hero-particles[data-static-custom]:not([data-rendered]) [data-particle-static] { opacity:1; }
+  hero-particles[data-static-custom] img { opacity:0; }
+  hero-particles[data-rendered] img { opacity:0; }
+  .particle-hint { margin:0; padding-inline:12px; min-height:2.8em; color:var(--ds-muted); text-align:center; font-size:12px; line-height:1.5; }
+  .particle-retry { display:block; margin:8px auto 0; padding:8px 12px; border:0; background:transparent; color:var(--ds-primary); text-decoration:underline; text-underline-offset:4px; font:inherit; font-size:13px; cursor:pointer; }
+  .particle-retry[hidden] { display:none; }
+  @media (max-width:767px) {
+    .particle-hint { font-size:11px; }
+    hero-particles[data-settings-open] .particle-surface { width:min(100%, calc(54dvh - 112px)); margin-inline:auto; }
+  }
+</style>

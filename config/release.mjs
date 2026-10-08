@@ -2,7 +2,7 @@ export const redirects = {
   '/services/web': '/services/sites/',
   '/soprovozhdenie-vashih-it-proektov': '/services/support/',
 };
-export const internalPaths = ['/design-system/', '/global-styles/', '/404.html', '/404/'];
+export const internalPaths = ['/design-system/', '/global-styles/', '/hero-lab/', '/404.html', '/404/'];
 export function releaseConfig(env = process.env) {
   const production = env.DEPLOY_ENV === 'production';
   if (env.DEPLOY_ENV && !['staging', 'production'].includes(env.DEPLOY_ENV)) throw new Error('DEPLOY_ENV must be staging or production');

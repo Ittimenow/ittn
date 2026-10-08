@@ -38,6 +38,7 @@ const { title, text, id, label = 'Получить консультацию', so
   }
   @media (max-width:899px) {
     .ittn-service-cta { grid-template-columns:1fr; grid-template-rows:auto minmax(180px,1fr) auto; gap:16px; align-items:start; }
+    .ittn-service-cta > * { grid-column:1; }
     .ittn-service-cta-copy { grid-row:1; width:100%; }
     .ittn-service-cta-image { grid-row:2/-1; width:100%; min-height:180px; }
     .ittn-service-cta .ittn-btn { grid-row:3; }

@@ -1,4 +1,5 @@
 ---
+import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceCta from './ServiceCta.astro';
 import UiIcon from './UiIcon.astro';
 import { aiServices } from '../data/ai-services';
@@ -137,8 +138,8 @@ const faqSchema = {
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <div class="ds ai-landing">
-	<section class="ai-hero">
-		<div class="ai-container ai-hero-grid">
+	<section class="ai-hero service-particle-hero">
+		<div class="ai-container ai-hero-grid service-particle-grid">
 			<div class="ai-hero-copy">
 				<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
 					<a href="/services/">Все услуги</a>
@@ -159,16 +160,7 @@ const faqSchema = {
 				</div>
 			</div>
 
-			<picture class="ai-hero-media">
-				<img
-					src="/services/ai/ai-hero-3d.webp"
-					alt="Объёмный символ AI, объединяющий данные и бизнес-системы"
-					width="1086"
-					height="1448"
-					loading="eager"
-					decoding="async"
-				/>
-			</picture>
+			<ServiceHeroVisual scene="ai" />
 		</div>
 	</section>
 

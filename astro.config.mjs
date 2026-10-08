@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { writeFile } from 'node:fs/promises';
+import { heroParticleDefaultsPlugin } from './scripts/hero-particle-defaults-plugin.mjs';
 import { releaseConfig } from './config/release.mjs';
 
 const release = releaseConfig();
@@ -33,6 +34,8 @@ export default defineConfig({
   ],
   vite: {
     define: { 'import.meta.env.PUBLIC_INDEXABLE': JSON.stringify(release.production) },
-    plugins: [tailwindcss()],
+    // Prepare the lazy particle renderer before the first browser request.
+    optimizeDeps: { include: ['three'] },
+    plugins: [tailwindcss(), heroParticleDefaultsPlugin()],
   },
 });
