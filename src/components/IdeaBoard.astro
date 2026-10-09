@@ -1,0 +1,54 @@
+<dialog class="idea-board" aria-label="Нарисуй свою идею">
+  <canvas class="idea-surface" aria-label="Лист для рисования синим карандашом"></canvas>
+  <header class="board-toolbar">
+    <span class="board-title">Нарисуй свою идею</span>
+    <div class="board-actions">
+      <button type="button" data-zoom-out aria-label="Уменьшить масштаб">−</button>
+      <output data-zoom>100%</output>
+      <button type="button" data-zoom-in aria-label="Увеличить масштаб">+</button>
+      <button type="button" data-pan aria-pressed="false">Переместить</button>
+      <button type="button" data-save class="board-save">Сохранить</button>
+      <button type="button" data-share>Поделиться</button>
+      <button type="button" data-close>Закрыть</button>
+    </div>
+  </header>
+  <div class="board-share-result" data-share-result hidden>
+    <label for="idea-share-link">Ссылка на рисунок</label>
+    <input id="idea-share-link" data-share-link readonly aria-label="Ссылка на рисунок" />
+    <button type="button" data-copy-link>Копировать</button>
+  </div>
+  <p class="board-note" aria-live="polite">Рисуйте мышью или пальцем. Ваша идея останется здесь.</p>
+</dialog>
+
+<style>
+.idea-board { position:fixed; inset:0; width:100%; height:100%; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; background:#faf9f6; color:#323bff; overflow:hidden; }
+.idea-board::backdrop { background:white; }
+.idea-surface { display:block; width:100%; height:100%; touch-action:none; cursor:crosshair; }
+.idea-board[data-pan] .idea-surface { cursor:grab; }
+.idea-board[data-pan] .idea-surface:active { cursor:grabbing; }
+.board-share-result { position:absolute; top:110px; right:24px; left:24px; max-width:650px; margin-left:auto; display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:16px; background:white; box-shadow:0 8px 30px #11111115; border-radius:12px; }
+.board-share-result[hidden] { display:none; }
+.board-share-result label { width:100%; font-size:13px; }
+.board-share-result input { flex:1; min-width:0; padding:10px; border:1px solid #dcdce8; border-radius:6px; user-select:text!important; -webkit-user-select:text!important; color:#323bff; }
+.board-share-result button { border:0; background:#ececff; color:#323bff; padding:12px; border-radius:6px; cursor:pointer; }
+.board-toolbar { position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 32px; background:rgba(255,255,255,.94); border-bottom:1px solid #e4e4ea; }
+.board-title { font-size:20px; font-weight:600; }
+.board-actions { display:flex; align-items:center; gap:10px; }
+.board-actions button { min-width:44px; min-height:44px; padding:10px 14px; border:0; border-radius:8px; background:transparent; color:#323bff; font:inherit; cursor:pointer; }
+.board-actions button:hover, .board-actions button[aria-pressed="true"] { background:#ececff; }
+.board-actions .board-save { background:#323bff; color:white; }
+.board-actions .board-save:hover { background:#242bcf; }
+.board-actions button:focus-visible { outline:2px solid #323bff; outline-offset:3px; }
+.board-actions button:disabled { opacity:.4; cursor:default; }
+.board-actions output { min-width:48px; text-align:center; font-size:13px; font-variant-numeric:tabular-nums; }
+.board-note { position:absolute; bottom:18px; left:24px; right:24px; margin:0; color:#61616f; font-size:13px; pointer-events:none; }
+@media(max-width:767px) {
+ .board-toolbar { padding:12px; gap:8px; flex-wrap:wrap; }
+ .board-share-result { top:165px; }
+ .board-title { font-size:16px; width:100%; }
+ .board-actions { width:100%; gap:2px; justify-content:space-between; flex-wrap:wrap; }
+ .board-actions button { padding:8px; font-size:12px; }
+ .board-actions output { min-width:34px; font-size:11px; }
+ .board-note { left:16px; bottom:16px; font-size:12px; }
+}
+</style>

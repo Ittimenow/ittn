@@ -16,6 +16,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "nodemailer": "^10.0.16",
     "sirv": "^3.0.2",
     "three": "^0.186.1"
   },

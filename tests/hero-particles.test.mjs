@@ -50,7 +50,7 @@ async function fixture({reduced=false,fail=false}={}) {
   };
 }
 
-test('eight distinct 3D surfaces fit the frame, have depth, normals and matching buffers',()=>{
+test('nine distinct 3D surfaces fit the frame, have depth, normals and matching buffers',()=>{
   const fingerprints=new Set();
   for(const {id} of serviceHeroScenes){
     const shape=createParticleShape(id);
@@ -64,14 +64,14 @@ test('eight distinct 3D surfaces fit the frame, have depth, normals and matching
     assert.ok(projected.length>shape.count*.15);
     assert.ok(projected.every(p=>Math.abs(p.x)<1.3&&Math.abs(p.y)<1.3));
     assert.ok(shape.positions.every(Number.isFinite));
-    assert.ok(shape.positions.every(v=>Math.abs(v)<1.2),'shape leaves room for cursor displacement');
+    assert.ok(shape.positions.every(v=>Math.abs(v)<(id==='home'?8:1.2)),'shape leaves room for cursor displacement and portal depth');
     assert.ok(shape.count>200&&shape.count<PARTICLE_COUNT);
     assert.equal(shape.pixelSize,6);
     assert.ok(shape.tones.every(v=>v>=0&&v<=1));
     assert.equal(createParticleShape(id),shape,'reuse sampled masks when switching back');
     fingerprints.add(shape.positions.slice(0,30).join(','));
   }
-  assert.equal(fingerprints.size,8);
+  assert.equal(fingerprints.size,9);
   assert.ok(volumeDistance('support',0,0,0)>0,'sphere surrounds its core');
   assert.ok(volumeDistance('web-services',0,0,0)>0,'cloud has a solid rounded body');
   assert.ok(volumeDistance('bitrix24',0,.65,0)<0,'funnel is hollow');
@@ -559,5 +559,30 @@ test('crystal touch tests the contact position once, preserves scrolling and sup
   app.w.dispatchEvent(new app.w.CustomEvent(PARTICLE_SETTINGS_EVENT,{detail:{...defaults,paused:true}}));
   app.pointer('pointerdown',250,250,'touch');app.pointer('pointerup',250,250,'touch');
   assert.equal(app.calls.filter(c=>c[0]==='pointer').length,1,'pause prevents touch activation');
+  app.close();
+});
+
+
+test('portal has real depth, stays finite over wraps and resets its interaction',async()=>{
+  const {SystemMotion,PORTAL_COUNT}=await import('../src/scripts/hero-particle-system.ts');
+  const portal=new SystemMotion(),initial=portal.block(130),mouth=portal.block(20);
+  portal.pointer(.8,-.5);portal.trigger();portal.advance(1.2);assert.ok(portal.energy>.99);
+  assert.notDeepEqual(portal.block(130),initial);assert.deepEqual(portal.block(20),mouth);
+  for(let frame=0;frame<1000;frame++){
+    portal.advance(.05);
+    for(let i=0;i<PORTAL_COUNT;i+=7){const b=portal.block(i);assert.ok([b.x,b.y,b.z,b.size,b.angle].every(Number.isFinite));assert.ok(b.size>=0&&b.size<.3);assert.ok(b.z>-8&&b.z<.2);}
+  }
+  assert.equal(portal.age,-1);assert.equal(portal.energy,0);portal.leave();portal.reset();assert.deepEqual(portal.block(130),initial);
+});
+
+
+test('home reveal handles touch location and drag without a second pulse or cancelled scrolling',async()=>{
+  const app=await fixture();app.element.setAttribute('scene','home');
+  app.pointer('pointerdown',310,290,'touch');app.pointer('pointermove',330,310,'touch');app.pointer('pointerup',330,310,'touch');
+  assert.equal(app.calls.filter(c=>c[0]==='pointer').length,2);
+  assert.equal(app.calls.filter(c=>c[0]==='pulse').length,0);
+  app.w.dispatchEvent(new app.w.CustomEvent(PARTICLE_SETTINGS_EVENT,{detail:{...defaults,paused:true}}));
+  app.pointer('pointerdown',310,290,'touch');
+  assert.equal(app.calls.filter(c=>c[0]==='pointer').length,2);
   app.close();
 });

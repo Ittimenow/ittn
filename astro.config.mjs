@@ -1,4 +1,5 @@
 // @ts-check
+import { ideaApiPlugin } from './scripts/idea-api.mjs';
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
@@ -13,7 +14,7 @@ export default defineConfig({
   compressHTML: true,
   redirects: release.redirects,
   integrations: [
-    ...(release.production ? [sitemap({ filter: (url) => release.production && !release.internalPaths.includes(new URL(url).pathname) && !Object.hasOwn(release.redirects, new URL(url).pathname.replace(/\/$/, '')) })] : []),
+    ...(release.production ? [sitemap({ filter: (url) => release.production && !release.internalPaths.includes(new URL(url).pathname) && new URL(url).pathname !== '/idea/' && !Object.hasOwn(release.redirects, new URL(url).pathname.replace(/\/$/, '')) })] : []),
     {
       name: 'release-metadata',
       hooks: {
@@ -36,6 +37,6 @@ export default defineConfig({
     define: { 'import.meta.env.PUBLIC_INDEXABLE': JSON.stringify(release.production) },
     // Prepare the lazy particle renderer before the first browser request.
     optimizeDeps: { include: ['three'] },
-    plugins: [tailwindcss(), heroParticleDefaultsPlugin()],
+    plugins: [tailwindcss(), heroParticleDefaultsPlugin(), ideaApiPlugin()],
   },
 });

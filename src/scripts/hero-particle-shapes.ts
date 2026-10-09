@@ -1,3 +1,4 @@
+import { SystemMotion, PORTAL_COUNT } from './hero-particle-system.ts';
 import { HINGE_CENTERS, HINGE_CUBE_HALF } from './hero-particle-hinges.ts';
 import { CloudMotion } from './hero-particle-cloud.ts';
 import { FlightMotion, FLIGHT_CAMERA_DISTANCE } from './hero-particle-flight.ts';
@@ -11,7 +12,7 @@ import type { ServiceHeroSceneId } from '../data/service-hero-scenes';
 export const PARTICLE_COUNT = 8192;
 export const VIEW_SIZE = 2.7;
 type Point = readonly [number, number];
-export interface ParticleShape { positions: Float32Array; normals: Float32Array; tones: Float32Array; sizes: Float32Array; materials: Float32Array; count: number; pixelSize: number; network?:boolean; flight?:boolean; cloud?:boolean; rigid?:boolean; }
+export interface ParticleShape { positions: Float32Array; normals: Float32Array; tones: Float32Array; sizes: Float32Array; materials: Float32Array; count: number; pixelSize: number; network?:boolean; flight?:boolean; cloud?:boolean; system?:boolean; rigid?:boolean; }
 const clamp = (n: number, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, n));
 function capsule(x: number, y: number, ax: number, ay: number, bx: number, by: number, radius: number) {
   const vx = bx - ax, vy = by - ay;
@@ -51,6 +52,7 @@ function extrude(distance:number,z:number,thickness:number,bevel=.055) {
 /** Positive-inside distance fields: closed surfaces, except the open funnel. */
 export function volumeDistance(id:ServiceHeroSceneId,x:number,y:number,z:number):number {
   switch(id) {
+    case 'home': return .18-Math.hypot(Math.hypot(x,y)-.64,z);
     case 'sites': {
       // Nose recedes from the viewer; the tail remains close and readable.
       const scale=.88,px=x/scale,py=(y*Math.cos(1.48)-z*Math.sin(1.48))/scale,pz=(y*Math.sin(1.48)+z*Math.cos(1.48))/scale;
@@ -91,6 +93,13 @@ const cache = new Map<string, ParticleShape>();
 export function createParticleShape(id:ServiceHeroSceneId,pixelSize=6,density=80):ParticleShape {
   const key=`${id}:${pixelSize}:${density}`;
   const cached=cache.get(key);if(cached)return cached;
+  if(id==='home'){
+    const count=Math.min(PARTICLE_COUNT-1,PORTAL_COUNT*20);
+    const positions=new Float32Array(PARTICLE_COUNT*3),normals=new Float32Array(PARTICLE_COUNT*3),tones=new Float32Array(PARTICLE_COUNT),sizes=new Float32Array(PARTICLE_COUNT),materials=new Float32Array(PARTICLE_COUNT),ribbon=new SystemMotion();
+    for(let i=0;i<count;i++){const p=ribbon.sample(Math.floor(i*PORTAL_COUNT*24/count),count);positions.set(p.position,i*3);normals.set(p.normal,i*3);tones[i]=.99;sizes[i]=(.8+particleHash(i+32)*.35)*ribbon.block(Math.floor(Math.floor(i*PORTAL_COUNT*24/count)/24)).size/.15;}
+    const shape={positions,normals,tones,sizes,materials,count,pixelSize,system:true};
+    if(cache.size>=16)cache.delete(cache.keys().next().value!);cache.set(key,shape);return shape;
+  }
   const step=Math.max(.027,pixelSize*VIEW_SIZE/500*1.34),span=Math.ceil((id==='rbs'?.32:1.08)/step);
   const samples:{x:number;y:number;z:number;nx:number;ny:number;nz:number;seed:number;order:number;material:number}[]=[];
   const occupied=new Set<string>();
@@ -170,10 +179,13 @@ export function particleAppearance(point:{light:number;seed:number;material:numb
 export function projectParticleShape(shape:ParticleShape,depth=100) {
   const points:{x:number;y:number;z:number;size:number;light:number;seed:number;material:number;facing:number;height:number}[]=[];
   for(let i=0;i<shape.count;i++) {
-    const n=rotateParticle(shape.normals[i*3],shape.normals[i*3+1],shape.normals[i*3+2]/Math.max(.15,depth/100));
+    if(shape.sizes[i]<.001)continue;
+    const rotate=shape.system?((x:number,y:number,z:number):[number,number,number]=>[x,y,z]):rotateParticle;
+    const n=rotate(shape.normals[i*3],shape.normals[i*3+1],shape.normals[i*3+2]/Math.max(.15,depth/100));
     const nl=Math.hypot(...n)||1;
-    const p=rotateParticle(shape.positions[i*3],shape.positions[i*3+1],shape.positions[i*3+2]*depth/100);
+    const p=rotate(shape.positions[i*3],shape.positions[i*3+1],shape.positions[i*3+2]*depth/100);
     const facing=(n[0]*-p[0]+n[1]*-p[1]+n[2]*(CAMERA_DISTANCE-p[2]))/nl;
+    if(shape.system&&p[2]<-.08&&Math.max(Math.abs(p[0]),Math.abs(p[1]))*CAMERA_DISTANCE/(CAMERA_DISTANCE-p[2])>.88)continue;
     const material=shape.materials[i];
     if(facing<0&&material!==1&&material!==3&&material!==5)continue;
     const perspective=CAMERA_DISTANCE/(CAMERA_DISTANCE-p[2]);

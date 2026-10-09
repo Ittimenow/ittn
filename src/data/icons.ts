@@ -28,6 +28,7 @@ export const iconNames = [
 	"monitor-48",
 	"nav-down-12",
 	"phone",
+	"pencil",
 	"rocket",
 	"settings",
 	"settings-16",

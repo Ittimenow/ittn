@@ -1,0 +1,8 @@
+Generated with built-in image_gen tool.
+
+public/images/idea-pencil-napkin.png
+Photorealistic product photograph cutout for a white website. Overhead view of one sharpened cobalt blue wooden colored pencil with blue pigment tip, lying diagonally from lower left to upper right on top of one small square white paper napkin. Entire pencil and napkin visible, subtle embossed paper fibers, delicate creases, soft natural contact shadow, bright daylight, premium editorial still life. Napkin rotated slightly, pencil extends a little beyond napkin corners. No text, no brand, no marks, no drawn illustration, no table or background. Transparent background surrounding the objects. Compact square composition.
+
+public/images/idea-napkin-texture.webp
+Seamless tileable texture of clean white paper napkin viewed straight overhead, flat evenly lit macro material scan. Very pale white, subtle tiny embossed dots and fine cellulose paper fibers, extremely gentle variations. No objects, no text, no edges, no folds, no borders, no shadow gradients. All four edges match for continuous repeating texture. Photorealistic material texture, square.
+Converted to 768×768 WebP using sharp.

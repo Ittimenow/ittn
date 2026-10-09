@@ -828,3 +828,11 @@ Square canvas. Tight framing, roughly 4% transparent margin along the longest di
 - **`headset-48`**: A SUPPORT HEADSET outline: a large upside-down U headband, two simple slim earcups on its lower ends, and a short curved microphone boom from the right earcup ending below center. No person's head or face, no text, no sound waves.
 
 </details>
+
+
+## Карандаш для hero-lab
+
+- `pencil`: ручной синий карандаш, диагональ снизу слева вверх вправо. Взять/положить инструмент рисования справа от «ИТ».
+- Рабочий файл: `public/icons/pencil.png`; архив: `docs/assets/sketch-icons/pencil.png`; подключение через `UiIcon`.
+- Создан встроенным image_gen по `docs/prompts/pencil-icon.txt`, со стилевым эталоном `docs/assets/sketch-icons/examples/bar-chart-bold-pressure.png`.
+- Нормализация: прозрачный PNG 512×512, длинная сторона рисунка 472 px, пигмент #323BFF, сохранена исходная альфа-фактура.

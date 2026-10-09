@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 .env.*
 !.env.example
+
+# Local idea drawings (not source assets)
+.data/
+mail.env

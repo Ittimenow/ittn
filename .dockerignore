@@ -9,3 +9,6 @@ temp/*
 temp/design_system-ittn-v2/*
 !temp/design_system-ittn-v2/design-system.html
 .env*
+
+.data
+mail.env

@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ServiceCta from '../components/ServiceCta.astro';
+---
+<Layout title="Рисунок — IT TIME NOW" description="Идея, нарисованная на цифровой салфетке IT TIME NOW.">
+  <section class="shared-idea">
+    <Breadcrumbs current="Рисунок" />
+    <h1>Идея на салфетке</h1>
+    <p data-idea-status role="status">Открываем рисунок…</p>
+    <img data-idea-image hidden alt="Рисунок синим карандашом на светлой салфетке" />
+    <a data-idea-download hidden download="Моя идея.png">Скачать рисунок</a>
+  </section>
+  <ServiceCta title="Поможем воплотить вашу идею" text="Обсудим задачу и подберём цифровое решение для вашего бизнеса." source="Рисунок на салфетке" />
+</Layout>
+<script>
+  const id=new URLSearchParams(location.search).get('id');
+  const image=document.querySelector<HTMLImageElement>('[data-idea-image]')!;
+  const status=document.querySelector<HTMLElement>('[data-idea-status]')!;
+  const download=document.querySelector<HTMLAnchorElement>('[data-idea-download]')!;
+  if(!id||!/^[a-f0-9]{32}$/.test(id)){status.textContent='Ссылка на рисунок неполная или неверная.';}
+  else{
+    image.onload=()=>{image.hidden=false;status.textContent='Сохранённая версия рисунка';download.hidden=false;};
+    image.onerror=()=>{status.textContent='Рисунок не найден или временно недоступен. Попробуйте открыть ссылку позже.';};
+    image.src='/api/ideas/'+id+'.png';download.href=image.src;
+  }
+</script>
+<style>
+.shared-idea { max-width:1440px; margin:0 auto; padding:32px 24px 64px; }
+h1 { margin:32px 0 16px; font-size:clamp(32px,5vw,64px); line-height:1.1; }
+p { color:#61616f; }
+img { display:block; max-width:100%; max-height:75vh; object-fit:contain; margin:24px auto; }
+img[hidden],a[hidden] { display:none; }
+a { display:inline-block; color:#323bff; padding:12px 0; text-decoration:underline; }
+</style>

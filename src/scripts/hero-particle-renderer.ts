@@ -1,6 +1,7 @@
-import { BufferAttribute, BufferGeometry, Group, NoToneMapping, PerspectiveCamera, Points, Scene, ShaderMaterial, Vector3, Vector4, WebGLRenderer } from 'three';
+import { AmbientLight, DirectionalLight, BufferAttribute, BufferGeometry, Group, NoToneMapping, PerspectiveCamera, Points, Scene, ShaderMaterial, Vector3, Vector4, WebGLRenderer } from 'three';
 import { BASE_ROTATION, CAMERA_DISTANCE, createParticleShape, volumeDistance, PARTICLE_COUNT, VIEW_SIZE } from './hero-particle-shapes';
 import type { ServiceHeroSceneId } from '../data/service-hero-scenes';
+import { RevealObject } from './hero-particle-reveal';
 import { CrystalMotion } from './hero-particle-crystal';
 import { HingeMotion } from './hero-particle-hinges';
 import { CloudMotion } from './hero-particle-cloud';
@@ -22,6 +23,8 @@ const vertexShader=/* glsl */`
   uniform float uSize;
   uniform vec4 uImpacts[8];
   uniform float uCloud;
+  uniform float uHome;
+  uniform float uSystemEnergy;
   varying float vRipple;
   varying float vLight;
   varying float vAlpha;
@@ -54,6 +57,7 @@ const vertexShader=/* glsl */`
         }
       }
     }
+    if(uHome>.5)vRipple=uSystemEnergy;
     vec4 viewPosition=modelViewMatrix*vec4(displaced,1.0);
     vec3 normal=normalize(normalMatrix*aNormal);
     vFacing=dot(normal,normalize(-viewPosition.xyz));
@@ -74,6 +78,7 @@ const fragmentShader=/* glsl */`
   uniform float uFunnelOpacity;
   uniform float uLayer;
   uniform float uCloud;
+  uniform float uHome;
   varying float vLight;
   varying float vRipple;
   varying float vAlpha;
@@ -89,11 +94,12 @@ const fragmentShader=/* glsl */`
     if(vAlpha<.02)discard;
     if(uLayer<.5) { if(shell||vFacing<0.0)discard; }
     else { if(!shell)discard; if(uLayer<1.5&&vFacing>=0.0)discard; if(uLayer>1.5&&vFacing<0.0)discard; }
-    bool accent=!core&&!shell&&vSeed<uAccentAmount;
+    bool accent=uHome<.5&&!core&&!shell&&vSeed<uAccentAmount;
     vec3 shadow=core?uCoreColor:accent?uAccent:uPrimary;
     vec3 highlight=core?mix(uCoreColor,vec3(1.0),.65):accent?mix(uAccent,vec3(1.0),.65):uSecondary;
     vec3 color=mix(shadow,highlight,pow(vLight,1.3));
     if(uCloud>.5)color=mix(color,mix(uCoreColor,vec3(1.0),.60),min(vRipple*.8,.65));
+    if(uHome>.5)color=mix(color,mix(uCoreColor,vec3(1.0),.25),vRipple*.8);
     float alpha=vAlpha;
     if(shell){alpha*=min(.9,uShellOpacity*(.32+.68*pow(max(0.0,1.0-abs(vFacing)),1.4))+vRipple*.24);color=mix(color,uSecondary,min(vRipple*.6,.7));}
     if(funnel){
@@ -125,6 +131,7 @@ const flowFragment=/* glsl */`
 `;
 export class ParticleRenderer {
   private renderer:WebGLRenderer;
+  private reveal?:RevealObject;
   private scene=new Scene();
   private camera=new PerspectiveCamera(2*Math.atan(VIEW_SIZE/2/CAMERA_DISTANCE)*180/Math.PI,1,.1,20);
   private geometry=new BufferGeometry();
@@ -179,7 +186,7 @@ export class ParticleRenderer {
   private shellOpacity:number;
   private accentAmount:number;
   constructor(canvas:HTMLCanvasElement,private id:ServiceHeroSceneId,private settings:ParticleSettings) {
-    this.renderer=new WebGLRenderer({canvas,alpha:true,antialias:false,powerPreference:'low-power'});
+    this.renderer=new WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});
     this.renderer.debug.onShaderError=()=>{throw new Error('Particle shader compilation failed');};
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));
     this.renderer.setClearColor(0xffffff,0);this.renderer.toneMapping=NoToneMapping;
@@ -196,7 +203,7 @@ export class ParticleRenderer {
     this.size=settings.pixelSize;this.depth=settings.depth;this.rocking=settings.rocking;
     this.shellOpacity=settings.shellOpacity;this.accentAmount=settings.accentAmount;this.funnelOpacity=settings.funnelOpacity;
     this.setColors(true);
-    const uniforms={uCloud:{value:id==='web-services'?1:0},uFunnelOpacity:{value:this.funnelOpacity/100},uImpacts:{value:this.impactUniforms},uSize:{value:this.size},uPrimary:{value:this.primary},uSecondary:{value:this.secondary},uAccent:{value:this.accent},uCoreColor:{value:this.coreColor},uAccentAmount:{value:this.accentAmount/100},uShellOpacity:{value:this.shellOpacity/100}};
+    const uniforms={uHome:{value:id==='home'?1:0},uSystemEnergy:{value:0},uCloud:{value:id==='web-services'?1:0},uFunnelOpacity:{value:this.funnelOpacity/100},uImpacts:{value:this.impactUniforms},uSize:{value:this.size},uPrimary:{value:this.primary},uSecondary:{value:this.secondary},uAccent:{value:this.accent},uCoreColor:{value:this.coreColor},uAccentAmount:{value:this.accentAmount/100},uShellOpacity:{value:this.shellOpacity/100}};
     // Transparent shell is drawn behind and in front of the opaque core.
     // This preserves its interior without translucent pixels writing depth.
     for(const [layer,order] of [[1,0],[0,1],[2,2]]) {
@@ -229,11 +236,15 @@ export class ParticleRenderer {
     this.hingePoints.frustumCulled=false;this.hingePoints.renderOrder=2;this.hingePoints.visible=id==='rbs';this.points.add(this.hingePoints);
     for(const [key,array,itemSize] of [['position',this.crystal.positions,3],['aAlpha',this.crystal.alphas,1],['aSize',this.crystal.sizes,1],['aColor',this.crystal.colors,3],['aSoft',this.crystal.soft,1]] as const)this.crystalGeometry.setAttribute(key,new BufferAttribute(array,itemSize));
     this.crystalPoints.frustumCulled=false;this.crystalPoints.renderOrder=1;this.crystalPoints.visible=id==='ai';this.crystal.reset();this.points.add(this.crystalPoints);
+    if(id==='home'){this.reveal=new RevealObject();this.scene.add(this.reveal.group);}
+    this.scene.add(new AmbientLight(0xffffff,1.7));
+    const daylight=new DirectionalLight(0xffffff,2.4);daylight.position.set(-3,5,5);this.scene.add(daylight);
     this.material=this.materials[1];
     this.scene.add(this.points);this.pose();this.sync();
   }
 
   setShape(id:ServiceHeroSceneId) {
+    if(id==='home'&&!this.reveal){this.reveal=new RevealObject();this.scene.add(this.reveal.group);this.reveal?.resize(this.width*this.renderer.getPixelRatio(),this.width*this.renderer.getPixelRatio());}this.reveal?.reset();if(this.reveal)this.reveal.group.visible=id==='home';
     this.crystal.reset();this.crystalPoints.visible=id==='ai';
     this.hinges.reset();this.hingePoints.visible=id==='rbs';
     this.cloud.reset();this.cloudPoints.visible=id==='web-services';
@@ -256,6 +267,7 @@ export class ParticleRenderer {
   }
   pointer(x:number,y:number){
     this.pointerPosition={x,y};
+    if(this.id==='home'){this.reveal?.pointer(x,y);return;}
     if(this.id==='sites'){this.flight.pointer(x/(VIEW_SIZE*.5)*this.settings.reaction/100,y/(VIEW_SIZE*.5)*this.settings.reaction/100);return;}
     if(this.id==='integrations'){
       this.points.updateMatrixWorld();
@@ -276,11 +288,12 @@ export class ParticleRenderer {
     // Intersect the pointer ray with the object's central plane, then enter model space.
     const point=new Vector3(x,y,0);this.points.updateMatrixWorld();this.points.worldToLocal(point);this.motion.pointer(point.x,point.y);
   }
-  leave(){this.pointerPosition={x:0,y:0};this.motion.leave();this.network.leave();this.flight.leave();this.crystal.touch(false);}
-  pulse(){if(this.id==='ai')this.crystal.trigger();else if(this.id==='integrations')this.network.pulse();else this.motion.signal();}
-  resize(width:number,height:number){this.width=width;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.sync();}
+  leave(){this.reveal?.leave();this.pointerPosition={x:0,y:0};this.motion.leave();this.network.leave();this.flight.leave();this.crystal.touch(false);}
+  pulse(){if(this.id==='home')this.reveal?.trigger();else if(this.id==='ai')this.crystal.trigger();else if(this.id==='integrations')this.network.pulse();else this.motion.signal();}
+  resize(width:number,height:number){this.width=width;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.reveal?.resize(width*this.renderer.getPixelRatio(),height*this.renderer.getPixelRatio());this.sync();}
   advance(dt:number) {
     if(this.settings.paused)return;
+    if(this.id==='home')this.reveal?.advance(dt*this.settings.speed);
     this.motion.advance(dt);this.time+=dt*this.settings.speed;
     if(this.id==='ai')this.crystal.advance(dt*this.settings.speed);
     if(this.id==='rbs')this.hinges.advance(dt*this.settings.speed);
@@ -312,6 +325,7 @@ export class ParticleRenderer {
     this.points.scale.z=Math.max(.15,this.depth/100);
   }
   private sync() {
+    if(this.reveal)this.reveal.group.visible=this.id==='home';
     if(this.id==='ai')for(const key of ['position','aAlpha','aSize','aColor','aSoft'])this.crystalGeometry.getAttribute(key).needsUpdate=true;
     this.crystalMaterial.uniforms.uSize.value=this.size*this.width/500*this.renderer.getPixelRatio();
     if(this.id==='rbs'){
@@ -333,7 +347,7 @@ export class ParticleRenderer {
     this.flightMaterial.uniforms.uSize.value=this.size*this.width/500*this.renderer.getPixelRatio();
     if(this.id==='integrations')for(const key of ['position','aAlpha','aSize','aColor'])this.networkGeometry.getAttribute(key).needsUpdate=true;
     this.networkMaterial.uniforms.uSize.value=this.size*this.width/500*this.renderer.getPixelRatio();
-    this.geometry.setDrawRange(0,this.motion.count);
+    this.geometry.setDrawRange(0,this.id==='home'?0:this.motion.count);
     for(let i=0;i<8;i++){const impact=this.id==='support'?this.shield.impacts[i]:this.id==='web-services'?this.cloud.arrivals[i]:undefined;this.impactUniforms[i].set(impact?.x||0,impact?.y||0,impact?.z||1,impact?.age??-1);}
     if(this.id==='support')for(const key of ['position','aAlpha','aSize'])this.shieldGeometry.getAttribute(key).needsUpdate=true;
     if(this.id==='bitrix24')for(const key of ['position','aAlpha','aSize','aColor'])this.funnelGeometry.getAttribute(key).needsUpdate=true;
@@ -345,5 +359,5 @@ export class ParticleRenderer {
     this.material.uniforms.uSize.value=this.size*this.width/500*this.renderer.getPixelRatio();
   }
   render(){this.renderer.render(this.scene,this.camera);}
-  dispose(){this.crystalGeometry.dispose();this.crystalMaterial.dispose();this.hingeGeometry.dispose();this.hingeMaterial.dispose();this.cloudGeometry.dispose();this.cloudMaterial.dispose();this.flightGeometry.dispose();this.flightMaterial.dispose();this.networkGeometry.dispose();this.networkMaterial.dispose();this.funnelGeometry.dispose();this.funnelMaterial.dispose();this.shieldGeometry.dispose();this.shieldMaterial.dispose();this.geometry.dispose();this.materials.forEach(material=>material.dispose());this.renderer.dispose();}
+  dispose(){this.reveal?.dispose();this.crystalGeometry.dispose();this.crystalMaterial.dispose();this.hingeGeometry.dispose();this.hingeMaterial.dispose();this.cloudGeometry.dispose();this.cloudMaterial.dispose();this.flightGeometry.dispose();this.flightMaterial.dispose();this.networkGeometry.dispose();this.networkMaterial.dispose();this.funnelGeometry.dispose();this.funnelMaterial.dispose();this.shieldGeometry.dispose();this.shieldMaterial.dispose();this.geometry.dispose();this.materials.forEach(material=>material.dispose());this.renderer.dispose();}
 }

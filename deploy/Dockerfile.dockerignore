@@ -3,6 +3,7 @@
 !package-lock.json
 !scripts/
 !scripts/serve.mjs
+!scripts/idea-api.mjs
 !dist/
 !dist/**
 !deploy/

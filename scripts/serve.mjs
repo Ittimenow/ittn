@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sirv from 'sirv';
+import { createIdeaApi } from './idea-api.mjs';
 
 export function createStaticServer(root = resolve('dist')) {
   const release = JSON.parse(readFileSync(resolve(root, '.release.json'), 'utf8'));
@@ -10,13 +11,15 @@ export function createStaticServer(root = resolve('dist')) {
   const serve = sirv(root, { etag: true, maxAge: 0, dotfiles: false, setHeaders(res, path) {
     if (path.includes('/_astro/')) res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   } });
-  return createServer((req, res) => {
+  const ideas=createIdeaApi({origin:process.env.IDEA_PUBLIC_ORIGIN||(release.production?release.site:undefined)});
+  const server=createServer(async (req, res) => {
     let url;
     try { url = new URL(req.url, 'http://localhost'); decodeURIComponent(url.pathname); }
     catch { res.writeHead(400).end(); return; }
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     if (!release.production || release.internalPaths.includes(url.pathname)) res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    if(await ideas.handle(req,res))return;
     if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, { Allow: 'GET, HEAD' }).end(); return; }
     const redirect = release.redirects[url.pathname.replace(/\/$/, '')];
     if (redirect) { res.writeHead(301, { Location: redirect + url.search }).end(); return; }
@@ -27,6 +30,8 @@ export function createStaticServer(root = resolve('dist')) {
     if (url.pathname.split('/').some(part => part.startsWith('.')) || ['/_headers', '/_redirects'].includes(url.pathname)) { fail(); return; }
     serve(req, res, fail);
   });
+  server.once('close',()=>ideas.close());
+  return server;
 }
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const server = createStaticServer();

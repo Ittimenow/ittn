@@ -25,7 +25,7 @@ const {
 	structuredData = [],
 } = Astro.props;
 
-const indexable = import.meta.env.PUBLIC_INDEXABLE && !['/404', '/404/', '/404.html', '/global-styles/', '/design-system/'].includes(Astro.url.pathname);
+const indexable = import.meta.env.PUBLIC_INDEXABLE && !['/404', '/404/', '/404.html', '/global-styles/', '/design-system/', '/idea/'].includes(Astro.url.pathname);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImage = new URL(image, Astro.site ?? Astro.url);
 const siteURL = new URL('/', Astro.site ?? Astro.url);

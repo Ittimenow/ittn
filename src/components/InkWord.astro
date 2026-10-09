@@ -1,0 +1,18 @@
+<ink-word role="button" tabindex="0" aria-label="Оживить чернила слова «крутым!». Проведите мышью или нажмите Enter.">
+  <img src="/ds-v2/assets/hero-word-cool.png" width="980" height="294" alt="крутым!" loading="eager" decoding="async" />
+  <canvas data-ink-fluid aria-hidden="true"></canvas>
+  <canvas data-ink-drops aria-hidden="true"></canvas>
+</ink-word>
+<script>
+  import '../scripts/hero-ink';
+</script>
+<style>
+  ink-word { position:relative; display:block; width:100%; aspect-ratio:980/294; cursor:grab; touch-action:pan-y; -webkit-tap-highlight-color:transparent; }
+  ink-word:active { cursor:grabbing; }
+  ink-word:focus-visible { outline:2px solid var(--ds-primary); outline-offset:10px; border-radius:2px; }
+  ink-word img { display:block; width:100%; height:auto; }
+  ink-word canvas { position:absolute; width:160%; height:300%; left:-30%; top:-100%; pointer-events:none; opacity:0; }
+  ink-word[data-ready] canvas { opacity:1; }
+  ink-word[data-ready] img { opacity:0; }
+  @media(prefers-reduced-motion:reduce) { ink-word { cursor:default; } ink-word canvas { display:none; } ink-word[data-ready] img { opacity:1; } }
+</style>

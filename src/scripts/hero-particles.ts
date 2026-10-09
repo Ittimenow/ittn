@@ -35,14 +35,14 @@ class HeroParticles extends HTMLElement {
     this.intersection.observe(this.surface);
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(this.surface);
     this.surface.addEventListener('pointermove',event=>{
-      if((event.pointerType!=='mouse'&&(this.sceneId!=='integrations'||!this.touchStart))||this.motion.matches||this.settings.paused)return;
+      if((event.pointerType!=='mouse'&&((this.sceneId!=='integrations'&&this.sceneId!=='home')||!this.touchStart))||this.motion.matches||this.settings.paused)return;
       const p=this.localPoint(event.clientX,event.clientY);this.engine?.pointer(p.x,p.y);
     },options);
     this.surface.addEventListener('pointerleave',()=>this.engine?.leave(),options);
-    this.surface.addEventListener('pointerdown',event=>{this.touchStart={x:event.clientX,y:event.clientY};if((this.sceneId==='integrations'||this.sceneId==='ai')&&!this.motion.matches&&!this.settings.paused){const p=this.localPoint(event.clientX,event.clientY);this.engine?.pointer(p.x,p.y);}},{...options,passive:true});
+    this.surface.addEventListener('pointerdown',event=>{this.touchStart={x:event.clientX,y:event.clientY};if((this.sceneId==='integrations'||this.sceneId==='ai'||this.sceneId==='home')&&!this.motion.matches&&!this.settings.paused){const p=this.localPoint(event.clientX,event.clientY);this.engine?.pointer(p.x,p.y);}},{...options,passive:true});
     this.surface.addEventListener('pointercancel',()=>{this.touchStart=undefined;this.engine?.leave();},options);
     this.surface.addEventListener('pointerup',event=>{
-      if(this.sceneId!=='integrations'&&this.sceneId!=='ai'&&this.touchStart&&Math.hypot(event.clientX-this.touchStart.x,event.clientY-this.touchStart.y)<12&&!this.motion.matches&&!this.settings.paused)this.engine?.pulse();
+      if(this.sceneId!=='integrations'&&this.sceneId!=='ai'&&this.sceneId!=='home'&&this.touchStart&&Math.hypot(event.clientX-this.touchStart.x,event.clientY-this.touchStart.y)<12&&!this.motion.matches&&!this.settings.paused)this.engine?.pulse();
       this.touchStart=undefined;if(event.pointerType!=='mouse')this.engine?.leave();
     },{...options,passive:true});
     this.surface.addEventListener('click',event=>{if(event.detail===0&&!this.motion.matches&&!this.settings.paused)this.engine?.pulse();},options);
@@ -70,7 +70,7 @@ class HeroParticles extends HTMLElement {
   private updateImage() {
     const scene=serviceHeroScenes.find(s=>s.id===this.sceneId)!;
     this.querySelector<HTMLImageElement>('img')!.src=`/services/particles/${scene.id}.webp`;
-    this.surface.setAttribute('aria-label',`${scene.alt}. ${this.sceneId==='ai'?'Коснитесь кристалла, чтобы запустить преобразование потока.':this.sceneId==='integrations'?'Проведите по связи, чтобы разорвать её. Она восстановится.':'Нажмите, чтобы запустить волну.'}`);
+    this.surface.setAttribute('aria-label',`${scene.alt}. ${this.sceneId==='home'?'Проведите по знаку, чтобы увидеть внутренние связи. Нажмите Enter для демонстрации.':this.sceneId==='ai'?'Коснитесь кристалла, чтобы запустить преобразование потока.':this.sceneId==='integrations'?'Проведите по связи, чтобы разорвать её. Она восстановится.':'Нажмите, чтобы запустить волну.'}`);
   }
   private localPoint(x:number,y:number) {
     const rect=this.surface.getBoundingClientRect();return{x:((x-rect.left)/rect.width-.5)*VIEW_SIZE,y:(.5-(y-rect.top)/rect.height)*VIEW_SIZE};
@@ -85,7 +85,7 @@ class HeroParticles extends HTMLElement {
   }
   private drawStatic() {
     const customized=(['pixelSize','density','primary','secondary','depth','accent','accentAmount','coreColor','shellOpacity','funnelOpacity'] as const).some(key=>this.settings[key]!==DEFAULT_PARTICLE_SETTINGS[key]);
-    if(!customized){delete this.dataset.staticCustom;return;}
+    if(this.sceneId==='home'||!customized){delete this.dataset.staticCustom;return;}
     const canvas=this.querySelector<HTMLCanvasElement>('[data-particle-static]');
     if(!canvas)return;
     const ctx=canvas.getContext('2d');if(!ctx)return;
@@ -113,7 +113,7 @@ class HeroParticles extends HTMLElement {
   }
   private fail(){this.failed=true;this.stop();delete this.dataset.rendered;this.drawStatic();this.updateState();}
   private updateState() {
-    this.hint.textContent=this.motion.matches?'Движение отключено в настройках устройства.':this.failed?'Не удалось включить анимацию.':this.settings.paused?(this.hasAttribute('data-settings-available')?'Движение на паузе. Продолжить можно в настройках.':'Движение на паузе.'):this.sceneId==='integrations'?'Проведите по связи — она рассыплется и восстановится.':this.sceneId==='ai'?'Коснитесь кристалла — голубой поток станет розовым.':this.sceneId==='sites'?'Двигайте мышью — курсор изменит направление полёта.':'Проведите по пикселям. Нажмите, чтобы запустить волну.';
+    this.hint.textContent=this.motion.matches?'Движение отключено в настройках устройства.':this.failed?'Не удалось включить анимацию.':this.settings.paused?(this.hasAttribute('data-settings-available')?'Движение на паузе. Продолжить можно в настройках.':'Движение на паузе.'):this.sceneId==='home'?'Проведите по знаку — загляните внутрь.':this.sceneId==='integrations'?'Проведите по связи — она рассыплется и восстановится.':this.sceneId==='ai'?'Коснитесь кристалла — голубой поток станет розовым.':this.sceneId==='sites'?'Двигайте мышью — курсор изменит направление полёта.':'Проведите по пикселям. Нажмите, чтобы запустить волну.';
     this.surface.disabled=this.failed||this.motion.matches||this.settings.paused||!this.engine;
     this.querySelector<HTMLButtonElement>('[data-particle-retry]')!.hidden=!this.failed;
   }

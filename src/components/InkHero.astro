@@ -1,0 +1,196 @@
+---
+import IdeaBoard from './IdeaBoard.astro';
+import ConsultationCta from './ConsultationCta.astro';
+
+const metrics = [
+	{ value: '150+', label: 'проектов' },
+	{ value: '10+', label: 'лет на рынке' },
+	{ value: 'CRM / ERP', label: 'интеграции и разработка' },
+	{ value: 'Полный цикл', label: 'аудит → запуск → развитие' },
+];
+
+const segments = ['B2B', 'Производство', 'Опт', 'Сервис', 'Строительство'];
+---
+
+<hero-pencil class="ds pencil-hero relative isolate overflow-hidden border-b border-neutral-200 bg-white dark:border-neutral-800">
+    <IdeaBoard />
+	<div class="pencil-content mx-auto max-w-[1440px] px-6 py-14 sm:py-20 lg:py-24">
+        <button class="idea-invitation" type="button" data-open-board aria-haspopup="dialog">
+          <img src="/images/idea-pencil-napkin.png" alt="" width="400" height="400" draggable="false" />
+          <span>Нарисуй свою идею</span>
+        </button>
+		<h1 class="hero-lockup" aria-label="Делаем сложное ИТ — простым, а скучное — крутым!">
+			<span class="hero-lockup__row hero-lockup__row--top">
+				<span class="hero-lockup__text">Делаем сложное</span>
+				<img
+					src="/ds-v2/assets/hero-word-it.png"
+					alt=""
+					class="hero-lockup__image hero-lockup__image--it"
+					draggable="false"
+					loading="eager"
+					decoding="async"
+				/>
+			</span>
+			<span class="hero-lockup__row hero-lockup__row--middle" aria-hidden="true">
+				<span class="hero-lockup__text">—</span>
+				<img
+					src="/ds-v2/assets/hero-word-simple.png"
+					alt=""
+					class="hero-lockup__image hero-lockup__image--simple"
+					draggable="false"
+					loading="eager"
+					decoding="async"
+				/>
+				<span class="hero-lockup__text">, а</span>
+			</span>
+			<span class="hero-lockup__row hero-lockup__row--bottom">
+				<span class="hero-lockup__text">скучное —</span>
+<img src="/ds-v2/assets/hero-word-cool.png" width="980" height="294" alt="" class="hero-lockup__image hero-lockup__image--cool" draggable="false" loading="eager" decoding="async" />
+			</span>
+		</h1>
+        <div class="hero-summary">
+
+		<p class="hero-description">
+			Проектируем и внедряем цифровые решения, которые объединяют сайт,
+			продажи, документы, склад, производство и сервис в один управляемый контур.
+		</p>
+
+		<div class="hero-action"><ConsultationCta /></div>
+        </div>
+
+		<div class="hero-segments mt-8 flex flex-wrap gap-2">
+			{segments.map((segment) => (
+				<span class="rounded-full border border-neutral-200 bg-white/62 px-3 py-1 text-sm text-neutral-700 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/54 dark:text-neutral-300">
+					{segment}
+				</span>
+			))}
+		</div>
+
+		<dl class="hero-metrics mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-neutral-200 pt-6 sm:grid-cols-4 dark:border-neutral-800">
+			{metrics.map((metric) => (
+				<div>
+					<dt class="text-sm leading-5 text-neutral-600 dark:text-neutral-400">{metric.label}</dt>
+					<dd class="mt-1 text-xl font-semibold text-neutral-950 dark:text-white">{metric.value}</dd>
+				</div>
+			))}
+		</dl>
+	</div>
+</hero-pencil>
+
+<script>
+  import '../scripts/hero-pencil';
+</script>
+
+<style>
+    .pencil-hero { display:block; cursor:default; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
+    .pencil-hero :global(*) { user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
+    .pencil-hero :global(img) { -webkit-user-drag:none; }
+    .pencil-content { position:relative; }
+    .idea-invitation { position:absolute; top:50px; right:30px; width:230px; padding:0; border:0; background:transparent; cursor:pointer; color:#323bff; font:inherit; z-index:2; }
+    .idea-invitation img { display:block; width:100%; height:auto; transition:transform .25s ease-out; }
+    .idea-invitation span { display:block; font-size:16px; margin-top:-12px; }
+    .idea-invitation:hover img { transform:rotate(-4deg) translateY(-4px); }
+    .idea-invitation:focus-visible { outline:2px solid #323bff; outline-offset:4px; }
+    @media(max-width:1199px) { .idea-invitation { width:170px; top:48px; right:24px; } .idea-invitation span { font-size:14px; } }
+    @media(max-width:767px) { .idea-invitation { position:relative; float:right; width:120px; top:auto; right:auto; margin:-30px 0 16px 12px; } .idea-invitation span { font-size:12px; margin-top:-6px; } .hero-lockup { clear:both; } }
+    @media(prefers-reduced-motion:reduce) { .idea-invitation img { transition:none; } }
+    .hero-summary { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); align-items:center; gap:64px; margin-top:30px; }
+    .hero-description { margin:0; max-width:650px; font-size:20px; line-height:1.6; color:var(--ds-muted); }
+    .hero-action { justify-self:end; }
+    .hero-action :global(.consultation-cta) { margin-top:0; }
+    .hero-metrics { width:100%; }
+    @media(max-width:767px) {
+      .hero-summary { grid-template-columns:1fr; gap:24px; margin-top:20px; }
+      .hero-action { justify-self:start; }
+      .hero-description { font-size:18px; line-height:1.65; }
+    }
+	.hero-lockup {
+		display: grid;
+		width: 100%;
+		margin: 0;
+		color: #111111;
+		font-size: 34px;
+		font-weight: 400;
+		line-height: 0.92;
+	}
+
+	.hero-lockup__row {
+		display: flex;
+		min-width: 0;
+		align-items: center;
+	}
+
+	.hero-lockup__row--top {
+		gap: 0.35em;
+	}
+
+	.hero-lockup__row--middle {
+		margin-top: -0.04em;
+		gap: 0.22em;
+	}
+
+	.hero-lockup__row--bottom {
+		margin-top: -0.08em;
+		gap: 0.3em;
+	}
+
+	.hero-lockup__text {
+		display: block;
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.hero-lockup__image {
+		display: block;
+		flex: none;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.hero-lockup__image--it {
+		width: 1.75em;
+	}
+
+	.hero-lockup__image--simple {
+		width: min(5.35em, 100%);
+	}
+
+	.hero-lockup__image--cool {
+		width: min(4.8em, 52%);
+	}
+
+	@media (min-width: 640px) {
+		.hero-lockup {
+			font-size: 52px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.hero-lockup {
+			font-size: clamp(68px, 6.65vw, 96px);
+            gap: .08em;
+		}
+	}
+
+    @media(min-width:1024px) {
+      .hero-lockup__row--middle { margin-left:12%; }
+      .hero-lockup__row--bottom { margin-left:25%; }
+    }
+    @media(min-width:768px) and (max-width:1023px) {
+      .hero-lockup { font-size:clamp(52px,6.6vw,68px); }
+      .hero-lockup__row--middle { margin-left:10%; }
+      .hero-lockup__row--bottom { margin-left:20%; }
+    }
+	@media (max-width: 520px) {
+		.hero-lockup__row--top,
+		.hero-lockup__row--middle,
+		.hero-lockup__row--bottom {
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+
+		.hero-lockup__image--cool {
+			width: min(4.8em, 100%);
+		}
+	}
+</style>

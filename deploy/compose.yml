@@ -7,6 +7,15 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:4321:4321"
+    environment:
+      IDEA_STORAGE_DIR: /app/data/ideas
+      IDEA_TRUST_PROXY: "true"
+      IDEA_PUBLIC_ORIGIN: https://ittimenow.com
+    env_file:
+      - path: ./mail.env
+        required: false
+    volumes:
+      - idea-drawings:/app/data
     init: true
     user: "1000:1000"
     read_only: true
@@ -22,3 +31,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  idea-drawings:
