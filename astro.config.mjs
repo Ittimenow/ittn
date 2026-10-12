@@ -10,6 +10,7 @@ import { releaseConfig } from './config/release.mjs';
 const release = releaseConfig();
 export default defineConfig({
   site: release.site,
+  server: { port: 3040 },
   trailingSlash: 'always',
   compressHTML: true,
   redirects: release.redirects,
@@ -34,6 +35,7 @@ export default defineConfig({
     },
   ],
   vite: {
+    server: { strictPort: true },
     define: { 'import.meta.env.PUBLIC_INDEXABLE': JSON.stringify(release.production) },
     // Prepare the lazy particle renderer before the first browser request.
     optimizeDeps: { include: ['three'] },

@@ -11,11 +11,16 @@ function setup(timeoutMs = 5000) {
   return { dom, doc, dialog, click: () => doc.querySelector('[data-b24-form-trigger]').click() };
 }
 const tick = () => new Promise(resolve => setTimeout(resolve, 20));
-test('CRM loads on demand once, then opens only the initialized form', async () => {
+test('CRM loads on demand without an intermediate dialog, then opens only the initialized form', async () => {
   const { dom, doc, dialog, click } = setup();
   assert.equal(doc.querySelectorAll('script').length, 0);
   click(); click();
-  assert.equal(doc.querySelectorAll('script').length, 1); assert.equal(dialog.open, true);
+  const trigger = doc.querySelector('[data-b24-form-trigger]');
+  assert.equal(doc.querySelectorAll('script').length, 1);
+  assert.equal(dialog.open, false);
+  assert.equal(trigger.hasAttribute('data-b24-loading'), true);
+  assert.equal(trigger.getAttribute('aria-busy'), 'true');
+  assert.match(trigger.getAttribute('aria-label'), /Открываем форму/);
   let opens = 0;
   const form = { identification: { id: '21' }, getId: () => '21', show() { opens++; }, hide() {} };
   doc.getElementById('b24-native-trigger').addEventListener('click', () => {
@@ -25,19 +30,27 @@ test('CRM loads on demand once, then opens only the initialized form', async () 
   doc.querySelector('script').setAttribute('data-b24-loaded', 'true');
   await tick();
   assert.equal(opens, 1); assert.equal(dialog.open, false);
+  assert.equal(trigger.hasAttribute('data-b24-loading'), false);
+  assert.equal(trigger.hasAttribute('aria-busy'), false);
+  assert.equal(trigger.hasAttribute('aria-label'), false);
   click(); assert.equal(opens, 2); assert.equal(doc.querySelectorAll('script').length, 1);
   dom.window.close();
 });
 test('blocked CRM gives contact fallback, never a false success', () => {
   const { dom, doc, dialog, click } = setup(); click();
+  assert.equal(dialog.open, false);
   doc.querySelector('script').dispatchEvent(new dom.window.Event('error'));
   assert.equal(dialog.open, true);
+  assert.equal(doc.querySelector('[data-b24-form-trigger]').hasAttribute('data-b24-loading'), false);
   assert.match(doc.querySelector('[role="status"]')?.textContent || doc.getElementById('consultation-status-message').textContent, /недоступна/);
   assert.ok(dialog.querySelector('a[href^="mailto:"]'));
   dom.window.close();
 });
 test('timeout and cancellation prevent a late popup from interrupting the visitor', async () => {
-  const { dom, doc, dialog, click } = setup(5); click(); await tick();
+  const { dom, doc, dialog, click } = setup(5); click();
+  assert.equal(dialog.open, false);
+  await tick();
+  assert.equal(dialog.open, true);
   assert.match(doc.getElementById('consultation-status-message').textContent, /недоступна/);
   doc.getElementById('consultation-status-close').click();
   let opens = 0;

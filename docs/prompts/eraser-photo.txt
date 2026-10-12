@@ -1,0 +1,7 @@
+Use case: product-mockup. Asset type: compact toolbar control for the «Нарисуй свою идею» drawing editor.
+
+Initial prompt: Create a single photorealistic handheld rectangular eraser, charcoal-light gray rubber body with one bold electric blue #323BFF band wrapped around its center, diagonally tilted, photographed with soft studio light. Isolated cutout with a genuinely transparent background and no cast shadow. Clear silhouette at 28 px; square image with tight but safe margins. No text, pencil, hand, crumbs, surface, frame, extra objects, white background, illustration, or vector style.
+
+Final edit prompt: Keep its isolated diagonal rectangular shape, perspective, transparent background, lighting, and realistic rubber texture. Change the eraser body to VERY light cool gray, nearly off-white but still visibly gray. Replace the wide blue wrapper with one THIN electric-blue #323BFF stripe running across the body, about 7% of the eraser's length; the rest of the eraser must stay uninterrupted pale gray. No text, crumbs, hand, shadow, surface, background, or extra details. Maintain genuine transparency around it and a strong recognizable silhouette at 28 px.
+
+Final asset: public/icons/eraser-photo.png (RGBA, 512×512), mirrored in docs/assets/sketch-icons/eraser-photo.png; 48 px preview in docs/assets/sketch-icons/previews/eraser-photo.png. This photographic control image is an explicit user-requested exception to the blue hand-drawn icon family. No SVG predecessor exists.

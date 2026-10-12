@@ -4,7 +4,7 @@ import {createServer} from 'node:http';
 import {mkdtemp,rm,readdir,readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {createIdeaApi,validPng} from '../scripts/idea-api.mjs';
+import {createIdeaApi,validPng,IDEA_LINK_TTL_MS} from '../scripts/idea-api.mjs';
 const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jvWQAAAAASUVORK5CYII=','base64');
 async function setup(t,options={}){
  const directory=await mkdtemp(join(tmpdir(),'ittn-ideas-')),mail=[];
@@ -19,7 +19,7 @@ test('publish PNG, immutable link, fixed mail recipient, deduplicate, restart st
  const x=await setup(t);
  const r=await x.post();assert.equal(r.status,201);const {url}=await r.json(),id=new URL(url).searchParams.get('id');
  assert.match(id,/^[a-f0-9]{32}$/);assert.equal(url,x.base+'/idea/?id='+id);
- const loaded=await fetch(x.base+'/api/ideas/'+id+'.png');assert.equal(loaded.status,200);assert.deepEqual(Buffer.from(await loaded.arrayBuffer()),png);
+ const loaded=await fetch(x.base+'/api/ideas/'+id+'.png');assert.equal(loaded.status,200);assert.equal(loaded.headers.get('cache-control'),'no-store');assert.deepEqual(Buffer.from(await loaded.arrayBuffer()),png);
  const second=await x.post();assert.equal((await second.json()).url,url);
  for(let i=0;i<50&&x.mail.length===0;i++)await new Promise(r=>setTimeout(r,10));
  assert.equal(x.mail.length,1);assert.equal(x.mail[0].to,'pm@ittimenow.com');assert.ok(x.mail[0].text.includes(url));
@@ -48,4 +48,18 @@ test('SMTP failure queues notification; absent SMTP leaves pending record',async
 test('rate and disk limits preserve existing content',async t=>{
  const x=await setup(t,{rateLimit:1});assert.equal((await x.post()).status,201);assert.equal((await x.post()).status,429);
  const y=await setup(t,{maxBytes:1});assert.equal((await y.post()).status,507);
+});
+test('published link expires after 90 days, image is deleted, and a new publish gets a new link',async t=>{
+ let time=Date.UTC(2026,9,12);
+ const x=await setup(t,{now:()=>time,sendMail:null,env:{}});
+ const first=await (await x.post()).json(),id=new URL(first.url).searchParams.get('id');
+ assert.equal(Date.parse(first.expiresAt)-time,IDEA_LINK_TTL_MS);
+ assert.equal((await fetch(x.base+'/api/ideas/'+id+'.png')).status,200);
+ time+=IDEA_LINK_TTL_MS;
+ assert.equal((await fetch(x.base+'/api/ideas/'+id+'.png')).status,404);
+ await x.api.cleanup();
+ assert.deepEqual(await readdir(x.directory),[]);
+ const second=await (await x.post()).json();
+ assert.notEqual(second.url,first.url);
+ assert.equal((await fetch(x.base+'/api/ideas/'+id+'.png')).status,404);
 });

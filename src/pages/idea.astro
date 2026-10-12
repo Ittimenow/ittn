@@ -21,8 +21,8 @@ import ServiceCta from '../components/ServiceCta.astro';
   if(!id||!/^[a-f0-9]{32}$/.test(id)){status.textContent='Ссылка на рисунок неполная или неверная.';}
   else{
     image.onload=()=>{image.hidden=false;status.textContent='Сохранённая версия рисунка';download.hidden=false;};
-    image.onerror=()=>{status.textContent='Рисунок не найден или временно недоступен. Попробуйте открыть ссылку позже.';};
-    image.src='/api/ideas/'+id+'.png';download.href=image.src;
+    image.onerror=()=>{status.textContent='Рисунок не найден или срок действия ссылки истёк.';};
+    image.src='/api/ideas/'+id+'.png?view='+Date.now();download.href=image.src;
   }
 </script>
 <style>

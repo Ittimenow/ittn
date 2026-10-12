@@ -14,6 +14,7 @@ export const iconNames = [
 	"cloud",
 	"cube-48",
 	"database",
+	"eraser-photo",
 	"file",
 	"filter",
 	"filter-16",

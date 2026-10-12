@@ -17,7 +17,7 @@ const segments = ['B2B', 'Производство', 'Опт', 'Сервис', '
 	<div class="pencil-content mx-auto max-w-[1440px] px-6 py-14 sm:py-20 lg:py-24">
         <button class="idea-invitation" type="button" data-open-board aria-haspopup="dialog">
           <img src="/images/idea-pencil-napkin.png" alt="" width="400" height="400" draggable="false" />
-          <span>Нарисуй свою идею</span>
+          <span>Нарисуй свой бизнес процесс,<br />а мы разберемся как оптимизировать</span>
         </button>
 		<h1 class="hero-lockup" aria-label="Делаем сложное ИТ — простым, а скучное — крутым!">
 			<span class="hero-lockup__row hero-lockup__row--top">
@@ -86,13 +86,13 @@ const segments = ['B2B', 'Производство', 'Опт', 'Сервис', '
     .pencil-hero :global(*) { user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
     .pencil-hero :global(img) { -webkit-user-drag:none; }
     .pencil-content { position:relative; }
-    .idea-invitation { position:absolute; top:50px; right:30px; width:230px; padding:0; border:0; background:transparent; cursor:pointer; color:#323bff; font:inherit; z-index:2; }
-    .idea-invitation img { display:block; width:100%; height:auto; transition:transform .25s ease-out; }
-    .idea-invitation span { display:block; font-size:16px; margin-top:-12px; }
+    .idea-invitation { position:absolute; top:50px; right:clamp(90px, 8vw, 125px); width:300px; padding:0; border:0; background:transparent; cursor:pointer; color:#323bff; font:inherit; z-index:2; }
+    .idea-invitation img { display:block; width:250px; max-width:100%; height:auto; margin-inline:auto; transition:transform .25s ease-out; }
+    .idea-invitation span { display:block; font-size:14px; line-height:1.35; margin-top:-12px; }
     .idea-invitation:hover img { transform:rotate(-4deg) translateY(-4px); }
     .idea-invitation:focus-visible { outline:2px solid #323bff; outline-offset:4px; }
-    @media(max-width:1199px) { .idea-invitation { width:170px; top:48px; right:24px; } .idea-invitation span { font-size:14px; } }
-    @media(max-width:767px) { .idea-invitation { position:relative; float:right; width:120px; top:auto; right:auto; margin:-30px 0 16px 12px; } .idea-invitation span { font-size:12px; margin-top:-6px; } .hero-lockup { clear:both; } }
+    @media(max-width:1199px) { .idea-invitation { width:170px; top:48px; right:24px; } }
+    @media(max-width:767px) { .idea-invitation { position:relative; float:right; width:160px; top:auto; right:auto; margin:-30px 0 16px 12px; } .idea-invitation span { font-size:12px; margin-top:-6px; } .hero-lockup { clear:both; } }
     @media(prefers-reduced-motion:reduce) { .idea-invitation img { transition:none; } }
     .hero-summary { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); align-items:center; gap:64px; margin-top:30px; }
     .hero-description { margin:0; max-width:650px; font-size:20px; line-height:1.6; color:var(--ds-muted); }

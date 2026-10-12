@@ -10,6 +10,7 @@ type IconName =
 	| 'chevron'
 	| 'cloud'
 	| 'database'
+	| 'eraser-photo'
 	| 'file'
 	| 'filter'
 	| 'layers'
@@ -31,6 +32,11 @@ interface IconItem {
 }
 
 const icons: IconItem[] = [
+	{
+		name: 'eraser-photo',
+		description: 'Фотографичный светло-серый ластик с тонкой синей полосой. Исключение из карандашной серии по запросу для редактора рисунка.',
+		placements: ['Главная / «Нарисуй свою идею»: кнопка «Ластик» в панели доски.'],
+	},
 	{
 		name: 'message',
 		description: 'Сообщения, входящие обращения.',

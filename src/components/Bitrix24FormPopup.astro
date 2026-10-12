@@ -2,13 +2,37 @@
   <button id="b24-native-trigger" type="button" hidden aria-hidden="true"></button>
   <dialog id="consultation-status" aria-labelledby="consultation-status-title" aria-describedby="consultation-status-message">
     <h2 id="consultation-status-title">Консультация</h2>
-    <p id="consultation-status-message" role="status">Открываем форму консультации…</p>
+    <p id="consultation-status-message" role="status">Форма сейчас недоступна. Напишите нам — поможем обсудить вашу задачу.</p>
     <p>Можно написать напрямую: <a href="mailto:hello@ittimenow.com">hello@ittimenow.com</a>.</p>
     <button id="consultation-status-close" class="ds-btn ds-btn-primary" type="button" autofocus>Закрыть</button>
   </dialog>
   <noscript><p>Чтобы обсудить проект, напишите на <a href="mailto:hello@ittimenow.com">hello@ittimenow.com</a>.</p></noscript>
 </div>
 <style>
+  :global(button[data-b24-form-trigger][data-b24-loading]) { position: relative; color: transparent !important; cursor: progress; }
+  :global(button[data-b24-form-trigger][data-b24-loading] > *) { visibility: hidden; }
+  :global(button[data-b24-form-trigger][data-b24-loading]::after) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--b24-loading-color, #323bff);
+    border-right-color: transparent;
+    border-radius: 50%;
+    background: none;
+    opacity: 1;
+    filter: none;
+    content: '';
+    transform: translate(-50%, -50%);
+    transition: none;
+    animation: b24-loading-spin 750ms linear infinite;
+  }
+  @keyframes b24-loading-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    :global(button[data-b24-form-trigger][data-b24-loading]::after) { animation: none; }
+  }
   dialog { margin: auto; max-width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; border: 1px solid var(--ds-border); border-radius: 24px; padding: 28px; background: white; color: var(--ds-ink); }
   dialog::backdrop { background: rgb(17 17 17 / .45); }
   dialog h2 { font-size: 28px; }
