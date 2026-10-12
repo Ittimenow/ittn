@@ -11,12 +11,12 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 	<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
 
 		<Breadcrumbs current="Кейсы" />
-<h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Кейсы</h1>
+<h1 class="ds-page-title mt-2">Кейсы</h1>
 		<p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
 			Решения, которые уже работают в проде у наших клиентов.
 		</p>
 
-		<div class="service-card-row mt-12 grid gap-4 md:grid-cols-2">
+		<div class="catalog-card-list service-card-row mt-12 grid gap-4 md:grid-cols-2" data-progressive-list>
 			{cases.map((c) => (
 				<a
 					href={`/cases/${c.id}/`}
@@ -64,11 +64,14 @@ const cases = (await getCollection('cases')).sort((a, b) => b.data.order - a.dat
 				</a>
 			))}
 		</div>
+		<button type="button" class="catalog-load-more" data-load-more hidden>Показать ещё кейсы</button>
 	</section>
 <ServiceCta title="Обсудим решение для вашего бизнеса?" text="Расскажите о задаче. Покажем подходящие примеры и предложим следующий шаг." />
 </Layout>
 
 <script>
+	import '../../scripts/progressive-list';
+
 	const resetVideo = (video: HTMLVideoElement) => {
 		video.pause();
 		if (video.readyState > 0) video.currentTime = 0;

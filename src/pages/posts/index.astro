@@ -14,7 +14,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 		<div>
 
 			<Breadcrumbs current="Блог" />
-<h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Блог</h1>
+<h1 class="ds-page-title mt-2">Блог</h1>
 			<p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
 				Заметки о разработке, внедрениях и ИИ в боевых проектах.
 			</p>
@@ -26,7 +26,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 					Готовим новые материалы о разработке и автоматизации.
 				</p>
 			) : (
-				<ul class="service-card-row grid gap-10">
+				<ul class="catalog-card-list service-card-row grid gap-10" data-progressive-list>
 					{posts.map((post) => (
 						<li class="rounded-2xl border border-neutral-200 p-5">
 							<a
@@ -42,7 +42,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 									/>
 								)}
 								<h2
-									class="mt-5 max-w-4xl text-3xl font-semibold leading-tight transition group-hover:text-[#323bff] dark:group-hover:text-[#323bff]"
+									class="post-card-title mt-5 max-w-4xl transition group-hover:text-[#323bff] dark:group-hover:text-[#323bff]"
 									transition:name={`post-${post.id}`}
 								>
 									{post.data.title}
@@ -52,7 +52,20 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 					))}
 				</ul>
 			)}
+			<button type="button" class="catalog-load-more" data-load-more hidden>Показать ещё статьи</button>
 		</div>
 	</section>
 <ServiceCta title="Хотите применить эти решения в своём бизнесе?" text="Разберём ваш процесс и подскажем, с чего начать автоматизацию или разработку." />
 </Layout>
+
+<script>
+	import '../../scripts/progressive-list';
+</script>
+
+<style>
+	.post-card-title {
+		font-size: clamp(20px, 2vw, 26px);
+		font-weight: 600;
+		line-height: 1.25;
+	}
+</style>

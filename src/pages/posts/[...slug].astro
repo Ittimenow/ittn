@@ -74,7 +74,7 @@ const breadcrumbSchema = {
 	structuredData={[articleSchema, breadcrumbSchema]}
 >
 	<article class="mx-auto max-w-3xl px-6 py-16">
-		<div class="flex items-center justify-between gap-4 text-sm text-neutral-500">
+		<div class="post-meta flex flex-col items-start gap-2 text-sm text-neutral-500 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
 			<Breadcrumbs current={post.data.title} parents={[{ href: "/posts/", label: "Блог" }]} />
 			<time
 				datetime={post.data.pubDate.toISOString()}
@@ -90,7 +90,7 @@ const breadcrumbSchema = {
 
 		<header class="mt-6 mb-10 pb-6">
 			<h1
-				class="text-4xl font-bold tracking-tight"
+				class="ds-page-title"
 				transition:name={`post-${post.id}`}
 			>
 				{post.data.title}
@@ -114,6 +114,10 @@ const breadcrumbSchema = {
 </Layout>
 
 <style>
+	.post-meta :global(.service-breadcrumbs) {
+		margin-bottom: 0;
+	}
+
 	.prose-content :global(h2) {
 		margin-top: 2.5rem;
 		margin-bottom: 1rem;

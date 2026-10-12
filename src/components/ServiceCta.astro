@@ -28,8 +28,8 @@ const { title, text, id, label = 'Получить консультацию', so
   .ittn-service-cta-copy h2 { max-width:880px; margin:0; color:#fff; font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1.05; letter-spacing:-.02em; }
   .ittn-service-cta-copy p { max-width:760px; margin:20px 0 0; color:rgba(255,255,255,.8); font-size:18px; line-height:1.75; }
   .ittn-service-cta-image { z-index:0; min-width:0; min-height:185px; background:url('/ds-v2/assets/contact-me.png') left bottom / contain no-repeat; filter:brightness(0) invert(1); pointer-events:none; transform:translateY(var(--service-cta-padding-bottom)); }
-  .ittn-service-cta .ittn-btn, .ittn-service-cta .ittn-btn:hover, .ittn-service-cta .ittn-btn:focus-visible { --ui-icon-filter:brightness(0) invert(1); --btn-fill:#fff; --btn-hover-color:#232BFF; --btn-hover-border:transparent; position:relative; z-index:1; justify-self:end; align-self:end; border-color:transparent; background:#111; color:#fff; box-shadow:none; }
-  .ittn-service-cta .ittn-btn:hover { --ui-icon-filter:none; background:#fff; color:#232BFF; }
+  .ittn-service-cta .ittn-btn { --ui-icon-filter:brightness(0) invert(1); --ds-btn-fill:#fff; --ds-btn-hover-color:#111; --ds-btn-hover-border:transparent; position:relative; z-index:1; justify-self:end; align-self:end; border-color:transparent; background:#111; color:#fff; box-shadow:none; }
+  .ittn-service-cta .ittn-btn:hover, .ittn-service-cta .ittn-btn:focus-visible { --ui-icon-filter:none; background:#fff; color:#111; }
   @media (min-width:900px) {
     .ittn-service-cta { --service-cta-padding-bottom:32px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:1fr auto; column-gap:32px; padding:32px 40px; }
     .ittn-service-cta-copy { grid-column:1; grid-row:1/-1; align-self:start; }

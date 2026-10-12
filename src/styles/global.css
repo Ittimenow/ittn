@@ -90,6 +90,7 @@
 	--ds-shadow: var(--ittn-shadow);
 	--ds-glow: 0 24px 80px -34px rgba(35, 43, 255, 0.42);
 	--ds-font-system: var(--ittn-font-system);
+	--ds-page-title-size: clamp(32px, 4vw, 56px);
 	--ds-display-size: clamp(56px, 9vw, 108px);
 	--ds-display-line: 0.92;
 	--ds-display-weight: 800;
@@ -136,11 +137,22 @@ body :where(h1, h2, h3, h4, h5, h6, blockquote) {
 	color: var(--ds-ink);
 }
 
-body :where(h1) {
-	font-size: var(--ds-display-size);
-	font-weight: var(--ds-display-weight);
-	line-height: var(--ds-display-line);
+@layer base {
+	body :where(h1) {
+		font-size: var(--ds-page-title-size);
+		font-weight: 700;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+	}
+}
+
+.ds-page-title {
+	font-size: var(--ds-page-title-size);
+	font-weight: 700;
+	line-height: 1.1;
 	letter-spacing: -0.03em;
+	text-wrap: balance;
+	overflow-wrap: anywhere;
 }
 
 body :where(h2) {
@@ -522,6 +534,28 @@ body :where(hr) {
 	transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
+[data-progressive-list] > [hidden] {
+	display: none !important;
+}
+
+.catalog-load-more:not([hidden]) {
+	display: block;
+	margin: 24px auto 0;
+	border: 1px solid var(--ds-primary);
+	border-radius: 12px;
+	padding: 12px 20px;
+	background: var(--ds-bg);
+	color: var(--ds-primary);
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.catalog-load-more:hover {
+	background: var(--ds-primary);
+	color: #fff;
+}
+
 .ai-service-timeline {
 	overflow: hidden;
 	background: #ffffff;
@@ -721,7 +755,18 @@ body :where(hr) {
 
 @media (max-width: 767px) {
 	.service-breadcrumbs {
+		width: 100%;
+		min-width: 0;
+		flex-wrap: nowrap;
 		margin-bottom: 24px;
+	}
+
+	.service-breadcrumbs [aria-current="page"] {
+		min-width: 0;
+		flex: 1 1 auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.service-card-row {
@@ -749,6 +794,25 @@ body :where(hr) {
 		box-shadow: 0 24px 58px -34px rgba(35, 43, 255, 0.46) !important;
 		scroll-snap-align: start;
 		transform: translateY(-3px);
+	}
+
+	.catalog-card-list.service-card-row {
+		display: grid !important;
+		grid-template-columns: minmax(0, 1fr);
+		width: 100%;
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+		overflow-x: visible !important;
+		padding: 16px 0 40px !important;
+		gap: 24px;
+		scroll-snap-type: none;
+	}
+
+	.catalog-card-list.service-card-row > * {
+		min-width: 0;
+		width: 100%;
+		flex: none !important;
+		scroll-snap-align: none;
 	}
 
 }
