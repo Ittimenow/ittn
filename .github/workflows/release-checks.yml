@@ -65,11 +65,12 @@ jobs:
         if: matrix.environment == 'production' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: production-${{ github.sha }}-${{ github.run_attempt }}
+          name: production-${{ github.run_id }}
           path: release/
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 7
           compression-level: 0
+          overwrite: true
 
   deploy:
     needs: validate
@@ -91,7 +92,7 @@ jobs:
           node-version: 22
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          name: production-${{ github.sha }}-${{ github.run_attempt }}
+          name: production-${{ github.run_id }}
           path: release
       - name: Publish ITTN and verify the public site
         env:
