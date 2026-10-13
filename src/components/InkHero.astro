@@ -16,15 +16,28 @@ const segments = ['B2B', 'Производство', 'Опт', 'Сервис', '
     <IdeaBoard />
 	<div class="pencil-content mx-auto max-w-[1440px] px-6 py-14 sm:py-20 lg:py-24">
         <button class="idea-invitation" type="button" data-open-board aria-haspopup="dialog">
-          <img src="/images/idea-pencil-napkin.png" alt="" width="400" height="400" draggable="false" />
+          <img
+            src="/images/idea-pencil-napkin-640.webp"
+            srcset="/images/idea-pencil-napkin-320.webp 320w, /images/idea-pencil-napkin-480.webp 480w, /images/idea-pencil-napkin-640.webp 640w"
+            sizes="(max-width: 767px) 160px, (max-width: 1199px) 170px, 250px"
+            alt=""
+            width="1254"
+            height="1254"
+            draggable="false"
+            decoding="async"
+          />
           <span>Нарисуй свой бизнес процесс,<br />а мы разберемся как оптимизировать</span>
         </button>
 		<h1 class="hero-lockup" aria-label="Делаем сложное ИТ — простым, а скучное — крутым!">
 			<span class="hero-lockup__row hero-lockup__row--top">
 				<span class="hero-lockup__text">Делаем сложное</span>
 				<img
-					src="/ds-v2/assets/hero-word-it.png"
+					src="/ds-v2/assets/hero-word-it.webp"
+					srcset="/ds-v2/assets/hero-word-it-240.webp 240w, /ds-v2/assets/hero-word-it.webp 385w"
+					sizes="(min-width: 1024px) 168px, (min-width: 640px) 91px, 60px"
 					alt=""
+					width="385"
+					height="294"
 					class="hero-lockup__image hero-lockup__image--it"
 					draggable="false"
 					loading="eager"
@@ -34,8 +47,12 @@ const segments = ['B2B', 'Производство', 'Опт', 'Сервис', '
 			<span class="hero-lockup__row hero-lockup__row--middle" aria-hidden="true">
 				<span class="hero-lockup__text">—</span>
 				<img
-					src="/ds-v2/assets/hero-word-simple.png"
+					src="/ds-v2/assets/hero-word-simple.webp"
+					srcset="/ds-v2/assets/hero-word-simple-640.webp 640w, /ds-v2/assets/hero-word-simple.webp 1104w"
+					sizes="(min-width: 1024px) 514px, (min-width: 640px) 278px, 182px"
 					alt=""
+					width="1104"
+					height="229"
 					class="hero-lockup__image hero-lockup__image--simple"
 					draggable="false"
 					loading="eager"
@@ -45,7 +62,7 @@ const segments = ['B2B', 'Производство', 'Опт', 'Сервис', '
 			</span>
 			<span class="hero-lockup__row hero-lockup__row--bottom">
 				<span class="hero-lockup__text">скучное —</span>
-<img src="/ds-v2/assets/hero-word-cool.png" width="980" height="294" alt="" class="hero-lockup__image hero-lockup__image--cool" draggable="false" loading="eager" decoding="async" />
+<img src="/ds-v2/assets/hero-word-cool.webp" srcset="/ds-v2/assets/hero-word-cool-640.webp 640w, /ds-v2/assets/hero-word-cool.webp 980w" sizes="(min-width: 1024px) 461px, (min-width: 640px) 250px, 164px" width="980" height="294" alt="" class="hero-lockup__image hero-lockup__image--cool" draggable="false" loading="eager" decoding="async" />
 			</span>
 		</h1>
         <div class="hero-summary">
@@ -78,7 +95,24 @@ const segments = ['B2B', 'Производство', 'Опт', 'Сервис', '
 </hero-pencil>
 
 <script>
-  import '../scripts/hero-pencil';
+  const opener = document.querySelector<HTMLButtonElement>('hero-pencil [data-open-board]');
+  if (opener) {
+    const loadBoard = async () => {
+      opener.disabled = true;
+      try {
+        await import('../scripts/hero-pencil');
+        opener.removeEventListener('click', loadBoard);
+        const hero = opener.closest('hero-pencil') as HTMLElement & { openBoard: () => Promise<void> };
+        await hero.openBoard();
+      } catch {
+        const label = opener.querySelector('span');
+        if (label) label.textContent = 'Не удалось открыть доску. Попробуйте ещё раз.';
+      } finally {
+        opener.disabled = false;
+      }
+    };
+    opener.addEventListener('click', loadBoard);
+  }
 </script>
 
 <style>

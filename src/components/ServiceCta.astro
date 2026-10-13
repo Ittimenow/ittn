@@ -15,19 +15,44 @@ const { title, text, id, label = 'Получить консультацию', so
       <h2>{title}</h2>
       <p>{text}</p>
     </div>
-    <div class="ittn-service-cta-image" aria-hidden="true"></div>
+    <div class="ittn-service-cta-image" aria-hidden="true">
+      <img data-src="/ds-v2/assets/contact-me-1200.webp" data-srcset="/ds-v2/assets/contact-me-700.webp 700w, /ds-v2/assets/contact-me-1200.webp 1200w" sizes="(max-width: 899px) 350px, 600px" width="1600" height="800" alt="" loading="lazy" decoding="async" />
+      <noscript><img src="/ds-v2/assets/contact-me-1200.webp" width="1600" height="800" alt="" /></noscript>
+    </div>
     <button class="ds-btn ittn-btn" type="button" data-b24-form-trigger data-service-cta data-service-source={source}>
       <span>{label}</span><UiIcon name="arrow-alt-24" class="h-[28px] w-[28px]" />
     </button>
   </div>
 </section>
+<script>
+  const images = document.querySelectorAll<HTMLImageElement>('.ittn-service-cta-image img[data-src]');
+  const loadImage = (image: HTMLImageElement) => {
+    image.srcset = image.dataset.srcset ?? '';
+    image.src = image.dataset.src ?? '';
+    image.removeAttribute('data-src');
+    image.removeAttribute('data-srcset');
+  };
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        loadImage(entry.target as HTMLImageElement);
+      }
+    }, { rootMargin: '600px 0px' });
+    images.forEach((image) => observer.observe(image));
+  } else {
+    images.forEach(loadImage);
+  }
+</script>
 <style>
   .service-cta-section { width: 100%; max-width: 1440px; margin-inline: auto; padding: 88px 24px; }
   .ittn-service-cta { --service-cta-padding-bottom:24px; position:relative; display:grid; min-height:265px; overflow:hidden; gap:24px; align-items:stretch; border-radius:32px; background:#232BFF; padding:24px; color:#fff; }
   .ittn-service-cta-copy { position:relative; z-index:1; min-width:0; }
   .ittn-service-cta-copy h2 { max-width:880px; margin:0; color:#fff; font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1.05; letter-spacing:-.02em; }
   .ittn-service-cta-copy p { max-width:760px; margin:20px 0 0; color:rgba(255,255,255,.8); font-size:18px; line-height:1.75; }
-  .ittn-service-cta-image { z-index:0; min-width:0; min-height:185px; background:url('/ds-v2/assets/contact-me.png') left bottom / contain no-repeat; filter:brightness(0) invert(1); pointer-events:none; transform:translateY(var(--service-cta-padding-bottom)); }
+  .ittn-service-cta-image { position:relative; z-index:0; min-width:0; min-height:185px; pointer-events:none; transform:translateY(var(--service-cta-padding-bottom)); }
+  .ittn-service-cta-image img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:left bottom; filter:brightness(0) invert(1); }
   .ittn-service-cta .ittn-btn { --ui-icon-filter:brightness(0) invert(1); --ds-btn-fill:#fff; --ds-btn-hover-color:#111; --ds-btn-hover-border:transparent; position:relative; z-index:1; justify-self:end; align-self:end; border-color:transparent; background:#111; color:#fff; box-shadow:none; }
   .ittn-service-cta .ittn-btn:hover, .ittn-service-cta .ittn-btn:focus-visible { --ui-icon-filter:none; background:#fff; color:#111; }
   @media (min-width:900px) {

@@ -2,6 +2,7 @@ import { ideaOwner, openIdeaStore } from './idea-store';
 import { eraseAt, type IdeaPoint as Point, type IdeaStroke as Stroke } from './idea-erase';
 const SIZE=8192, KEY='ittn-idea-board-v1';
 class HeroPencil extends HTMLElement {
+  openBoard(){return this.open();}
   private dialog!:HTMLDialogElement;
   private canvas!:HTMLCanvasElement;
   private ctx!:CanvasRenderingContext2D;

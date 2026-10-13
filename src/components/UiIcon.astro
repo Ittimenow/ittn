@@ -4,9 +4,10 @@ import { iconSrc, type IconName } from '../data/icons';
 interface Props {
 	name: IconName;
 	class?: string;
+	loading?: 'eager' | 'lazy';
 }
 
-const { name, class: className = 'h-[35px] w-[35px]' } = Astro.props;
+const { name, class: className = 'h-[35px] w-[35px]', loading } = Astro.props;
 ---
 
 <i
@@ -14,5 +15,5 @@ const { name, class: className = 'h-[35px] w-[35px]' } = Astro.props;
 	data-ui-icon={name}
 	aria-hidden="true"
 >
-	<img src={iconSrc(name)} width="512" height="512" alt="" decoding="async" draggable="false" />
+	<img src={iconSrc(name)} width="512" height="512" alt="" loading={loading} decoding="async" draggable="false" />
 </i>
