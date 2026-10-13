@@ -426,9 +426,7 @@ const faqSchema = {
 		isolation: isolate;
 		overflow: hidden;
 		border-bottom: 1px solid var(--support-line);
-		background:
-			radial-gradient(circle at 86% 18%, rgba(35, 43, 255, 0.17), transparent 30%),
-			linear-gradient(180deg, #f5f7ff 0%, #fff 82%);
+		background: #fff;
 	}
 
 	.support-hero::before {
@@ -606,7 +604,7 @@ const faqSchema = {
 	.support-console-foot span { gap: 6px; }
 
 	.support-section { padding-block: 96px; }
-	.support-section-soft { border-block: 1px solid var(--support-line); background: var(--support-soft); }
+	.support-section-soft { border-block: 1px solid var(--support-line); background: #fff; }
 
 	.support-section-head {
 		display: grid;
@@ -636,13 +634,13 @@ const faqSchema = {
 	.support-service-card li,
 	.support-price-card li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; line-height: 1.45; }
 
-	.support-section-ink { background: var(--support-ink); color: #fff; }
-	.support-section-head-light h2 { color: #fff; }
-	.support-section-head-light > p { color: rgba(255, 255, 255, 0.62); }
-	.support-section-ink .ds-kicker { color: #9da1ff; }
+	.support-section-ink { background: #fff; color: var(--support-ink); }
+	.support-section-head-light h2 { color: var(--support-ink); }
+	.support-section-head-light > p { color: var(--ds-muted); }
+	.support-section-ink .ds-kicker { color: var(--support-blue); }
 
 	.support-tasks-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-	.support-task-card { min-height: 240px; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 22px; background: rgba(255, 255, 255, 0.055); padding: 23px; }
+	.support-task-card { min-height: 240px; border: 1px solid var(--support-ink); border-radius: 22px; background: var(--support-ink); padding: 23px; }
 	.support-task-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: #9da1ff; font-family: var(--ittn-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
 	.support-task-top span:last-child { color: rgba(255, 255, 255, 0.48); text-align: right; }
 	.support-task-card h3 { margin-top: 42px; color: #fff; font-size: 22px; line-height: 1.16; }

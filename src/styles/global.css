@@ -114,9 +114,7 @@ html {
 
 body {
 	min-width: 320px;
-	background:
-		linear-gradient(180deg, rgba(245, 247, 255, 0.9) 0%, rgba(255, 255, 255, 1) 28%),
-		var(--ds-bg);
+	background: #ffffff;
 	color: var(--ds-ink);
 	font-family: var(--ds-font-system);
 	font-size: var(--ds-body-size);

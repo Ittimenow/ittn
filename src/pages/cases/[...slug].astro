@@ -669,22 +669,22 @@ const breadcrumbSchema = {
 		gap: 2rem;
 		align-items: center;
 		margin: 2.5rem 0;
+		border: 1px solid var(--ds-border);
 		border-radius: 2.5rem;
-		background: linear-gradient(135deg, #18181b, #232bff);
+		background: #ffffff;
 		padding: 2rem;
-		color: #ffffff;
-		box-shadow: var(--ds-glow);
+		color: var(--ds-ink);
 	}
 	.prose-content :global(.case-results-cta h2) {
 		margin: 0 0 1rem;
-		color: #ffffff;
+		color: var(--ds-ink);
 	}
 	.prose-content :global(.case-results-cta p),
 	.prose-content :global(.case-results-cta ul),
 	.prose-content :global(.case-results-cta ol) {
 		max-width: 720px;
 		margin: 0;
-		color: rgba(255, 255, 255, 0.78);
+		color: var(--ds-muted);
 		font-size: 1.125rem;
 		line-height: 1.7;
 	}
@@ -698,12 +698,12 @@ const breadcrumbSchema = {
 		color: #ffffff;
 	}
 	.prose-content :global(.case-results-cta a:not(.case-results-button)) {
-		color: #ffffff;
+		color: var(--ds-primary);
 		text-decoration: underline;
 		text-underline-offset: 4px;
 	}
 	.prose-content :global(.case-results-cta a:not(.case-results-button):hover) {
-		color: rgba(255, 255, 255, 0.82);
+		color: var(--ittn-blue-dark);
 	}
 	.prose-content :global(.case-results-button) {
 		display: inline-flex;
@@ -713,9 +713,9 @@ const breadcrumbSchema = {
 		justify-self: start;
 		border: 0;
 		border-radius: 9999px;
-		background: #ffffff;
+		background: var(--ds-primary);
 		padding: 0 1.5rem;
-		color: #18181b;
+		color: #ffffff;
 		cursor: pointer;
 		font-size: 0.875rem;
 		font-weight: 700;
@@ -724,7 +724,7 @@ const breadcrumbSchema = {
 		transition: transform 180ms ease, background 180ms ease;
 	}
 	.prose-content :global(.case-results-button:hover) {
-		background: #f4f4f5;
+		background: var(--ittn-blue-dark);
 		transform: translateY(-1px);
 	}
 	.prose-content :global(.case-configurator-quote),

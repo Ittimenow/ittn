@@ -10,7 +10,7 @@ const colorTokens = [
 	{ token: '--ittn-ink', value: '#111111', note: 'Основной текст и контрастные элементы' },
 	{ token: '--ittn-muted', value: '#626977', note: 'Вторичный текст' },
 	{ token: '--ittn-line', value: '#DFE4F2', note: 'Границы и разделители' },
-	{ token: '--ittn-cloud', value: '#F5F7FF', note: 'Мягкий фон секций' },
+	{ token: '--ittn-cloud', value: '#F5F7FF', note: 'Мягкий фон отдельных компонентов' },
 	{ token: '--ittn-acid', value: '#D7FF38', note: 'Редкий дополнительный акцент' },
 	{ token: '--ittn-coral', value: '#FF5C39', note: 'Ошибки и тёплый контраст' },
 	{ token: '--ittn-blue-soft', value: '#7E84FF', note: 'Подписи на тёмных поверхностях' },
@@ -265,14 +265,14 @@ const typographyRows = [
 <style>
 	.demo-page { min-height: 100vh; }
 	.demo-shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
-	.demo-hero { padding: 88px 0 72px; background: linear-gradient(135deg, rgba(35,43,255,.1), transparent 42%), var(--ittn-cloud); border-bottom: 1px solid var(--ds-border); }
+	.demo-hero { padding: 88px 0 72px; background: #fff; border-bottom: 1px solid var(--ds-border); }
 	.demo-eyebrow { color: var(--ds-primary); font-family: var(--ittn-font-mono); font-size: 13px; font-weight: 500; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; }
 	.demo-label { color: var(--ds-primary); font-family: var(--ittn-font-mono); font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: .11em; text-transform: uppercase; }
 	.demo-title { max-width: 920px; margin: 22px 0 0; font-size: var(--ds-display-size); font-weight: var(--ds-display-weight); line-height: var(--ds-display-line); letter-spacing: -.03em; }
 	.demo-lead { max-width: 760px; margin: 28px 0 0; color: var(--ds-muted); font-size: 19px; line-height: 1.55; }
 	.demo-actions, .button-row, .demo-footer-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 	.demo-section { padding: 88px 0; }
-	.demo-section-soft { background: var(--ittn-cloud); border-block: 1px solid var(--ds-border); }
+	.demo-section-soft { background: #fff; border-block: 1px solid var(--ds-border); }
 	.demo-section-title { max-width: 900px; margin: 18px 0 0; font-size: clamp(34px, 5vw, 52px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
 	.demo-section-copy { max-width: 780px; margin: 18px 0 40px; color: var(--ds-muted); }
 	.token-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 40px; }

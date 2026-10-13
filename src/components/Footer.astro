@@ -27,7 +27,7 @@ const sections = [
 ];
 ---
 
-<footer class="mt-32 border-t border-white/15 bg-[#111111] text-white">
+<footer class="mt-32 border-t border-[color:var(--ds-border)] bg-white text-[color:var(--ds-ink)]">
 	<div class="mx-auto max-w-[1440px] px-6 py-16">
 		<div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.25fr_repeat(5,minmax(0,1fr))]">
 			<div>
@@ -37,19 +37,19 @@ const sections = [
 						alt="IT TIME NOW"
 						width="1328"
 						height="157"
-						class="block h-auto w-[271px] max-w-full object-contain brightness-0 invert"
+						class="block h-auto w-[271px] max-w-full object-contain brightness-0"
 						loading="lazy"
 						decoding="async"
 					/>
 				</a>
-				<p class="mt-4 max-w-xs text-sm leading-6 text-white/60">
+				<p class="mt-4 max-w-xs text-sm leading-6 text-[color:var(--ds-muted)]">
 					Цифровые системы эффективного бизнеса. С&nbsp;2013&nbsp;года.
 				</p>
 			</div>
 
 			{sections.map((s) => (
 				<div>
-					<p class="mb-3 text-xs font-bold uppercase text-white/60">
+					<p class="mb-3 text-xs font-bold uppercase text-[color:var(--ds-muted)]">
 						{s.title}
 					</p>
 					<ul class="space-y-2 text-sm">
@@ -57,7 +57,7 @@ const sections = [
 							<li>
 								<a
 									href={l.href}
-									class="font-medium text-white transition hover:text-[color:var(--ds-secondary)]"
+									class="font-medium text-[color:var(--ds-ink)] transition hover:text-[color:var(--ds-primary)]"
 								>
 									{l.title}
 								</a>
@@ -69,23 +69,23 @@ const sections = [
 		</div>
 
 		<div
-			class="mt-12 flex flex-col gap-4 border-t border-white/15 pt-6 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between"
+			class="mt-12 flex flex-col gap-4 border-t border-[color:var(--ds-border)] pt-6 text-sm text-[color:var(--ds-muted)] sm:flex-row sm:items-center sm:justify-between"
 		>
 			<p>© 2013–{year} ittimenow.com</p>
 			<div class="flex flex-wrap items-center gap-x-6 gap-y-2">
 				<a
 					href="/oferta-ooo-vok-torg-na-sertifikat-1s-bit"
-					class="transition hover:text-[color:var(--ds-secondary)]"
+					class="transition hover:text-[color:var(--ds-primary)]"
 				>
 					Оферта Битрикс24.Маркет
 				</a>
 				<a
 					href="/oferta-ip-podobnyi-jurii-semenovich-na-zakljuchenie-sublicenzionnogo-dogovora"
-					class="transition hover:text-[color:var(--ds-secondary)]"
+					class="transition hover:text-[color:var(--ds-primary)]"
 				>
 					Сублицензионная оферта
 				</a>
-				<a href="mailto:hello@ittimenow.com" class="transition hover:text-[color:var(--ds-secondary)]">
+				<a href="mailto:hello@ittimenow.com" class="transition hover:text-[color:var(--ds-primary)]">
 					hello@ittimenow.com
 				</a>
 				<span>Москва, Варшавское шоссе, 28А</span>

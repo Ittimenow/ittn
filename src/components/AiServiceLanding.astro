@@ -198,7 +198,7 @@ const safeguards = [
 	.ais-page { --ais-blue: var(--ds-primary); --ais-line: var(--ds-border); background: #fff; color: var(--ds-ink); }
 	.ais-container { width: min(100% - 48px, 1320px); margin-inline: auto; }
 	.ais-section { padding-block: 72px; }
-	.ais-hero { overflow: hidden; border-bottom: 1px solid var(--ais-line); background: linear-gradient(180deg, #fff 0%, #f5f7ff 100%); }
+	.ais-hero { overflow: hidden; border-bottom: 1px solid var(--ais-line); background: #fff; }
 	.ais-hero-grid { display: grid; min-height: 680px; grid-template-columns: minmax(0, 1.08fr) minmax(400px, .92fr); align-items: center; gap: clamp(48px, 7vw, 110px); padding-block: 42px 70px; }
 	.ais-breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-bottom: 30px; color: var(--ds-muted); font-size: 13px; }
 	.ais-breadcrumbs a { text-decoration: none; transition: color 160ms ease; }
@@ -228,10 +228,10 @@ const safeguards = [
 	.ais-pain-card { min-height: 260px; padding: 28px; }
 	.ais-pain-card h3, .ais-capability-card h3 { margin: 24px 0 0; font-size: 23px; }
 	.ais-pain-card p, .ais-capability-card p { margin: 13px 0 0; color: var(--ds-muted); font-size: 15px; line-height: 1.65; }
-	.ais-scenario-section { background: var(--ds-ink); color: #fff; }
-	.ais-section-head-light h2 { color: #fff; }
-	.ais-section-head-light .ds-kicker, .ais-section-head-light > p { color: var(--ds-tertiary); }
-	.ais-scenario { display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); align-items: center; gap: 28px; border: 1px solid rgba(255,255,255,.14); border-radius: 28px; background: rgba(255,255,255,.055); padding: clamp(26px, 4vw, 48px); }
+	.ais-scenario-section { background: #fff; color: var(--ds-ink); }
+	.ais-section-head-light h2 { color: var(--ds-ink); }
+	.ais-section-head-light .ds-kicker, .ais-section-head-light > p { color: var(--ds-muted); }
+	.ais-scenario { display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); align-items: center; gap: 28px; border: 1px solid var(--ds-ink); border-radius: 28px; background: var(--ds-ink); padding: clamp(26px, 4vw, 48px); color: #fff; }
 	.ais-scenario > div > span { color: var(--ds-secondary); font-family: var(--ittn-font-mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 	.ais-scenario p { margin: 12px 0 0; font-size: 17px; line-height: 1.65; }
 	.ais-scenario-arrow { display: grid; place-items: center; color: var(--ds-secondary); }
@@ -241,7 +241,7 @@ const safeguards = [
 	.ais-capability-card { min-height: 290px; padding: 26px; }
 	.ais-card-top { display: flex; align-items: flex-start; justify-content: space-between; }
 	.ais-card-top > span { color: var(--ittn-subtle); font-family: var(--ittn-font-mono); font-size: 11px; }
-	.ais-soft-section { background: var(--ittn-cloud); }
+	.ais-soft-section { background: #fff; }
 	.ais-results-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr); align-items: center; gap: clamp(48px, 8vw, 120px); }
 	.ais-integrations > p { margin-top: 22px; }
 	.ais-integrations ul { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 0; padding: 0; list-style: none; }

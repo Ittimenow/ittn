@@ -610,7 +610,7 @@ const comparison = [
 	}
 
 	.ds-section-soft {
-		background: var(--ittn-cloud);
+		background: var(--ittn-white);
 	}
 
 	.bitrix-ds :where(.ds-kicker) {
@@ -759,27 +759,13 @@ const comparison = [
 
 	.ds-hero {
 		border-bottom: 1px solid var(--ittn-border);
-		background:
-			linear-gradient(180deg, var(--ittn-white) 0%, rgba(245, 247, 255, 0.86) 100%);
+		background: var(--ittn-white);
 	}
 
 	.bitrix-hero {
 		position: relative;
 		isolation: isolate;
 		overflow: hidden;
-	}
-
-	.bitrix-hero::before {
-		position: absolute;
-		top: 10%;
-		right: -8%;
-		z-index: -1;
-		width: min(42vw, 620px);
-		aspect-ratio: 1;
-		border-radius: 50%;
-		background: rgba(35, 43, 255, 0.055);
-		content: "";
-		filter: blur(2px);
 	}
 
 	.bitrix-hero-grid {
@@ -1092,7 +1078,7 @@ const comparison = [
 
 	.ds-price-card.is-featured {
 		border-color: var(--ittn-blue);
-		background: linear-gradient(180deg, rgba(35, 43, 255, 0.07), var(--ittn-white) 45%);
+		background: var(--ittn-white);
 	}
 
 	.ds-price-card.is-featured::before {
@@ -1409,20 +1395,21 @@ const comparison = [
 		gap: 36px;
 		align-items: center;
 		overflow: hidden;
+		border: 1px solid var(--ittn-border);
 		border-radius: 24px;
-		background: var(--ittn-ink);
+		background: var(--ittn-white);
 		padding: 40px;
-		color: var(--ittn-white);
+		color: var(--ittn-ink);
 	}
 
 	.bitrix-reasons-card .ds-kicker {
-		color: var(--ittn-blue-soft, #7e84ff) !important;
+		color: var(--ittn-blue) !important;
 	}
 
 	.bitrix-reasons-card blockquote {
 		margin-top: 18px;
 		max-width: 680px;
-		color: var(--ittn-white);
+		color: var(--ittn-ink);
 		font-size: clamp(28px, 3.4vw, 42px);
 		font-weight: 700;
 		line-height: 1.12;
@@ -1439,17 +1426,13 @@ const comparison = [
 		min-height: 58px;
 		align-items: center;
 		gap: 12px;
-		border: 1px solid rgba(255, 255, 255, 0.13);
+		border: 1px solid var(--ittn-border);
 		border-radius: 14px;
-		background: rgba(255, 255, 255, 0.055);
+		background: var(--ittn-white);
 		padding: 12px 14px;
-		color: rgba(255, 255, 255, 0.76);
+		color: var(--ittn-muted);
 		font-size: 14px;
 		line-height: 1.48;
-	}
-
-	.bitrix-reasons .bitrix-list-check {
-		filter: brightness(0) invert(1);
 	}
 
 	.bitrix-faq-list {
