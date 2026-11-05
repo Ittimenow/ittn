@@ -5,14 +5,15 @@ import Layout from '../layouts/Layout.astro';
 
 interface Props {
 	title: string;
+	seoTitle?: string;
 	description: string;
 	date?: string;
 }
 
-const { title, description, date } = Astro.props;
+const { title, seoTitle, description, date } = Astro.props;
 ---
 
-<Layout title={`${title} — IT TIME NOW`} description={description}>
+<Layout title={seoTitle ?? `${title} — IT TIME NOW`} description={description}>
 	<article class="mx-auto max-w-4xl px-6 py-16 sm:py-24">
 		<Breadcrumbs current={title} />
 		<h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-5xl">{title}</h1>

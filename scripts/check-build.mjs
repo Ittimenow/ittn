@@ -23,6 +23,8 @@ for (const file of html) {
 const check = (condition, message) => { if (!condition) errors.push(message); };
 const exists = path => paths.has(path) || paths.has(path.replace(/\/$/, '') + '/index.html');
 let links = 0;
+const seenTitles = new Map();
+const seenDescriptions = new Map();
 for (const [route, { doc }] of pages) {
   if (doc.querySelector('meta[http-equiv="refresh"]')) continue;
   check(Boolean(doc.title.trim()), `${route}: missing title`);
@@ -34,6 +36,23 @@ for (const [route, { doc }] of pages) {
   }
   if (!release.internalPaths.includes(route)) {
     check(doc.querySelectorAll('h1').length === 1, `${route}: expected one h1`);
+    check(doc.querySelectorAll('title').length === 1, `${route}: expected one title`);
+    check(doc.querySelectorAll('meta[name="description"]').length === 1, `${route}: expected one description`);
+    for (const [seen, value, field] of [
+      [seenTitles, doc.title.trim(), 'title'],
+      [seenDescriptions, doc.querySelector('meta[name="description"]')?.content.trim(), 'description'],
+    ]) {
+      check(!seen.has(value), `${route}: duplicate ${field} with ${seen.get(value)}`);
+      seen.set(value, route);
+    }
+
+    for (const link of doc.querySelectorAll('a[href]')) {
+      const labelledBy = (link.getAttribute('aria-labelledby') || '').split(/\s+/).some(id => doc.getElementById(id)?.textContent.trim());
+      const name = link.textContent.trim() || link.getAttribute('aria-label')?.trim() || labelledBy
+        || link.getAttribute('title')?.trim() || [...link.querySelectorAll('img')].some(image => image.alt.trim());
+      check(Boolean(name), `${route}: unnamed link ${link.getAttribute('href')}`);
+    }
+
     check(!doc.querySelector('.ds-kicker, .home-section-kicker, .implementation-kicker'), `${route}: section kicker`);
     check(!doc.querySelector('form[data-b24-form-wrapper]'), `${route}: duplicate local CRM form`);
     check(Boolean(doc.querySelector('main [data-service-final-cta]')), `${route}: missing final CTA`);
@@ -59,6 +78,10 @@ for (const [route, { doc }] of pages) {
       if (url.origin !== release.site) continue;
       links++;
       const path = decodeURIComponent(url.pathname);
+      if (!release.internalPaths.includes(route) && attr === 'href' && element.matches('a') && paths.has(path + '/index.html')) {
+        check(false, `${route}: internal link requires trailing slash: ${value}`);
+      }
+
       check(exists(path), `${route}: missing ${attr} ${path}`);
       if (url.hash && url.hash !== '#') {
         const target = pages.get(path.endsWith('/') || path.endsWith('.html') ? path : path + '/')?.doc;

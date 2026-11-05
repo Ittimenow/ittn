@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sirv from 'sirv';
 import { createIdeaApi } from './idea-api.mjs';
@@ -28,6 +28,13 @@ export function createStaticServer(root = resolve('dist')) {
       res.end(req.method === 'HEAD' ? undefined : notFound);
     };
     if (url.pathname.split('/').some(part => part.startsWith('.')) || ['/_headers', '/_redirects'].includes(url.pathname)) { fail(); return; }
+    // Normalize only real HTML routes, preserving query parameters and real 404s.
+    const pathname = decodeURIComponent(url.pathname);
+    const pageFile = resolve(root, '.' + pathname, 'index.html');
+    if (!url.pathname.endsWith('/') && pageFile.startsWith(resolve(root) + sep) && existsSync(pageFile)) {
+      res.writeHead(301, { Location: url.pathname + '/' + url.search }).end();
+      return;
+    }
     serve(req, res, fail);
   });
   server.once('close',()=>ideas.close());

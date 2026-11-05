@@ -32,27 +32,21 @@ const isIntegrations = service.id === 'integrations';
 const isElma = service.id === 'elma';
 const isSupport = service.id === 'support';
 const isAi = service.id === 'ai';
-const pageTitle = isBitrix24
-	? 'Внедрение и настройка Bitrix24 под ключ — цена от 39 000 ₽ | IT Time Now'
-	: isRbs
-		? 'Внедрение CRM/ERP\u00A0РосБизнесСофт под\u00A0ключ — настройка RBS360 от\u00A080\u00A0000\u00A0₽ | IT\u00A0TIME\u00A0NOW'
-		: isSites
-			? 'Разработка сайтов под ключ — от 150 000 ₽ | IT TIME NOW'
-			: isWebServices
-				? 'Разработка веб-сервисов, порталов и личных кабинетов | IT TIME NOW'
-				: isIntegrations
-					? 'Интеграция сайта, CRM, ERP и 1С через API | IT TIME NOW'
-			: isElma
-				? 'Внедрение ELMA365 под ключ — автоматизация бизнес-процессов | IT TIME NOW'
-				: isSupport
-					? 'Техническая поддержка сайтов и IT-систем для бизнеса — от 3 500 ₽/час | IT TIME NOW'
-					: isAi
-						? 'ИИ для бизнеса — консультанты, ассистенты и автоматизация | IT TIME NOW'
-						: `${service.data.title} — ittimenow`;
+const serviceTitles: Record<string, string> = {
+	bitrix24: 'Внедрение Битрикс24: настройка CRM под ключ — IT TIME NOW',
+	rbs: 'Внедрение РосБизнесСофт: CRM/ERP под ключ — IT TIME NOW',
+	sites: 'Разработка сайтов под ключ — от 150 000 ₽ | IT TIME NOW',
+	'web-services': 'Разработка веб-сервисов и личных кабинетов — IT TIME NOW',
+	integrations: 'Интеграция сайта, CRM, ERP и 1С через API | IT TIME NOW',
+	elma: 'Внедрение ELMA365 и автоматизация процессов — IT TIME NOW',
+	support: 'Техническая поддержка сайтов, CRM и ERP — IT TIME NOW',
+	ai: 'ИИ для бизнеса: разработка и внедрение — IT TIME NOW',
+};
+const pageTitle = serviceTitles[service.id] ?? `${service.data.title} — ittimenow`;
 const pageDescription = isBitrix24
 	? 'Внедрение и настройка Bitrix24 для бизнеса: CRM, воронки, роботы, телефония, 1С, интеграции, обучение и сопровождение. Запуск от 39 000 ₽.'
 	: isRbs
-		? 'Внедрим и\u00A0настроим CRM/ERP\u00A0систему РосБизнесСофт для\u00A0продаж, склада, производства, сервиса и\u00A0B2B. Интеграция с\u00A01С, сайтом, телефонией, почтой и\u00A0мессенджерами. Быстрый старт от\u00A080\u00A0000\u00A0₽, проектное внедрение от\u00A0300\u00A0000\u00A0₽.'
+		? 'Внедряем РосБизнесСофт для продаж, склада, производства и сервиса. Настройка CRM/ERP, интеграция с 1С, перенос данных и обучение. Старт от 80 000 ₽.'
 		: isSites
 			? 'Разрабатываем лендинги, корпоративные, интерактивные сайты и интернет-магазины. Структура, тексты, UX/UI, CMS, интеграции и запуск.'
 			: isWebServices

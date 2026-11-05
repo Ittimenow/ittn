@@ -1,5 +1,6 @@
 ---
 title: 'Сокращение времени обработки заявки в 3 раза'
+seoTitle: 'PEROLA SKY: автоматизация заявок в бизнес-авиации — IT TIME NOW'
 client: 'PEROLA SKY'
 summary: 'Кейс IT TIME NOW — Оптимизировали процессы и CRM, сократив время обработки заявок в 3 раза без потери качества работы.'
 industry: 'Бизнес-авиация'
@@ -87,7 +88,7 @@ listingCover: '/cases/perola-crm/main-image-perolasky.webp'
 	</div>
 </section>
 
-### Предложение (оффер)
+### Формирование и согласование оффера
 
 <section class="case-media-grid case-media-grid-four">
 	<figure class="case-media-card">

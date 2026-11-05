@@ -68,7 +68,7 @@ const breadcrumbSchema = {
 ---
 
 <Layout
-	title={post.data.title}
+	title={post.data.seoTitle ?? post.data.title}
 	description={post.data.description}
 	image={post.data.cover}
 	structuredData={[articleSchema, breadcrumbSchema]}

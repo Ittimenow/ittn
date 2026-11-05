@@ -57,8 +57,8 @@ const breadcrumbSchema = {
 ---
 
 <Layout
-	title={`${c.data.title} — ittimenow`}
-	description={c.data.summary}
+	title={c.data.seoTitle ?? `${c.data.title} — ittimenow`}
+	description={c.data.seoDescription ?? c.data.summary}
 	image={c.data.cover}
 	structuredData={[caseSchema, breadcrumbSchema]}
 >

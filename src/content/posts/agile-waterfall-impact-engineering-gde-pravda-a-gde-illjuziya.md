@@ -1,6 +1,7 @@
 ---
 title: "Agile, Waterfall, Impact Engineering: где правда, а где иллюзия"
-description: "В индустрии разработки программного обеспечения на протяжении последних десятилетий не утихают споры о том, какой подход к управлению проектами является наиболее эффективным. Чаще всего в этом контексте рассматривают три модели: Waterfall, Agile и сравнительно новый подход —"
+seoTitle: 'Сравнение Agile, Waterfall и Impact Engineering — IT TIME NOW'
+description: 'Сравниваем Agile, Waterfall и Impact Engineering: как подходы влияют на разработку, управление проектом и результат для бизнеса.'
 pubDate: 2026-04-08
 tags: ["управление проектами", "разработка"]
 cover: "/posts/agile-waterfall-impact-engineering/agile-metod.webp"

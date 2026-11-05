@@ -279,7 +279,7 @@ const faqSchema = {
 		<div class="service-card-row mt-10 grid gap-6 lg:grid-cols-3">
 			{cases.map((item) => (
 				<article class="overflow-hidden rounded-2xl border border-neutral-200 bg-white transition hover:-translate-y-1 hover:shadow-[0_30px_70px_-38px_rgba(35,43,255,0.45)]">
-					<a href={item.href} class="block overflow-hidden">
+					<a href={item.href} class="block overflow-hidden" aria-label={`Смотреть кейс: ${item.title}`}>
 						<img class="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-105" src={item.image} alt={item.title} loading="lazy" decoding="async" />
 					</a>
 					<div class="p-6">

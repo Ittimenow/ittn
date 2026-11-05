@@ -20,6 +20,13 @@ test('static server: status codes, redirects, metadata isolation, cache and envi
     response = await fetch(base + path + '?utm_source=test', { redirect: 'manual' });
     assert.equal(response.status, 301); assert.equal(response.headers.get('location'), '/services/sites/?utm_source=test');
   }
+  for (const method of ['GET', 'HEAD']) {
+    response = await fetch(base + '/services/sites?utm_source=test', { method, redirect: 'manual' });
+    assert.equal(response.status, 301);
+    assert.equal(response.headers.get('location'), '/services/sites/?utm_source=test');
+  }
+  response = await fetch(base + '/missing', { redirect: 'manual' }); assert.equal(response.status, 404);
+  response = await fetch(base + '/_astro/main.css', { redirect: 'manual' }); assert.equal(response.status, 200);
   response = await fetch(base + '/services/sites/'); assert.equal(response.status, 200);
   for (const path of ['/missing/', '/_headers', '/.release.json', '/%2erelease.json']) {
     response = await fetch(base + path); assert.equal(response.status, 404, path); assert.match(response.headers.get('x-robots-tag'), /noindex/);
