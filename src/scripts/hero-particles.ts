@@ -122,7 +122,7 @@ class HeroParticles extends HTMLElement {
     if(!this.engine||this.failed||this.motion.matches)return;
     const{width,height}=this.surface.getBoundingClientRect();if(width&&height){this.engine.resize(width,height);this.draw();}
   }
-  private draw(){try{this.engine?.render();this.dataset.rendered='';}catch(error){console.warn('[hero-particles] Animation interrupted.',error);this.fail();}}
+  private draw(){try{this.engine?.render();if(this.engine?.ready===false){delete this.dataset.rendered;return;}this.dataset.rendered='';}catch(error){console.warn('[hero-particles] Animation interrupted.',error);this.fail();}}
   private wake() {
     if(this.frame||!this.engine||!this.visible||this.motion.matches||this.settings.paused||document.hidden||this.failed)return;
     this.lastTime=performance.now();this.frame=requestAnimationFrame(this.tick);

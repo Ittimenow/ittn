@@ -295,7 +295,7 @@ const schema = [
 				{tasks.map(({ icon, title, text }) => (
 					<article class="ds-service-card rbs-task-card">
 						<div class="ds-service-icon">
-							<UiIcon name={icon} class="h-[35px] w-[35px]" />
+							<UiIcon loading="lazy" name={icon} class="h-[35px] w-[35px]" />
 						</div>
 						<h3>{title}</h3>
 						<p>{text}</p>
@@ -342,7 +342,7 @@ const schema = [
 					<article class:list={['ds-price-card', 'featured' in pack && pack.featured && 'is-featured']}>
 						<div class="rbs-card-top">
 							<div class="ds-service-icon">
-								<UiIcon name={pack.icon} class="h-[35px] w-[35px]" />
+								<UiIcon loading="lazy" name={pack.icon} class="h-[35px] w-[35px]" />
 							</div>
 							<span class="ds-chip">{pack.tag}</span>
 						</div>
@@ -380,7 +380,7 @@ const schema = [
 				{services.map((group) => (
 					<article class="ds-service-card">
 						<div class="ds-service-icon">
-							<UiIcon name={group.icon} class="h-[35px] w-[35px]" />
+							<UiIcon loading="lazy" name={group.icon} class="h-[35px] w-[35px]" />
 						</div>
 						<h3>{group.title}</h3>
 						<ul class="ittn-marker-list">
@@ -409,7 +409,7 @@ const schema = [
 					</p>
 					<button class="ds-btn ds-btn-dark consultation-trigger" type="button" data-b24-form-trigger>
 						<span>Собрать план внедрения</span>
-						<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+						<UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" />
 					</button>
 				</div>
 			</div>
@@ -499,7 +499,7 @@ const schema = [
 			<div class="rbs-outcomes service-card-row">
 				{outcomes.map(([title, text]) => (
 					<article class="ds-card">
-						<UiIcon name="thumbs-up" class="h-[42px] w-[42px]" />
+						<UiIcon loading="lazy" name="thumbs-up" class="h-[42px] w-[42px]" />
 						<h3>{title}</h3>
 						<p>{text}</p>
 					</article>
@@ -522,7 +522,7 @@ const schema = [
 					<details class="ds-faq">
 						<summary>
 							<span>{question}</span>
-							<UiIcon name="chevron" class="h-[28px] w-[28px]" />
+							<UiIcon loading="lazy" name="chevron" class="h-[28px] w-[28px]" />
 						</summary>
 						<div class="ds-faq-content">
 							<p>{answer}</p>

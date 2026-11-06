@@ -206,7 +206,7 @@ const schema = {
 				{painPoints.map(({ icon, title, text }, index) => (
 					<article class="elma-card elma-pain-card">
 						<span class="elma-card-index">0{index + 1}</span>
-						<div class="elma-icon"><UiIcon name={icon} class="h-[35px] w-[35px]" /></div>
+						<div class="elma-icon"><UiIcon loading="lazy" name={icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{title}</h3>
 						<p>{text}</p>
 					</article>
@@ -226,7 +226,7 @@ const schema = {
 			<div class="elma-capability-grid service-card-row">
 				{capabilities.map(({ icon, title, text, items }) => (
 					<article class="elma-card elma-capability-card">
-						<div class="elma-icon"><UiIcon name={icon} class="h-[35px] w-[35px]" /></div>
+						<div class="elma-icon"><UiIcon loading="lazy" name={icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{title}</h3>
 						<p>{text}</p>
 						<ul class="elma-capability-list">
@@ -293,7 +293,7 @@ const schema = {
 				<p>Не&nbsp;знаете, с&nbsp;какого процесса начать?</p>
 				<button class="ds-btn ds-btn-dark consultation-trigger" type="button" data-b24-form-trigger>
 					<span>Провести диагностику</span>
-					<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+					<UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" />
 				</button>
 			</div>
 		</div>
@@ -310,7 +310,7 @@ const schema = {
 			<div class="elma-results-grid service-card-row">
 				{results.map(([title, text], index) => (
 					<article class:list={['elma-result-card', index === 0 && 'is-featured']}>
-						<UiIcon name={index === 0 ? 'workflow' : index === 1 ? 'bar-chart' : index === 2 ? 'rocket' : 'spark'} class="h-[42px] w-[42px]" />
+						<UiIcon loading="lazy" name={index === 0 ? 'workflow' : index === 1 ? 'bar-chart' : index === 2 ? 'rocket' : 'spark'} class="h-[42px] w-[42px]" />
 						<h3>{title}</h3>
 						<p>{text}</p>
 					</article>
@@ -325,7 +325,7 @@ const schema = {
 				<h2>ELMA365 становится частью вашей IT-среды</h2>
 				<p>Настраиваем безопасный обмен данными, чтобы сотрудники работали в&nbsp;едином процессе, а&nbsp;информация не&nbsp;дублировалась.</p>
 				<div class="elma-security-note">
-					<UiIcon name="shield" class="h-[42px] w-[42px]" />
+					<UiIcon loading="lazy" name="shield" class="h-[42px] w-[42px]" />
 					<div><strong>Роли и&nbsp;доступы</strong><span>Разделяем права на&nbsp;данные, документы и&nbsp;действия.</span></div>
 				</div>
 			</div>

@@ -56,7 +56,7 @@ const safeguards = [
 			<div class="ais-pain-grid ais-mobile-row service-card-row">
 				{service.pains.map((pain) => (
 					<article class="ais-card ais-pain-card">
-						<div class="ais-icon"><UiIcon name={pain.icon} class="h-[35px] w-[35px]" /></div>
+						<div class="ais-icon"><UiIcon loading="lazy" name={pain.icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{pain.title}</h3><p>{pain.text}</p>
 					</article>
 				))}
@@ -72,7 +72,7 @@ const safeguards = [
 			</div>
 			<div class="ais-scenario">
 				<div><span>Сейчас</span><p>{service.before}</p></div>
-				<div class="ais-scenario-arrow"><UiIcon name="arrow" class="h-[56px] w-[56px]" /></div>
+				<div class="ais-scenario-arrow"><UiIcon loading="lazy" name="arrow" class="h-[56px] w-[56px]" /></div>
 				<div><span>После внедрения</span><p>{service.after}</p></div>
 				<div class="ais-scenario-metric"><span>Что измеряем</span><strong>{service.metric}</strong></div>
 			</div>
@@ -88,7 +88,7 @@ const safeguards = [
 			<div class="ais-capabilities ais-mobile-row service-card-row">
 				{service.capabilities.map((capability, index) => (
 					<article class="ais-card ais-capability-card">
-						<div class="ais-card-top"><div class="ais-icon"><UiIcon name={capability.icon} class="h-[35px] w-[35px]" /></div><span>{String(index + 1).padStart(2, '0')}</span></div>
+						<div class="ais-card-top"><div class="ais-icon"><UiIcon loading="lazy" name={capability.icon} class="h-[35px] w-[35px]" /></div><span>{String(index + 1).padStart(2, '0')}</span></div>
 						<h3>{capability.title}</h3><p>{capability.text}</p>
 					</article>
 				))}
@@ -106,7 +106,7 @@ const safeguards = [
 			<div class="ais-metrics">
 				<h3>Сравниваем процесс до и после</h3>
 				{service.metrics.map((metric) => (
-					<div><UiIcon name="bar-chart" class="h-[35px] w-[35px]" /><span><strong>{metric.title}</strong><small>{metric.text}</small></span></div>
+					<div><UiIcon loading="lazy" name="bar-chart" class="h-[35px] w-[35px]" /><span><strong>{metric.title}</strong><small>{metric.text}</small></span></div>
 				))}
 			</div>
 		</div>
@@ -119,7 +119,7 @@ const safeguards = [
 				<p class="ittn-timeline-description">Не перестраиваем весь IT-контур ради проверки гипотезы. Начинаем с одного процесса, канала или команды.</p>
 				<button class="ds-btn ds-btn-dark consultation-trigger" type="button" data-b24-form-trigger>
 					<span>Обсудить пилот</span>
-					<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+					<UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" />
 				</button>
 			</div>
 
@@ -157,7 +157,7 @@ const safeguards = [
 				<h2>Контроль проектируется заранее</h2>
 				<div>
 					{safeguards.map((item) => (
-						<article><UiIcon name={item.icon} class="h-[35px] w-[35px]" /><span><strong>{item.title}</strong><small>{item.text}</small></span></article>
+						<article><UiIcon loading="lazy" name={item.icon} class="h-[35px] w-[35px]" /><span><strong>{item.title}</strong><small>{item.text}</small></span></article>
 					))}
 				</div>
 			</div>
@@ -172,7 +172,7 @@ const safeguards = [
 			</div>
 			<div class="ais-related ais-mobile-row service-card-row">
 				{relatedServices.map((item) => (
-					<a href={`/services/ai/${item.slug}/`}><UiIcon name={item.icon} class="h-[42px] w-[42px]" /><span><strong>{item.cardTitle}</strong><small>{item.heroLead}</small></span><UiIcon name="arrow" class="h-[35px] w-[35px]" /></a>
+					<a href={`/services/ai/${item.slug}/`}><UiIcon loading="lazy" name={item.icon} class="h-[42px] w-[42px]" /><span><strong>{item.cardTitle}</strong><small>{item.heroLead}</small></span><UiIcon loading="lazy" name="arrow" class="h-[35px] w-[35px]" /></a>
 				))}
 			</div>
 		</div>
@@ -183,7 +183,7 @@ const safeguards = [
 			<div><h2>Частые вопросы</h2><p>На первой встрече уточним данные, ограничения и текущий процесс — без заранее выбранной модели или платформы.</p></div>
 			<div class="ais-faq-list">
 				{service.faqs.map(([question, answer]) => (
-					<details><summary><span>{question}</span><UiIcon name="chevron" class="h-[28px] w-[28px]" /></summary><p>{answer}</p></details>
+					<details><summary><span>{question}</span><UiIcon loading="lazy" name="chevron" class="h-[28px] w-[28px]" /></summary><p>{answer}</p></details>
 				))}
 			</div>
 		</div>

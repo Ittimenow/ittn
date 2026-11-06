@@ -175,7 +175,7 @@ const faqSchema = {
 			<div class="ai-pain-grid ai-card-row service-card-row">
 				{painPoints.map((item) => (
 					<article class="ai-card ai-pain-card">
-						<div class="ai-icon"><UiIcon name={item.icon} class="h-[35px] w-[35px]" /></div>
+						<div class="ai-icon"><UiIcon loading="lazy" name={item.icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{item.title}</h3>
 						<p>{item.text}</p>
 						<div class="ai-metric"><span>Что измеряем</span><strong>{item.metric}</strong></div>
@@ -197,7 +197,7 @@ const faqSchema = {
 				{solutions.map((item, index) => (
 					<a href={item.href} class:list={['ai-card ai-solution-card', index === 0 && 'is-featured']}>
 						<div class="ai-solution-top">
-							<div class="ai-icon"><UiIcon name={item.icon} class="h-[35px] w-[35px]" /></div>
+							<div class="ai-icon"><UiIcon loading="lazy" name={item.icon} class="h-[35px] w-[35px]" /></div>
 							<span>{String(index + 1).padStart(2, '0')}</span>
 						</div>
 						<p class="ai-card-tag">{item.tag}</p>
@@ -206,7 +206,7 @@ const faqSchema = {
 						<ul class="ittn-marker-list">
 							{item.items.map((feature) => <li>{feature}</li>)}
 						</ul>
-						<span class="ai-solution-link">Подробнее <UiIcon name="arrow" class="h-[28px] w-[28px]" /></span>
+						<span class="ai-solution-link">Подробнее <UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" /></span>
 					</a>
 				))}
 			</div>
@@ -224,7 +224,7 @@ const faqSchema = {
 			<div class="ai-scenarios ai-card-row service-card-row">
 				{scenarios.map((scenario) => (
 					<article class="ai-scenario-card">
-						<div class="ai-scenario-label"><UiIcon name={scenario.icon} class="h-[35px] w-[35px]" /><strong>{scenario.label}</strong></div>
+						<div class="ai-scenario-label"><UiIcon loading="lazy" name={scenario.icon} class="h-[35px] w-[35px]" /><strong>{scenario.label}</strong></div>
 						<div><span>Сейчас</span><p>{scenario.before}</p></div>
 						<div class="ai-scenario-arrow"><img src="/ds-v2/assets/decorations-split/deco-arrow-04.png" alt="" aria-hidden="true" /></div>
 						<div><span>После пилота</span><p>{scenario.after}</p></div>
@@ -257,12 +257,12 @@ const faqSchema = {
 						<line x1="300" y1="300" x2="90" y2="178" />
 					</svg>
 					<div class="ai-core">
-						<UiIcon name="spark" class="ai-core-icon" />
+						<UiIcon loading="lazy" name="spark" class="ai-core-icon" />
 						<strong>ИИ-сценарий</strong>
 					</div>
 					{integrations.map(([icon, title], index) => (
 						<div class={`ai-integration-node is-${index + 1}`}>
-							<div><UiIcon name={icon} class="h-[35px] w-[35px]" /></div>
+							<div><UiIcon loading="lazy" name={icon} class="h-[35px] w-[35px]" /></div>
 							<span>{title}</span>
 						</div>
 					))}
@@ -299,7 +299,7 @@ const faqSchema = {
 				<p>Принесите процесс, на который команда регулярно тратит время. Мы поможем сузить его до проверяемого сценария и предложим метрику.</p>
 				<button class:list={['ds-btn ds-btn-primary', b24ButtonClass]} type="button" data-b24-form-trigger>
 					<span>Обсудить пилот</span>
-					<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+					<UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" />
 				</button>
 			</div>
 		</div>
@@ -316,7 +316,7 @@ const faqSchema = {
 			<div class="ai-controls-grid ai-card-row service-card-row">
 				{controls.map((item) => (
 					<article class="ai-card ai-control-card">
-						<div class="ai-icon"><UiIcon name={item.icon} class="h-[35px] w-[35px]" /></div>
+						<div class="ai-icon"><UiIcon loading="lazy" name={item.icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{item.title}</h3>
 						<p>{item.text}</p>
 					</article>
@@ -334,7 +334,7 @@ const faqSchema = {
 			<div class="ai-faq-list">
 				{faqs.map(([question, answer]) => (
 					<details class="ai-faq">
-						<summary><span>{question}</span><UiIcon name="chevron" class="h-[28px] w-[28px]" /></summary>
+						<summary><span>{question}</span><UiIcon loading="lazy" name="chevron" class="h-[28px] w-[28px]" /></summary>
 						<div><p>{answer}</p></div>
 					</details>
 				))}

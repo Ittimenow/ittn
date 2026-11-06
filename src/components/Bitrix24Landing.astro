@@ -237,7 +237,7 @@ const comparison = [
 				{problems.map(({ icon, title, text }) => (
 					<article class="ds-service-card bitrix-problem-card">
 						<div class="ds-service-icon">
-							<UiIcon name={icon} class="h-[35px] w-[35px]" />
+							<UiIcon loading="lazy" name={icon} class="h-[35px] w-[35px]" />
 						</div>
 						<p>{title}</p>
 						<h3>{text}</h3>
@@ -262,7 +262,7 @@ const comparison = [
 				<article class="ds-price-card bitrix-audit-card">
 					<div class="bitrix-card-top">
 						<div class="ds-service-icon">
-							<UiIcon name={auditPackage.icon} class="h-[35px] w-[35px]" />
+							<UiIcon loading="lazy" name={auditPackage.icon} class="h-[35px] w-[35px]" />
 						</div>
 						<span class="ds-chip">{auditPackage.tag}</span>
 					</div>
@@ -288,7 +288,7 @@ const comparison = [
 					<article class:list={['ds-price-card', 'featured' in pack && pack.featured && 'is-featured']}>
 						<div class="bitrix-card-top">
 							<div class="ds-service-icon">
-								<UiIcon name={pack.icon} class="h-[35px] w-[35px]" />
+								<UiIcon loading="lazy" name={pack.icon} class="h-[35px] w-[35px]" />
 							</div>
 							<span class="ds-chip">{pack.tag}</span>
 						</div>
@@ -321,7 +321,7 @@ const comparison = [
 				</p>
 				<button class="ds-btn ds-btn-dark consultation-trigger" type="button" data-b24-form-trigger>
 					<span>Собрать состав работ</span>
-					<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+					<UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" />
 				</button>
 			</div>
 			<ol class="bitrix-process-list" aria-label="Этапы внедрения Bitrix24">
@@ -391,7 +391,7 @@ const comparison = [
 				{services.map((group) => (
 					<article class:list={['ds-service-card', group.title === 'Индивидуальные доработки' ? 'is-accent' : '']}>
 						<div class="ds-service-icon">
-							<UiIcon name={group.icon} class="h-[35px] w-[35px]" />
+							<UiIcon loading="lazy" name={group.icon} class="h-[35px] w-[35px]" />
 						</div>
 						<h3>{group.title}</h3>
 						<ul class="ittn-marker-list">
@@ -472,7 +472,7 @@ const comparison = [
 					<details class="ds-faq">
 						<summary>
 							<span>{question}</span>
-							<UiIcon name="chevron" class="h-[28px] w-[28px]" />
+							<UiIcon loading="lazy" name="chevron" class="h-[28px] w-[28px]" />
 						</summary>
 						<div class="ds-faq-content">
 							<p>{answer}</p>

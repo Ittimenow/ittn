@@ -14,7 +14,7 @@ const {DEFAULT_PARTICLE_SETTINGS:defaults,PARTICLE_SETTINGS_EVENT,sanitizePartic
 const controller=ts.transpileModule(readFileSync(new URL('../src/scripts/hero-particles.ts',import.meta.url),'utf8'),{
   compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS},
 }).outputText;
-async function fixture({reduced=false,fail=false}={}) {
+async function fixture({reduced=false,fail=false,ready=true}={}) {
   const dom=new JSDOM('<hero-particles scene="sites"><button data-particle-surface><img/><canvas data-particle-canvas></canvas></button><p data-particle-hint></p><button data-particle-retry hidden></button></hero-particles>',{runScripts:'outside-only',pretendToBeVisual:true,url:'https://example.test/hero-lab/'});
   const w=dom.window, element=w.document.querySelector('hero-particles'), surface=element.querySelector('[data-particle-surface]');
   surface.getBoundingClientRect=()=>({width:500,height:500,left:0,top:0});
@@ -27,6 +27,7 @@ async function fixture({reduced=false,fail=false}={}) {
   w.IntersectionObserver=class {constructor(cb){observer=cb;}observe(){}disconnect(){}};
   w.ResizeObserver=class {observe(){}disconnect(){}};
   class Renderer {
+    get ready(){return ready;}
     constructor(){if(fail)throw Error('WebGL unavailable');}
     resize(){} advance(dt){calls.push(['advance',dt]);} render(){draws++;}
     pointer(x,y){calls.push(['pointer',x,y]);} leave(){} pulse(x,y){calls.push(['pulse',x,y]);}
@@ -44,6 +45,7 @@ async function fixture({reduced=false,fail=false}={}) {
   return {w,element,surface,media,calls,frames,
     get imports(){return imports;},get draws(){return draws;},get disposals(){return disposals;},
     visible(value){observer([{isIntersecting:value}]);},
+    ready(value){ready=value;},
     step(n=1){for(let i=0;i<n;i++){time+=1000/60;const callbacks=[...frames.values()];frames.clear();callbacks.forEach(cb=>cb(time));}},
     pointer(type,x,y,pointerType='mouse'){const event=new w.Event(type,{cancelable:true});Object.assign(event,{clientX:x,clientY:y,pointerType});surface.dispatchEvent(event);assert.equal(event.defaultPrevented,false);},
     close(){element.remove();dom.window.close();},
@@ -584,5 +586,14 @@ test('home reveal handles touch location and drag without a second pulse or canc
   app.w.dispatchEvent(new app.w.CustomEvent(PARTICLE_SETTINGS_EVENT,{detail:{...defaults,paused:true}}));
   app.pointer('pointerdown',310,290,'touch');
   assert.equal(app.calls.filter(c=>c[0]==='pointer').length,2);
+  app.close();
+});
+
+
+test('the static poster remains visible while a lazy scene is still loading',async()=>{
+  const app=await fixture({ready:false});
+  assert.equal(app.element.hasAttribute('data-rendered'),false);
+  app.ready(true);app.step();
+  assert.equal(app.element.hasAttribute('data-rendered'),true);
   app.close();
 });

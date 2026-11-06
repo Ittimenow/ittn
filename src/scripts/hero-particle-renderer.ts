@@ -1,7 +1,7 @@
 import { AmbientLight, DirectionalLight, BufferAttribute, BufferGeometry, Group, NoToneMapping, PerspectiveCamera, Points, Scene, ShaderMaterial, Vector3, Vector4, WebGLRenderer } from 'three';
 import { BASE_ROTATION, CAMERA_DISTANCE, createParticleShape, volumeDistance, PARTICLE_COUNT, VIEW_SIZE } from './hero-particle-shapes';
 import type { ServiceHeroSceneId } from '../data/service-hero-scenes';
-import { RevealObject } from './hero-particle-reveal';
+import type { RevealObject } from './hero-particle-reveal';
 import { CrystalMotion } from './hero-particle-crystal';
 import { HingeMotion } from './hero-particle-hinges';
 import { CloudMotion } from './hero-particle-cloud';
@@ -132,6 +132,20 @@ const flowFragment=/* glsl */`
 export class ParticleRenderer {
   private renderer:WebGLRenderer;
   private reveal?:RevealObject;
+  private revealLoading?:Promise<void>;
+  private revealError?:unknown;
+  private disposed=false;
+  get ready(){return this.id!=='home'||Boolean(this.reveal);}
+  private loadReveal() {
+    if(this.reveal||this.revealLoading||this.disposed)return;
+    this.revealLoading=import('./hero-particle-reveal').then(({RevealObject})=>{
+      if(this.disposed||this.id!=='home')return;
+      this.reveal=new RevealObject();this.scene.add(this.reveal.group);
+      this.reveal.resize(this.width*this.renderer.getPixelRatio(),this.width*this.renderer.getPixelRatio());
+    }).catch(error=>{
+      if(!this.disposed&&this.id==='home')this.revealError=error;
+    }).finally(()=>{this.revealLoading=undefined;});
+  }
   private scene=new Scene();
   private camera=new PerspectiveCamera(2*Math.atan(VIEW_SIZE/2/CAMERA_DISTANCE)*180/Math.PI,1,.1,20);
   private geometry=new BufferGeometry();
@@ -236,7 +250,7 @@ export class ParticleRenderer {
     this.hingePoints.frustumCulled=false;this.hingePoints.renderOrder=2;this.hingePoints.visible=id==='rbs';this.points.add(this.hingePoints);
     for(const [key,array,itemSize] of [['position',this.crystal.positions,3],['aAlpha',this.crystal.alphas,1],['aSize',this.crystal.sizes,1],['aColor',this.crystal.colors,3],['aSoft',this.crystal.soft,1]] as const)this.crystalGeometry.setAttribute(key,new BufferAttribute(array,itemSize));
     this.crystalPoints.frustumCulled=false;this.crystalPoints.renderOrder=1;this.crystalPoints.visible=id==='ai';this.crystal.reset();this.points.add(this.crystalPoints);
-    if(id==='home'){this.reveal=new RevealObject();this.scene.add(this.reveal.group);}
+    if(id==='home')this.loadReveal();
     this.scene.add(new AmbientLight(0xffffff,1.7));
     const daylight=new DirectionalLight(0xffffff,2.4);daylight.position.set(-3,5,5);this.scene.add(daylight);
     this.material=this.materials[1];
@@ -244,7 +258,8 @@ export class ParticleRenderer {
   }
 
   setShape(id:ServiceHeroSceneId) {
-    if(id==='home'&&!this.reveal){this.reveal=new RevealObject();this.scene.add(this.reveal.group);this.reveal?.resize(this.width*this.renderer.getPixelRatio(),this.width*this.renderer.getPixelRatio());}this.reveal?.reset();if(this.reveal)this.reveal.group.visible=id==='home';
+    if(id==='home')this.loadReveal();
+    this.reveal?.reset();if(this.reveal)this.reveal.group.visible=id==='home';
     this.crystal.reset();this.crystalPoints.visible=id==='ai';
     this.hinges.reset();this.hingePoints.visible=id==='rbs';
     this.cloud.reset();this.cloudPoints.visible=id==='web-services';
@@ -358,6 +373,6 @@ export class ParticleRenderer {
     this.material.uniforms.uShellOpacity.value=this.shellOpacity/100;this.material.uniforms.uAccentAmount.value=this.accentAmount/100;
     this.material.uniforms.uSize.value=this.size*this.width/500*this.renderer.getPixelRatio();
   }
-  render(){this.renderer.render(this.scene,this.camera);}
-  dispose(){this.reveal?.dispose();this.crystalGeometry.dispose();this.crystalMaterial.dispose();this.hingeGeometry.dispose();this.hingeMaterial.dispose();this.cloudGeometry.dispose();this.cloudMaterial.dispose();this.flightGeometry.dispose();this.flightMaterial.dispose();this.networkGeometry.dispose();this.networkMaterial.dispose();this.funnelGeometry.dispose();this.funnelMaterial.dispose();this.shieldGeometry.dispose();this.shieldMaterial.dispose();this.geometry.dispose();this.materials.forEach(material=>material.dispose());this.renderer.dispose();}
+  render(){if(this.revealError)throw this.revealError;if(this.ready)this.renderer.render(this.scene,this.camera);}
+  dispose(){this.disposed=true;this.reveal?.dispose();this.crystalGeometry.dispose();this.crystalMaterial.dispose();this.hingeGeometry.dispose();this.hingeMaterial.dispose();this.cloudGeometry.dispose();this.cloudMaterial.dispose();this.flightGeometry.dispose();this.flightMaterial.dispose();this.networkGeometry.dispose();this.networkMaterial.dispose();this.funnelGeometry.dispose();this.funnelMaterial.dispose();this.shieldGeometry.dispose();this.shieldMaterial.dispose();this.geometry.dispose();this.materials.forEach(material=>material.dispose());this.renderer.dispose();}
 }

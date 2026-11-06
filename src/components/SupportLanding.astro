@@ -261,7 +261,7 @@ const faqSchema = {
 			<div class="support-pain-grid support-mobile-row service-card-row">
 				{painPoints.map((item) => (
 					<article class="support-card support-pain-card">
-						<div class="support-icon"><UiIcon name={item.icon} class="h-[35px] w-[35px]" /></div>
+						<div class="support-icon"><UiIcon loading="lazy" name={item.icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{item.title}</h3>
 						<p>{item.text}</p>
 					</article>
@@ -281,7 +281,7 @@ const faqSchema = {
 			<div class="support-services-grid service-card-row">
 				{serviceGroups.map((group) => (
 					<article class="support-card support-service-card">
-						<div class="support-icon"><UiIcon name={group.icon} class="h-[35px] w-[35px]" /></div>
+						<div class="support-icon"><UiIcon loading="lazy" name={group.icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{group.title}</h3>
 						<p>{group.text}</p>
 						<ul class="ittn-marker-list">
@@ -336,13 +336,13 @@ const faqSchema = {
 						</ul>
 						<button class:list={['ds-btn', pack.featured ? 'ds-btn-primary' : 'ds-btn-secondary', b24ButtonClass]} type="button" data-b24-form-trigger>
 							<span>{pack.cta}</span>
-							<UiIcon name="arrow" class="h-[28px] w-[28px]" />
+							<UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" />
 						</button>
 					</article>
 				))}
 			</div>
 			<div class="support-price-note">
-				<UiIcon name="message" class="h-[35px] w-[35px]" />
+				<UiIcon loading="lazy" name="message" class="h-[35px] w-[35px]" />
 				<p><strong>Не знаете, сколько часов потребуется?</strong> Пришлите список задач — разложим их по приоритету и предложим подходящий формат.</p>
 			</div>
 		</div>
@@ -361,7 +361,7 @@ const faqSchema = {
 			<div class="support-roles-grid support-mobile-row service-card-row">
 				{roles.map(([icon, title, text]) => (
 					<article class="support-role-card">
-						<div class="support-icon"><UiIcon name={icon} class="h-[35px] w-[35px]" /></div>
+						<div class="support-icon"><UiIcon loading="lazy" name={icon} class="h-[35px] w-[35px]" /></div>
 						<h3>{title}</h3>
 						<p>{text}</p>
 					</article>
@@ -395,7 +395,7 @@ const faqSchema = {
 			<div class="support-faq-list">
 				{faqs.map(([question, answer]) => (
 					<details class="support-faq">
-						<summary><span>{question}</span><UiIcon name="chevron" class="h-[28px] w-[28px]" /></summary>
+						<summary><span>{question}</span><UiIcon loading="lazy" name="chevron" class="h-[28px] w-[28px]" /></summary>
 						<div><p>{answer}</p></div>
 					</details>
 				))}
