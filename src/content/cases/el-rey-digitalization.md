@@ -177,7 +177,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 В компании существуют 3 рабочих подразделения: Слесарная – техническая зона, Малярная зона, Детейлинг.  
 Для удобства работы мы все сделки объединили в одну воронку продаж.
 
-<section class="case-slider" data-case-slider aria-label="Внедрение CRM">
+<div role="group" class="case-slider" data-case-slider aria-label="Внедрение CRM">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -199,7 +199,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
@@ -208,7 +208,7 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 Также,
 
@@ -228,27 +228,22 @@ coverVideo: '/cases/el-rey-digitalization/elrey-main-video-2.mp4'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/el-rey-digitalization/avatar-sasha.webp" alt="Фото участника проекта" />
-		<h4>Менеджер проекта</h4>
+		<h3>Менеджер проекта</h3>
 		<p>Александра Константиновна</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/el-rey-digitalization/avatar-oleg.webp" alt="Фото участника проекта" />
-		<h4>Инженер внедрения</h4>
+		<h3>Инженер внедрения</h3>
 		<p>Олег Викторович</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/el-rey-digitalization/avatar-serg.webp" alt="Фото участника проекта" />
-		<h4>Backend разработчик</h4>
-		<p>Сергей Николаевич</p>
-	</div>
-	<div class="case-team-card">
-		<img src="/cases/el-rey-digitalization/avatar-serg.webp" alt="Фото участника проекта" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/el-rey-digitalization/avatar-yarik.webp" alt="Фото участника проекта" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

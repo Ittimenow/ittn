@@ -45,7 +45,7 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 
 Собрали на Pinterest подборку разных плавучих платформ, нарисовали эскиз.
 
-<section class="case-slider" data-case-slider aria-label="Эскизы плавучей платформы">
+<div role="group" class="case-slider" data-case-slider aria-label="Эскизы плавучей платформы">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -67,7 +67,7 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
@@ -76,13 +76,13 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ### 3D моделирование
 
 Утвердили с заказчиком концепцию и начали моделировать.
 
-<section class="case-slider" data-case-slider aria-label="3D-моделирование технологического комплекса">
+<div role="group" class="case-slider" data-case-slider aria-label="3D-моделирование технологического комплекса">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -104,7 +104,7 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
@@ -113,16 +113,16 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ### Концепция страницы
 
 Проработали структуру главной страницы, дорисовали требуемые элементы.
 
-<section class="case-image-gallery">
+<div class="case-image-gallery">
 	<img src="/cases/energy-depths/slider-3-de-1.webp" alt="Концепция главной страницы сайта «Энергия глубин»" />
 	<img src="/cases/energy-depths/slider-3-de-2.webp" alt="Продолжение концепции главной страницы сайта «Энергия глубин»" />
-</section>
+</div>
 
 Так как проект экологический, мы решили на главном экране показать голубое небо как символ чистоты. Добавили Parallax эффект с облаками и чаек, как неотъемлемый атрибут моря.
 
@@ -136,7 +136,7 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 
 На базе дизайн концепции сайта и подготовленных материалов были разработаны полиграфические материалы.
 
-<section class="case-slider" data-case-slider aria-label="Презентационные материалы проекта">
+<div role="group" class="case-slider" data-case-slider aria-label="Презентационные материалы проекта">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide"><img src="/cases/energy-depths/Image2.webp" alt="Презентационные материалы, слайд 1" /></div>
@@ -153,7 +153,7 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
@@ -167,34 +167,34 @@ coverVideo: '/cases/energy-depths/de-main-page-video-fast-2.webm'
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ## Команда
 
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-max.webp" alt="Макс Юрич" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/team-avatar-placeholder.webp" alt="Фотография Алекса Сергеевича пока отсутствует" />
-		<h4>Дизайнер</h4>
+		<h3>Дизайнер</h3>
 		<p>Алекс Сергеевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/team-avatar-placeholder.webp" alt="Фотография Павла Мизерева пока отсутствует" />
-		<h4>Зd дизайнер</h4>
+		<h3>Зd дизайнер</h3>
 		<p>Павел Мизерев</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-serg.webp" alt="Серж Николаевич" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Серж Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/team-avatar-placeholder.webp" alt="Фотография Евгения Александровича пока отсутствует" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Евгений Александрович</p>
 	</div>
 </div>

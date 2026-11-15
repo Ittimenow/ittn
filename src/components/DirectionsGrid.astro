@@ -55,7 +55,7 @@ const solutions = [
 		</p>
 	</div>
 
-	<div class="home-mobile-carousel grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+	<div class="service-card-row grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 		{solutions.map((item, index) => (
 			<a
 				href={item.href}
@@ -67,7 +67,7 @@ const solutions = [
 
 				<h3 class="home-card-title mt-3 pr-8">{item.title}</h3>
 				<p class="home-card-copy mt-3 pr-4">{item.description}</p>
-				<div class="mt-6 grid gap-4 text-sm sm:grid-cols-2">
+				<div class="mt-6 grid gap-4 text-sm md:grid-cols-2">
 					<div>
 						<p class="font-medium text-neutral-950 dark:text-white">Когда подходит</p>
 						<p class="home-card-copy mt-2">{item.when}</p>

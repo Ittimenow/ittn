@@ -157,7 +157,7 @@ const safeguards = [
 				<h2>Контроль проектируется заранее</h2>
 				<div>
 					{safeguards.map((item) => (
-						<article><UiIcon loading="lazy" name={item.icon} class="h-[35px] w-[35px]" /><span><strong>{item.title}</strong><small>{item.text}</small></span></article>
+						<div class="ais-safety-item"><UiIcon loading="lazy" name={item.icon} class="h-[35px] w-[35px]" /><span><strong>{item.title}</strong><small>{item.text}</small></span></div>
 					))}
 				</div>
 			</div>
@@ -262,10 +262,10 @@ const safeguards = [
 	.ais-safety .ds-kicker { color: var(--ds-secondary); }
 	.ais-safety h2 { color: #fff; }
 	.ais-safety > div { display: grid; gap: 0; margin-top: 30px; }
-	.ais-safety article { display: flex; gap: 14px; border-top: 1px solid rgba(255,255,255,.14); padding: 18px 0; color: var(--ds-secondary); }
-	.ais-safety article span, .ais-safety article strong, .ais-safety article small { display: block; }
-	.ais-safety article strong { color: #fff; font-size: 15px; }
-	.ais-safety article small { margin-top: 5px; color: rgba(255,255,255,.62); font-size: 13px; line-height: 1.45; }
+	.ais-safety .ais-safety-item { display: flex; gap: 14px; border-top: 1px solid rgba(255,255,255,.14); padding: 18px 0; color: var(--ds-secondary); }
+	.ais-safety .ais-safety-item span, .ais-safety .ais-safety-item strong, .ais-safety .ais-safety-item small { display: block; }
+	.ais-safety .ais-safety-item strong { color: #fff; font-size: 15px; }
+	.ais-safety .ais-safety-item small { margin-top: 5px; color: rgba(255,255,255,.62); font-size: 13px; line-height: 1.45; }
 	.ais-related { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 	.ais-related a { display: grid; min-height: 210px; grid-template-columns: auto 1fr auto; align-items: start; gap: 15px; border: 1px solid var(--ais-line); border-radius: 22px; padding: 24px; color: var(--ais-blue); text-decoration: none; transition: transform 180ms ease, border-color 180ms ease; }
 	.ais-related a:hover { border-color: rgba(35,43,255,.36); transform: translateY(-3px); }

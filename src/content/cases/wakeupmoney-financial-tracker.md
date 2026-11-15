@@ -44,7 +44,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 В этом проекте нам пришлось в процессе работы перейти от водопадной модели разработки к Agile. К моменту, когда мы сформировали техническое задание и прототип, наши партнеры из бюро CULT разработали брендинг проекта.
 
-<section class="case-slider wum-prototype-slider" data-case-slider aria-label="Прототипы WakeUpMoney">
+<div role="group" class="case-slider wum-prototype-slider" data-case-slider aria-label="Прототипы WakeUpMoney">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -60,14 +60,14 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ## UX/UI
 
@@ -135,7 +135,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 
 Сервис работает в браузере на компьютере и смартфоне, а также доступен как мобильное приложение для Android и iOS.
 
-<section class="wum-video-grid wum-video-grid-mobile" aria-label="Мобильная версия WakeUpMoney">
+<div role="group" class="wum-video-grid wum-video-grid-mobile" aria-label="Мобильная версия WakeUpMoney">
 	<video poster="/video-posters/8e3e780113a44f6d.jpg" preload="none" controls loop muted playsinline aria-label="Вход в мобильное приложение">
 		<source src="/cases/wakeupmoney/wum-mob-enter.mp4" type="video/mp4" />
 	</video>
@@ -148,7 +148,7 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 	<video poster="/video-posters/dd63cc71257eff52.jpg" preload="none" controls loop muted playsinline aria-label="Заметки в мобильном приложении">
 		<source src="/cases/wakeupmoney/wum-mob-notes.mp4" type="video/mp4" />
 	</video>
-</section>
+</div>
 
 <section class="case-results-cta">
 	<div>
@@ -162,32 +162,32 @@ cover: '/cases/wakeupmoney/main-image-wum.webp'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-max.webp" alt="Макс Юрьевич" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрьевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/wakeupmoney/avatar-stas.webp" alt="Станислав Викторович" />
-		<h4>Аналитик</h4>
+		<h3>Аналитик</h3>
 		<p>Станислав Викторович</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/wakeupmoney/avatar-daniil.webp" alt="Даниил Михайлович" />
-		<h4>Дизайнер</h4>
+		<h3>Дизайнер</h3>
 		<p>Даниил Михайлович</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-yarik.webp" alt="Ярослав Евгеньевич" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-serg.webp" alt="Сергей Николаевич" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/team-avatar-placeholder.webp" alt="Фотография Виктории Викторовны пока отсутствует" />
-		<h4>Тестировщик</h4>
+		<h3>Тестировщик</h3>
 		<p>Виктория Викторовна</p>
 	</div>
 </div>

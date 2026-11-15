@@ -61,17 +61,17 @@ coverVideo: '/cases/berkut/skberkut-video-1.webm'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/berkut/avatar-max.webp" alt="Макс Юрич" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/berkut/avatar-artem.webp" alt="Фотография Артёма Веретёнко пока отсутствует" />
-		<h4>Дизайнер</h4>
+		<h3>Дизайнер</h3>
 		<p>Артём Веретёнко</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/berkut/avatar-yarik.webp" alt="Ярослав Евгеньевич" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

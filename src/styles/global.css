@@ -1050,6 +1050,13 @@ body :where(hr) {
 	line-height: 1.65;
 }
 
+.home-swipe-card {
+	min-width: 0;
+	border: 1px solid var(--ds-border);
+	border-radius: var(--ittn-radius-md);
+	background: #ffffff;
+}
+
 .home-trust-card-title {
 	font-size: 24px;
 	font-weight: 700;
@@ -1188,64 +1195,6 @@ body :where(hr) {
 
 	.home-service-card {
 		min-height: 300px;
-	}
-
-	.home-mobile-carousel {
-		display: flex !important;
-		grid-template-columns: none !important;
-		gap: 14px !important;
-		margin-right: -24px;
-		margin-left: -24px;
-		overflow-x: auto !important;
-		overflow-y: visible !important;
-		padding: 8px 24px 38px;
-		scroll-padding-inline: 24px;
-		scroll-snap-type: x mandatory;
-		-webkit-overflow-scrolling: touch;
-	}
-
-	.home-mobile-carousel::-webkit-scrollbar {
-		display: none;
-	}
-
-	.home-mobile-carousel {
-		scrollbar-width: none;
-	}
-
-	.home-mobile-carousel > * {
-		flex: 0 0 min(82vw, 360px);
-		scroll-snap-align: start;
-	}
-
-	.home-card-grid,
-	.home-task-strip {
-		border: 0 !important;
-		border-radius: 0 !important;
-		background: transparent !important;
-	}
-
-	.home-swipe-card,
-	.home-link-card {
-		border: 1px solid var(--ds-border);
-		border-radius: var(--ittn-radius-md);
-		box-shadow: 0 24px 58px -34px rgba(35, 43, 255, 0.46);
-	}
-
-	.home-swipe-card {
-		position: relative;
-		isolation: isolate;
-		overflow: hidden;
-		transform: translateY(-3px);
-	}
-
-	.home-swipe-card::before {
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background:
-			linear-gradient(135deg, rgba(35, 43, 255, 0.08), transparent 42%),
-			linear-gradient(180deg, rgba(255, 255, 255, 0.9), transparent 48%);
-		content: "";
 	}
 
 	.home-link-card {

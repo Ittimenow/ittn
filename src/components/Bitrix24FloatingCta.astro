@@ -99,6 +99,11 @@ import UiIcon from './UiIcon.astro';
 		}
 	}
 
+	@media (prefers-reduced-motion: reduce) {
+		.web-sticky-icon { animation: none; }
+		.web-sticky-cta, .web-sticky-label { transition: none; }
+	}
+
 	@media (max-width: 640px) {
 		.web-sticky-cta {
 			right: 12px;

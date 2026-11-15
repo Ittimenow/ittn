@@ -223,13 +223,13 @@ const faqSchema = {
 			</div>
 			<div class="ai-scenarios ai-card-row service-card-row">
 				{scenarios.map((scenario) => (
-					<article class="ai-scenario-card">
+					<div class="ai-scenario-card">
 						<div class="ai-scenario-label"><UiIcon loading="lazy" name={scenario.icon} class="h-[35px] w-[35px]" /><strong>{scenario.label}</strong></div>
 						<div><span>Сейчас</span><p>{scenario.before}</p></div>
 						<div class="ai-scenario-arrow"><img src="/ds-v2/assets/decorations-split/deco-arrow-04.png" alt="" aria-hidden="true" /></div>
 						<div><span>После пилота</span><p>{scenario.after}</p></div>
 						<div class="ai-scenario-metric"><span>Метрика</span><strong>{scenario.metric}</strong></div>
-					</article>
+					</div>
 				))}
 			</div>
 		</div>
@@ -246,7 +246,7 @@ const faqSchema = {
 					<li>сотрудник видит контекст и может вмешаться</li>
 				</ul>
 			</div>
-			<div class="ai-integration-map" aria-label="Схема интеграций ИИ с системами бизнеса">
+			<div class="ai-integration-map" role="group" aria-label="Схема интеграций ИИ с системами бизнеса">
 				<div class="ai-integration-orbit">
 					<svg class="ai-orbit-lines" viewBox="0 0 600 600" aria-hidden="true">
 						<line x1="300" y1="300" x2="300" y2="58" />

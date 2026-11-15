@@ -73,12 +73,12 @@ cover: '/cases/photoreal-3d-crm/img-photoreal3d-main-2.webp'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/photoreal-3d-crm/avatar-max.webp" alt="Фото участника проекта" />
-		<h4>Менеджер проекта</h4>
+		<h3>Менеджер проекта</h3>
 		<p>Макс Юрьевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/photoreal-3d-crm/avatar-oleg.webp" alt="Фото участника проекта" />
-		<h4>Инженер внедрения</h4>
+		<h3>Инженер внедрения</h3>
 		<p>Олег Викторович</p>
 	</div>
 </div>

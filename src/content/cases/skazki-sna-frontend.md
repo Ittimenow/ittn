@@ -54,7 +54,7 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 
 В процессе работы мы экспериментировали с акцентным цветом, но в итоге отказались от него — на чёрном фоне он выглядел излишне ярко и отвлекал от общего визуального настроения. Были протестированы блоки с красными и зеленоватыми оттенками, однако мы вернулись к более сдержанной палитре.
 
-<section class="case-slider" data-case-slider aria-label="Эксперименты с цветом">
+<div role="group" class="case-slider" data-case-slider aria-label="Эксперименты с цветом">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -67,13 +67,13 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 <video poster="/video-posters/ba1c6096c4afabaf.jpg" preload="none" class="case-video" controls loop muted playsinline>
 	<source src="/cases/skazki-sna-frontend/sc-pc-skazkisna-effect.mp4" type="video/mp4" />
@@ -81,7 +81,7 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 
 Одним из амбициозных этапов стало проектирование интерфейса и логики генерации уникального видеоролика для каждого пользователя. Изначальная механика позволяла создать более 120 вариантов видео, персонализированных под гостя. Из-за объема контента и сроков реализации мы упростили сценарий: пользователь по-прежнему получает именное видео после покупки билета и может легко поделиться им в соцсетях.
 
-<section class="case-slider" data-case-slider aria-label="Интерфейсные экраны Сказки сна">
+<div role="group" class="case-slider" data-case-slider aria-label="Интерфейсные экраны Сказки сна">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -100,7 +100,7 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
@@ -108,9 +108,9 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
-<section class="case-mobile-showcase">
+<div class="case-mobile-showcase">
 	<video poster="/video-posters/379e27f514c4af6b.jpg" preload="none" class="case-mobile-showcase-video" controls loop muted playsinline>
 		<source src="/cases/skazki-sna-frontend/sc-mob-skazkisna-effect-2.mp4" type="video/mp4" />
 	</video>
@@ -119,14 +119,14 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 		<p>Также мы разработали собственный дизайн блока выбора даты и времени мероприятия, что-то там старались пыхтели… ?  Но на финальной стадии решили использовать стандартную механику от Яндекс.Афиши — она оказалась проще и привычнее для пользователя.</p>
 	</div>
 	<img src="/cases/skazki-sna-frontend/img-skazkisna-datapicker-2.webp" alt="Концепт выбора времени мероприятия" />
-</section>
+</div>
 
-<section class="case-video-copy-row">
+<div class="case-video-copy-row">
 	<video preload="none" controls loop muted playsinline poster="/cases/skazki-sna-frontend/img-skazkisna-main-4x3-1.webp">
 		<source src="/cases/skazki-sna-frontend/sc-pc-skazkisna-creators.mp4" type="video/mp4" />
 	</video>
 	<p>Из-за большого объёма информации об организаторах мы вынесли этот раздел в отдельное всплывающее окно — так структура страницы осталась чистой, а всё нужное осталось под рукой.</p>
-</section>
+</div>
 
 А потом случилось главное: руководитель проекта попал на само мероприятие. Феерия образов, света и атмосферы оказалась настолько мощной, что мы собрали небольшой промо-ролик о том, как это было.
 
@@ -139,22 +139,22 @@ coverVideo: '/cases/skazki-sna-frontend/video-skazkisna-main.mp4'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-max.webp" alt="Фото участника проекта" />
-		<h4>Менеджер проекта</h4>
+		<h3>Менеджер проекта</h3>
 		<p>Макс Юрьевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-goga.webp" alt="Фото участника проекта" />
-		<h4>Дизайнер</h4>
+		<h3>Дизайнер</h3>
 		<p>Гога</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-serg.webp" alt="Фото участника проекта" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-yarik.webp" alt="Фото участника проекта" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

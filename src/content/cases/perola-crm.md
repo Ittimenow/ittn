@@ -90,7 +90,7 @@ listingCover: '/cases/perola-crm/main-image-perolasky.webp'
 
 ### Формирование и согласование оффера
 
-<section class="case-media-grid case-media-grid-four">
+<div class="case-media-grid case-media-grid-four">
 	<figure class="case-media-card">
 		<figcaption>Создание заявки и оффера с 2 ВС</figcaption>
 		<video poster="/video-posters/657d97026a1390bd.jpg" preload="none" controls loop muted playsinline>
@@ -115,7 +115,7 @@ listingCover: '/cases/perola-crm/main-image-perolasky.webp'
 			<source src="/cases/perola-crm/client-brief.webm" type="video/webm" />
 		</video>
 	</figure>
-</section>
+</div>
 
 ### Модули
 
@@ -135,22 +135,22 @@ listingCover: '/cases/perola-crm/main-image-perolasky.webp'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/perola-crm/avatar-max.webp" alt="Фото участника проекта" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/perola-crm/avatar-max.webp" alt="Фото участника проекта" />
-		<h4>Аналитик</h4>
+		<h3>Аналитик</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/perola-crm/avatar-serg.webp" alt="Фото участника проекта" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Серж Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/perola-crm/avatar-yarik.webp" alt="Фото участника проекта" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

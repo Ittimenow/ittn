@@ -17,6 +17,11 @@ const routeFor = file => '/' + relative(root, file).replace(/(^|\/)index\.html$/
 for (const file of html) {
   const route = routeFor(file);
   const markup = await readFile(file, 'utf8');
+  // DOM parsers silently move trailing scripts into body, hiding invalid source HTML.
+  const htmlEnd = markup.lastIndexOf('</html>');
+  if (!release.internalPaths.includes(route) && htmlEnd !== -1 && markup.slice(htmlEnd + 7).trim()) {
+    errors.push(`${route}: content after closing html`);
+  }
   const dom = new JSDOM(markup, { url: release.site + route, virtualConsole: new VirtualConsole() });
   pages.set(route, { doc: dom.window.document, dom });
 }
@@ -35,6 +40,18 @@ for (const [route, { doc }] of pages) {
     check(doc.querySelector('link[rel="canonical"]')?.href === release.site + route, `${route}: incorrect canonical`);
   }
   if (!release.internalPaths.includes(route)) {
+    for (const image of doc.querySelectorAll('img')) {
+      check(Boolean(image.getAttribute('src')?.trim() || image.getAttribute('srcset')?.trim()), `${route}: image without src/srcset`);
+      check(!image.hasAttribute('sizes') || Boolean(image.getAttribute('srcset')?.trim()), `${route}: image sizes without srcset`);
+      check(image.alt === image.alt.normalize('NFC'), `${route}: image alt is not NFC`);
+    }
+    check(!doc.querySelector('div[aria-label]:not([role]), div[aria-label][role="generic"]'), `${route}: aria-label on generic div`);
+    for (const element of doc.querySelectorAll('article, section')) {
+      check(Boolean(element.querySelector('h1, h2, h3, h4, h5, h6')), `${route}: ${element.localName} without heading: ${element.className}`);
+    }
+    for (const card of doc.querySelectorAll('.case-team-card')) {
+      check(Boolean(card.querySelector('h3')), `${route}: team heading must follow h2 without skipping a level`);
+    }
     check(doc.querySelectorAll('h1').length === 1, `${route}: expected one h1`);
     check(doc.querySelectorAll('title').length === 1, `${route}: expected one title`);
     check(doc.querySelectorAll('meta[name="description"]').length === 1, `${route}: expected one description`);
@@ -59,6 +76,13 @@ for (const [route, { doc }] of pages) {
     if (route !== '/') check(Boolean(doc.querySelector('[aria-label="Хлебные крошки"] [aria-current="page"]')), `${route}: missing current breadcrumb`);
     check(Boolean(doc.querySelector('#mobile-menu-toggle[aria-expanded="false"][aria-controls="mobile-menu"]')), `${route}: menu ARIA`);
     check(Boolean(doc.querySelector('#mobile-menu[hidden]')), `${route}: menu initially visible`);
+    check(Boolean(doc.querySelector('[data-services-trigger][aria-expanded="false"][aria-controls="desktop-services-panel"]')), `${route}: desktop menu ARIA`);
+    check(Boolean(doc.querySelector('#desktop-services-panel[hidden]')), `${route}: desktop submenu initially visible`);
+  }
+  if (!release.internalPaths.includes(route)) {
+    check(Boolean(doc.querySelector('script[data-site-analytics]')) === release.production, `${route}: analytics environment mismatch`);
+    // noscript is raw text to an HTML parser with scripting enabled.
+    check(doc.documentElement.outerHTML.includes('mc.yandex.ru/watch/') === release.production, `${route}: analytics pixel environment mismatch`);
   }
   for (const schema of doc.querySelectorAll('script[type="application/ld+json"]')) {
     try { JSON.parse(schema.textContent); } catch { errors.push(`${route}: invalid JSON-LD`); }

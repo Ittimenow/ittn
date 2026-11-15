@@ -1,0 +1,40 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from './Layout.astro';
+import { servicePages } from '../data/service-pages';
+
+interface Props { slug: string; }
+const { slug } = Astro.props;
+const service = await getEntry('services', slug);
+if (!service) throw new Error(`Missing service content: ${slug}`);
+const metadata = servicePages[slug];
+const title = metadata?.title ?? `${service.data.title} — ittimenow`;
+const description = metadata?.description ?? service.data.summary;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.data.title,
+  description,
+  url: pageUrl,
+  provider: {
+    '@type': 'Organization',
+    name: 'IT TIME NOW',
+    url: new URL('/', Astro.site ?? Astro.url).href,
+  },
+  areaServed: { '@type': 'Country', name: 'Россия' },
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Главная', item: new URL('/', Astro.site ?? Astro.url).href },
+    { '@type': 'ListItem', position: 2, name: 'Услуги', item: new URL('/services/', Astro.site ?? Astro.url).href },
+    { '@type': 'ListItem', position: 3, name: service.data.title, item: pageUrl },
+  ],
+};
+---
+
+<Layout title={title} description={description} bodyClass={slug === 'ai' ? 'ai-page' : undefined} structuredData={[serviceSchema, breadcrumbSchema]}>
+  <slot />
+</Layout>

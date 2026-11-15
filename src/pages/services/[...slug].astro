@@ -1,126 +1,22 @@
 ---
 import ServiceCta from '../../components/ServiceCta.astro';
 import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import Bitrix24Landing from '../../components/Bitrix24Landing.astro';
-import RbsLanding from '../../components/RbsLanding.astro';
-import SitesLanding from '../../components/SitesLanding.astro';
-import WebServicesLanding from '../../components/WebServicesLanding.astro';
-import IntegrationsLanding from '../../components/IntegrationsLanding.astro';
-import ElmaLanding from '../../components/ElmaLanding.astro';
-import SupportLanding from '../../components/SupportLanding.astro';
-import AiLanding from '../../components/AiLanding.astro';
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import UiIcon from '../../components/UiIcon.astro';
+import { servicePages } from '../../data/service-pages';
 
 export const prerender = true;
-
 export async function getStaticPaths() {
-	const services = await getCollection('services');
-	return services.map((service) => ({
-		params: { slug: service.id },
-		props: { service },
-	}));
+  const services = await getCollection('services');
+  return services.filter(service => !Object.hasOwn(servicePages, service.id)).map(service => ({
+    params: { slug: service.id }, props: { service },
+  }));
 }
-
 const { service } = Astro.props;
 const { Content } = await render(service);
-const isBitrix24 = service.id === 'bitrix24';
-const isRbs = service.id === 'rbs';
-const isSites = service.id === 'sites';
-const isWebServices = service.id === 'web-services';
-const isIntegrations = service.id === 'integrations';
-const isElma = service.id === 'elma';
-const isSupport = service.id === 'support';
-const isAi = service.id === 'ai';
-const serviceTitles: Record<string, string> = {
-	bitrix24: 'Внедрение Битрикс24: настройка CRM под ключ — IT TIME NOW',
-	rbs: 'Внедрение РосБизнесСофт: CRM/ERP под ключ — IT TIME NOW',
-	sites: 'Разработка сайтов под ключ — от 150 000 ₽ | IT TIME NOW',
-	'web-services': 'Разработка веб-сервисов и личных кабинетов — IT TIME NOW',
-	integrations: 'Интеграция сайта, CRM, ERP и 1С через API | IT TIME NOW',
-	elma: 'Внедрение ELMA365 и автоматизация процессов — IT TIME NOW',
-	support: 'Техническая поддержка сайтов, CRM и ERP — IT TIME NOW',
-	ai: 'ИИ для бизнеса: разработка и внедрение — IT TIME NOW',
-};
-const pageTitle = serviceTitles[service.id] ?? `${service.data.title} — ittimenow`;
-const pageDescription = isBitrix24
-	? 'Внедрение и настройка Bitrix24 для бизнеса: CRM, воронки, роботы, телефония, 1С, интеграции, обучение и сопровождение. Запуск от 39 000 ₽.'
-	: isRbs
-		? 'Внедряем РосБизнесСофт для продаж, склада, производства и сервиса. Настройка CRM/ERP, интеграция с 1С, перенос данных и обучение. Старт от 80 000 ₽.'
-		: isSites
-			? 'Разрабатываем лендинги, корпоративные, интерактивные сайты и интернет-магазины. Структура, тексты, UX/UI, CMS, интеграции и запуск.'
-			: isWebServices
-				? 'Проектируем и разрабатываем MVP, личные кабинеты, B2B-порталы, агрегаторы и внутренние веб-системы с индивидуальной бизнес-логикой.'
-				: isIntegrations
-					? 'Связываем сайт, CRM, ERP, 1С, оплату, телефонию, склад, маркетплейсы и внутренние системы. Проектирование, разработка и поддержка обмена данными.'
-			: isElma
-				? 'Внедрение и настройка ELMA365: автоматизация бизнес-процессов в BPMN, электронный документооборот, low-code приложения, интеграция с 1С и корпоративными системами.'
-				: isSupport
-					? 'Техническая поддержка сайтов, CRM, ERP и интеграций для малого бизнеса. Разовые задачи от 3 500 ₽/час и пакеты от 26 000 ₽ в месяц.'
-					: isAi
-						? 'ИИ для бизнеса: консультанты для сайта, ассистенты продаж, базы знаний и автоматизация рутинных процессов с интеграцией в CRM, ERP, 1С и мессенджеры.'
-						: service.data.summary;
-const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
-const serviceSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'Service',
-	name: service.data.title,
-	description: pageDescription,
-	url: pageUrl,
-	provider: {
-		'@type': 'Organization',
-		name: 'IT TIME NOW',
-		url: new URL('/', Astro.site ?? Astro.url).href,
-	},
-	areaServed: {
-		'@type': 'Country',
-		name: 'Россия',
-	},
-};
-const breadcrumbSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'BreadcrumbList',
-	itemListElement: [
-		{
-			'@type': 'ListItem',
-			position: 1,
-			name: 'Главная',
-			item: new URL('/', Astro.site ?? Astro.url).href,
-		},
-		{
-			'@type': 'ListItem',
-			position: 2,
-			name: 'Услуги',
-			item: new URL('/services/', Astro.site ?? Astro.url).href,
-		},
-		{
-			'@type': 'ListItem',
-			position: 3,
-			name: service.data.title,
-			item: pageUrl,
-		},
-	],
-};
 ---
 
-<Layout title={pageTitle} description={pageDescription} bodyClass={isAi ? 'ai-page' : undefined} structuredData={[serviceSchema, breadcrumbSchema]}>
-	{isBitrix24 ? (
-		<Bitrix24Landing />
-	) : isRbs ? (
-		<RbsLanding />
-	) : isSites ? (
-		<SitesLanding />
-	) : isWebServices ? (
-		<WebServicesLanding />
-	) : isIntegrations ? (
-		<IntegrationsLanding />
-	) : isElma ? (
-		<ElmaLanding />
-	) : isSupport ? (
-		<SupportLanding />
-	) : isAi ? (
-		<AiLanding />
-	) : (
+<ServiceLayout slug={service.id}>
 		<article class="mx-auto max-w-3xl px-6 py-16">
 			<nav class="service-breadcrumbs" aria-label="Хлебные крошки">
 				<a href="/services/">Все услуги</a>
@@ -144,8 +40,7 @@ const breadcrumbSchema = {
 
 			<ServiceCta title={`Обсудим: ${service.data.title}`} text="Расскажите о задаче — разберём контекст и предложим следующий шаг." />
 		</article>
-	)}
-</Layout>
+</ServiceLayout>
 
 <style>
 	.prose-content :global(h2) { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600; }

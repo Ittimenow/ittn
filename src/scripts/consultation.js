@@ -7,6 +7,8 @@ export function bindConsultation(doc = document, { timeoutMs = 15000 } = {}) {
   let pending = false;
   let timer;
   let opener;
+  let loader;
+  let observer;
   const dialog = () => doc.getElementById('consultation-status');
   const message = (text) => { doc.getElementById('consultation-status-message').textContent = text; };
   const clearLoading = () => {
@@ -21,6 +23,14 @@ export function bindConsultation(doc = document, { timeoutMs = 15000 } = {}) {
     }
   };
   const cancel = () => { pending = false; win.clearTimeout(timer); clearLoading(); };
+  const resetLoader = () => {
+    observer?.disconnect();
+    observer = undefined;
+    loader?.remove();
+    loader = undefined;
+    requested = false;
+    ready = false;
+  };
   const fail = () => {
     if (!pending) return;
     cancel();
@@ -56,18 +66,28 @@ export function bindConsultation(doc = document, { timeoutMs = 15000 } = {}) {
     opener.setAttribute('aria-busy', 'true');
     opener.setAttribute('data-b24-loading', '');
     win.clearTimeout(timer);
-    timer = win.setTimeout(fail, timeoutMs);
+    timer = win.setTimeout(() => {
+      // A loader that never reached Bitrix's ready marker can be retried.
+      // Keep a ready loader: it already owns the native trigger's listeners.
+      if (!ready) resetLoader();
+      fail();
+    }, timeoutMs);
     if (!requested) {
       requested = true;
       const script = doc.createElement('script');
+      loader = script;
       script.async = true;
       script.dataset.b24Form = 'click/21/8r4fh6';
       script.src = 'https://cdn-ru.bitrix24.ru/b27699562/crm/form/loader_21.js';
-      script.addEventListener('error', fail, { once: true });
+      script.addEventListener('error', () => {
+        if (loader !== script) return;
+        resetLoader();
+        fail();
+      }, { once: true });
       // Bitrix binds click forms to the next sibling and creates the form only
       // on that sibling's click. Wait for its loaded marker before opening.
-      const observer = new win.MutationObserver(() => {
-        if (!script.hasAttribute('data-b24-loaded')) return;
+      observer = new win.MutationObserver(() => {
+        if (loader !== script || !script.hasAttribute('data-b24-loaded')) return;
         observer.disconnect();
         ready = true;
         if (pending) doc.getElementById('b24-native-trigger').click();

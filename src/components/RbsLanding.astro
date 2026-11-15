@@ -271,10 +271,10 @@ const schema = [
 			</div>
 			<div class="rbs-fit-grid service-card-row">
 				{fitItems.map((item) => (
-					<article class="ds-service-card rbs-fit-card">
+					<div class="ds-service-card rbs-fit-card">
 						<img class="rbs-hand-check" src="/ds-v2/assets/decorations-split/deco-check-03.png" alt="" aria-hidden="true" />
 						<p>{item}</p>
-					</article>
+					</div>
 				))}
 			</div>
 		</div>
@@ -413,7 +413,7 @@ const schema = [
 					</button>
 				</div>
 			</div>
-			<div class="rbs-process-scroll" tabindex="0" aria-label="Прокручиваемый список этапов внедрения">
+			<div class="rbs-process-scroll" tabindex="0" role="group" aria-label="Прокручиваемый список этапов внедрения">
 				<ol class="rbs-process-track" aria-label="Этапы внедрения РосБизнесСофт">
 					{steps.map(([, title, text], index) => (
 						<>
@@ -469,7 +469,7 @@ const schema = [
 				</p>
 			</div>
 
-			<div class="bitrix-logo-marquee" aria-label="Логотипы клиентов">
+			<div class="bitrix-logo-marquee" role="group" aria-label="Логотипы клиентов">
 				<div class="bitrix-logo-track">
 					{[0, 1, 2].map((group) => (
 						<div class="bitrix-logo-group" aria-hidden={group === 0 ? 'false' : 'true'}>
