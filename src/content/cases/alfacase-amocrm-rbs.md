@@ -88,12 +88,12 @@ cover: '/cases/alfacase-amocrm-rbs/img-alfacases-1.webp'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-max.webp" alt="Фото участника проекта" />
-		<h4>Менеджер проекта</h4>
+		<h3>Менеджер проекта</h3>
 		<p>Макс Юрьевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-serg.webp" alt="Фото участника проекта" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 </div>

@@ -13,25 +13,25 @@ export function createStaticServer(root = resolve('dist')) {
   } });
   const ideas=createIdeaApi({origin:process.env.IDEA_PUBLIC_ORIGIN||(release.production?release.site:undefined)});
   const server=createServer(async (req, res) => {
-    let url;
-    try { url = new URL(req.url, 'http://localhost'); decodeURIComponent(url.pathname); }
+    let url, pathname;
+    try { url = new URL(req.url, 'http://localhost'); pathname = decodeURIComponent(url.pathname); }
     catch { res.writeHead(400).end(); return; }
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    if (!release.production || release.internalPaths.includes(url.pathname)) res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    const route = pathname.replace(/\/index\.html$/, '/');
+    if (!release.production || release.internalPaths.includes(route)) res.setHeader('X-Robots-Tag', 'noindex, nofollow');
     if(await ideas.handle(req,res))return;
     if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, { Allow: 'GET, HEAD' }).end(); return; }
-    const redirect = release.redirects[url.pathname.replace(/\/$/, '')];
+    const redirect = release.redirects[pathname.replace(/\/$/, '')];
     if (redirect) { res.writeHead(301, { Location: redirect + url.search }).end(); return; }
     const fail = () => {
       res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex, nofollow' });
       res.end(req.method === 'HEAD' ? undefined : notFound);
     };
-    if (url.pathname.split('/').some(part => part.startsWith('.')) || ['/_headers', '/_redirects'].includes(url.pathname)) { fail(); return; }
+    if (pathname.split('/').some(part => part.startsWith('.')) || ['/_headers', '/_redirects'].includes(pathname.replace(/\/+$/, ''))) { fail(); return; }
     // Normalize only real HTML routes, preserving query parameters and real 404s.
-    const pathname = decodeURIComponent(url.pathname);
     const pageFile = resolve(root, '.' + pathname, 'index.html');
-    if (!url.pathname.endsWith('/') && pageFile.startsWith(resolve(root) + sep) && existsSync(pageFile)) {
+    if (!pathname.endsWith('/') && pageFile.startsWith(resolve(root) + sep) && existsSync(pageFile)) {
       res.writeHead(301, { Location: url.pathname + '/' + url.search }).end();
       return;
     }

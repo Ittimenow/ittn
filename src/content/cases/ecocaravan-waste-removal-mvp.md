@@ -77,22 +77,22 @@ MVP запустили в установленный срок и предст�
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/berkut/avatar-max.webp" alt="Макс Юрич" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-oleg.webp" alt="Олег Викторович" />
-		<h4>Аналитик</h4>
+		<h3>Аналитик</h3>
 		<p>Олег Викторович</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-serg.webp" alt="Сергей Николаевич" />
-		<h4>Бэкенд-разработчик</h4>
+		<h3>Бэкенд-разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/berkut/avatar-yarik.webp" alt="Ярослав Евгеньевич" />
-		<h4>Фронтенд-разработчик</h4>
+		<h3>Фронтенд-разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

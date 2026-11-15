@@ -41,7 +41,7 @@ joyos это помощник, который помогает ставить ц
 
 Жирная линия, из которой состоит логотип символизирует извилистый путь из точки А в точку Б. Тему линии можно развивать и в рисунки как в примере ниже.
 
-<section class="case-slider" data-case-slider aria-label="Графические элементы JoyOS">
+<div role="group" class="case-slider" data-case-slider aria-label="Графические элементы JoyOS">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -54,13 +54,13 @@ joyos это помощник, который помогает ставить ц
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ### Шрифты
 
@@ -78,7 +78,7 @@ joyos это помощник, который помогает ставить ц
 
 Ну и конечно были разработы первичные рекламные носители.
 
-<section class="case-slider" data-case-slider aria-label="Рекламные материалы JoyOS">
+<div role="group" class="case-slider" data-case-slider aria-label="Рекламные материалы JoyOS">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -91,25 +91,25 @@ joyos это помощник, который помогает ставить ц
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ## Команда
 
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-max.webp" alt="Макс Юрич" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/berkut/avatar-artem.webp" alt="Артём Веретёнко" />
-		<h4>Арт-директор</h4>
+		<h3>Арт-директор</h3>
 		<p>Артём Веретёнко</p>
 	</div>
 </div>

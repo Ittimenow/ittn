@@ -4,8 +4,9 @@ import {createServer} from 'node:http';
 import {mkdtemp,rm,readdir,readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import sharp from 'sharp';
 import {createIdeaApi,validPng,IDEA_LINK_TTL_MS} from '../scripts/idea-api.mjs';
-const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jvWQAAAAASUVORK5CYII=','base64');
+const png=await sharp({create:{width:2,height:2,channels:4,background:'#ffffff'}}).png().toBuffer();
 async function setup(t,options={}){
  const directory=await mkdtemp(join(tmpdir(),'ittn-ideas-')),mail=[];
  const api=createIdeaApi({directory,sendMail:async data=>{mail.push(data);return {accepted:['pm@ittimenow.com']};},env:{SMTP_FROM:'ideas@example.com'},...options});
@@ -32,7 +33,7 @@ test('reject malformed/oversized PNG, cross-origin and invalid identifiers',asyn
  assert.equal((await x.post(png,{origin:'https://evil.example'})).status,403);
  assert.equal((await x.post(Buffer.from('<svg/>'))).status,400);
  assert.equal((await x.post(png,{'content-type':'text/plain'})).status,415);
- const huge=Buffer.from(png);huge.writeUInt32BE(9000,16);assert.equal(validPng(huge),false);
+ const huge=Buffer.from(png);huge.writeUInt32BE(9000,16);assert.equal(await validPng(huge),false);
  assert.equal((await x.post(huge)).status,400);
  assert.equal((await x.post(Buffer.alloc(8*1024*1024+1))).status,413);
  assert.equal((await fetch(x.base+'/api/ideas/not-a-token.png')).status,404);
@@ -44,6 +45,21 @@ test('SMTP failure queues notification; absent SMTP leaves pending record',async
  const {url}=await (await x.post()).json(),id=new URL(url).searchParams.get('id');
  for(let i=0;i<50;i++){const meta=JSON.parse(await readFile(join(x.directory,id,'meta.json')));if(meta.retryAt){assert.equal(meta.notified,false);return;}await new Promise(r=>setTimeout(r,10));}
  assert.fail('retry was not persisted');
+});
+test('corrupt pixel data is rejected before storing or notifying, while valid PNG still publishes',async t=>{
+ const x=await setup(t);
+ const broken=Buffer.from(png);
+ for(let at=8;at+12<=broken.length;){
+  const size=broken.readUInt32BE(at);
+  if(broken.toString('ascii',at+4,at+8)==='IDAT'){broken.fill(0,at+8,at+8+size);break;}
+  at+=size+12;
+ }
+ assert.equal(await validPng(png),true);
+ assert.equal(await validPng(broken),false);
+ assert.equal((await x.post(broken)).status,400);
+ assert.deepEqual(await readdir(x.directory),[]);
+ assert.equal(x.mail.length,0);
+ assert.equal((await x.post()).status,201);
 });
 test('rate and disk limits preserve existing content',async t=>{
  const x=await setup(t,{rateLimit:1});assert.equal((await x.post()).status,201);assert.equal((await x.post()).status,429);

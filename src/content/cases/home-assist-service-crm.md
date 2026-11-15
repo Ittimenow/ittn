@@ -90,11 +90,11 @@ cover: '/cases/home-assist/main-homeassit.webp'
 
 Карточку сделки полностью переработали: сотрудники видят всю информацию о заявке в одном месте, включая её тип — обычная или страховая.
 
-<section class="case-image-gallery case-image-gallery-three">
+<div class="case-image-gallery case-image-gallery-three">
 	<img src="/cases/home-assist/kartochka-sdelki-1.webp" alt="Карточка сделки — основная информация" loading="lazy" />
 	<img src="/cases/home-assist/kartochka-sdelki-2.webp" alt="Карточка сделки — параметры заявки" loading="lazy" />
 	<img src="/cases/home-assist/kartochka-sdelki-3.webp" alt="Карточка сделки — работы и расчёты" loading="lazy" />
-</section>
+</div>
 
 ## Заявки мастера
 
@@ -105,13 +105,13 @@ cover: '/cases/home-assist/main-homeassit.webp'
 3. **Прибытие.** На объекте мастер фиксирует состояние объекта и неисправность на фото и видео. Материалы передаются в CRM.
 4. **Выполнение работ.** Мастер фиксирует результат, клиент расписывается на экране смартфона, после чего мастер завершает заявку. В CRM устанавливается статус «Работы выполнены».
 
-<section class="case-mobile-image-grid">
+<div class="case-mobile-image-grid">
 	<img src="/cases/home-assist/zayavka-mastera-1.webp" alt="Новая заявка мастера" loading="lazy" />
 	<img src="/cases/home-assist/zayavka-mastera-2-1.webp" alt="Принятая заявка мастера" loading="lazy" />
 	<img src="/cases/home-assist/zayavka-mastera-2-2.webp" alt="Выезд мастера на объект" loading="lazy" />
 	<img src="/cases/home-assist/zayavka-mastera-3.webp" alt="Работа мастера на объекте" loading="lazy" />
 	<img src="/cases/home-assist/zayavka-mastera-5.webp" alt="Завершение заявки мастером" loading="lazy" />
-</section>
+</div>
 
 ## Автоматизация проверки качества услуг
 
@@ -138,22 +138,22 @@ cover: '/cases/home-assist/main-homeassit.webp'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/home-assist/avatar-max.webp" alt="Фото участника проекта" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/home-assist/avatar-antonio.webp" alt="Фото участника проекта" />
-		<h4>Аналитик</h4>
+		<h3>Аналитик</h3>
 		<p>Антонио Сергеевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/home-assist/avatar-serg.webp" alt="Фото участника проекта" />
-		<h4>Бэкенд-разработчик</h4>
+		<h3>Бэкенд-разработчик</h3>
 		<p>Серж Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/home-assist/avatar-yarik.webp" alt="Фото участника проекта" />
-		<h4>Фронтенд-разработчик</h4>
+		<h3>Фронтенд-разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

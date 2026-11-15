@@ -16,7 +16,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 			<Breadcrumbs current="Блог" />
 <h1 class="ds-page-title mt-2">Блог</h1>
 			<p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
-				Заметки о разработке, внедрениях и ИИ в боевых проектах.
+				Статьи о внедрении CRM, разработке и автоматизации бизнеса. Разбираем рабочие подходы, возможности ИИ и опыт проектных команд — чтобы помочь выбрать решение под вашу задачу.
 			</p>
 		</div>
 
@@ -56,11 +56,12 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 		</div>
 	</section>
 <ServiceCta title="Хотите применить эти решения в своём бизнесе?" text="Разберём ваш процесс и подскажем, с чего начать автоматизацию или разработку." />
-</Layout>
-
 <script>
 	import '../../scripts/progressive-list';
 </script>
+</Layout>
+
+
 
 <style>
 	.post-card-title {

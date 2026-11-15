@@ -102,12 +102,12 @@ resultsCta: false
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-max.webp" alt="Макс Юрьевич" />
-		<h4>Управляющий проектом, аналитик</h4>
+		<h3>Управляющий проектом, аналитик</h3>
 		<p>Макс Юрьевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-serg.webp" alt="Сергей Николаевич" />
-		<h4>Бэкенд-разработчик</h4>
+		<h3>Бэкенд-разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 </div>

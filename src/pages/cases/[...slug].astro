@@ -124,6 +124,156 @@ const breadcrumbSchema = {
 		</div>
 	</article>
 <ServiceCta title="Хотите похожий результат для своего бизнеса?" text="Расскажите, что нужно изменить. Разберём задачу и предложим подходящий формат работы." />
+<script>
+	function buildCaseResultsCta() {
+		const content = document.querySelector('.prose-content');
+		if (!content || content.getAttribute('data-results-cta') === 'false') return;
+
+		const resultHeading = [...content.querySelectorAll('h2')].find((heading) =>
+			heading.textContent?.trim().toLowerCase() === 'результаты'
+		);
+		if (!resultHeading || resultHeading.closest('.case-results-cta')) return;
+
+		const resultBlocks = [];
+		let node = resultHeading.nextElementSibling;
+		while (node && node.tagName !== 'H2') {
+			resultBlocks.push(node);
+			node = node.nextElementSibling;
+		}
+		if (resultBlocks.length === 0) return;
+
+		const cta = document.createElement('section');
+		cta.className = 'case-results-cta';
+
+		const body = document.createElement('div');
+		body.className = 'case-results-body';
+
+		const button = document.createElement('button');
+		button.className = 'case-results-button consultation-trigger';
+		button.type = 'button';
+		button.dataset.b24FormTrigger = '';
+		button.textContent = 'Хочу также!';
+
+		resultHeading.replaceWith(cta);
+		body.append(resultHeading, ...resultBlocks);
+		cta.append(body, button);
+	}
+
+	function buildCaseConfiguratorQuote() {
+		const content = document.querySelector('.prose-content');
+		if (!content) return;
+
+		const image = [...content.querySelectorAll('img')].find((img) =>
+			img.getAttribute('src')?.includes('illustration-configurator.webp')
+		);
+		if (!image || image.closest('.case-configurator-quote')) return;
+
+		const imageWrapper = image.parentElement;
+		const text = imageWrapper?.nextElementSibling;
+		if (!(imageWrapper instanceof HTMLParagraphElement) || !(text instanceof HTMLParagraphElement)) return;
+
+		const quote = document.createElement('section');
+		quote.className = 'case-configurator-quote';
+
+		imageWrapper.replaceWith(quote);
+		quote.append(image, text);
+	}
+
+	function initCaseSliders() {
+		const sliders = document.querySelectorAll('[data-case-slider]');
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		sliders.forEach((slider) => {
+			if (!(slider instanceof HTMLElement) || slider.dataset.sliderInitialized === 'true') return;
+
+			const viewport = slider.querySelector('.case-slider-viewport');
+			const track = slider.querySelector('.case-slider-track');
+			const slides = [...slider.querySelectorAll('.case-slider-slide')];
+			const prev = slider.querySelector('.case-slider-button-prev');
+			const next = slider.querySelector('.case-slider-button-next');
+			const dots = [...slider.querySelectorAll('.case-slider-dot')];
+			if (!(track instanceof HTMLElement) || slides.length === 0) return;
+
+			slider.dataset.sliderInitialized = 'true';
+			let current = 0;
+			let timer: number | undefined;
+			let touchStartX = 0;
+			let touchDeltaX = 0;
+			const isMobile = window.matchMedia('(max-width: 640px)').matches;
+			const autoplayDelay = isMobile ? 4500 : 3000;
+
+			const update = (index: number) => {
+				current = (index + slides.length) % slides.length;
+				track.style.transform = `translateX(-${current * 100}%)`;
+				slides.forEach((slide, slideIndex) => {
+					slide.setAttribute('aria-hidden', slideIndex === current ? 'false' : 'true');
+				});
+				dots.forEach((dot, dotIndex) => {
+					dot.classList.toggle('is-active', dotIndex === current);
+					dot.setAttribute('aria-current', dotIndex === current ? 'true' : 'false');
+				});
+			};
+
+			const stop = () => {
+				if (timer) window.clearInterval(timer);
+			};
+			const start = () => {
+				stop();
+				if (!reduceMotion && slides.length > 1) {
+					timer = window.setInterval(() => update(current + 1), autoplayDelay);
+				}
+			};
+
+			if (prev instanceof HTMLButtonElement) prev.addEventListener('click', () => {
+				update(current - 1);
+				start();
+			});
+			if (next instanceof HTMLButtonElement) next.addEventListener('click', () => {
+				update(current + 1);
+				start();
+			});
+			dots.forEach((dot, dotIndex) => {
+				if (!(dot instanceof HTMLButtonElement)) return;
+				dot.addEventListener('click', () => {
+					update(dotIndex);
+					start();
+				});
+			});
+			if (viewport instanceof HTMLElement) {
+				viewport.addEventListener('touchstart', (event) => {
+					touchStartX = event.touches[0]?.clientX ?? 0;
+					touchDeltaX = 0;
+					stop();
+				}, { passive: true });
+				viewport.addEventListener('touchmove', (event) => {
+					touchDeltaX = (event.touches[0]?.clientX ?? touchStartX) - touchStartX;
+				}, { passive: true });
+				viewport.addEventListener('touchend', () => {
+					if (Math.abs(touchDeltaX) > 48) {
+						update(current + (touchDeltaX < 0 ? 1 : -1));
+					}
+					start();
+				});
+			}
+			document.addEventListener('astro:before-swap', stop, { once: true });
+			slider.addEventListener('mouseenter', stop);
+			slider.addEventListener('mouseleave', start);
+			slider.addEventListener('focusin', stop);
+			slider.addEventListener('focusout', start);
+
+			update(0);
+			start();
+		});
+	}
+
+
+	buildCaseResultsCta();
+	buildCaseConfiguratorQuote();
+	initCaseSliders();
+	document.addEventListener('astro:page-load', buildCaseResultsCta);
+	document.addEventListener('astro:page-load', buildCaseConfiguratorQuote);
+	document.addEventListener('astro:page-load', initCaseSliders);
+</script>
 </Layout>
 
 <style>
@@ -788,7 +938,9 @@ const breadcrumbSchema = {
 		margin: 0 0 0.75rem;
 		border-radius: 9999px;
 	}
-	.prose-content :global(.case-team-card h4) {
+	.prose-content :global(.case-team-card h3) {
+		font-size: 1.25rem;
+		font-weight: 600;
 		min-height: 2.3em;
 		margin: 0.75rem 0 0.125rem;
 		line-height: 1.15;
@@ -1001,154 +1153,3 @@ const breadcrumbSchema = {
 		}
 	}
 </style>
-
-<script>
-	function buildCaseResultsCta() {
-		const content = document.querySelector('.prose-content');
-		if (!content || content.getAttribute('data-results-cta') === 'false') return;
-
-		const resultHeading = [...content.querySelectorAll('h2')].find((heading) =>
-			heading.textContent?.trim().toLowerCase() === 'результаты'
-		);
-		if (!resultHeading || resultHeading.closest('.case-results-cta')) return;
-
-		const resultBlocks = [];
-		let node = resultHeading.nextElementSibling;
-		while (node && node.tagName !== 'H2') {
-			resultBlocks.push(node);
-			node = node.nextElementSibling;
-		}
-		if (resultBlocks.length === 0) return;
-
-		const cta = document.createElement('section');
-		cta.className = 'case-results-cta';
-
-		const body = document.createElement('div');
-		body.className = 'case-results-body';
-
-		const button = document.createElement('button');
-		button.className = 'case-results-button consultation-trigger';
-		button.type = 'button';
-		button.dataset.b24FormTrigger = '';
-		button.textContent = 'Хочу также!';
-
-		resultHeading.replaceWith(cta);
-		body.append(resultHeading, ...resultBlocks);
-		cta.append(body, button);
-	}
-
-	function buildCaseConfiguratorQuote() {
-		const content = document.querySelector('.prose-content');
-		if (!content) return;
-
-		const image = [...content.querySelectorAll('img')].find((img) =>
-			img.getAttribute('src')?.includes('illustration-configurator.webp')
-		);
-		if (!image || image.closest('.case-configurator-quote')) return;
-
-		const imageWrapper = image.parentElement;
-		const text = imageWrapper?.nextElementSibling;
-		if (!(imageWrapper instanceof HTMLParagraphElement) || !(text instanceof HTMLParagraphElement)) return;
-
-		const quote = document.createElement('section');
-		quote.className = 'case-configurator-quote';
-
-		imageWrapper.replaceWith(quote);
-		quote.append(image, text);
-	}
-
-	function initCaseSliders() {
-		const sliders = document.querySelectorAll('[data-case-slider]');
-		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-		sliders.forEach((slider) => {
-			if (!(slider instanceof HTMLElement) || slider.dataset.sliderInitialized === 'true') return;
-
-			const viewport = slider.querySelector('.case-slider-viewport');
-			const track = slider.querySelector('.case-slider-track');
-			const slides = [...slider.querySelectorAll('.case-slider-slide')];
-			const prev = slider.querySelector('.case-slider-button-prev');
-			const next = slider.querySelector('.case-slider-button-next');
-			const dots = [...slider.querySelectorAll('.case-slider-dot')];
-			if (!(track instanceof HTMLElement) || slides.length === 0) return;
-
-			slider.dataset.sliderInitialized = 'true';
-			let current = 0;
-			let timer: number | undefined;
-			let touchStartX = 0;
-			let touchDeltaX = 0;
-			const isMobile = window.matchMedia('(max-width: 640px)').matches;
-			const autoplayDelay = isMobile ? 4500 : 3000;
-
-			const update = (index: number) => {
-				current = (index + slides.length) % slides.length;
-				track.style.transform = `translateX(-${current * 100}%)`;
-				slides.forEach((slide, slideIndex) => {
-					slide.setAttribute('aria-hidden', slideIndex === current ? 'false' : 'true');
-				});
-				dots.forEach((dot, dotIndex) => {
-					dot.classList.toggle('is-active', dotIndex === current);
-					dot.setAttribute('aria-current', dotIndex === current ? 'true' : 'false');
-				});
-			};
-
-			const stop = () => {
-				if (timer) window.clearInterval(timer);
-			};
-			const start = () => {
-				stop();
-				if (!reduceMotion && slides.length > 1) {
-					timer = window.setInterval(() => update(current + 1), autoplayDelay);
-				}
-			};
-
-			if (prev instanceof HTMLButtonElement) prev.addEventListener('click', () => {
-				update(current - 1);
-				start();
-			});
-			if (next instanceof HTMLButtonElement) next.addEventListener('click', () => {
-				update(current + 1);
-				start();
-			});
-			dots.forEach((dot, dotIndex) => {
-				if (!(dot instanceof HTMLButtonElement)) return;
-				dot.addEventListener('click', () => {
-					update(dotIndex);
-					start();
-				});
-			});
-			if (viewport instanceof HTMLElement) {
-				viewport.addEventListener('touchstart', (event) => {
-					touchStartX = event.touches[0]?.clientX ?? 0;
-					touchDeltaX = 0;
-					stop();
-				}, { passive: true });
-				viewport.addEventListener('touchmove', (event) => {
-					touchDeltaX = (event.touches[0]?.clientX ?? touchStartX) - touchStartX;
-				}, { passive: true });
-				viewport.addEventListener('touchend', () => {
-					if (Math.abs(touchDeltaX) > 48) {
-						update(current + (touchDeltaX < 0 ? 1 : -1));
-					}
-					start();
-				});
-			}
-			document.addEventListener('astro:before-swap', stop, { once: true });
-			slider.addEventListener('mouseenter', stop);
-			slider.addEventListener('mouseleave', start);
-			slider.addEventListener('focusin', stop);
-			slider.addEventListener('focusout', start);
-
-			update(0);
-			start();
-		});
-	}
-
-
-	buildCaseResultsCta();
-	buildCaseConfiguratorQuote();
-	initCaseSliders();
-	document.addEventListener('astro:page-load', buildCaseResultsCta);
-	document.addEventListener('astro:page-load', buildCaseConfiguratorQuote);
-	document.addEventListener('astro:page-load', initCaseSliders);
-</script>

@@ -248,7 +248,7 @@ const schema = {
 				</div>
 				<p>Двигаемся короткими этапами: показываем результат, собираем обратную связь и&nbsp;снижаем риск большого запуска.</p>
 			</div>
-			<div class="elma-process-scroll" tabindex="0" aria-label="Прокручиваемый список этапов внедрения">
+			<div class="elma-process-scroll" tabindex="0" role="group" aria-label="Прокручиваемый список этапов внедрения">
 				<ol class="elma-process-track" aria-label="Этапы внедрения ELMA365">
 					{steps.map(({ number, title, text }, index) => (
 						<>
@@ -331,11 +331,11 @@ const schema = {
 			</div>
 			<div class="elma-integration-grid service-card-row">
 				{integrations.map(([title, text]) => (
-					<article class="elma-integration-card">
+					<div class="elma-integration-card">
 						<div class="elma-integration-dot"></div>
 						<strong>{title}</strong>
 						<span>{text}</span>
-					</article>
+					</div>
 				))}
 			</div>
 		</div>

@@ -41,7 +41,7 @@ listingCover: '/cases/gallery-automation/main-image-elohovskiy.webp'
 
 При выборе CRM-системы в первую очередь была важна скорость запуска, поэтому выбрали Битрикс24. Это позволило быстро установить и настроить необходимые модули.
 
-<section class="case-slider" data-case-slider aria-label="Схемы бизнес-процессов галереи">
+<div role="group" class="case-slider" data-case-slider aria-label="Схемы бизнес-процессов галереи">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -57,14 +57,14 @@ listingCover: '/cases/gallery-automation/main-image-elohovskiy.webp'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ### Бизнес-процессы
 
@@ -89,12 +89,12 @@ listingCover: '/cases/gallery-automation/main-image-elohovskiy.webp'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/gallery-automation/avatar-max.webp" alt="Фото участника проекта" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрьевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/team-avatar-placeholder.webp" alt="Фотография Олега Сергеевича пока отсутствует" />
-		<h4>Специалист внедрения</h4>
+		<h3>Специалист внедрения</h3>
 		<p>Олег Сергеевич</p>
 	</div>
 </div>

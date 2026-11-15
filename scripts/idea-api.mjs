@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile, rename, readdir, stat, rm } from 'node:fs/p
 import { resolve, join } from 'node:path';
 import { createHash, randomBytes } from 'node:crypto';
 import nodemailer from 'nodemailer';
+import sharp from 'sharp';
 import { isIP } from 'node:net';
 
 const LIMIT=8*1024*1024, ID=/^[a-f0-9]{32}$/;
@@ -9,7 +10,7 @@ export const IDEA_LINK_TTL_MS=90*24*60*60*1000;
 const recipient='pm@ittimenow.com';
 const json=(res,status,value)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(value));};
 const fail=(status,message)=>Object.assign(new Error(message),{status});
-export function validPng(data) {
+export async function validPng(data) {
   if(data.length<45||!data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))return false;
   if(data.readUInt32BE(8)!==13||data.toString('ascii',12,16)!=='IHDR')return false;
   const width=data.readUInt32BE(16),height=data.readUInt32BE(20);
@@ -19,7 +20,16 @@ export function validPng(data) {
     const len=data.readUInt32BE(at),type=data.toString('ascii',at+4,at+8);
     if(at+12+len>data.length)return false;
     if(type==='IDAT')sawData=true;
-    if(type==='IEND')return len===0&&at+12===data.length&&sawData;
+    // The drawing board produces still PNGs, so animated containers are rejected.
+    if(type==='acTL')return false;
+    if(type==='IEND'){
+      if(len!==0||at+12!==data.length||!sawData)return false;
+      try{
+        // stats() decodes all pixels without retaining a large raw output buffer.
+        await sharp(data,{failOn:'warning',limitInputPixels:4096*4096}).stats();
+        return true;
+      }catch{return false;}
+    }
     at+=12+len;
   }
   return false;
@@ -91,10 +101,12 @@ export function createIdeaApi({directory=process.env.IDEA_STORAGE_DIR||resolve('
         if(Number(req.headers['content-length'])>LIMIT)throw fail(413,'Рисунок слишком большой.');
         const chunks=[];let size=0;
         for await(const chunk of req){size+=chunk.length;if(size>LIMIT)throw fail(413,'Рисунок слишком большой.');chunks.push(chunk);}
-        const png=Buffer.concat(chunks);if(!validPng(png))throw fail(400,'Не удалось прочитать рисунок.');
+        const png=Buffer.concat(chunks);
         const hash=createHash('sha256').update(png).digest('hex');
         let id='',createdAt='';
         await exclusive(async()=>{
+          // Serialize full decoding with writes to bound concurrent decoder memory.
+          if(!await validPng(png))throw fail(400,'Не удалось прочитать рисунок.');
           await mkdir(directory,{recursive:true});
           let used=0,count=0;
           for(const item of await readdir(directory)){

@@ -40,12 +40,12 @@ coverVideo: '/cases/pushkarev-tilda/pushkarev-video-main.webm'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-max.webp" alt="Макс Юрьевич" />
-		<h4>Менеджер проекта</h4>
+		<h3>Менеджер проекта</h3>
 		<p>Макс Юрьевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-serg.webp" alt="Сергей Николаевич" />
-		<h4>Full-stack разработчик</h4>
+		<h3>Full-stack разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 </div>

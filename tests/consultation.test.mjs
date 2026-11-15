@@ -58,3 +58,53 @@ test('timeout and cancellation prevent a late popup from interrupting the visito
   await tick(); assert.equal(opens, 0); assert.equal(dialog.open, false);
   dom.window.close();
 });
+
+test('a network error releases the loader and a new click opens one recovered form', async () => {
+  const { dom, doc, dialog, click } = setup();
+  click();
+  const failed = doc.querySelector('script');
+  failed.dispatchEvent(new dom.window.Event('error'));
+  assert.equal(dialog.open, true);
+  assert.equal(doc.querySelectorAll('script').length, 0);
+  dialog.close();
+  click(); click();
+  const retry = doc.querySelector('script');
+  assert.notEqual(retry, failed);
+  assert.equal(doc.querySelectorAll('script').length, 1);
+  let opens = 0, nativeClicks = 0;
+  doc.getElementById('b24-native-trigger').addEventListener('click', () => {
+    nativeClicks++;
+    dom.window.dispatchEvent(new dom.window.CustomEvent('b24:form:init', {
+      detail: { object: { identification: { id: 21 }, show() { opens++; } } },
+    }));
+  });
+  failed.setAttribute('data-b24-loaded', 'true');
+  failed.dispatchEvent(new dom.window.Event('error'));
+  await tick();
+  assert.equal(nativeClicks, 0);
+  assert.equal(dialog.open, false);
+  retry.setAttribute('data-b24-loaded', 'true');
+  await tick();
+  assert.equal(nativeClicks, 1);
+  assert.equal(opens, 1);
+  assert.equal(doc.querySelector('[data-b24-form-trigger]').hasAttribute('aria-busy'), false);
+  dom.window.close();
+});
+
+test('a loader timeout allows a fresh request without reacting to the abandoned loader', async () => {
+  const { dom, doc, dialog, click } = setup(5);
+  click();
+  const failed = doc.querySelector('script');
+  await tick();
+  assert.equal(dialog.open, true);
+  assert.equal(failed.isConnected, false);
+  dialog.close();
+  click();
+  assert.notEqual(doc.querySelector('script'), failed);
+  let nativeClicks = 0;
+  doc.getElementById('b24-native-trigger').addEventListener('click', () => nativeClicks++);
+  failed.setAttribute('data-b24-loaded', 'true');
+  await Promise.resolve();
+  assert.equal(nativeClicks, 0);
+  dom.window.close();
+});

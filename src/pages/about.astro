@@ -193,8 +193,6 @@ const structuredData = {
 		</section>
 	</div>
 <ServiceCta title="Обсудим ваш проект с командой IT TIME NOW?" text="Расскажите о задаче. Подберём специалистов, определим ближайший полезный результат и предложим формат работы." />
-</Layout>
-
 <script>
 	function bindTeamCards() {
 		const cards = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-team-card]'));
@@ -223,6 +221,9 @@ const structuredData = {
 	bindTeamCards();
 	document.addEventListener('astro:page-load', bindTeamCards);
 </script>
+</Layout>
+
+
 
 <style>
 	.about-page {

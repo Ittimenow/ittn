@@ -61,7 +61,7 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 - на основе бизнес-процессов и пожеланий клиента описали функционал в виде документа Техническое Задание (ТЗ)  
 сформировали дорожную карту проекта
 
-<section class="case-slider" data-case-slider aria-label="Бизнес-процессы">
+<div role="group" class="case-slider" data-case-slider aria-label="Бизнес-процессы">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -74,13 +74,13 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 <section class="case-work-list">
 	<div class="case-work-list-title">
@@ -100,7 +100,7 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 	</ol>
 </section>
 
-<section class="case-slider" data-case-slider aria-label="Первичная настройка системы">
+<div role="group" class="case-slider" data-case-slider aria-label="Первичная настройка системы">
 	<div class="case-slider-viewport">
 		<div class="case-slider-track">
 			<div class="case-slider-slide">
@@ -125,7 +125,7 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 	</div>
 	<div class="case-slider-controls">
 		<button class="case-slider-button case-slider-button-prev" type="button" aria-label="Предыдущий слайд">&larr;</button>
-		<div class="case-slider-dots" aria-label="Навигация по слайдам">
+		<div class="case-slider-dots" role="group" aria-label="Навигация по слайдам">
 			<button class="case-slider-dot" type="button" aria-label="Слайд 1"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 2"></button>
 			<button class="case-slider-dot" type="button" aria-label="Слайд 3"></button>
@@ -135,11 +135,11 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 		</div>
 		<button class="case-slider-button case-slider-button-next" type="button" aria-label="Следующий слайд">&rarr;</button>
 	</div>
-</section>
+</div>
 
 ### Путевые листы
 
-<section class="case-waybills">
+<div class="case-waybills">
 	<div class="case-waybill-row">
 		<div class="case-waybill-copy">
 			<p>Первым этапом мы начали разработку с модуля Путевых листов, так как, у компании большой автопарк и практически любой процесс связан с Транспортными Средствами (ТС).</p>
@@ -159,7 +159,7 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 			<p>Путевые листы связаны с Транспортной накладной, без которой невозможно доставить товар клиенту.</p>
 		</div>
 	</div>
-</section>
+</div>
 
 ### Удобные фишки интерфейса системы
 
@@ -219,7 +219,7 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 			<p>Перенесли интерфейс для быстрого внесения данных идентично привычному бумажному носителю</p>
 		</div>
 		<div class="case-interface-media">
-			<img src="/cases/gravelon-digitalization/gravelon-interfejs.webp" alt="Интерфейс ввода данных как на бумажном носителе" />
+			<img src="/cases/gravelon-digitalization/gravelon-interfejs.webp" alt="Интерфейс ввода данных как на бумажном носителе" />
 		</div>
 	</div>
 </section>
@@ -231,27 +231,27 @@ coverVideo: '/cases/gravelon-digitalization/main-gravelon-2-high-720.mp4'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-sasha.webp" alt="Фото участника проекта" />
-		<h4>Менеджер проекта</h4>
+		<h3>Менеджер проекта</h3>
 		<p>Александра Константиновна</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-oleg.webp" alt="Фото участника проекта" />
-		<h4>Инженер внедрения</h4>
+		<h3>Инженер внедрения</h3>
 		<p>Олег Викторович</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-serg.webp" alt="Фото участника проекта" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Сергей Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-anton.webp" alt="Фото участника проекта" />
-		<h4>1С разработчик</h4>
+		<h3>1С разработчик</h3>
 		<p>Антон Сергеевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-yarik.webp" alt="Фото участника проекта" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

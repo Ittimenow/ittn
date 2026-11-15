@@ -9,8 +9,9 @@ test('static server: status codes, redirects, metadata isolation, cache and envi
   const root = await mkdtemp(join(tmpdir(), 'ittn-server-'));
   await mkdir(join(root, '_astro'));
   await mkdir(join(root, 'services', 'sites'), { recursive: true });
+  await mkdir(join(root, 'design-system'));
   const release = releaseConfig({ DEPLOY_ENV: 'production', SITE_URL: 'https://example.com' });
-  await Promise.all(Object.entries({ '.release.json': JSON.stringify(release), '404.html': '<h1>Not found</h1>', 'index.html': '<h1>Home</h1>', '_headers': 'private config', '_astro/main.css': 'body{}', 'services/sites/index.html': '<h1>Sites</h1>' }).map(([path, data]) => writeFile(join(root, path), data)));
+  await Promise.all(Object.entries({ '.release.json': JSON.stringify(release), '404.html': '<h1>Not found</h1>', 'index.html': '<h1>Home</h1>', '_headers': 'private config', '_redirects': 'private redirects', '_astro/main.css': 'body{}', 'services/sites/index.html': '<h1>Sites</h1>', 'design-system/index.html': '<h1>Internal</h1>' }).map(([path, data]) => writeFile(join(root, path), data)));
   const server = createStaticServer(root);
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
   t.after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); await rm(root, { recursive: true }); });
@@ -28,9 +29,17 @@ test('static server: status codes, redirects, metadata isolation, cache and envi
   response = await fetch(base + '/missing', { redirect: 'manual' }); assert.equal(response.status, 404);
   response = await fetch(base + '/_astro/main.css', { redirect: 'manual' }); assert.equal(response.status, 200);
   response = await fetch(base + '/services/sites/'); assert.equal(response.status, 200);
-  for (const path of ['/missing/', '/_headers', '/.release.json', '/%2erelease.json']) {
+  for (const path of ['/missing/', '/_headers', '/%5fheaders', '/_head%65rs', '/_headers/', '/%5fheaders%2f', '/_redirects', '/%5Fredirects', '/_redirects/', '/.release.json', '/%2erelease.json', '/design-system%2f']) {
     response = await fetch(base + path); assert.equal(response.status, 404, path); assert.match(response.headers.get('x-robots-tag'), /noindex/);
   }
+  for (const path of ['/design-system/', '/design-system/index.html', '/%64esign-system/']) {
+    response = await fetch(base + path, { redirect: 'manual' });
+    assert.equal(response.status, 200, path);
+    assert.match(response.headers.get('x-robots-tag'), /noindex/, path);
+  }
+  response = await fetch(base + '/services/%77eb/', { redirect: 'manual' });
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get('location'), '/services/sites/');
   response = await fetch(base + '/_astro/main.css'); assert.match(response.headers.get('cache-control'), /immutable/); assert.match(response.headers.get('content-type'), /css/); assert.equal(response.headers.get('x-content-type-options'), 'nosniff');
   response = await fetch(base, { method: 'POST' }); assert.equal(response.status, 405);
   response = await fetch(base + '/missing/', { method: 'HEAD' }); assert.equal(response.status, 404); assert.equal(await response.text(), '');

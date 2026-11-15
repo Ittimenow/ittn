@@ -119,22 +119,22 @@ cover: '/cases/aquatron-crm/main-image-aquatron.webp'
 <div class="case-team">
 	<div class="case-team-card">
 		<img src="/cases/alfacase-amocrm-rbs/avatar-max.webp" alt="Макс Юрич" />
-		<h4>Управляющий проектом</h4>
+		<h3>Управляющий проектом</h3>
 		<p>Макс Юрич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/gravelon-digitalization/avatar-anton.webp" alt="Антонио Сергеевич" />
-		<h4>Аналитик</h4>
+		<h3>Аналитик</h3>
 		<p>Антонио Сергеевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-serg.webp" alt="Серж Николаевич" />
-		<h4>Backend разработчик</h4>
+		<h3>Backend разработчик</h3>
 		<p>Серж Николаевич</p>
 	</div>
 	<div class="case-team-card">
 		<img src="/cases/skazki-sna-frontend/avatar-yarik.webp" alt="Ярослав Евгеньевич" />
-		<h4>Frontend разработчик</h4>
+		<h3>Frontend разработчик</h3>
 		<p>Ярослав Евгеньевич</p>
 	</div>
 </div>

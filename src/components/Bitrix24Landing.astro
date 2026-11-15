@@ -360,7 +360,7 @@ const comparison = [
 				</p>
 			</div>
 
-			<div class="bitrix-logo-marquee" aria-label="Логотипы клиентов">
+			<div class="bitrix-logo-marquee" role="group" aria-label="Логотипы клиентов">
 				<div class="bitrix-logo-track">
 					{[0, 1, 2].map((group) => (
 						<div class="bitrix-logo-group" aria-hidden={group === 0 ? 'false' : 'true'}>
@@ -416,7 +416,7 @@ const comparison = [
 					инфраструктуре, безопасности, интеграциям и будущей нагрузке.
 				</p>
 			</div>
-			<section class="ds-card bitrix-version-table-card" aria-label="Сравнение облачной и коробочной версии Bitrix24">
+			<div class="ds-card bitrix-version-table-card" role="group" aria-label="Сравнение облачной и коробочной версии Bitrix24">
 				<div class="bitrix-table-wrap">
 					<table class="ds-table">
 						<thead>
@@ -437,13 +437,13 @@ const comparison = [
 						</tbody>
 					</table>
 				</div>
-			</section>
+			</div>
 		</div>
 	</section>
 
-	<section class="ds-section">
+	<div class="ds-section">
 		<div class="ds-container">
-			<section class="ds-testimonial bitrix-reasons-card">
+			<div class="ds-testimonial bitrix-reasons-card">
 				<div>
 				<blockquote>
 					Сначала фиксируем бизнес-задачу и границы этапа, потом настраиваем инструменты.
@@ -454,9 +454,9 @@ const comparison = [
 						<span><img class="bitrix-list-check" src="/ds-v2/assets/decorations-split/deco-check-03.png" alt="" aria-hidden="true" />{item}</span>
 					))}
 				</div>
-			</section>
+			</div>
 		</div>
-	</section>
+	</div>
 
 	<section class="ds-section ds-section-soft">
 		<div class="ds-container bitrix-faq-grid">

@@ -36,12 +36,9 @@ const tasks = [
 			</h2>
 		</div>
 
-		<div class="home-mobile-carousel home-task-strip overflow-hidden rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/40">
-			{tasks.map((task, index) => (
-				<div class:list={[
-					'home-swipe-card grid gap-4 px-5 py-5 sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)] sm:px-6',
-					index > 0 && 'border-neutral-200 dark:border-neutral-800 sm:border-t',
-				]}>
+		<div class="service-card-row home-task-strip grid gap-4">
+			{tasks.map((task) => (
+				<div class="home-swipe-card grid gap-4 px-5 py-5 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)] sm:px-6">
 					<p class="font-medium text-neutral-950 dark:text-white">{task.problem}</p>
 					<p class="home-card-copy">{task.solution}</p>
 				</div>
