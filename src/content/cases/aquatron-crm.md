@@ -18,7 +18,7 @@ cover: '/cases/aquatron-crm/main-image-aquatron.webp'
 
 ## Задача
 
-Внедрить CRM | ERP-систему РосБизнесСофт со складским учётом.
+[Внедрить CRM | ERP-систему РосБизнесСофт](/services/rbs/) со складским учётом.
 
 ### Решение
 

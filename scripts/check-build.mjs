@@ -30,6 +30,7 @@ const exists = path => paths.has(path) || paths.has(path.replace(/\/$/, '') + '/
 let links = 0;
 const seenTitles = new Map();
 const seenDescriptions = new Map();
+const analyticsSources = new Set();
 for (const [route, { doc }] of pages) {
   if (doc.querySelector('meta[http-equiv="refresh"]')) continue;
   check(Boolean(doc.title.trim()), `${route}: missing title`);
@@ -81,9 +82,10 @@ for (const [route, { doc }] of pages) {
   }
   if (!release.internalPaths.includes(route)) {
     check(Boolean(doc.querySelector('script[data-site-analytics]')) === release.production, `${route}: analytics environment mismatch`);
-    // noscript is raw text to an HTML parser with scripting enabled.
-    check(doc.documentElement.outerHTML.includes('mc.yandex.ru/watch/') === release.production, `${route}: analytics pixel environment mismatch`);
   }
+  // A static noscript pixel would bypass the runtime origin guard in local previews.
+  check(!doc.documentElement.outerHTML.includes('mc.yandex.ru/watch/'), `${route}: analytics pixel bypasses origin check`);
+  for (const script of doc.querySelectorAll('script[data-site-analytics]')) analyticsSources.add(script.textContent);
   for (const schema of doc.querySelectorAll('script[type="application/ld+json"]')) {
     try { JSON.parse(schema.textContent); } catch { errors.push(`${route}: invalid JSON-LD`); }
   }
@@ -111,6 +113,42 @@ for (const [route, { doc }] of pages) {
         const target = pages.get(path.endsWith('/') || path.endsWith('.html') ? path : path + '/')?.doc;
         if (target) check(Boolean(target.getElementById(decodeURIComponent(url.hash.slice(1)))), `${route}: missing anchor ${value}`);
       }
+    }
+  }
+}
+for (const source of analyticsSources) {
+  const productionURL = new URL('/analytics-origin-check/?source=build-test', release.site);
+  const foreignPortURL = new URL(productionURL);
+  foreignPortURL.port = productionURL.port === '444' ? '445' : '444';
+  const blockedURLs = [
+    'http://localhost:3040/',
+    'http://127.0.0.1:4327/',
+    'http://[::1]:4327/',
+    'https://ittimenow-ittn-020d.twc1.net/',
+    `https://preview.${productionURL.hostname}/`,
+    `https://${productionURL.hostname}.invalid/`,
+    productionURL.href.replace(/^https:/, 'http:'),
+    foreignPortURL.href,
+  ];
+  for (const [url, allowed] of [[productionURL.href, true], ...blockedURLs.map(url => [url, false])]) {
+    // Execute only the built inline snippet. Default resources are disabled, so
+    // even the allowed origin cannot fetch tag.js or send analytics requests.
+    const dom = new JSDOM('<!doctype html><script></script>', { url, runScripts: 'outside-only' });
+    try {
+      dom.window.eval(source);
+      const tags = dom.window.document.querySelectorAll('script[src="https://mc.yandex.ru/metrika/tag.js"]');
+      if (allowed) {
+        const calls = dom.window.ym?.a ?? [];
+        check(tags.length === 1, `${url}: production analytics loader missing`);
+        check(calls.length === 1 && calls[0][0] === 91660098 && calls[0][1] === 'init'
+          && calls[0][2]?.url === dom.window.location.href, `${url}: production analytics init mismatch`);
+      } else {
+        check(tags.length === 0 && dom.window.ym === undefined, `${url}: analytics enabled outside production origin`);
+      }
+    } catch (error) {
+      errors.push(`${url}: analytics script failed: ${error.message}`);
+    } finally {
+      dom.window.close();
     }
   }
 }

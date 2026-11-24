@@ -1,6 +1,7 @@
 ---
 import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceCta from './ServiceCta.astro';
+import ServiceCaseStudies from './ServiceCaseStudies.astro';
 import UiIcon from './UiIcon.astro';
 
 const heroBenefits = [
@@ -330,7 +331,7 @@ const schema = [
 		<div class="ds-container">
 			<div class="ds-section-head">
 				<div>
-					<h2>Пакеты внедрения РосБизнесСофт</h2>
+					<h2>Стоимость внедрения РосБизнесСофт</h2>
 				</div>
 				<p>
 					Итоговая стоимость зависит от&nbsp;количества пользователей, модулей, интеграций, объема
@@ -374,6 +375,8 @@ const schema = [
 				<p>
 					Проект можно запустить поэтапно: сначала обследование и&nbsp;быстрый контур продаж, затем
 					ERP-модули, интеграции, миграция данных, отчеты и&nbsp;сопровождение.
+					Для обмена данными с&nbsp;учётной системой отдельно определяем состав
+					<a class="underline underline-offset-4" href="/services/integrations/">интеграции CRM/ERP с&nbsp;1С</a>.
 				</p>
 			</div>
 			<div class="rbs-services service-card-row">
@@ -457,6 +460,15 @@ const schema = [
 		</div>
 	</section>
 
+	<ServiceCaseStudies
+		title="Кейсы внедрения РосБизнесСофт"
+		text="Примеры работы CRM/ERP в производстве и сервисе: какие процессы автоматизировали и как связали систему с другими инструментами."
+		cases={[
+			{ id: 'aquatron-crm', title: 'CRM и складской учёт для «Акватрон-БХК»', text: 'Внедрили РосБизнесСофт и настроили синхронизацию с 1С 8.3. Менеджеры видят остатки и отгрузки, счета и контрагенты передаются в учётную систему.' },
+			{ id: 'home-assist-service-crm', title: 'РосБизнесСофт для сервисной компании', text: 'Доработали CRM/ERP на тарифе Helpdesk под обработку заявок, подготовили интерфейс для мастеров и автоматизировали процессы оказания услуг.' },
+		]}
+	/>
+
 	<section class="ds-section bitrix-clients-section">
 		<div class="ds-container">
 			<div class="ds-section-head bitrix-wide-head">
@@ -513,8 +525,8 @@ const schema = [
 			<div>
 				<h2>Частые вопросы о&nbsp;внедрении РосБизнесСофт</h2>
 				<p>
-					Ответы закрывают ключевые вопросы перед заявкой: цена, сроки, 1С, перенос данных,
-					производство, сервис и&nbsp;выбор между РосБизнесСофт и&nbsp;Bitrix24.
+					Разбираем стоимость, сроки, обмен с&nbsp;1С и&nbsp;перенос данных. Если вы выбираете
+					систему впервые, начните с&nbsp;<a class="underline underline-offset-4" href="/posts/vnedrenie-crm-pod-kljuch-rukovodstvo-dlya-sobstvennika-biznesa/">руководства по&nbsp;внедрению CRM</a>.
 				</p>
 			</div>
 			<div class="rbs-faq-list">
