@@ -1,6 +1,6 @@
 # IT Time Now site
 
-Статический сайт IT TIME NOW на Astro 7 и Tailwind CSS 4: услуги, кейсы, блог, команда и юридические документы. Node.js >=22.12.0; в CI и Docker используется Node 22. Зависимости зафиксированы в `package-lock.json`.
+Статический сайт IT TIME NOW на Astro 7 и Tailwind CSS 4: услуги, кейсы, блог, команда и юридические документы. Требуется Node.js >=22.23.4; в CI используется Node 22.23.4, в Docker — актуальный образ Node 22 Alpine. Зависимости зафиксированы в `package-lock.json`.
 
 ## Правило для ИИ-агентов
 
