@@ -1,0 +1,85 @@
+---
+import { getEntry } from 'astro:content';
+import UiIcon from './UiIcon.astro';
+
+interface Props {
+	title: string;
+	text: string;
+	cases: { id: string; title: string; text: string }[];
+}
+
+const { title, text, cases } = Astro.props;
+const studies = await Promise.all(cases.map(async (item) => {
+	const entry = await getEntry('cases', item.id);
+	if (!entry) throw new Error(`Missing service case: ${item.id}`);
+	return { ...item, image: entry.data.listingCover ?? entry.data.cover };
+}));
+---
+
+<section class="ds-section" data-service-cases>
+	<div class="ds-container">
+		<div class="ds-section-head">
+			<div><h2>{title}</h2></div>
+			<p>{text}</p>
+		</div>
+		<div class="service-card-row mt-10 grid gap-6 md:grid-cols-2">
+			{studies.map((item) => (
+				<article class="overflow-hidden rounded-2xl border border-neutral-200 bg-white transition hover:-translate-y-1 hover:shadow-[0_30px_70px_-38px_rgba(35,43,255,0.45)]">
+					{item.image && <a href={`/cases/${item.id}/`} class="block overflow-hidden" aria-label={`Смотреть кейс: ${item.title}`}>
+						<img class="aspect-[4/3] w-full object-cover" src={item.image} alt={item.title} loading="lazy" decoding="async" />
+					</a>}
+					<div class="p-6">
+						<h3 class="text-2xl font-bold leading-tight">{item.title}</h3>
+						<p class="mt-3 text-sm leading-6 text-neutral-600">{item.text}</p>
+						<a class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-800" href={`/cases/${item.id}/`}>
+							<span>Смотреть кейс</span>
+							<UiIcon loading="lazy" name="arrow" class="h-[28px] w-[28px]" />
+						</a>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	/* Match the landing-page sections without relying on their scoped styles. */
+	.ds-section {
+		padding-block: 88px;
+		background: var(--ittn-white);
+	}
+	.ds-container {
+		width: 100%;
+		max-width: var(--bitrix-container, 1276px);
+		margin-inline: auto;
+		padding-inline: 48px;
+	}
+	.ds-section-head {
+		display: grid;
+		gap: 28px;
+		align-items: end;
+	}
+	.ds-section-head h2 {
+		max-width: 760px;
+		color: var(--ittn-ink);
+		font-size: clamp(34px, 5vw, 52px);
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+	}
+	.ds-section-head > p {
+		max-width: 520px;
+		color: var(--ittn-muted);
+		font-size: 17px;
+		line-height: 1.6;
+	}
+	@media (min-width: 900px) {
+		.ds-section-head {
+			grid-template-columns: minmax(0, 1fr) minmax(300px, 0.48fr);
+		}
+	}
+	@media (max-width: 767px) {
+		.ds-section { padding-block: 64px; }
+		.ds-container { padding-inline: 24px; }
+	}
+</style>

@@ -1,6 +1,7 @@
 ---
 import ServiceHeroVisual from './ServiceHeroVisual.astro';
 import ServiceCta from './ServiceCta.astro';
+import ServiceCaseStudies from './ServiceCaseStudies.astro';
 import UiIcon from './UiIcon.astro';
 
 const heroBenefits = [
@@ -251,7 +252,7 @@ const comparison = [
 		<div class="ds-container">
 			<div class="ds-section-head">
 				<div>
-					<h2>Пакеты работ с понятным составом</h2>
+					<h2>Стоимость внедрения Битрикс24</h2>
 				</div>
 				<p>
 					Лицензия Bitrix24 оплачивается отдельно. Итоговая стоимость зависит от числа
@@ -314,10 +315,10 @@ const comparison = [
 	<section class="ds-section bitrix-process-section">
 		<div class="ds-container bitrix-process-grid">
 			<div>
-				<h2>Пять этапов магии интегратора</h2>
+				<h2>Как проходит внедрение Битрикс24</h2>
 				<p>
-					Вместо длинной абстрактной схемы показываем управляемый проект: что делаем, что
-					проверяем и где фиксируем результат.
+					От аудита продаж до обучения команды и сопровождения: на каждом этапе фиксируем
+					состав работ и проверяем результат.
 				</p>
 				<button class="ds-btn ds-btn-dark consultation-trigger" type="button" data-b24-form-trigger>
 					<span>Собрать состав работ</span>
@@ -347,6 +348,15 @@ const comparison = [
 			</ol>
 		</div>
 	</section>
+
+	<ServiceCaseStudies
+		title="Кейсы внедрения Битрикс24"
+		text="Как мы связываем CRM с работой компании: бронирование и продажи в галерее, управление заявками и ремонтом в автосервисе."
+		cases={[
+			{ id: 'gallery-automation', title: 'Битрикс24 для галереи искусств', text: 'Связали CRM с сайтом на Tilda, бронированием посещений и оплатой через PayKeeper. Менеджеры управляют посещениями и заказами, руководитель видит аналитику продаж.' },
+			{ id: 'el-rey-digitalization', title: 'Битрикс24 для техцентра EL REY', text: 'Развернули коробочную версию и отраслевое решение «Автосервис 5». Объединили сделки подразделений в одну воронку продаж.' },
+		]}
+	/>
 
 	<section class="ds-section ds-section-soft bitrix-clients-section">
 		<div class="ds-container">
@@ -385,6 +395,7 @@ const comparison = [
 				<p>
 					Проект можно собрать из модулей: быстрый запуск продаж, автоматизация внутренних
 					процессов, интеграции, миграция данных, обучение и дальнейшее развитие портала.
+					Подробнее о связи систем — в разделе <a class="underline underline-offset-4" href="/services/integrations/">интеграции CRM, сайта и 1С</a>.
 				</p>
 			</div>
 			<div class="bitrix-services service-card-row">
@@ -463,8 +474,9 @@ const comparison = [
 			<div>
 				<h2>Частые вопросы о внедрении Bitrix24</h2>
 				<p>
-					Ответы оставлены широкими, чтобы длинные коммерческие формулировки читались
-					нормально и не превращались в узкую колонку.
+					Стоимость, сроки, выбор версии и перенос данных. Перед стартом полезно
+					<a class="underline underline-offset-4" href="/posts/vnedrenie-crm-pod-kljuch-rukovodstvo-dlya-sobstvennika-biznesa/">подготовиться к внедрению CRM</a>:
+					сформулировать задачи и определить, какие процессы нужно автоматизировать.
 				</p>
 			</div>
 			<div class="bitrix-faq-list">
